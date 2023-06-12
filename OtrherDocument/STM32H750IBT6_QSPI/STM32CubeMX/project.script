@@ -1,0 +1,7 @@
+load STM32H750IBTx 
+project name STCubeGenerated 
+project toolchain "MDK-ARM V5" 
+project path "D:\documents\STM32_prj\BSMU_H750IBT6\STM32H750IBT6_QSPI\STM32CubeMX\" 
+set tpl_path "D:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.0.0\MDK\CubeMX\SC" 
+set dest_path "D:\documents\STM32_prj\BSMU_H750IBT6\STM32H750IBT6_QSPI" 
+SetCopyLibrary  "copy as reference"
