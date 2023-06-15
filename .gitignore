@@ -189,3 +189,4 @@ dkms.conf
 *.lnp
 *.__i
 *._ia
+*.orig
