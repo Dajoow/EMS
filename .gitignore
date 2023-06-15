@@ -88,3 +88,14 @@ dkms.conf
 *.s
 
 *.uvguix*
+
+*.uvoptx
+*.uvprojx
+*.lst
+*.axf
+*.htm
+*.sct
+*.dep
+*.lnp
+*.__i
+*._ia
