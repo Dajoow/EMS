@@ -79,6 +79,9 @@ void MainScreenView::CellStateShow_OFF()
 void MainScreenView::setupScreen()
 {
     MainScreenViewBase::setupScreen();
+	//通知model更新数据
+	viewToModelData.reflashFlag = true;
+	presenter->ViewtoModelDat(viewToModelData);
 }
 
 void MainScreenView::tearDownScreen()

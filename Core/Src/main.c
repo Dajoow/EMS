@@ -120,16 +120,16 @@ int main(void)
   MX_GPIO_Init();
   MX_FDCAN2_Init();
   MX_FMC_Init();
-  // MX_QUADSPI_Init();
+//  MX_QUADSPI_Init();
   MX_DMA2D_Init();
   MX_CRC_Init();
   MX_LTDC_Init();
   MX_TIM6_Init();
   MX_SPI2_Init();
   MX_DMA_Init();
+  MX_UART5_Init();
   MX_USART2_UART_Init();
   MX_UART4_Init();
-  MX_UART5_Init();
 #if TOUCHGFX_ENABLE
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
@@ -161,7 +161,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		//你好 你好2
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

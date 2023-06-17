@@ -47,7 +47,7 @@ uint8_t BCMU_ID[cluster_num][2] = {BCMU1_ID>>8,BCMU1_ID&0x00ff,BCMU2_ID>>8,BCMU2
 	BCMU20_ID>>8,BCMU20_ID&0x00ff};
 #else
 uint8_t FDCAN_REV_Buff[FDCAN_REV_BuffSize];              //FDCAN接收缓存区  8k
-uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize]; 						 //FDCAN发送缓存区  32k
+uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize]; 			 //FDCAN发送缓存区  32k
 #endif
 
 static const unsigned char aucCRCHi[] = {
