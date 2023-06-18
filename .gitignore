@@ -85,7 +85,6 @@ dkms.conf
 *.app
 
 
-*.s
 
 *.uvguix*
 # Prerequisites
@@ -175,12 +174,8 @@ dkms.conf
 *.app
 
 
-*.s
-
 *.uvguix*
 
-*.uvoptx
-*.uvprojx
 *.lst
 *.axf
 *.htm
@@ -193,3 +188,9 @@ dkms.conf
 *.json
 *.log
 *.iex
+
+
+*.s
+!startup*.s
+
+
