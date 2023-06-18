@@ -34,7 +34,7 @@ osSemaphoreId ETHSndSemHandle;
 osSemaphoreId ViewUpdateSemHandle;
 
 extern Client_Sd_t Client_Sd[cluster_num];
-
+uint8_t Queue_NUM_POLL;
 #if MasterOrSlave==Master
 uint8_t FDCAN_REV_Buff[cluster_num][FDCAN_REV_BuffSize] __attribute__((at(CANRevBuffStartAdd)));            //FDCAN接收缓存区  8k*20
 uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize] 							__attribute__((at(CANSndBuffStartAdd)));						//FDCAN发送缓存区  32k
@@ -47,7 +47,7 @@ uint8_t BCMU_ID[cluster_num][2] = {BCMU1_ID>>8,BCMU1_ID&0x00ff,BCMU2_ID>>8,BCMU2
 	BCMU20_ID>>8,BCMU20_ID&0x00ff};
 #else
 uint8_t FDCAN_REV_Buff[FDCAN_REV_BuffSize];              //FDCAN接收缓存区  8k
-uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize]; 			 //FDCAN发送缓存区  32k
+uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize]; 						 //FDCAN发送缓存区  32k
 #endif
 
 static const unsigned char aucCRCHi[] = {
@@ -262,10 +262,9 @@ int8_t CANFrameSend(uint8_t cmd,uint8_t *pdata, uint8_t *msg, uint16_t len)
 	
 	for(uint16_t i=0; i<index/CAN_Snd_DLC+1; i++){
 		memcpy(TxMsg.payload, msg+i*CAN_Snd_DLC, CAN_Snd_DLC);
-		while(HAL_FDCAN_GetTxFifoFreeLevel(&Myfdcan) < 3){
+		count = 0;
+		while(HAL_FDCAN_GetTxFifoFreeLevel(&Myfdcan) < 3 && count < UINT16_MAX){
 			count++;
-			if(count>100)
-				return -1;
 		}//wait the FiFo free
 		HAL_FDCAN_AddMessageToTxFifoQ(&Myfdcan, &TxMsg.TxHeader, TxMsg.payload);
 		
@@ -280,10 +279,15 @@ int8_t CANFrameSend(uint8_t cmd,uint8_t *pdata, uint8_t *msg, uint16_t len)
 //成功接收后处理函数
 void CAN_DataHandle(uint8_t Queue_NUM_t, uint8_t cmd, void *data, uint16_t len)
 {
-	uint8_t Queue_NUM = Queue_NUM_t;
+	//uint8_t Queue_NUM = Queue_NUM_t;
+	memcpy((void*)&Client_Sd[Queue_NUM_POLL], data, len);
 	
-  	memcpy((void*)&Client_Sd[Queue_NUM], data, len);
-
+	if(Queue_NUM_t == Queue_NUM_POLL) {			
+		xTaskNotifyGive(CAN_Poll_TaskHandle);
+	}
+	else{
+		//可能是紧急数据上传来的
+	}
 }
 
 
@@ -367,6 +371,8 @@ void CAN_Rev(void const * argument)
 								len[Queue_NUM] |= (uint16_t)data;
 								if(len[Queue_NUM]==0)
 									frame_status[Queue_NUM] = frame_crc1status;
+								if(len[Queue_NUM]>=LENGTH_MAX)
+									frame_status[Queue_NUM] = frame_head1status;
 								index[Queue_NUM]++;
 						break; 
 						case frame_datastatus://接收数据段
@@ -435,25 +441,26 @@ void CAN_Rev(void const * argument)
   }
 }
 
-//从机在线离线判断
-void SlaveOnlineCheck()
-{
-	static uint32_t Last_Cnt[cluster_num];
-	uint32_t Curr_Cnt[cluster_num];
-	for(uint8_t i=0; i<cluster_num; i++)
-	{
-		Curr_Cnt[i] = BCMU[i].Request_Cnt - BCMU[i].Frame_Cnt;
-		if(Last_Cnt[i]==Curr_Cnt[i]){
-			BCMU[i].OnlineOrOffline = Online;
-		}
-		else{
-			BCMU[i].OnlineOrOffline = Offline;
-			//BCMU工作状态
-			Client_Sd[i].work_state = Offline;
-		}
-		Last_Cnt[i] = Curr_Cnt[i];
-	}
-}
+////从机在线离线判断
+//void SlaveOnlineCheck()
+//{
+//	static uint32_t Last_Cnt[cluster_num];
+//	uint32_t Curr_Cnt[cluster_num];
+//	for(uint8_t i=0; i<cluster_num; i++)
+//	{
+//		Curr_Cnt[i] = BCMU[i].Request_Cnt - BCMU[i].Frame_Cnt;
+//		if(Last_Cnt[i]==Curr_Cnt[i]){
+//			BCMU[i].OnlineOrOffline = Online;
+//			Client_Sd[i].work_state = Online;
+//		}
+//		else{
+//			BCMU[i].OnlineOrOffline = Offline;
+//			//BCMU工作状态
+//			Client_Sd[i].work_state = Offline;
+//		}
+//		Last_Cnt[i] = Curr_Cnt[i];
+//	}
+//}
 
 
 
@@ -473,18 +480,39 @@ void CAN_Poll(void const * argument)
 //	osTimerStart(CANTimer01Handle, 1000);					//开启FREERTOS软件定时器once
   for(;;)
   {
-	for(uint8_t Queue_NUM=0; Queue_NUM<cluster_num; Queue_NUM++){
-		if(CANFrameSend(CMD_TRANS_START,(unsigned char*)&BCMU_ID[Queue_NUM], FDCAN_SND_Buff, 2)>0)
-			BCMU[Queue_NUM].Request_Cnt++;
-		else{
-			printf("CAN SEND FAIL!\n");
-			BCMU[Queue_NUM].Request_Cnt++;
+	uint8_t ACK_ERROR_TIME=0;
+	for(Queue_NUM_POLL = 0; Queue_NUM_POLL < cluster_num; ){
+		if(Queue_NUM_POLL < bsmuSetting.cu_num){
+			CANFrameSend(CMD_TRANS_START,(unsigned char*)&BCMU_ID[Queue_NUM_POLL], FDCAN_SND_Buff, 2);
+			if(ulTaskNotifyTake(pdTRUE, 1000))
+			{
+				ACK_ERROR_TIME=0;
+				BCMU[Queue_NUM_POLL].OnlineOrOffline = Online;
+				Client_Sd[Queue_NUM_POLL].work_state = Online;				
+				Queue_NUM_POLL++;
+			}
+			else
+			{
+				ACK_ERROR_TIME++;	
+				if(ACK_ERROR_TIME >= ACK_ERROR_TIME_MAX){
+					BCMU[Queue_NUM_POLL].OnlineOrOffline = Offline;
+					Client_Sd[Queue_NUM_POLL].work_state = Offline;
+					ACK_ERROR_TIME=0;
+					Queue_NUM_POLL++;
+						continue;
+				}				
+			}			
+			vTaskDelay(bsmuSetting.poll_T*10);
 		}
-		vTaskDelay(bsmuSetting.poll_T*10);
+		else{
+			BCMU[Queue_NUM_POLL].OnlineOrOffline = Offline;
+			Client_Sd[Queue_NUM_POLL].work_state = Offline;
+			Queue_NUM_POLL++;
+		}
 	}
 	//等待两个命令周期
 	vTaskDelay(bsmuSetting.poll_T*10*2);
-	SlaveOnlineCheck();//判断从机离线情况
+//	SlaveOnlineCheck();//判断从机离线情况
 	CalStationData();//计算整个电站数据
 	xSemaphoreGive(ETHSndSemHandle);//释放信号量（用来发送以太网数据）
 	xSemaphoreGive(ViewUpdateSemHandle);//释放信号量（用来更新LCD显示数据）

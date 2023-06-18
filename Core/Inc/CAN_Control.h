@@ -104,6 +104,9 @@ extern FDCAN_HandleTypeDef  hfdcan2;
 #define FRAME_HEAD1 				0xAA                   //帧头高8
 #define FRAME_HEAD2 				0x55									 //帧头低8
 
+#define ACK_ERROR_TIME_MAX	5
+#define LENGTH_MAX					0x1400   							//5k
+
 /*命令码*/
 #define CMD_TRANS_START  		0xC0
 #define CMD_TRANS_STOP  		0xC1
