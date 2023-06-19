@@ -446,28 +446,6 @@ void CAN_Rev(void const * argument)
   }
 }
 
-////从机在线离线判断
-//void SlaveOnlineCheck()
-//{
-//	static uint32_t Last_Cnt[cluster_num];
-//	uint32_t Curr_Cnt[cluster_num];
-//	for(uint8_t i=0; i<cluster_num; i++)
-//	{
-//		Curr_Cnt[i] = BCMU[i].Request_Cnt - BCMU[i].Frame_Cnt;
-//		if(Last_Cnt[i]==Curr_Cnt[i]){
-//			BCMU[i].OnlineOrOffline = Online;
-//			Client_Sd[i].work_state = Online;
-//		}
-//		else{
-//			BCMU[i].OnlineOrOffline = Offline;
-//			//BCMU工作状态
-//			Client_Sd[i].work_state = Offline;
-//		}
-//		Last_Cnt[i] = Curr_Cnt[i];
-//	}
-//}
-
-
 
 //FDCAN轮询（BSMU）
 void CAN_Poll(void const * argument)
@@ -515,12 +493,11 @@ void CAN_Poll(void const * argument)
 			Queue_NUM_POLL++;
 		}
 	}
-	//等待两个命令周期
-	vTaskDelay(bsmuSetting.poll_T*10*2);
-//	SlaveOnlineCheck();//判断从机离线情况
 	CalStationData();//计算整个电站数据
 	xSemaphoreGive(ETHSndSemHandle);//释放信号量（用来发送以太网数据）
 	xSemaphoreGive(ViewUpdateSemHandle);//释放信号量（用来更新LCD显示数据）
+	//等待两个命令周期
+	vTaskDelay(bsmuSetting.poll_T*10*2);
 
     osDelay(1);
   }

@@ -87,7 +87,7 @@ void CalStationData(void){
 
 	Client_Sd_Station.station_VOL = 0;
 	Client_Sd_Station.station_CUR = 0;
-	for(uint8_t i=0; i<cluster_num; i++){
+	for(uint8_t i=0; i < cluster_num; i++){
 		if(BCMU[i].OnlineOrOffline == Online){
 			OnlineNUM++;
 			Client_Sd_Station.station_VOL += Client_Sd[i].cluster_VOL;
