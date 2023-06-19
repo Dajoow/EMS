@@ -69,9 +69,9 @@
 ## touchGFX
 
 - 	程序运行MX_TouchGFX_Init();时，会调用临界保护代码
-   	taskENTER_CRITICAL()；和	taskEXIT_CRITICAL();
-   	但是在退出临界保护阶段，并没有重新开启中断，（具体原因待查）。
-   	*/
+      	taskENTER_CRITICAL()；和	taskEXIT_CRITICAL();
+      	但是在退出临界保护阶段，并没有重新开启中断，（具体原因待查）。
+      	*/
    portENABLE_INTERRUPTS();      //重新开启中断
 
 
@@ -262,3 +262,4 @@
 
 ![image-20230530182729084](D:\documents\STM32_prj\BSMU_H750IBT6\image-20230530182729084.png)
 
+can处的注释

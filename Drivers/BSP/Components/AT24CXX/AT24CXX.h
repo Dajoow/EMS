@@ -63,6 +63,7 @@ typedef struct EEPROM_BSMU_t
 	uint16_t port;
     uint8_t IP_ADD_2[4];	 //4G
 	uint16_t port_1;
+	uint8_t canBps;			//CAN波特率
 }EEPROM_BSMU;
 
 extern EEPROM_DATA eerom_data;

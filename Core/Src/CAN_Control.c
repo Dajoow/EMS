@@ -369,11 +369,16 @@ void CAN_Rev(void const * argument)
 								frame_status[Queue_NUM] = frame_datastatus;
 								BCMU[Queue_NUM].Data_buf[index[Queue_NUM]] = data;
 								len[Queue_NUM] |= (uint16_t)data;
+								index[Queue_NUM]++;
 								if(len[Queue_NUM]==0)
 									frame_status[Queue_NUM] = frame_crc1status;
-								if(len[Queue_NUM]>=LENGTH_MAX)
+								else if(len[Queue_NUM]>=LENGTH_MAX){
 									frame_status[Queue_NUM] = frame_head1status;
-								index[Queue_NUM]++;
+									index[Queue_NUM] = 0;
+									len[Queue_NUM] = 0;
+									crc[Queue_NUM] = 0;
+									comand[Queue_NUM] = 0;
+								}	
 						break; 
 						case frame_datastatus://接收数据段
 								BCMU[Queue_NUM].Data_buf[index[Queue_NUM]] = data;
@@ -484,7 +489,7 @@ void CAN_Poll(void const * argument)
 	for(Queue_NUM_POLL = 0; Queue_NUM_POLL < cluster_num; ){
 		if(Queue_NUM_POLL < bsmuSetting.cu_num){
 			CANFrameSend(CMD_TRANS_START,(unsigned char*)&BCMU_ID[Queue_NUM_POLL], FDCAN_SND_Buff, 2);
-			if(ulTaskNotifyTake(pdTRUE, 1000))
+			if(ulTaskNotifyTake(pdTRUE, WAIT_PACK_TIME))
 			{
 				ACK_ERROR_TIME=0;
 				BCMU[Queue_NUM_POLL].OnlineOrOffline = Online;
@@ -501,7 +506,7 @@ void CAN_Poll(void const * argument)
 					Queue_NUM_POLL++;
 						continue;
 				}				
-			}			
+			}
 			vTaskDelay(bsmuSetting.poll_T*10);
 		}
 		else{

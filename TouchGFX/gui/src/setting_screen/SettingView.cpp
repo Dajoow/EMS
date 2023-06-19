@@ -544,6 +544,18 @@ void SettingView::CAN_kbpsUpdateCenterItem(CustomContainer4& item, int16_t itemI
         item.SetText(250, 250);
     else if (itemIndex == 4)
         item.SetText(125, 125);    
+//	#ifndef SIMULATOR
+//	if(itemIndex == 0)
+//        SettingBuff.canBps = 0;
+//    else if (itemIndex == 1)
+//        SettingBuff.canBps = 1;
+//    else if (itemIndex == 2)
+//        SettingBuff.canBps = 2;
+//    else if (itemIndex == 3)
+//        SettingBuff.canBps = 3;
+//    else if (itemIndex == 4)
+//        SettingBuff.canBps = 4;
+//	#endif
 }
 
 //RS485_kbps

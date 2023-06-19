@@ -21,7 +21,7 @@
 #include "fdcan.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "at24cxx.h"
 /* USER CODE END 0 */
 
 FDCAN_HandleTypeDef hfdcan2;
@@ -65,12 +65,48 @@ void MX_FDCAN2_Init(void)
   hfdcan2.Init.TxFifoQueueElmtsNbr = 16;
   hfdcan2.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
   hfdcan2.Init.TxElmtSize = FDCAN_DATA_BYTES_64;
+//  if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
+  /* USER CODE BEGIN FDCAN2_Init 2 */
+  //500k 2M
+  if(bsmuSetting.canBps == 0){
+	hfdcan2.Init.DataPrescaler = 2;
+	hfdcan2.Init.DataTimeSeg1 = 15;
+	hfdcan2.Init.DataTimeSeg2 = 4;
+  }
+  //500k 1M
+  if(bsmuSetting.canBps == 1){
+	hfdcan2.Init.DataPrescaler = 4;
+	hfdcan2.Init.DataTimeSeg1 = 15;
+	hfdcan2.Init.DataTimeSeg2 = 4;
+  }
+  //500k 500k
+  if(bsmuSetting.canBps == 2){
+	hfdcan2.Init.FrameFormat = FDCAN_FRAME_FD_NO_BRS;
+	hfdcan2.Init.DataPrescaler = 8;
+	hfdcan2.Init.DataTimeSeg1 = 15;
+	hfdcan2.Init.DataTimeSeg2 = 4;
+  }
+  //250k 250k
+  if(bsmuSetting.canBps == 3){
+	hfdcan2.Init.FrameFormat = FDCAN_FRAME_FD_NO_BRS;
+	hfdcan2.Init.DataPrescaler = 16;
+	hfdcan2.Init.DataTimeSeg1 = 15;
+	hfdcan2.Init.DataTimeSeg2 = 4;
+  }
+  //125k 125k
+  if(bsmuSetting.canBps == 4){
+	hfdcan2.Init.FrameFormat = FDCAN_FRAME_FD_NO_BRS;
+	hfdcan2.Init.DataPrescaler = 32;
+	hfdcan2.Init.DataTimeSeg1 = 15;
+	hfdcan2.Init.DataTimeSeg2 = 4;
+  }
   if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN FDCAN2_Init 2 */
-
   /* USER CODE END FDCAN2_Init 2 */
 
 }
