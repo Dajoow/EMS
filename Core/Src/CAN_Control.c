@@ -499,7 +499,7 @@ void CAN_Poll(void const * argument)
 			else
 			{
 				ACK_ERROR_TIME++;	
-				if(ACK_ERROR_TIME >= ACK_ERROR_TIME_MAX){
+				if(ACK_ERROR_TIME > ACK_ERROR_TIME_MAX){
 					BCMU[Queue_NUM_POLL].OnlineOrOffline = Offline;
 					Client_Sd[Queue_NUM_POLL].work_state = Offline;
 					ACK_ERROR_TIME=0;

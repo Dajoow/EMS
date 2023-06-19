@@ -97,24 +97,24 @@ extern FDCAN_HandleTypeDef  hfdcan2;
 #define CAN_Rev_DLC     		64                      //实际值
 #define CAN_Snd_DLC     		64											//配置参数值
 
-#define FDCAN_REV_BuffSize 	1024*8                 //接收缓存区大小
-#define FDCAN_SND_BuffSize 	1024*32								//发送缓存区大小
+#define FDCAN_REV_BuffSize 		1024*8                 //接收缓存区大小
+#define FDCAN_SND_BuffSize 		1024*32								//发送缓存区大小
 
 //CAN传输层协议相关参数 
 #define FRAME_HEAD1 				0xAA                   //帧头高8
-#define FRAME_HEAD2 				0x55									 //帧头低8
+#define FRAME_HEAD2 				0x55				   //帧头低8
 
-#define ACK_ERROR_TIME_MAX	5
-#define WAIT_PACK_TIME				250
+#define ACK_ERROR_TIME_MAX			5
+#define WAIT_PACK_TIME				100						//500k 500k速率以上的等待时间
 #define LENGTH_MAX					0x1400   							//5k
 
 /*命令码*/
 #define CMD_TRANS_START  		0xC0
 #define CMD_TRANS_STOP  		0xC1
-#define CMD_TRANS_ACK     	0xC2
+#define CMD_TRANS_ACK     		0xC2
 
-#define DATA_NOMAL        	0X80								   //普通数据上传
-#define DATA_URGENT       	0X81									 //紧急数据上传，如报警信息
+#define DATA_NOMAL        		0X80								   //普通数据上传
+#define DATA_URGENT       		0X81									 //紧急数据上传，如报警信息
 
 
 
