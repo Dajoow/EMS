@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include "string.h"
 #include "cmsis_os.h"
+#include "at24cxx.h"
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart4;
@@ -138,10 +139,27 @@ void MX_USART2_UART_Init(void)
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
-
+  if(bsmuSetting.RS485Bps == 0){
+	huart2.Init.BaudRate = 115200;
+  }
+  if(bsmuSetting.RS485Bps == 1){
+	huart2.Init.BaudRate = 57600;
+  }
+  if(bsmuSetting.RS485Bps == 2){
+	huart2.Init.BaudRate = 38400;
+  }
+  if(bsmuSetting.RS485Bps == 3){
+	huart2.Init.BaudRate = 19200;
+  }
+  if(bsmuSetting.RS485Bps == 4){
+	huart2.Init.BaudRate = 9600;
+  }
+  if(bsmuSetting.RS485Bps == 5){
+	huart2.Init.BaudRate = 4800;
+  }
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+//  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;

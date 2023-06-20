@@ -37,6 +37,7 @@
 #include "station_ctl.h"
 #include "usart.h"
 #include "AT_module_4g.h"
+#include "RS485.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -272,8 +273,11 @@ void CPU_Task(void const * argument)
 	Debug_printf("Queue_name      QueueMessagesWaiting   QueueSpacesAvailable\r\n");
 	for(uint8_t i=0; i<cluster_num; i++)
 		Debug_printf("CANQueue%d       %d                       %d\n", i+1, (int)uxQueueMessagesWaiting(CANQueueHandle[i]), (int)uxQueueSpacesAvailable(CANQueueHandle[i]));
-	HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
+	
+	//测试485
+	RS485_REV();
 #endif
+	HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
     modelToViewData.frameRate = modelToViewData.frameRateCount;
     modelToViewData.frameRateCount = 0;
 	vTaskDelay(1000);

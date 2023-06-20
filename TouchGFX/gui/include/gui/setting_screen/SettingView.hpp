@@ -27,6 +27,8 @@ typedef struct
     uint8_t IP_ADD_2[4];	 //4G
 	uint16_t port_1;
 	uint8_t canBps;			//CAN波特率
+	uint8_t RS485Bps;			//CAN波特率
+	uint8_t checksum;
 }EEPROM_BSMU_tem;
 
 
@@ -98,6 +100,14 @@ protected:
     Unicode::UnicodeChar Buffer[12][10]; //临时变量
     Unicode::UnicodeChar Buffer1[5][10]; //临时变量
     Unicode::UnicodeChar Buffer2[5][10]; //临时变量
+
+	// Callback which is executed when a item in the scroll whell is selected to as selected style.
+    // The parameter itemSelected is the selected item.
+    Callback<SettingView, int16_t> CAN_kbpsAnimateToCallback;
+    void CAN_kbpsAnimateToHandler(int16_t itemSelected);
+
+	Callback<SettingView, int16_t> RS485_kbpsAnimateToCallback;
+    void RS485_kbpsAnimateToHandler(int16_t itemSelected);
 };
 
 #endif // SETTINGVIEW_HPP

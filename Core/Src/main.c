@@ -112,8 +112,10 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-//	HAL_Delay(100);
-//  LCD_init();          //仅仅是等待LCD上电
+  AT24Cxx_Init();					//初始化AT24C02
+  //读取AT24C02并更新参数
+	AT24Cxx_SeqRead(0x00, CAPACITY_SIZE, eerom_data.ReadBuff);
+	memcpy(&bsmuSetting, eerom_data.ReadBuff, sizeof(EEPROM_BSMU));
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -143,10 +145,6 @@ int main(void)
 #endif
 	Init_printf();                //初始化打印信息
 	GT911_init();                 //在此处初始化GT911
-	AT24Cxx_Init();					//初始化AT24C02
-    //读取AT24C02并更新参数
-	AT24Cxx_SeqRead(0x00, CAPACITY_SIZE, eerom_data.ReadBuff);
-  memcpy(&bsmuSetting, eerom_data.ReadBuff, sizeof(EEPROM_BSMU));
 	HAL_TIM_Base_Start_IT(&htim6);    //用于FREERTOS任务使用率计数
   /* USER CODE END 2 */
 

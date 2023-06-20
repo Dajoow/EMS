@@ -1,3 +1,7 @@
+#ifndef __MY_IIC_H_
+#define __MY_IIC_H_
+
+
 #include "main.h"
 #include "stdint.h"
 #include "my_delay.h"
@@ -34,3 +38,4 @@ void IIC_Write_One_Byte(uint8_t  daddr,uint8_t  addr,uint8_t  data);
 uint8_t IIC_Read_One_Byte(uint8_t  daddr,uint8_t  addr);	 
 
 
+#endif

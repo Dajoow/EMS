@@ -1,5 +1,5 @@
-#ifndef __MY_IIC_H_
-#define __MY_IIC_H_
+#ifndef __AT_MODULE_4G_H_
+#define __AT_MODULE_4G_H_
 
 #include "main.h"
 #include "usart.h"

@@ -26,9 +26,52 @@ void SoftReset(void)
     NVIC_SystemReset(); //进行软件复位
 }
 
-SettingView::SettingView()
+SettingView::SettingView():CAN_kbpsAnimateToCallback(this, &SettingView::CAN_kbpsAnimateToHandler), RS485_kbpsAnimateToCallback(this, &SettingView::RS485_kbpsAnimateToHandler)
 {
-    //IP_setting这个界面的有关按键
+	//滚轮的添加回调函数
+	CAN_kbps.setAnimateToCallback(CAN_kbpsAnimateToCallback);
+	RS485_kbps.setAnimateToCallback(RS485_kbpsAnimateToCallback);
+}
+
+void SettingView::CAN_kbpsAnimateToHandler(int16_t itemSelected)
+{
+	#ifndef SIMULATOR
+	if(itemSelected == 0)
+        SettingBuff.canBps = 0;
+    else if (itemSelected == 1)
+        SettingBuff.canBps = 1;
+    else if (itemSelected == 2)
+        SettingBuff.canBps = 2;
+    else if (itemSelected == 3)
+        SettingBuff.canBps = 3;
+    else if (itemSelected == 4)
+        SettingBuff.canBps = 4;
+	#endif
+}
+
+void SettingView::RS485_kbpsAnimateToHandler(int16_t itemSelected)
+{
+	#ifndef SIMULATOR
+	if(itemSelected == 0)
+        SettingBuff.RS485Bps = 0;
+    else if (itemSelected == 1)
+        SettingBuff.RS485Bps = 1;
+    else if (itemSelected == 2)
+        SettingBuff.RS485Bps = 2;
+    else if (itemSelected == 3)
+        SettingBuff.RS485Bps = 3;
+    else if (itemSelected == 4)
+        SettingBuff.RS485Bps = 4;
+	else if (itemSelected == 5)
+        SettingBuff.RS485Bps = 5;
+	#endif
+}
+
+
+void SettingView::setupScreen()
+{
+    SettingViewBase::setupScreen();
+	    //IP_setting这个界面的有关按键
     IP_setting_butAry[0] = &IP_ADD_1;
     IP_setting_butAry[1] = &IP_ADD_2;
     IP_setting_butAry[2] = &IP_ADD_3;
@@ -93,7 +136,6 @@ SettingView::SettingView()
 #ifndef SIMULATOR
     memcpy(&SettingBuff, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
 #endif
-
     //装机的簇数量和轮询周期参数显示初始化
     poll_T.setValue(SettingBuff.poll_T);
     Unicode::snprintf(poll_tBuffer, POLL_T_SIZE, "%d", SettingBuff.poll_T*10);
@@ -176,8 +218,6 @@ SettingView::SettingView()
     Unicode::snprintf(Buffer2[4], 10, "%d", SettingBuff.port_1);
     PORT_1.setWildcardTextBuffer(Buffer2[4]);
     PORT_1.invalidate();
- 
-    CAN_kbps.animateToItem(0);
 
     //配置界面中显示内容初始化
     Unicode::snprintf(ip_text1Buffer1, IP_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[0]);
@@ -218,12 +258,10 @@ SettingView::SettingView()
     ip_1_text1_1.invalidate();
     Unicode::snprintf(port_1_textBuffer, PORT_1_TEXT_SIZE, "%d", SettingBuff.port_1);
     port_1_text.invalidate();
-
-}
-
-void SettingView::setupScreen()
-{
-    SettingViewBase::setupScreen();
+	
+	//滚轮状态
+	CAN_kbps.animateToItem(SettingBuff.canBps);
+	RS485_kbps.animateToItem(SettingBuff.RS485Bps);
 }
 
 void SettingView::tearDownScreen()
@@ -415,8 +453,14 @@ void SettingView::save_all_fun(void)
     eeprom_bsmu_WR.cu_num
     eeprom_bsmu_WR.poll_T
     */
+	AT24Cxx_SeqRead(0x00, CAPACITY_SIZE, eerom_data.ReadBuff);
+	
     memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
-    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
+	while(memcmp(eerom_data.WriteBuff, eerom_data.ReadBuff, CAPACITY_SIZE) != 0){
+		AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
+		AT24Cxx_SeqRead(0x00, CAPACITY_SIZE, eerom_data.ReadBuff);
+	}
+		
     SoftReset();
 #endif
 }
@@ -453,9 +497,8 @@ void SettingView::Save_1_Fun(void)
     eeprom_bsmu_WR.cu_num
     eeprom_bsmu_WR.poll_T
     */
-    // eeprom_bsmu_WR.IP_ADD[0] = IP_ADD_1.getSelectedItem();
-    memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
-    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
+//    memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
+//    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
 #endif
     //本本地服务器更新显示
     Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[0]);
@@ -501,8 +544,8 @@ void SettingView::Save_2_Fun(void)
     eeprom_bsmu_WR.poll_T
     */
     // eeprom_bsmu_WR.IP_ADD[0] = IP_ADD_1.getSelectedItem();
-    memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
-    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
+//    memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
+//    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
 #endif
     //4G模块更新显示
     Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[0]);
@@ -544,18 +587,6 @@ void SettingView::CAN_kbpsUpdateCenterItem(CustomContainer4& item, int16_t itemI
         item.SetText(250, 250);
     else if (itemIndex == 4)
         item.SetText(125, 125);    
-//	#ifndef SIMULATOR
-//	if(itemIndex == 0)
-//        SettingBuff.canBps = 0;
-//    else if (itemIndex == 1)
-//        SettingBuff.canBps = 1;
-//    else if (itemIndex == 2)
-//        SettingBuff.canBps = 2;
-//    else if (itemIndex == 3)
-//        SettingBuff.canBps = 3;
-//    else if (itemIndex == 4)
-//        SettingBuff.canBps = 4;
-//	#endif
 }
 
 //RS485_kbps
