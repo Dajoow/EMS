@@ -895,40 +895,40 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 	dianchixinxi.invalidate();
   
 	//更新电池电压值
-	Unicode::snprintfFloat(CellText1Buffer, CELLTEXT1_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[0]/100);
+	Unicode::snprintfFloat(CellText1Buffer, CELLTEXT1_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[0]/10000);
 	CellText1.invalidate();
 	
-	Unicode::snprintfFloat(CellText2Buffer, CELLTEXT2_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[1]/100);
+	Unicode::snprintfFloat(CellText2Buffer, CELLTEXT2_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[1]/10000);
 	CellText2.invalidate();
 	
-	Unicode::snprintfFloat(CellText3Buffer, CELLTEXT3_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[2]/100);
+	Unicode::snprintfFloat(CellText3Buffer, CELLTEXT3_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[2]/10000);
 	CellText3.invalidate();
 
-	Unicode::snprintfFloat(CellText4Buffer, CELLTEXT4_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[3]/100);
+	Unicode::snprintfFloat(CellText4Buffer, CELLTEXT4_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[3]/10000);
 	CellText4.invalidate();
 
-	Unicode::snprintfFloat(CellText5Buffer, CELLTEXT5_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[4]/100);
+	Unicode::snprintfFloat(CellText5Buffer, CELLTEXT5_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[4]/10000);
 	CellText5.invalidate();
 
-	Unicode::snprintfFloat(CellText6Buffer, CELLTEXT6_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[5]/100);
+	Unicode::snprintfFloat(CellText6Buffer, CELLTEXT6_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[5]/10000);
 	CellText6.invalidate();
 
-	Unicode::snprintfFloat(CellText7Buffer, CELLTEXT7_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[6]/100);
+	Unicode::snprintfFloat(CellText7Buffer, CELLTEXT7_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[6]/10000);
 	CellText7.invalidate();
 
-	Unicode::snprintfFloat(CellText8Buffer, CELLTEXT8_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[7]/100);
+	Unicode::snprintfFloat(CellText8Buffer, CELLTEXT8_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[7]/10000);
 	CellText8.invalidate();
 
-	Unicode::snprintfFloat(CellText9Buffer, CELLTEXT9_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[8]/100);
+	Unicode::snprintfFloat(CellText9Buffer, CELLTEXT9_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[8]/10000);
 	CellText9.invalidate();
 
-	Unicode::snprintfFloat(CellText10Buffer, CELLTEXT10_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[9]/100);
+	Unicode::snprintfFloat(CellText10Buffer, CELLTEXT10_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[9]/10000);
 	CellText10.invalidate();
 
-	Unicode::snprintfFloat(CellText11Buffer, CELLTEXT11_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[10]/100);
+	Unicode::snprintfFloat(CellText11Buffer, CELLTEXT11_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[10]/10000);
 	CellText11.invalidate();
 
-	Unicode::snprintfFloat(CellText12Buffer, CELLTEXT12_SIZE, "%.2f", (float)modelToViewData.BAT_VOL[11]/100);
+	Unicode::snprintfFloat(CellText12Buffer, CELLTEXT12_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[11]/10000);
 	CellText12.invalidate();
 
   //更新电站信息
@@ -1012,40 +1012,40 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   Unicode::snprintf(CellSOCText12Buffer, CELLSOCTEXT12_SIZE, "%d", modelToViewData.BAT_SOC[11]/10);
 	CellSOCText12.invalidate();
 	//更新电池温度
-  Unicode::snprintfFloat(CellTempText1Buffer, CELLTEMPTEXT1_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText1Buffer, CELLTEMPTEXT1_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText1.invalidate();
 
-  Unicode::snprintfFloat(CellTempText2Buffer, CELLTEMPTEXT2_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[1]/10);
+  Unicode::snprintfFloat(CellTempText2Buffer, CELLTEMPTEXT2_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[1]/100);
 	CellTempText2.invalidate();
 
-  Unicode::snprintfFloat(CellTempText3Buffer, CELLTEMPTEXT3_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[2]/10);
+  Unicode::snprintfFloat(CellTempText3Buffer, CELLTEMPTEXT3_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[2]/100);
 	CellTempText3.invalidate();
 
-  Unicode::snprintfFloat(CellTempText4Buffer, CELLTEMPTEXT4_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[3]/10);
+  Unicode::snprintfFloat(CellTempText4Buffer, CELLTEMPTEXT4_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[3]/100);
 	CellTempText4.invalidate();
 
-  Unicode::snprintfFloat(CellTempText5Buffer, CELLTEMPTEXT5_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText5Buffer, CELLTEMPTEXT5_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText5.invalidate();
 
-  Unicode::snprintfFloat(CellTempText6Buffer, CELLTEMPTEXT6_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText6Buffer, CELLTEMPTEXT6_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText6.invalidate();
 
-  Unicode::snprintfFloat(CellTempText7Buffer, CELLTEMPTEXT7_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText7Buffer, CELLTEMPTEXT7_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText7.invalidate();
 
-  Unicode::snprintfFloat(CellTempText8Buffer, CELLTEMPTEXT8_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText8Buffer, CELLTEMPTEXT8_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText8.invalidate();
 
-  Unicode::snprintfFloat(CellTempText9Buffer, CELLTEMPTEXT9_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText9Buffer, CELLTEMPTEXT9_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText9.invalidate();
 
-  Unicode::snprintfFloat(CellTempText10Buffer, CELLTEMPTEXT10_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText10Buffer, CELLTEMPTEXT10_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText10.invalidate();
 
-  Unicode::snprintfFloat(CellTempText11Buffer, CELLTEMPTEXT11_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText11Buffer, CELLTEMPTEXT11_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText11.invalidate();
 
-  Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/10);
+  Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText12.invalidate();
 
   //更新BCMU框选图标
