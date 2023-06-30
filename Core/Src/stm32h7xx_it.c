@@ -72,7 +72,7 @@ extern UART_HandleTypeDef huart2;
 extern TIM_HandleTypeDef htim7;
 
 /* USER CODE BEGIN EV */
-
+extern osThreadId modbus_taskhandle;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -237,6 +237,7 @@ void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
 	uint16_t temp;
+  BaseType_t xHigherPriorityTaskWoken = pdTRUE;
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
@@ -257,6 +258,14 @@ void USART2_IRQHandler(void)
       memcpy(uart2_buff.recv_buf, uart2_buff.dma_buf, uart2_buff.recv_len);
       // 接收完成标志置位
       uart2_buff.recv_end_flag = 1;
+      if(modbus_taskhandle != NULL){
+        vTaskNotifyGiveFromISR(modbus_taskhandle, &xHigherPriorityTaskWoken);
+        /* If xHigherPriorityTaskWoken is now set to pdTRUE then a context switch
+        should be performed to ensure the interrupt returns directly to the highest
+        priority task.  The macro used for this purpose is dependent on the port in
+        use and may be called portEND_SWITCHING_ISR(). */
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+      }
       // 因为前面停止了 DMA 传输，现在要重新打开（这个视个人需求而定要不要重新打开）//现在放在数据处理中
   //			while(HAL_UART_Receive_DMA(&huart2, uart2_buff.dma_buf, BUFFERSIZE) != HAL_OK){}
     }

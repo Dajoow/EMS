@@ -197,6 +197,8 @@ void Startup(void const * argument)
 	ClientInit();									  
   //开启4G模块线程
 	Module4G_Init();
+
+  modbus_init();
   //开启CPU_Task线程
   osThreadDef(CPU_Task_Thread, CPU_Task, osPriorityIdle, 0, 128);
   CPU_Task_ThreadHandle = osThreadCreate(osThread(CPU_Task_Thread), NULL);
@@ -275,7 +277,7 @@ void CPU_Task(void const * argument)
 		Debug_printf("CANQueue%d       %d                       %d\n", i+1, (int)uxQueueMessagesWaiting(CANQueueHandle[i]), (int)uxQueueSpacesAvailable(CANQueueHandle[i]));
 	
 	//测试485
-	RS485_REV();
+//	RS485_REV();
 #endif
 	HAL_GPIO_TogglePin(LED_G_GPIO_Port, LED_G_Pin);
     modelToViewData.frameRate = modelToViewData.frameRateCount;
