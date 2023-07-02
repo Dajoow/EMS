@@ -16,15 +16,13 @@ extern "C"{
 #include "string.h"
 #include "stm32h7xx_hal.h"
 #include "core_cm7.h"	
-};
-#endif
-
 
 void SoftReset(void)
 {
     __set_FAULTMASK(1); //关闭所有中断
-    NVIC_SystemReset(); //进行软件复位
 }
+};
+#endif
 
 SettingView::SettingView():CAN_kbpsAnimateToCallback(this, &SettingView::CAN_kbpsAnimateToHandler), RS485_kbpsAnimateToCallback(this, &SettingView::RS485_kbpsAnimateToHandler)
 {

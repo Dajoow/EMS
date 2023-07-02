@@ -142,20 +142,22 @@ void MX_USART2_UART_Init(void)
   if(bsmuSetting.RS485Bps == 0){
 	huart2.Init.BaudRate = 115200;
   }
-  if(bsmuSetting.RS485Bps == 1){
+  else if(bsmuSetting.RS485Bps == 1){
 	huart2.Init.BaudRate = 57600;
   }
-  if(bsmuSetting.RS485Bps == 2){
+  else if(bsmuSetting.RS485Bps == 2){
 	huart2.Init.BaudRate = 38400;
   }
-  if(bsmuSetting.RS485Bps == 3){
+  else if(bsmuSetting.RS485Bps == 3){
 	huart2.Init.BaudRate = 19200;
   }
-  if(bsmuSetting.RS485Bps == 4){
+  else if(bsmuSetting.RS485Bps == 4){
 	huart2.Init.BaudRate = 9600;
   }
-  if(bsmuSetting.RS485Bps == 5){
+  else if(bsmuSetting.RS485Bps == 5){
 	huart2.Init.BaudRate = 4800;
+  }else{
+	huart2.Init.BaudRate = 115200;
   }
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;

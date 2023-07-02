@@ -77,32 +77,38 @@ void MX_FDCAN2_Init(void)
 	hfdcan2.Init.DataTimeSeg2 = 4;
   }
   //500k 1M
-  if(bsmuSetting.canBps == 1){
+  else if(bsmuSetting.canBps == 1){
 	hfdcan2.Init.DataPrescaler = 4;
 	hfdcan2.Init.DataTimeSeg1 = 15;
 	hfdcan2.Init.DataTimeSeg2 = 4;
   }
   //500k 500k
-  if(bsmuSetting.canBps == 2){
+  else if(bsmuSetting.canBps == 2){
 	hfdcan2.Init.FrameFormat = FDCAN_FRAME_FD_NO_BRS;
 	hfdcan2.Init.DataPrescaler = 8;
 	hfdcan2.Init.DataTimeSeg1 = 15;
 	hfdcan2.Init.DataTimeSeg2 = 4;
   }
   //250k 250k
-  if(bsmuSetting.canBps == 3){
+  else if(bsmuSetting.canBps == 3){
 	hfdcan2.Init.FrameFormat = FDCAN_FRAME_FD_NO_BRS;
 	hfdcan2.Init.DataPrescaler = 16;
 	hfdcan2.Init.DataTimeSeg1 = 15;
 	hfdcan2.Init.DataTimeSeg2 = 4;
   }
   //125k 125k
-  if(bsmuSetting.canBps == 4){
+  else if(bsmuSetting.canBps == 4){
 	hfdcan2.Init.FrameFormat = FDCAN_FRAME_FD_NO_BRS;
 	hfdcan2.Init.DataPrescaler = 32;
 	hfdcan2.Init.DataTimeSeg1 = 15;
 	hfdcan2.Init.DataTimeSeg2 = 4;
   }
+  else {
+	hfdcan2.Init.DataPrescaler = 2;
+	hfdcan2.Init.DataTimeSeg1 = 15;
+	hfdcan2.Init.DataTimeSeg2 = 4;
+  }
+
   if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
   {
     Error_Handler();
