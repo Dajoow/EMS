@@ -2,13 +2,16 @@
 #include "cmsis_os.h"
 #include "RS485.h"
 #include "agile_modbus.h"
-#include "agile_modbus_slave_util.h"
+#include "modbus_slave.h"
+#include "modbus_data.h"
 #include "string.h"
 
 osThreadId modbus_taskhandle = NULL;
 
 uint8_t modbus_send_buf[AGILE_MODBUS_MAX_ADU_LENGTH];
 uint8_t modbus_read_buf[AGILE_MODBUS_MAX_ADU_LENGTH];
+
+extern bsmu_modbus_data_t bsmu_modbus_data[];
 
 void modbus_task (void const *args);
 
@@ -53,7 +56,7 @@ modbus_task (void const *args)
         continue;
 
       int send_len = agile_modbus_slave_handle (
-          mb_rtu_ctx, read_len, 0, agile_modbus_slave_util_callback, NULL,
+          mb_rtu_ctx, read_len, 0, bsmu_modbus_slave_callback, bsmu_modbus_data,
           NULL);
 
       if (send_len > 0)

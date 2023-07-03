@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx,NDEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/my_iic;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;..\agile_modbus\inc;..\agile_modbus\util</IncludePath>
+              <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/my_iic;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;..\agile_modbus\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1027,6 +1027,16 @@
               <FileName>modbus.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Drivers\BSP\Components\RS485\modbus.c</FilePath>
+            </File>
+            <File>
+              <FileName>modbus_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\Components\RS485\modbus_data.c</FilePath>
+            </File>
+            <File>
+              <FileName>modbus_slave.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\BSP\Components\RS485\modbus_slave.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3403,11 +3413,6 @@
               <FileName>agile_modbus_tcp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\agile_modbus\src\agile_modbus_tcp.c</FilePath>
-            </File>
-            <File>
-              <FileName>agile_modbus_slave_util.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\agile_modbus\util\agile_modbus_slave_util.c</FilePath>
             </File>
           </Files>
         </Group>
