@@ -3,7 +3,7 @@
 #include "string.h"
 
 static int
-get_map_buf (agile_modbus_slave_util_map_t *map, void *buf, int bufsz)
+get_map_buf (const agile_modbus_slave_util_map_t *map, void *buf, int bufsz)
 {
   modbus_data_type_e modbus_data_type = map->data_type;
 
@@ -32,7 +32,7 @@ get_map_buf (agile_modbus_slave_util_map_t *map, void *buf, int bufsz)
 }
 
 static int
-set_map_buf (agile_modbus_slave_util_map_t *map, int index, int len, void *buf,
+set_map_buf (const agile_modbus_slave_util_map_t *map, int index, int len, void *buf,
              int bufsz)
 {
   modbus_data_type_e modbus_data_type = map->data_type;

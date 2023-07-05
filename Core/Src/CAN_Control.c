@@ -36,8 +36,13 @@ osSemaphoreId ViewUpdateSemHandle;
 extern Client_Sd_t Client_Sd[cluster_num];
 uint8_t Queue_NUM_POLL;
 #if MasterOrSlave==Master
+#if defined(__CC_ARM__)
 uint8_t FDCAN_REV_Buff[cluster_num][FDCAN_REV_BuffSize] __attribute__((at(CANRevBuffStartAdd)));            //FDCAN接收缓存区  8k*20
 uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize] 							__attribute__((at(CANSndBuffStartAdd)));						//FDCAN发送缓存区  32k
+#elif defined(__GNUC__)
+uint8_t FDCAN_REV_Buff[cluster_num][FDCAN_REV_BuffSize] __attribute__((section(".CANRevBuff")));            //FDCAN接收缓存区  8k*20
+uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize] 							__attribute__((section(".CANSndBuff")));						//FDCAN发送缓存区  32k
+#endif
 BCMU_Mail_t BCMU[cluster_num];
 uint8_t BCMU_ID[cluster_num][2] = {BCMU1_ID>>8,BCMU1_ID&0x00ff,BCMU2_ID>>8,BCMU2_ID&0x00ff,BCMU3_ID>>8,BCMU3_ID&0x00ff,
 	BCMU4_ID>>8,BCMU4_ID&0x00ff,BCMU5_ID>>8,BCMU5_ID&0x00ff,BCMU6_ID>>8,BCMU6_ID&0x00ff,BCMU7_ID>>8,BCMU7_ID&0x00ff,

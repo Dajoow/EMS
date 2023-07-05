@@ -458,9 +458,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 /* USER CODE BEGIN 1 */
 //使用之前要清零
+#if defined(__CC_ARM__)
 Uart_BUFF uart5_buff __attribute__((at(0x30000000)));
 Uart_BUFF uart4_buff __attribute__((at(0x30001000)));
 Uart_BUFF uart2_buff __attribute__((at(0x30002000)));
+#elif defined(__GNUC__)
+Uart_BUFF uart5_buff __attribute__((section(".RAM_D2")));
+Uart_BUFF uart4_buff __attribute__((section(".RAM_D2")));
+Uart_BUFF uart2_buff __attribute__((section(".RAM_D2")));
+#endif
 
 extern osMutexId DebugUartMutexHandle;
 //初始化打印信息

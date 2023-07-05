@@ -64,8 +64,8 @@ typedef struct agile_modbus_slave_util {
     int nb_registers;                                                                         /**< 保持寄存器定义数组数目 */
     const agile_modbus_slave_util_map_t *tab_input_registers;                                 /**< 输入寄存器定义数组 */
     int nb_input_registers;                                                                   /**< 输入寄存器定义数组数目 */
-    int (*get)(agile_modbus_slave_util_map_t *map, void *buf, int bufsz);                     /**< 获取寄存器数据接口 */
-    int (*set)(agile_modbus_slave_util_map_t *map, int index, int len, void *buf, int bufsz); /**< 设置寄存器数据接口 */
+    int (*get)(const agile_modbus_slave_util_map_t *map, void *buf, int bufsz);                     /**< 获取寄存器数据接口 */
+    int (*set)(const agile_modbus_slave_util_map_t *map, int index, int len, void *buf, int bufsz); /**< 设置寄存器数据接口 */
     int (*addr_check)(agile_modbus_t *ctx, struct agile_modbus_slave_info *slave_info);       /**< 地址检查接口 */
     int (*special_function)(agile_modbus_t *ctx, struct agile_modbus_slave_info *slave_info); /**< 特殊功能码处理接口 */
     int (*done)(agile_modbus_t *ctx, struct agile_modbus_slave_info *slave_info, int ret);    /**< 处理结束接口 */
