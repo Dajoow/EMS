@@ -96,8 +96,8 @@ void Error_Handler(void);
 #define T_IC2_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-#define TOUCHGFX_ENABLE 1
-#define CPU_PRINTF 1
+#define TOUCHGFX_ENABLE 0
+#define CPU_PRINTF 0
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

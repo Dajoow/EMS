@@ -229,6 +229,10 @@ static void low_level_init(struct netif *netif)
   heth.Init.RxBuffLen = 1536;
 
   /* USER CODE BEGIN MACADDRESS */
+  uint32_t cpu_id = *(uint32_t *)(0x1FF0F420);//STM32 cpu id
+  MACAddr[3] = (cpu_id >> 16) & 0xFF;
+  MACAddr[4] = (cpu_id >> 8) & 0xFFF;
+  MACAddr[5] = cpu_id & 0xFF;
 
   /* USER CODE END MACADDRESS */
 

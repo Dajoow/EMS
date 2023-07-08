@@ -130,6 +130,9 @@
 
 - 最好加以阻抗控制
 
+## RTC
+
+- LSE 负载电容改为 12.5pF
 
 
 
@@ -242,19 +245,28 @@
 
 # CUBEMX重新生成后操作：
 
-- 注释QSPI
+- ~~注释QSPI~~
 
 - ETHLINK线程中增加  HAL_ETH_Start_IT(&heth);     //此处
 
-- DMA初始化要在串口初始化之前
+- ~~DMA初始化要在串口初始化之前~~
 
 - UART2可以在软件层面进行了TX\RX交换
 
-- \#if  TOUCHGFX_ENABLE
+- ~~\#if  TOUCHGFX_ENABLE~~
 
-  MX_TouchGFX_PreOSInit();
+  ~~MX_TouchGFX_PreOSInit();~~
 
 - 注释掉FDCAN1
+
+- 修改 `Middlewares/Third_Party/LwIP/system/arch/cc.h` 和 `Middlewares/Third_Party/LwIP/src/include/lwip/arch.h` 将 `printf` 改为 `Debug_printf` 并引入相应头文件。
+
+快速完成以上操作：
+```
+git restore Core/Src/fdcan.c Core/Src/usart.c Middlewares/Third_Party/LwIP/system/arch/cc.h Middlewares/Third_Party/LwIP/src/include/lwip/arch.h
+```
+
+**注意：执行以上命令时，务必确保自己没有对这些文件做过修改，不然这些修改会被一并还原。**
 
 
 

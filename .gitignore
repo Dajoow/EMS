@@ -190,4 +190,6 @@ dkms.conf
 *.s
 !startup*.s
 
+.vscode/
+.idea/
 

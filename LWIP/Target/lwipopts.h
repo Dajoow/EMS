@@ -53,16 +53,12 @@
 #define ETH_RX_BUFFER_SIZE 1536
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
-/*----- Default Value for MEM_SIZE: 1600 ---*/
-#define MEM_SIZE 12288
 /*----- Default Value for H7 devices: 0x30044000 -----*/
 #define LWIP_RAM_HEAP_POINTER 0x30044C00
 /*----- Value in opt.h for MEMP_NUM_SYS_TIMEOUT: (LWIP_TCP + IP_REASSEMBLY + LWIP_ARP + (2*LWIP_DHCP) + LWIP_AUTOIP + LWIP_IGMP + LWIP_DNS + (PPP_SUPPORT*6*MEMP_NUM_PPP_PCB) + (LWIP_IPV6 ? (1 + LWIP_IPV6_REASS + LWIP_IPV6_MLD) : 0)) -*/
 #define MEMP_NUM_SYS_TIMEOUT 5
 /*----- Value supported for H7 devices: 1 -----*/
 #define LWIP_SUPPORT_CUSTOM_PBUF 1
-/*----- Default Value for PBUF_POOL_SIZE: 16 ---*/
-#define PBUF_POOL_SIZE 31
 /*----- Value in opt.h for LWIP_ETHERNET: LWIP_ARP || PPPOE_SUPPORT -*/
 #define LWIP_ETHERNET 1
 /*----- Value in opt.h for LWIP_DNS_SECURE: (LWIP_DNS_SECURE_RAND_XID | LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING | LWIP_DNS_SECURE_RAND_SRC_PORT) -*/
@@ -99,6 +95,12 @@
 #define DEFAULT_ACCEPTMBOX_SIZE 6
 /*----- Value in opt.h for RECV_BUFSIZE_DEFAULT: INT_MAX -----*/
 #define RECV_BUFSIZE_DEFAULT 2000000000
+/*----- Default Value for LWIP_SNTP: 0 ---*/
+#define LWIP_SNTP 1
+/*----- Default Value for SNTP_MAX_SERVERS: 1 ---*/
+#define SNTP_MAX_SERVERS 5
+/*----- Default Value for SNTP_COMP_ROUNDTRIP: 0 ---*/
+#define SNTP_COMP_ROUNDTRIP 1
 /*----- Value in opt.h for LWIP_STATS: 1 -----*/
 #define LWIP_STATS 0
 /*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/
@@ -117,13 +119,20 @@
 #define CHECKSUM_CHECK_TCP 0
 /*----- Value in opt.h for CHECKSUM_CHECK_ICMP6: 1 -----*/
 #define CHECKSUM_CHECK_ICMP6 0
-/*----- Default Value for LWIP_DBG_MIN_LEVEL: LWIP_DBG_LEVEL_ALL ---*/
-#define LWIP_DBG_MIN_LEVEL LWIP_DBG_MASK_LEVEL
-/*----- Default Value for LWIP_DBG_TYPES_ON: LWIP_DBG_ON ---*/
-#define LWIP_DBG_TYPES_ON LWIP_DBG_OFF
+/*----- Default Value for MEMP_DEBUG: LWIP_DBG_OFF ---*/
+#define MEMP_DEBUG LWIP_DBG_ON
+/*----- Default Value for UDP_DEBUG: LWIP_DBG_OFF ---*/
+#define UDP_DEBUG LWIP_DBG_ON
+/*----- Default Value for SNTP_DEBUG: LWIP_DBG_OFF ---*/
+#define SNTP_DEBUG LWIP_DBG_ON
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
-
+#include "sntp_client.h"
+#include "usart.h"
+#define SNTP_SET_SYSTEM_TIME sntp_set_rtc
+#define SNTP_GET_SYSTEM_TIME(sec, us) do {get_system_time (&sec, &us);} while(0)
+#define LWIP_DEBUG
+#define LWIP_PLATFORM_DIAG(x) do {Debug_printf x;} while(0)
 /* USER CODE END 1 */
 
 #ifdef __cplusplus

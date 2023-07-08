@@ -38,6 +38,8 @@
 #include "usart.h"
 #include "AT_module_4g.h"
 #include "RS485.h"
+#include "sntp_client.h"
+#include "http_client.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -191,18 +193,21 @@ void Startup(void const * argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN Startup */
+  sntp_client_init ();
   //开启CAN接收线程
-	BSMU_CANInit();								
-  //开启客户端线程	
-	ClientInit();									  
+  BSMU_CANInit();
+  //开启客户端线程
+  ClientInit();
   //开启4G模块线程
-	Module4G_Init();
+  Module4G_Init();
 
   modbus_init();
+
+  http_client_init();
   //开启CPU_Task线程
   osThreadDef(CPU_Task_Thread, CPU_Task, osPriorityIdle, 0, 128);
   CPU_Task_ThreadHandle = osThreadCreate(osThread(CPU_Task_Thread), NULL);
-#if TOUCHGFX_ENABLE  
+#if TOUCHGFX_ENABLE
   vTaskDelay(200);									//延迟200ms再开启背光
   LCD_BL(1);     										//开启背光
 #endif
@@ -210,8 +215,7 @@ void Startup(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-
-	osDelay(1);
+    osDelay(1);
   }
   /* USER CODE END Startup */
 }

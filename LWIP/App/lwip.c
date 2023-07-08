@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
  ******************************************************************************
-  * File Name          : LWIP.c
-  * Description        : This file provides initialization code for LWIP
-  *                      middleWare.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ * File Name          : LWIP.c
+ * Description        : This file provides initialization code for LWIP
+ *                      middleWare.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2022 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -29,6 +29,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "at24cxx.h"
+#include "lwip/ip_addr.h"
 #include "usart.h"
 /* USER CODE END 0 */
 /* Private function prototypes -----------------------------------------------*/
@@ -85,8 +86,9 @@ void MX_LWIP_Init(void)
 
   /* Create the Ethernet link handler thread */
 /* USER CODE BEGIN H7_OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
-  osThreadDef(EthLink, ethernet_link_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE *2);
-  osThreadCreate (osThread(EthLink), &gnetif);
+  osThreadDef (EthLink, ethernet_link_thread, osPriorityBelowNormal, 0,
+               configMINIMAL_STACK_SIZE * 2);
+  osThreadCreate (osThread (EthLink), &gnetif);
 /* USER CODE END H7_OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
 
   /* Start DHCP negotiation for a network interface (IPv4) */
@@ -114,22 +116,47 @@ static void ethernet_link_status_updated(struct netif *netif)
   if (netif_is_up(netif))
   {
 /* USER CODE BEGIN 5 */
-    int err = 0;
-    Debug_printf("netif is up\r\n");
-    Debug_printf("starting dhcp...\n");
-    err = dhcp_start(&gnetif);
-    
-    if (err == ERR_OK) {
-      Debug_printf("starting dhcp success!\n");
-    } else {
-      Debug_printf("starting dhcp fail!\n");
-    }
+      int err = 0;
+      Debug_printf ("netif is up\r\n");
+      Debug_printf ("starting dhcp...\n");
+      err = dhcp_start (&gnetif);
+
+      if (err == ERR_OK)
+        {
+          Debug_printf ("starting dhcp success!\n");
+        }
+      else
+        {
+          Debug_printf ("starting dhcp fail!\n");
+          return;
+        }
+
+      int res = 0;
+      ipaddr.addr = 0;
+      do
+        {
+            res = ip_addr_cmp (&(gnetif.ip_addr), &ipaddr);
+
+            if (res)
+            {
+                osDelay (1000);
+                Debug_printf ("wait dhcp...\r\n");
+            }
+        }
+        while (res);
+
+        struct dhcp *dhcp;
+        dhcp = netif_dhcp_data (&gnetif);
+        Debug_printf ("IP:%s\r\nSN_MASK:%s\r\nGATEWAY:%s\r\n",
+                    ipaddr_ntoa (&gnetif.ip_addr),
+                    ipaddr_ntoa (&dhcp->offered_sn_mask),
+                    ipaddr_ntoa (&dhcp->offered_gw_addr));
 /* USER CODE END 5 */
   }
   else /* netif is down */
   {
 /* USER CODE BEGIN 6 */
-    Debug_printf("netif is down\r\n");
+      Debug_printf ("netif is down\r\n");
 /* USER CODE END 6 */
   }
 }

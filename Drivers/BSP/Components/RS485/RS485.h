@@ -6,7 +6,7 @@
 #define RS485_BUFF uart2_buff
 
 
-void ResetRS85UsartREV();
+void ResetRS85UsartREV(void);
 
 void RS485_REV(void);
 
