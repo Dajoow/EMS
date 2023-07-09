@@ -192,4 +192,5 @@ dkms.conf
 
 .vscode/
 .idea/
+cmake-build-*/
 

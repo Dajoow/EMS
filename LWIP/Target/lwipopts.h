@@ -53,24 +53,30 @@
 #define ETH_RX_BUFFER_SIZE 1536
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
+/*----- Default Value for MEM_SIZE: 1600 ---*/
+#define MEM_SIZE 16*1024
 /*----- Default Value for H7 devices: 0x30044000 -----*/
 #define LWIP_RAM_HEAP_POINTER 0x30044C00
+/*----- Default Value for MEMP_NUM_PBUF: 16 ---*/
+#define MEMP_NUM_PBUF 20
 /*----- Value in opt.h for MEMP_NUM_SYS_TIMEOUT: (LWIP_TCP + IP_REASSEMBLY + LWIP_ARP + (2*LWIP_DHCP) + LWIP_AUTOIP + LWIP_IGMP + LWIP_DNS + (PPP_SUPPORT*6*MEMP_NUM_PPP_PCB) + (LWIP_IPV6 ? (1 + LWIP_IPV6_REASS + LWIP_IPV6_MLD) : 0)) -*/
 #define MEMP_NUM_SYS_TIMEOUT 5
 /*----- Value supported for H7 devices: 1 -----*/
 #define LWIP_SUPPORT_CUSTOM_PBUF 1
+/*----- Default Value for PBUF_POOL_BUFSIZE: 592 ---*/
+#define PBUF_POOL_BUFSIZE 2048
 /*----- Value in opt.h for LWIP_ETHERNET: LWIP_ARP || PPPOE_SUPPORT -*/
 #define LWIP_ETHERNET 1
 /*----- Value in opt.h for LWIP_DNS_SECURE: (LWIP_DNS_SECURE_RAND_XID | LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING | LWIP_DNS_SECURE_RAND_SRC_PORT) -*/
 #define LWIP_DNS_SECURE 7
+/*----- Default Value for TCP_WND: 2144 ---*/
+#define TCP_WND 5896
 /*----- Value in opt.h for TCP_SND_QUEUELEN: (4*TCP_SND_BUF + (TCP_MSS - 1))/TCP_MSS -----*/
 #define TCP_SND_QUEUELEN 9
 /*----- Value in opt.h for TCP_SNDLOWAT: LWIP_MIN(LWIP_MAX(((TCP_SND_BUF)/2), (2 * TCP_MSS) + 1), (TCP_SND_BUF) - 1) -*/
 #define TCP_SNDLOWAT 1071
 /*----- Value in opt.h for TCP_SNDQUEUELOWAT: LWIP_MAX(TCP_SND_QUEUELEN)/2, 5) -*/
 #define TCP_SNDQUEUELOWAT 5
-/*----- Value in opt.h for TCP_WND_UPDATE_THRESHOLD: LWIP_MIN(TCP_WND/4, TCP_MSS*4) -----*/
-#define TCP_WND_UPDATE_THRESHOLD 536
 /*----- Value in opt.h for LWIP_NETIF_LINK_CALLBACK: 0 -----*/
 #define LWIP_NETIF_LINK_CALLBACK 1
 /*----- Value in opt.h for TCPIP_THREAD_STACKSIZE: 0 -----*/
@@ -98,7 +104,7 @@
 /*----- Default Value for LWIP_SNTP: 0 ---*/
 #define LWIP_SNTP 1
 /*----- Default Value for SNTP_MAX_SERVERS: 1 ---*/
-#define SNTP_MAX_SERVERS 5
+#define SNTP_MAX_SERVERS 4
 /*----- Default Value for SNTP_COMP_ROUNDTRIP: 0 ---*/
 #define SNTP_COMP_ROUNDTRIP 1
 /*----- Value in opt.h for LWIP_STATS: 1 -----*/
