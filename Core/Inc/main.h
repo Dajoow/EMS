@@ -60,10 +60,10 @@ void Error_Handler(void);
 #define BufStartAdd_3 0xC0258000
 #define BufStartAdd_1 0xC0000000
 #define BufStartAdd_2 0xC012C000
+#define StationBuffAdd 0xC03AF000
 #define ETHSendBuffAdd 0xC0384000
 #define CANRevBuffStartAdd 0xC03B0000
 #define CANSndBuffStartAdd 0xC03F8000
-#define StationBuffAdd 0xC03AF000
 #define LED_G_Pin GPIO_PIN_2
 #define LED_G_GPIO_Port GPIOE
 #define LED_B_Pin GPIO_PIN_3

@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
  ******************************************************************************
-  * File Name          : LWIP.c
-  * Description        : This file provides initialization code for LWIP
-  *                      middleWare.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ * File Name          : LWIP.c
+ * Description        : This file provides initialization code for LWIP
+ *                      middleWare.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2022 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -29,6 +29,8 @@
 
 /* USER CODE BEGIN 0 */
 #include "at24cxx.h"
+#include "lwip/ip_addr.h"
+#include "usart.h"
 /* USER CODE END 0 */
 /* Private function prototypes -----------------------------------------------*/
 static void ethernet_link_status_updated(struct netif *netif);
@@ -44,9 +46,6 @@ struct netif gnetif;
 ip4_addr_t ipaddr;
 ip4_addr_t netmask;
 ip4_addr_t gw;
-uint8_t IP_ADDRESS[4];
-uint8_t NETMASK_ADDRESS[4];
-uint8_t GATEWAY_ADDRESS[4];
 
 /* USER CODE BEGIN 2 */
 
@@ -57,42 +56,13 @@ uint8_t GATEWAY_ADDRESS[4];
   */
 void MX_LWIP_Init(void)
 {
-  /* IP addresses initialization */
-  IP_ADDRESS[0] = 10;
-  IP_ADDRESS[1] = 2;
-  IP_ADDRESS[2] = 133;
-  IP_ADDRESS[3] = 33;
-  NETMASK_ADDRESS[0] = 255;
-  NETMASK_ADDRESS[1] = 255;
-  NETMASK_ADDRESS[2] = 255;
-  NETMASK_ADDRESS[3] = 0;
-  GATEWAY_ADDRESS[0] = 10;
-  GATEWAY_ADDRESS[1] = 2;
-  GATEWAY_ADDRESS[2] = 133;
-  GATEWAY_ADDRESS[3] = 254;
-
-/* USER CODE BEGIN IP_ADDRESSES */
-  IP_ADDRESS[0] = bsmuSetting.IP_ADD[0];
-  IP_ADDRESS[1] = bsmuSetting.IP_ADD[1];
-  IP_ADDRESS[2] = bsmuSetting.IP_ADD[2];
-  IP_ADDRESS[3] = bsmuSetting.IP_ADD[3];
-  NETMASK_ADDRESS[0] = bsmuSetting.NETMASK[0];
-  NETMASK_ADDRESS[1] = bsmuSetting.NETMASK[1];
-  NETMASK_ADDRESS[2] = bsmuSetting.NETMASK[2];
-  NETMASK_ADDRESS[3] = bsmuSetting.NETMASK[3];
-  GATEWAY_ADDRESS[0] = bsmuSetting.GATEWAY[0];
-  GATEWAY_ADDRESS[1] = bsmuSetting.GATEWAY[1];
-  GATEWAY_ADDRESS[2] = bsmuSetting.GATEWAY[2];
-  GATEWAY_ADDRESS[3] = bsmuSetting.GATEWAY[3];
-/* USER CODE END IP_ADDRESSES */
-
   /* Initilialize the LwIP stack with RTOS */
   tcpip_init( NULL, NULL );
 
-  /* IP addresses initialization without DHCP (IPv4) */
-  IP4_ADDR(&ipaddr, IP_ADDRESS[0], IP_ADDRESS[1], IP_ADDRESS[2], IP_ADDRESS[3]);
-  IP4_ADDR(&netmask, NETMASK_ADDRESS[0], NETMASK_ADDRESS[1] , NETMASK_ADDRESS[2], NETMASK_ADDRESS[3]);
-  IP4_ADDR(&gw, GATEWAY_ADDRESS[0], GATEWAY_ADDRESS[1], GATEWAY_ADDRESS[2], GATEWAY_ADDRESS[3]);
+  /* IP addresses initialization with DHCP (IPv4) */
+  ipaddr.addr = 0;
+  netmask.addr = 0;
+  gw.addr = 0;
 
   /* add the network interface (IPv4/IPv6) with RTOS */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
@@ -116,9 +86,13 @@ void MX_LWIP_Init(void)
 
   /* Create the Ethernet link handler thread */
 /* USER CODE BEGIN H7_OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
-  osThreadDef(EthLink, ethernet_link_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE *2);
-  osThreadCreate (osThread(EthLink), &gnetif);
+  osThreadDef (EthLink, ethernet_link_thread, osPriorityBelowNormal, 0,
+               configMINIMAL_STACK_SIZE * 2);
+  osThreadCreate (osThread (EthLink), &gnetif);
 /* USER CODE END H7_OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
+
+  /* Start DHCP negotiation for a network interface (IPv4) */
+  dhcp_start(&gnetif);
 
 /* USER CODE BEGIN 3 */
 
@@ -142,11 +116,47 @@ static void ethernet_link_status_updated(struct netif *netif)
   if (netif_is_up(netif))
   {
 /* USER CODE BEGIN 5 */
+      int err = 0;
+      Debug_printf ("netif is up\r\n");
+      Debug_printf ("starting dhcp...\n");
+      err = dhcp_start (&gnetif);
+
+      if (err == ERR_OK)
+        {
+          Debug_printf ("starting dhcp success!\n");
+        }
+      else
+        {
+          Debug_printf ("starting dhcp fail!\n");
+          return;
+        }
+
+      int res = 0;
+      ipaddr.addr = 0;
+      do
+        {
+            res = ip_addr_cmp (&(gnetif.ip_addr), &ipaddr);
+
+            if (res)
+            {
+                osDelay (1000);
+                Debug_printf ("wait dhcp...\r\n");
+            }
+        }
+        while (res);
+
+        struct dhcp *dhcp;
+        dhcp = netif_dhcp_data (&gnetif);
+        Debug_printf ("IP:%s\r\nSN_MASK:%s\r\nGATEWAY:%s\r\n",
+                    ipaddr_ntoa (&gnetif.ip_addr),
+                    ipaddr_ntoa (&dhcp->offered_sn_mask),
+                    ipaddr_ntoa (&dhcp->offered_gw_addr));
 /* USER CODE END 5 */
   }
   else /* netif is down */
   {
 /* USER CODE BEGIN 6 */
+      Debug_printf ("netif is down\r\n");
 /* USER CODE END 6 */
   }
 }

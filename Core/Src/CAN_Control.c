@@ -36,7 +36,7 @@ osSemaphoreId ViewUpdateSemHandle;
 extern Client_Sd_t Client_Sd[cluster_num];
 uint8_t Queue_NUM_POLL;
 #if MasterOrSlave==Master
-#if defined(__CC_ARM__)
+#if defined(__CC_ARM)
 uint8_t FDCAN_REV_Buff[cluster_num][FDCAN_REV_BuffSize] __attribute__((at(CANRevBuffStartAdd)));            //FDCAN接收缓存区  8k*20
 uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize] 							__attribute__((at(CANSndBuffStartAdd)));						//FDCAN发送缓存区  32k
 #elif defined(__GNUC__)
