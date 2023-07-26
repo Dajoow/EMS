@@ -25,8 +25,8 @@
 /* USER CODE END 0 */
 
 CRYP_HandleTypeDef hcryp;
-__ALIGN_BEGIN static const uint32_t pKeyCRYP[4] __ALIGN_END = {
-                            0x00000000,0x00000000,0x00000000,0x00000000};
+__ALIGN_BEGIN static const uint32_t pKeyCRYP[8] __ALIGN_END = {
+                            0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000,0x00000000};
 __ALIGN_BEGIN static const uint32_t pInitVectCRYP[4] __ALIGN_END = {
                             0x00000000,0x00000000,0x00000000,0x00000002};
 __ALIGN_BEGIN static const uint32_t HeaderCRYP[1] __ALIGN_END = {
@@ -45,7 +45,7 @@ void MX_CRYP_Init(void)
   /* USER CODE END CRYP_Init 1 */
   hcryp.Instance = CRYP;
   hcryp.Init.DataType = CRYP_DATATYPE_32B;
-  hcryp.Init.KeySize = CRYP_KEYSIZE_128B;
+  hcryp.Init.KeySize = CRYP_KEYSIZE_256B;
   hcryp.Init.pKey = (uint32_t *)pKeyCRYP;
   hcryp.Init.pInitVect = (uint32_t *)pInitVectCRYP;
   hcryp.Init.Algorithm = CRYP_AES_GCM;

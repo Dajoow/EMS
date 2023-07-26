@@ -193,4 +193,6 @@ dkms.conf
 .vscode/
 .idea/
 cmake-build-*/
+EIDE/
+MDK-ARM/BSMU_H750IB/
 

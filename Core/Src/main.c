@@ -67,6 +67,7 @@ uint32_t g_osRuntimeCounter = 0;        //FreeRTOS运行计数
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MPU_Initialize(void);
 static void MPU_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
@@ -99,9 +100,6 @@ int main(void)
 	__enable_irq();
   /* USER CODE END 1 */
 
-  /* MPU Configuration--------------------------------------------------------*/
-  MPU_Config();
-
   /* Enable I-Cache---------------------------------------------------------*/
   SCB_EnableICache();
 
@@ -112,6 +110,9 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+
+  /* MPU Configuration--------------------------------------------------------*/
+  MPU_Config();
 
   /* USER CODE BEGIN Init */
 //	SCB->CACR|=1<<2;   //强制D-Cache透写,CPU 每次操作 Cache 里面的数据，同时也会更新到 SRAM 里面，不需要再发送clean操作，保证D Cache 和 SRAM 里面数据一致。
@@ -144,6 +145,8 @@ int main(void)
   MX_RNG_Init();
   MX_HASH_Init();
   MX_RTC_Init();
+  /* Call PreOsInit function */
+  MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
 #if TOUCHGFX_ENABLE
   MX_TouchGFX_Init();
@@ -165,6 +168,7 @@ int main(void)
 
   /* Start scheduler */
   osKernelStart();
+
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -261,7 +265,7 @@ void MPU_Config(void)
   /** Initializes and configures the Region and the memory to be protected
   */
   MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
   MPU_InitStruct.BaseAddress = 0x30040000;
   MPU_InitStruct.Size = MPU_REGION_SIZE_32KB;
   MPU_InitStruct.SubRegionDisable = 0x0;
@@ -276,11 +280,22 @@ void MPU_Config(void)
 
   /** Initializes and configures the Region and the memory to be protected
   */
-  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
   MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER3;
+  MPU_InitStruct.BaseAddress = 0x30020000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_32KB;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */

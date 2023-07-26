@@ -79,7 +79,7 @@
 #define WOLF_CONF_MD5      0
 
 /*---------- WOLF_CONF_SHA1 -----------*/
-#define WOLF_CONF_SHA1      0
+#define WOLF_CONF_SHA1      1
 
 /*---------- WOLF_CONF_SHA2_224 -----------*/
 #define WOLF_CONF_SHA2_224      0
@@ -88,7 +88,7 @@
 #define WOLF_CONF_SHA2_256      1
 
 /*---------- WOLF_CONF_SHA2_384 -----------*/
-#define WOLF_CONF_SHA2_384      0
+#define WOLF_CONF_SHA2_384      1
 
 /*---------- WOLF_CONF_SHA2_512 -----------*/
 #define WOLF_CONF_SHA2_512      0
@@ -106,7 +106,7 @@
 #define WOLF_CONF_KEEP_PEER_CERT      0
 
 /*---------- WOLF_CONF_BASE64_ENCODE -----------*/
-#define WOLF_CONF_BASE64_ENCODE      0
+#define WOLF_CONF_BASE64_ENCODE      1
 
 /*---------- WOLF_CONF_OPENSSL_EXTRA -----------*/
 #define WOLF_CONF_OPENSSL_EXTRA      0
@@ -157,7 +157,7 @@
     #define WOLFSSL_STM32H7
     #undef  NO_STM32_HASH
     #undef  NO_STM32_CRYPTO
-    #define HAL_CONSOLE_UART huart3
+    #define HAL_CONSOLE_UART huart4
 #elif defined(STM32H723xx)
     #define WOLFSSL_STM32H7
     #define HAL_CONSOLE_UART huart3
@@ -379,7 +379,7 @@
     #ifdef USE_FAST_MATH
         /* Maximum math bits (Max RSA key bits * 2) */
         #undef  FP_MAX_BITS
-        #define FP_MAX_BITS     4096
+        #define FP_MAX_BITS     8192
     #endif
 
     /* half as much memory but twice as slow */
@@ -579,6 +579,10 @@
 #if defined(WOLF_CONF_DEBUG) && WOLF_CONF_DEBUG == 1
     #define DEBUG_WOLFSSL
 
+#undef  WOLFSSL_DEBUG_ERRORS_ONLY
+
+	#include "usart.h"
+	#define WOLFSSL_USER_LOG(x)	do { Debug_printf(x); Debug_printf("\n"); } while(0); 
     /* Use this to measure / print heap usage */
     #if 0
         #define USE_WOLFSSL_MEMORY
