@@ -9,7 +9,7 @@
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
  */
 #include <gui/containers/keyboard.hpp>
-#include <touchgfx/utils.hpp>
+#include <touchgfx/Utils.hpp>
 #ifndef SIMULATOR
 extern "C"{
 #include "string.h"

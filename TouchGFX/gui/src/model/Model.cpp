@@ -10,7 +10,7 @@
  */
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
-#include <touchgfx/utils.hpp>
+#include <touchgfx/Utils.hpp>
 
 #include <gui/common/GuiTransTypes.hpp>
 
@@ -39,7 +39,7 @@ void Model::tick()
     modelToViewData.frameRateCount++;				//再CPUtask线程中1s清零
 	//获取信号量但不阻塞
     //更新数据原因1.CAN采集完成传过来信号量 或者 2. VIEW通知要更新
-    if(xSemaphoreTake(ViewUpdateSemHandle, 0) == pdTRUE || viewToModelDataTemp.reflashFlag == true)
+    if(ViewUpdateSemHandle != NULL && (xSemaphoreTake(ViewUpdateSemHandle, 0) == pdTRUE || viewToModelDataTemp.reflashFlag == true))
 	{
         if(viewToModelDataTemp.reflashFlag == true)
             viewToModelDataTemp.reflashFlag = false;

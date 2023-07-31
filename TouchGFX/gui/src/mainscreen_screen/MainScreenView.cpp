@@ -1,5 +1,5 @@
 #include <gui/mainscreen_screen/MainScreenView.hpp>
-#include <touchgfx/utils.hpp>
+#include <touchgfx/Utils.hpp>
 #include <touchgfx/Callback.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 MainScreenView::MainScreenView()
