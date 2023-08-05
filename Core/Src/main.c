@@ -26,7 +26,7 @@
 #include "fdcan.h"
 #include "hash.h"
 #include "ltdc.h"
-#include "lwip.h"
+#include "mbedtls.h"
 #include "rng.h"
 #include "rtc.h"
 #include "spi.h"
@@ -145,7 +145,9 @@ int main(void)
   MX_RNG_Init();
   MX_HASH_Init();
   MX_RTC_Init();
+  MX_MBEDTLS_Init();
   /* Call PreOsInit function */
+  MX_MBEDTLS_Init();
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
 #if TOUCHGFX_ENABLE
@@ -296,6 +298,14 @@ void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
   MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER4;
+  MPU_InitStruct.BaseAddress = 0xC0000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4MB;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */

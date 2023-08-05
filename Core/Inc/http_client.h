@@ -2,13 +2,23 @@
 #define __HTTP_CLIENT_H__
 
 #include "station_ctl.h"
-#include "wolfssl/ssl.h"
+#include "lwip/ip_addr.h"
+#include "mbedtls.h"
+#include "mbedtls/net_sockets.h"
 
 typedef struct
 {
-  int socket;
-  WOLFSSL_CTX *ssl_ctx;
-  WOLFSSL *ssl;
+  struct{
+    mbedtls_ssl_context *ssl_ctx;
+    mbedtls_net_context *net_ctx;
+    mbedtls_ssl_config *conf;
+    mbedtls_x509_crt *cert;
+    mbedtls_ctr_drbg_context *ctr_drbg;
+    mbedtls_entropy_context *entropy;
+  } mbedtls;
+  int cert_verify_passed;
+  ip_addr_t host_ip;
+
   char *json_statistics;
   int json_statistics_len;
   char *json_clusters;

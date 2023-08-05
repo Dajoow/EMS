@@ -40,7 +40,7 @@ void SDRAM_init(void)
 	HAL_SDRAM_SendCommand(&hsdram1, &Command, 0xffff); 
 	
 	//配置FMC的SDRAM控制器的自动刷新周期
-	HAL_SDRAM_SetAutoRefreshNumber(&hsdram1, 677);   //761   //677
+	HAL_SDRAM_SetAutoRefreshNumber(&hsdram1, 762);   //761   //677
 }
 
 	

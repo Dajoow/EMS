@@ -65,10 +65,10 @@ void MX_FDCAN2_Init(void)
   hfdcan2.Init.TxFifoQueueElmtsNbr = 16;
   hfdcan2.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
   hfdcan2.Init.TxElmtSize = FDCAN_DATA_BYTES_64;
-//  if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
+  if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN FDCAN2_Init 2 */
   //500k 2M
   if(bsmuSetting.canBps == 0){

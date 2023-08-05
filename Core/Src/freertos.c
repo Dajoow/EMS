@@ -200,14 +200,13 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_Startup */
 void Startup(void const * argument)
 {
-  /* init code for LWIP */
-  MX_LWIP_Init();
   /* USER CODE BEGIN Startup */
+  mbedtls_net_init (NULL);
   sntp_client_init ();
   // 开启CAN接收线程
   BSMU_CANInit ();
   // 开启客户端线程
-  ClientInit ();
+  // ClientInit ();
   // 开启4G模块线程
   Module4G_Init ();
 

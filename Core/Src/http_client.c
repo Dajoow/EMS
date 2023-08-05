@@ -7,14 +7,16 @@
 #include "lwip/dhcp.h"
 #include "lwip/init.h"
 #include "lwip/sockets.h"
+#include "mbedtls.h"
+#include "mbedtls/base64.h"
+#include "mbedtls/net_sockets.h"
 #include "sntp_client.h"
 #include "station_ctl.h"
 #include "string.h"
 #include "task.h"
 #include "usart.h"
-#include "wolfssl/wolfcrypt/coding.h"
 
-#define SERVER_TOKEN "8cXNY4p+0HfK4Snvt4QLcQ=="
+// #define SERVER_TOKEN
 
 #if !defined(SERVER_TOKEN)
 #warning                                                                      \
@@ -23,11 +25,11 @@
 #define HTTPC_ENABLED
 #endif
 
-#define HOST "dz.hhkk.club"
-#define HTTPS_PORT 82
-#define HTTP_PORT 81
-#define HTTP_HOST "dz.hhkk.club:81"
-#define HTTPS_HOST "dz.hhkk.club:82"
+#define HOST "dzhk.hhkk.club"
+#define HTTPS_PORT "443"
+#define HTTP_PORT "80"
+#define HTTP_HOST "dzhk.hhkk.club"
+#define HTTPS_HOST "dzhk.hhkk.club"
 #define API_STATISTICS "/api/bmsRequest/sendSum"
 #define API_CLUSTERS "/api/bmsRequest/send"
 
@@ -48,118 +50,15 @@ extern EEPROM_BSMU bsmuSetting;
 
 osThreadId httpc_handle = NULL;
 
-Client_Sd_Station_t httpc_station_statistics __attribute__((at(0xC040E330)));
-Client_Sd_t httpc_clusters[cluster_num] __attribute__((at(0xC0400000)));
+Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E330)));
+Client_Sd_t httpc_clusters[cluster_num] __attribute__ ((at (0xC0400000)));
 
 httpc_ctx_t http_client;
 
-int
-my_IORecv (WOLFSSL *ssl, char *buff, int sz, void *ctx)
-{
-  /* By default, ctx will be a pointer to the file descriptor to read from.
-   * This can be changed by calling wolfSSL_SetIOReadCtx(). */
-  int sockfd = *(int *)ctx;
-  int recvd;
+static const char *pers = "ssl_client";
+static const int pers_len = sizeof (pers);
 
-  /* Receive message from socket */
-  if ((recvd = recv (sockfd, buff, sz, 0)) == -1)
-    {
-      /* error encountered. Be responsible and report it in wolfSSL terms */
-
-      Debug_printf ("IO RECEIVE ERROR: ");
-      switch (errno)
-        {
-#if EAGAIN != EWOULDBLOCK
-        case EAGAIN: /* EAGAIN == EWOULDBLOCK on some systems, but not others
-                      */
-#endif
-        case EWOULDBLOCK:
-          if (!wolfSSL_dtls (ssl) || wolfSSL_get_using_nonblock (ssl))
-            {
-              Debug_printf ("would block\n");
-              return WOLFSSL_CBIO_ERR_WANT_READ;
-            }
-          else
-            {
-              Debug_printf ("socket timeout\n");
-              return WOLFSSL_CBIO_ERR_TIMEOUT;
-            }
-        case ECONNRESET:
-          Debug_printf ("connection reset\n");
-          return WOLFSSL_CBIO_ERR_CONN_RST;
-        case EINTR:
-          Debug_printf ("socket interrupted\n");
-          return WOLFSSL_CBIO_ERR_ISR;
-        case ECONNREFUSED:
-          Debug_printf ("connection refused\n");
-          return WOLFSSL_CBIO_ERR_WANT_READ;
-        case ECONNABORTED:
-          Debug_printf ("connection aborted\n");
-          return WOLFSSL_CBIO_ERR_CONN_CLOSE;
-        default:
-          Debug_printf ("general error\n");
-          return WOLFSSL_CBIO_ERR_GENERAL;
-        }
-    }
-  else if (recvd == 0)
-    {
-      Debug_printf ("Connection closed\n");
-      return WOLFSSL_CBIO_ERR_CONN_CLOSE;
-    }
-
-  /* successful receive */
-  // Debug_printf ("my_IORecv: received %d bytes from %d\n", sz, sockfd);
-
-  return recvd;
-}
-
-int
-my_IOSend (WOLFSSL *ssl, char *buff, int sz, void *ctx)
-{
-  /* By default, ctx will be a pointer to the file descriptor to write to.
-   * This can be changed by calling wolfSSL_SetIOWriteCtx(). */
-  int sockfd = *(int *)ctx;
-  int sent;
-
-  /* Receive message from socket */
-  if ((sent = send (sockfd, buff, sz, 0)) == -1)
-    {
-      /* error encountered. Be responsible and report it in wolfSSL terms */
-
-      Debug_printf ("IO SEND ERROR: ");
-      switch (errno)
-        {
-#if EAGAIN != EWOULDBLOCK
-        case EAGAIN: /* EAGAIN == EWOULDBLOCK on some systems, but not others
-                      */
-#endif
-        case EWOULDBLOCK:
-          Debug_printf ("would block\n");
-          return WOLFSSL_CBIO_ERR_WANT_WRITE;
-        case ECONNRESET:
-          Debug_printf ("connection reset\n");
-          return WOLFSSL_CBIO_ERR_CONN_RST;
-        case EINTR:
-          Debug_printf ("socket interrupted\n");
-          return WOLFSSL_CBIO_ERR_ISR;
-        case EPIPE:
-          Debug_printf ("socket EPIPE\n");
-          return WOLFSSL_CBIO_ERR_CONN_CLOSE;
-        default:
-          Debug_printf ("general error %d\n", errno);
-          return WOLFSSL_CBIO_ERR_GENERAL;
-        }
-    }
-  else if (sent == 0)
-    {
-      Debug_printf ("Connection closed\n");
-      return 0;
-    }
-
-  /* successful send */
-  // Debug_printf ("my_IOSend: sent %d bytes to %d\n", sz, sockfd);
-  return sent;
-}
+static mbedtls_net_context server_fd;
 
 static int
 create_statistics_payload (httpc_ctx_t *ctx)
@@ -171,43 +70,41 @@ create_statistics_payload (httpc_ctx_t *ctx)
   if (obj == NULL)
     goto end;
 
-  // todo: debug only clear it on relaease
-  // data->station_state = 2;
-  // data->station_VOL = 200;
-  // data->station_CUR = -20;
-  // data->station_SOC = 98;
-  // data->station_SOH = 99;
-  // data->charge_power = 1200;
-  // data->discharge_power = 600;
-
   cJSON *sta = cJSON_CreateNumber (data->station_state);
   if (sta == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "sta", sta);
+
   cJSON *vs = cJSON_CreateNumber (data->station_VOL);
   if (vs == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "vs", vs);
+
   cJSON *is = cJSON_CreateNumber (data->station_CUR);
   if (is == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "is", is);
+
   cJSON *soc = cJSON_CreateNumber (data->station_SOC);
   if (soc == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "soc", soc);
+
   cJSON *soh = cJSON_CreateNumber (data->station_SOH);
   if (soh == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "soh", soh);
+
   cJSON *cp = cJSON_CreateNumber (data->charge_power);
   if (cp == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "cp", cp);
+
   cJSON *dp = cJSON_CreateNumber (data->discharge_power);
   if (dp == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "dp", dp);
+
   cJSON *token = cJSON_CreateString (SERVER_TOKEN);
   if (token == NULL)
     goto end;
@@ -231,6 +128,7 @@ end:
 static int
 create_clusters_payload (httpc_ctx_t *ctx, int index)
 {
+  int ret = -1;
   int len = -1;
   Client_Sd_t *data = &ctx->clusters_data[index];
   char base64_buffer[1024];
@@ -290,33 +188,49 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "bn", bn);
 
-  Base64_Encode_NoNl ((uint8_t *)data->BAT_VOL,
-                      TOTOL_BAT_num * sizeof (uint16_t), base64_buffer,
-                      &base64_buffer_len);
+  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+                               (uint8_t *)data->BAT_VOL,
+                               TOTOL_BAT_num * sizeof (uint16_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
   cJSON *vb = cJSON_CreateString (base64_buffer);
   if (vb == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "vb", vb);
 
-  Base64_Encode_NoNl ((uint8_t *)data->BAT_TMP,
-                      TOTOL_BAT_num * sizeof (uint16_t), base64_buffer,
-                      &base64_buffer_len);
+  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+                               (uint8_t *)data->BAT_TMP,
+                               TOTOL_BAT_num * sizeof (uint16_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
   cJSON *tb = cJSON_CreateString (base64_buffer);
   if (tb == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "tb", tb);
 
-  Base64_Encode_NoNl ((uint8_t *)data->BAT_SOC,
-                      TOTOL_BAT_num * sizeof (uint16_t), base64_buffer,
-                      &base64_buffer_len);
+  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+                               (uint8_t *)data->BAT_SOC,
+                               TOTOL_BAT_num * sizeof (uint16_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
   cJSON *socb = cJSON_CreateString (base64_buffer);
   if (socb == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "socb", socb);
 
-  Base64_Encode_NoNl ((uint8_t *)data->BAT_FAULT,
-                      TOTOL_BAT_num * sizeof (uint16_t), base64_buffer,
-                      &base64_buffer_len);
+  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+                               (uint8_t *)data->BAT_FAULT,
+                               TOTOL_BAT_num * sizeof (uint16_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
   cJSON *wb = cJSON_CreateString (base64_buffer);
   if (wb == NULL)
     goto end;
@@ -345,6 +259,15 @@ end:
 static int
 httpc_ctx_init_default (httpc_ctx_t *ctx)
 {
+  int ret;
+  extern mbedtls_ssl_context ssl;
+  extern mbedtls_ssl_config conf;
+  extern mbedtls_x509_crt cert;
+  extern mbedtls_ctr_drbg_context ctr_drbg;
+  extern mbedtls_entropy_context entropy;
+
+  memset (ctx, 0, sizeof (httpc_ctx_t));
+
   ctx->json_statistics = NULL;
   ctx->json_statistics_len = -1;
   ctx->json_clusters = NULL;
@@ -352,44 +275,46 @@ httpc_ctx_init_default (httpc_ctx_t *ctx)
   ctx->statistics_data = &httpc_station_statistics;
   ctx->clusters_data = httpc_clusters;
   ctx->clusters_sum = bsmuSetting.cu_num;
-  ctx->socket = -1;
-  ctx->ssl_ctx = NULL;
-  ctx->ssl = NULL;
 
-  if (wolfSSL_Init () != WOLFSSL_SUCCESS)
+  ctx->mbedtls.net_ctx = &server_fd;
+  ctx->mbedtls.ssl_ctx = &ssl;
+  ctx->mbedtls.conf = &conf;
+  ctx->mbedtls.cert = &cert;
+  ctx->mbedtls.ctr_drbg = &ctr_drbg;
+  ctx->mbedtls.entropy = &entropy;
+
+  ctx->cert_verify_passed = 0;
+
+  MX_MBEDTLS_Init ();
+
+  if ((ret = mbedtls_ctr_drbg_seed (ctx->mbedtls.ctr_drbg,
+                                    mbedtls_entropy_func, ctx->mbedtls.entropy,
+                                    (const unsigned char *)pers, pers_len))
+      != 0)
     {
-      Debug_printf ("Wolfssl init failed\r\n");
-      return -1;
+      Debug_printf ("failed! mbedtls_ctr_drbg_seed returned -0x%x\r\n", -ret);
+      goto end;
     }
 
-  ctx->ssl_ctx = wolfSSL_CTX_new (wolfTLSv1_2_client_method ());
-  if (ctx->ssl_ctx == NULL)
+  /*
+   * 1. Initialize certificates
+   */
+  ret = mbedtls_x509_crt_parse (ctx->mbedtls.cert,
+                                (const unsigned char *)__ssl_ca_certificate,
+                                __ssl_ca_certificate_len);
+  if (ret < 0)
     {
-      Debug_printf ("ssl ctx alloc failed\r\n");
-      return -1;
+      Debug_printf ("failed! mbedtls_x509_crt_parse returned -0x%x\r\n", -ret);
+      goto end;
     }
 
-  if (wolfSSL_CTX_load_verify_buffer (ctx->ssl_ctx, __ssl_ca_certificate,
-                                      __ssl_ca_certificate_len,
-                                      WOLFSSL_FILETYPE_PEM)
-      != SSL_SUCCESS)
-    {
-      Debug_printf ("load ca certificate failed\r\n");
-      return -1;
-    }
-
-  // todo: remove it aftr solve the problem
-  // workaround to avoid -188, -155 temporary
-  wolfSSL_CTX_set_verify (ctx->ssl_ctx, SSL_VERIFY_NONE, 0);
-
-  /* Register callbacks */
-  wolfSSL_SetIORecv (ctx->ssl_ctx, my_IORecv);
-  wolfSSL_SetIOSend (ctx->ssl_ctx, my_IOSend);
-
-  return 0;
+end:
+  return ret;
 }
 
-static int cjson_init(){
+static int
+cjson_init ()
+{
   cJSON_Hooks hooks;
 
   hooks.free_fn = vPortFree;
@@ -401,88 +326,132 @@ static int cjson_init(){
 }
 
 static int
-socket_connect (httpc_ctx_t *ctx, const char *host, int port)
+httpc_connect (httpc_ctx_t *ctx, const char *host, int port)
 {
-  // dns resolve
-  ip_addr_t host_ip;
-  err_t err = ERR_OK;
-  err = netconn_gethostbyname (host, &host_ip);
-  if (err != ERR_OK)
+  int ret;
+
+  // dns resolve, run once
+  if (ctx->host_ip.addr == 0)
     {
-      Debug_printf ("Host resolve error %d\r\n", err);
-      return -1;
+      err_t err = ERR_OK;
+      err = netconn_gethostbyname (host, &ctx->host_ip);
+      if (err != ERR_OK)
+        {
+          Debug_printf ("Host resolve error %d\r\n", err);
+          ret = -1;
+          goto end;
+        }
+
+      if (ctx->host_ip.addr == 0)
+        {
+          Debug_printf ("ip addr error\r\n");
+          ret = -1;
+          goto end;
+        }
     }
 
-  if (host_ip.addr == 0)
+  /*
+   * 2. Start the connection
+   */
+  if ((ret = mbedtls_net_connect (ctx->mbedtls.net_ctx, inet_ntoa (ctx->host_ip),
+                                  HTTPS_PORT, MBEDTLS_NET_PROTO_TCP))
+      != 0)
     {
-      Debug_printf ("ip addr error\r\n");
-      return -1;
+      Debug_printf ("failed! mbedtls_net_connect returned %d\n\n", ret);
+      goto end;
     }
 
-  // 进行 socket 连接
-  struct sockaddr_in servaddr;
-
-  /* Create a socket that uses an internet IPv4 address,
-   * Sets the socket to be stream based (TCP),
-   * 0 means choose the default protocol. */
-  ctx->socket = socket (AF_INET, SOCK_STREAM, 0);
-
-  memset (&servaddr, sizeof (servaddr), 0);
-  servaddr.sin_family = AF_INET;
-  servaddr.sin_port = htons (HTTPS_PORT);
-
-  inet_pton (AF_INET, inet_ntoa (host_ip), &servaddr.sin_addr);
-
-  /* Connect to socket file descriptor */
-  if (0
-      != connect (ctx->socket, (struct sockaddr *)&servaddr,
-                  sizeof (servaddr)))
+  /*
+   * 3. Setup stuff
+   */
+  if ((ret = mbedtls_ssl_config_defaults (
+           ctx->mbedtls.conf, MBEDTLS_SSL_IS_CLIENT,
+           MBEDTLS_SSL_TRANSPORT_STREAM, MBEDTLS_SSL_PRESET_DEFAULT))
+      != 0)
     {
-      Debug_printf ("socket connect failed\r\n");
+      Debug_printf ("failed! mbedtls_ssl_config_defaults returned %d\n\n",
+                    ret);
+      goto end;
     }
 
-  return 0;
+  /* OPTIONAL is not optimal for security,
+   * but makes interop easier in this simplified application */
+  mbedtls_ssl_conf_authmode (ctx->mbedtls.conf, MBEDTLS_SSL_VERIFY_OPTIONAL);
+  mbedtls_ssl_conf_ca_chain (ctx->mbedtls.conf, ctx->mbedtls.cert, NULL);
+  mbedtls_ssl_conf_rng (ctx->mbedtls.conf, mbedtls_ctr_drbg_random,
+                        ctx->mbedtls.ctr_drbg);
+
+  if ((ret = mbedtls_ssl_setup (ctx->mbedtls.ssl_ctx, ctx->mbedtls.conf)) != 0)
+    {
+      Debug_printf ("failed! mbedtls_ssl_setup returned %d\n\n", ret);
+      goto end;
+    }
+
+  if ((ret = mbedtls_ssl_set_hostname (ctx->mbedtls.ssl_ctx, HTTPS_HOST)) != 0)
+    {
+      Debug_printf ("failed! mbedtls_ssl_set_hostname returned %d\n\n", ret);
+      goto end;
+    }
+
+  mbedtls_ssl_set_bio (ctx->mbedtls.ssl_ctx, ctx->mbedtls.net_ctx,
+                       mbedtls_net_send, mbedtls_net_recv, NULL);
+
+  /*
+   * 4. Handshake
+   */
+  while ((ret = mbedtls_ssl_handshake (ctx->mbedtls.ssl_ctx)) != 0)
+    {
+      if (ret != MBEDTLS_ERR_SSL_WANT_READ
+          && ret != MBEDTLS_ERR_SSL_WANT_WRITE)
+        {
+          Debug_printf ("failed! mbedtls_ssl_handshake returned -0x%x\n\n",
+                        -ret);
+          goto end;
+        }
+    }
+
+end:
+  return ret;
 }
 
 static int
-httpc_connect (httpc_ctx_t *ctx, const char *host, int port)
+httpc_verify_cert (httpc_ctx_t *ctx)
 {
-  socket_connect (ctx, host, port);
+  int ret;
 
-  if ((ctx->ssl = wolfSSL_new (ctx->ssl_ctx)) == NULL)
+  /*
+   * 5. Verify the server certificate
+   */
+  if ((ret = mbedtls_ssl_get_verify_result (ctx->mbedtls.ssl_ctx)) != 0)
     {
-      Debug_printf ("SSL new failed\r\n");
+      char vrfy_buf[256];
+
+      Debug_printf ("failed ");
+      mbedtls_x509_crt_verify_info ((char *)vrfy_buf, sizeof (vrfy_buf), "!",
+                                    ret);
+
+      Debug_printf ("%s\n", vrfy_buf);
+    }
+  else
+    {
+      ctx->cert_verify_passed = 1;
     }
 
-  // 进行 SSL 和 socket 绑定
-  if (WOLFSSL_SUCCESS != wolfSSL_set_fd (ctx->ssl, ctx->socket))
-    {
-      Debug_printf ("https socket set failed\r\n");
-    }
-
-  return 0;
+  return ret;
 }
 
 static int
 httpc_disconnect (httpc_ctx_t *ctx)
 {
-  wolfSSL_free (ctx->ssl);
-  wolfSSL_CTX_free (ctx->ssl_ctx);
-  wolfSSL_Cleanup ();
-  closesocket (ctx->socket);
+  mbedtls_ssl_close_notify (ctx->mbedtls.ssl_ctx);
 
-  return 0;
-}
+  mbedtls_net_free (ctx->mbedtls.net_ctx);
 
-static int
-https_send (httpc_ctx_t *ctx, const char *pkg, int len)
-{
-  if (wolfSSL_write (ctx->ssl, pkg, len) != len)
-    {
-      Debug_printf ("ssl write failed\r\n");
-    }
-
-  // HAL_UART_Transmit (&huart4, pkg, len, 0xff);
+  // mbedtls_x509_crt_free( ctx->mbedtls.cert );
+  mbedtls_ssl_free (ctx->mbedtls.ssl_ctx);
+  mbedtls_ssl_config_free (ctx->mbedtls.conf);
+  // mbedtls_ctr_drbg_free( ctx->mbedtls.ctr_drbg );
+  // mbedtls_entropy_free (ctx->mbedtls.entropy);
 
   return 0;
 }
@@ -496,11 +465,35 @@ httpc_recv (httpc_ctx_t *ctx)
   char content_len[4]; // length always < 999
   int err_code = 0;
 
-  if (wolfSSL_read (ctx->ssl, buffer, sizeof (buffer)) == 0)
+  do
     {
-      Debug_printf ("ssl read failed\r\n");
-      return -1;
+      err_code
+          = mbedtls_ssl_read (ctx->mbedtls.ssl_ctx, buffer, sizeof (buffer));
+
+      if (err_code == MBEDTLS_ERR_SSL_WANT_READ
+          || err_code == MBEDTLS_ERR_SSL_WANT_WRITE)
+        {
+          continue;
+        }
+
+      if (err_code == MBEDTLS_ERR_SSL_PEER_CLOSE_NOTIFY)
+        {
+          break;
+        }
+
+      if (err_code < 0)
+        {
+          Debug_printf ("failed! mbedtls_ssl_read returned %d\n\n",
+                        err_code);
+          break;
+        }
+
+      if (err_code > 0)
+        {
+          break;
+        }
     }
+  while (1);
 
   if (ret = strstr (buffer, "HTTP/1.1 "))
     {
@@ -538,14 +531,29 @@ httpc_recv (httpc_ctx_t *ctx)
   return err_code;
 }
 
+static int
+https_send (httpc_ctx_t *ctx, const char *pkg, int len)
+{
+  int ret = 0;
+
+  ret = mbedtls_ssl_write (ctx->mbedtls.ssl_ctx, pkg, len);
+  if (ret != len)
+    {
+      Debug_printf ("ssl write failed -0x%x\r\n", -ret);
+    }
+
+  return ret;
+}
 
 static int
 httpc_send_data_statistics (httpc_ctx_t *ctx)
 {
+  int ret;
   char http_header[284];
 
   memcpy (ctx->statistics_data, &Client_Sd_Station,
           sizeof (Client_Sd_Station_t));
+
   create_statistics_payload (ctx);
 
   int http_header_len
@@ -555,11 +563,18 @@ httpc_send_data_statistics (httpc_ctx_t *ctx)
   https_send (ctx, ctx->json_statistics, ctx->json_statistics_len);
 
   // free josn string
-  vPortFree(ctx->json_statistics);
+  vPortFree (ctx->json_statistics);
   ctx->json_statistics = NULL;
   ctx->json_statistics_len = -1;
 
-  return 0;
+  ret = httpc_recv (&http_client);
+  if (ret)
+    {
+      Debug_printf ("statistics data send failed %d\r\n", ret);
+      // todo: inform UI
+    }
+
+  return ret;
 }
 
 static int
@@ -572,15 +587,6 @@ httpc_send_data_clusters (httpc_ctx_t *ctx)
 
   for (int i = 0; i < ctx->clusters_sum; i++)
     {
-      // todo: comment it after debug
-      // note: debug only
-      // ctx->clusters_data[i].cluster_No = i + 1;
-      // ctx->clusters_data[i].work_state = i;
-      // ctx->clusters_data[i].grp_bat_num = 12;
-      // ctx->clusters_data[i].grp_num = 30;
-      // ctx->clusters_data[i].cluster_SOC = 100;
-      // ctx->clusters_data[i].cluster_SOH = 100;
-
       // skip invalid data
       if (ctx->clusters_data[i].cluster_No > 20
           || ctx->clusters_data[i].cluster_No < 1)
@@ -604,9 +610,16 @@ httpc_send_data_clusters (httpc_ctx_t *ctx)
       ret = https_send (ctx, ctx->json_clusters, ctx->json_clusters_len);
 
       // free josn string
-      vPortFree(ctx->json_clusters);
+      vPortFree (ctx->json_clusters);
       ctx->json_clusters = NULL;
       ctx->json_clusters_len = -1;
+
+      ret = httpc_recv (&http_client);
+      if (ret)
+        {
+          Debug_printf ("clusters data send failed %d\r\n", ret);
+          // todo: inform UI
+        }
     }
 
   return ret;
@@ -620,11 +633,14 @@ httpc_task (void const *args)
       Debug_printf ("https client: waiting for DHCP\r\n");
       osDelay (2000);
     }
-    
-  // wolfSSL_Debugging_ON ();
 
   cjson_init ();
   httpc_ctx_init_default (&http_client);
+
+  // verify cert
+  // httpc_connect (&http_client, HOST, HTTPS_PORT);
+  // httpc_verify_cert (&http_client);
+  // httpc_disconnect (&http_client);
 
   while (1)
     {
@@ -642,32 +658,32 @@ httpc_task (void const *args)
       httpc_connect (&http_client, HOST, HTTPS_PORT);
 
       httpc_send_data_statistics (&http_client);
-      ret = httpc_recv (&http_client);
-      if(ret){
-          Debug_printf ("statistics data send failed %d\r\n", ret);
-          // todo: inform UI
-      }
 
       httpc_send_data_clusters (&http_client);
-      ret = httpc_recv (&http_client);
-      if(ret){
-          Debug_printf ("clusters data send failed %d\r\n", ret);
-        // todo: inform UI
-      }
 
-      wolfSSL_free (http_client.ssl);
-      closesocket (http_client.socket);
+      httpc_disconnect (&http_client);
+
       osDelay (1000);
     }
 
-  httpc_disconnect (&http_client);
+end:
+  // mbedtls_ssl_close_notify( ctx->mbedtls.ssl_ctx );
+
+  // mbedtls_net_free( ctx->mbedtls.net_ctx );
+
+  mbedtls_x509_crt_free (http_client.mbedtls.cert);
+  // mbedtls_ssl_free( ctx->mbedtls.ssl_ctx );
+  // mbedtls_ssl_config_free( ctx->mbedtls.conf );
+  mbedtls_ctr_drbg_free (http_client.mbedtls.ctr_drbg);
+  mbedtls_entropy_free (http_client.mbedtls.entropy);
 }
 
 void
 http_client_init (void)
 {
+// If SERVER_TOKEN is not defined, clinet will not start
 #ifdef HTTPC_ENABLED
-  osThreadDef (http_client, httpc_task, 1, 0, 2 * 1024);
+  osThreadDef (http_client, httpc_task, osPriorityNormal, 0, 2 * 1024);
   httpc_handle = osThreadCreate (osThread (http_client), NULL);
 #endif
 }

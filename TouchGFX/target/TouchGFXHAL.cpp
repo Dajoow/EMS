@@ -37,7 +37,7 @@ void TouchGFXHAL::initialize()
     // Please note, HAL::initialize() must be called to initialize the framework.
 
     TouchGFXGeneratedHAL::initialize();
-	setFrameBufferStartAddresses((void*)(BufStartAdd_2), (void*)(BufStartAdd_1), NULL);    //设置缓存地址
+	setFrameBufferStartAddresses((void*)(BufStartAdd_1), (void*)(BufStartAdd_2), NULL);    //设置缓存地址
     setFrameRateCompensation(true);
 		
 	//setFingerSize(2);

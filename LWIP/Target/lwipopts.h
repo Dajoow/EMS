@@ -41,6 +41,8 @@
 /* Parameters set in STM32CubeMX LwIP Configuration GUI -*/
 /*----- WITH_RTOS enabled (Since FREERTOS is set) -----*/
 #define WITH_RTOS 1
+/*----- WITH_MBEDTLS enabled (Since MBEDTLS and FREERTOS are set) -----*/
+#define WITH_MBEDTLS 1
 /*----- CHECKSUM_BY_HARDWARE enabled -----*/
 #define CHECKSUM_BY_HARDWARE 1
 /*-----------------------------------------------------------------------------*/
@@ -51,7 +53,7 @@
 #define LWIP_DHCP 1
 /*----- Default value in ETH configuration GUI in CubeMx: 1524 -----*/
 #define ETH_RX_BUFFER_SIZE 1536
-/*----- Default Value for LWIP_DNS: 0 ---*/
+/*----- Value in opt.h for LWIP_DNS: 0 -----*/
 #define LWIP_DNS 1
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
@@ -101,6 +103,8 @@
 #define DEFAULT_ACCEPTMBOX_SIZE 6
 /*----- Value in opt.h for RECV_BUFSIZE_DEFAULT: INT_MAX -----*/
 #define RECV_BUFSIZE_DEFAULT 2000000000
+/*----- Value in opt.h for LWIP_USE_EXTERNAL_MBEDTLS: 0 -----*/
+#define LWIP_USE_EXTERNAL_MBEDTLS 1
 /*----- Default Value for LWIP_SNTP: 0 ---*/
 #define LWIP_SNTP 1
 /*----- Default Value for SNTP_MAX_SERVERS: 1 ---*/
@@ -137,6 +141,7 @@
 #define SNTP_SET_SYSTEM_TIME sntp_set_rtc
 #define SNTP_GET_SYSTEM_TIME(sec, us) do {get_system_time (&sec, &us);} while(0)
 
+// #define LWIP_DEBUG
 #include "usart.h"
 #define LWIP_PLATFORM_DIAG(x) do {Debug_printf x;} while(0)
 /* USER CODE END 1 */

@@ -68,6 +68,14 @@ void Error_Handler(void);
 #define LED_G_GPIO_Port GPIOE
 #define LED_B_Pin GPIO_PIN_3
 #define LED_B_GPIO_Port GPIOE
+#define VSYNC_FREQ_Pin GPIO_PIN_4
+#define VSYNC_FREQ_GPIO_Port GPIOE
+#define RENDER_TIME_Pin GPIO_PIN_5
+#define RENDER_TIME_GPIO_Port GPIOE
+#define FRAME_RATE_Pin GPIO_PIN_6
+#define FRAME_RATE_GPIO_Port GPIOE
+#define MCU_ACTIVE_Pin GPIO_PIN_13
+#define MCU_ACTIVE_GPIO_Port GPIOC
 #define ETH_RESET_Pin GPIO_PIN_0
 #define ETH_RESET_GPIO_Port GPIOA
 #define AT24CXX_SCL_Pin GPIO_PIN_12
@@ -97,7 +105,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 #define TOUCHGFX_ENABLE 1
-#define CPU_PRINTF 1
+#define CPU_PRINTF 0
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

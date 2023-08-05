@@ -29,7 +29,7 @@ sntp_set_rtc (uint32_t timestamp)
   sDate.Month = (utc_time->tm_mon) + 1;
   sDate.Date = utc_time->tm_mday;
   sDate.Year
-      = (utc_time->tm_year); // workaround for wolfssl's stm32_hal_time()
+      = (utc_time->tm_year) - 2000 + 1900;
 
   if (HAL_RTC_SetTime (&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
     {
@@ -58,7 +58,7 @@ rtc_get_timestamp (void)
   HAL_RTC_GetTime (&hrtc, &g_Time, RTC_FORMAT_BIN);
   HAL_RTC_GetDate (&hrtc, &g_Date, RTC_FORMAT_BIN);
 
-  utc_time.tm_year = g_Date.Year;
+  utc_time.tm_year = g_Date.Year + 2000 - 1900;
   utc_time.tm_mon
       = g_Date.Month - 1;          // RTC_Month rang 1-12,but tm_mon rang 0-11
   utc_time.tm_mday = g_Date.Date;  // RTC_Date rang 1-31 and tm_mday rang 1-31
@@ -75,6 +75,14 @@ get_system_time (uint32_t *sec, uint32_t *us)
 {
   *sec = rtc_get_timestamp ();
   *us = 0;
+}
+
+time_t mbedtls_get_time(time_t *timer){
+  // if(timer != NULL){
+  //   return time(timer);
+  // }
+
+  return rtc_get_timestamp ();
 }
 
 void
