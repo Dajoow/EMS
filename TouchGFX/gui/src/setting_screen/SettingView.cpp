@@ -20,6 +20,7 @@ extern "C"{
 void SoftReset(void)
 {
     __set_FAULTMASK(1); //关闭所有中断
+    NVIC_SystemReset();
 }
 };
 #endif
