@@ -368,7 +368,7 @@ static int write_read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_i
 */
 agile_modbus_slave_util_t* get_data_by_slave_addr(struct agile_modbus_slave_info *slave_info, const bsmu_modbus_data_t *data){
     //todo: get number of data elegantly
-    int nb = 22;
+    int nb = 21;
     int target_slave = slave_info->sft->slave;
 
     for (int i = 0; i < nb; i++)

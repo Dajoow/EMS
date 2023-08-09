@@ -19,7 +19,7 @@ void
 modbus_init ()
 {
   ResetRS85UsartREV();
-  osThreadDef (modbus_task, modbus_task, osPriorityNormal, 0, 256);
+  osThreadDef (modbus_task, modbus_task, osPriorityNormal, 0, 512);
   modbus_taskhandle = osThreadCreate (osThread (modbus_task), NULL);
 }
 
@@ -28,16 +28,18 @@ modbus_task (void const *args)
 {
   agile_modbus_rtu_t mb_rtu;
   agile_modbus_t *mb_rtu_ctx = &mb_rtu._ctx;
-  agile_modbus_rtu_init (&mb_rtu, modbus_send_buf,
-                         sizeof (modbus_send_buf), modbus_read_buf,
-                         sizeof (modbus_read_buf));
+
+  bsmu_modbus_data_init ();
+
+  agile_modbus_rtu_init (&mb_rtu, modbus_send_buf, sizeof (modbus_send_buf),
+                         modbus_read_buf, sizeof (modbus_read_buf));
   agile_modbus_set_slave (mb_rtu_ctx, 1);
 
   while (1)
     {
       int read_len = 0;
       // take semaphore to wait for uart data
-     ulTaskNotifyTake (pdTRUE, portMAX_DELAY);
+      ulTaskNotifyTake (pdTRUE, portMAX_DELAY);
 
       if (RS485_BUFF.recv_end_flag == 1)
         {

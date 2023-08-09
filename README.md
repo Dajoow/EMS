@@ -205,14 +205,14 @@
 | 0xC000 0000——0xC012 C000-1                       |       LCDBuff_1       |
 | 0xC012 C000——0xC025 8000-1                       |       LCDBuff_2       |
 | 0xC025 8000——0xC038 4000-1                       |       LCDBuff_3       |
-| 0xC038 4000——0xC039 2330-1(56kB)(20簇x30组x12个) | ETHBuff(20簇电池数据) |
+| 0xC038 4000——0xC039 2330-1(56kB)(20簇x30组x12个)  | ETHBuff(20簇电池数据)  |
 | 0xC039 2330——0xC03A F000-1(115kB)                |     ETHBuff(预留)     |
-| 0xC03A F000——0xC03B 0000-1(4kB)                  |  ETHBuff(电站总数据)  |
+| 0xC03A F000——0xC03B 0000-1(4kB)                  |  ETHBuff(电站总数据)   |
 | 0xC03B 0000——0xC03D 8000-1(160kB)(8KB*20)        |    FDCAN_REV_Buff     |
 | 0xC03D 8000——0xC03F 8000-1(128kB)                | FDCAN_REV_Buff(预留)  |
 | 0xC03F 8000——0xC040 0000-1(32kB)                 |    FDCAN_SND_Buff     |
-|                                                  |                       |
-|                                                  |                       |
+| 0xC040 0000——0xC040 E330-1                       |     httpc_clusters    |
+| 0xC040 E330——0XC001 C660-1                       |httpc_station_statistics|
 |                                                  |                       |
 |                                                  |                       |
 |                                                  |                       |
@@ -259,11 +259,11 @@
 
 - 注释掉FDCAN1
 
-- 修改 `Middlewares/Third_Party/LwIP/system/arch/cc.h` 和 `Middlewares/Third_Party/LwIP/src/include/lwip/arch.h` 将 `printf` 改为 `Debug_printf` 并引入相应头文件。
+- 修改 `Middlewares/Third_Party/LwIP/system/arch/cc.h` 将 `printf` 改为 `Debug_printf` 并引入相应头文件。
 
 快速完成以上操作：
 ```
-git restore Core/Src/fdcan.c Core/Src/usart.c Middlewares/Third_Party/LwIP/system/arch/cc.h Middlewares/Third_Party/LwIP/src/include/lwip/arch.h
+git restore Core/Src/fdcan.c Core/Src/usart.c Middlewares/Third_Party/LwIP/system/arch/cc.h
 ```
 
 **注意：执行以上命令时，务必确保自己没有对这些文件做过修改，不然这些修改会被一并还原。**

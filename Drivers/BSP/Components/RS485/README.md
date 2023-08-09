@@ -31,3 +31,28 @@ classDiagram
         modbus_data_type_e data_type;
     }
 ```
+
+# Modbus 数据
+
+```mermaid
+mindmap
+    (bsmu_modbus_data)
+        (station_info)
+            (station_input_regs_map)
+                (station_info_u16)
+                (station_info_f32)
+        (cluster_info)
+            (cluster_input_bit_regs)
+                (cluster_warning)
+                (cell_charge_balance_status)
+                (cell_discharge_balance_status)
+            (cluster_input_regs)
+                (cluster_info_u16)
+                (cluster_info_f32)
+                (cell_vol)
+                (cell_temp)
+                (cell_soc)
+                (cell_resistance)
+                (cell_soh)
+
+```

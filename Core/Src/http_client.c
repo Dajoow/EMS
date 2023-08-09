@@ -21,6 +21,7 @@
 #if !defined(SERVER_TOKEN)
 #warning                                                                      \
     "HTTPS SERVER TOKEN NOT DEFINED, DEFINE A TOKEN TO ENABLE HTTPS CLIENT"
+#define SERVER_TOKEN "NULL"
 #else
 #define HTTPC_ENABLED
 #endif

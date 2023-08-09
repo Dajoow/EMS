@@ -105,7 +105,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 #define TOUCHGFX_ENABLE 1
-#define CPU_PRINTF 0
+#define CPU_PRINTF 1
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
