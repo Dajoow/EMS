@@ -2,30 +2,34 @@
 #include "modbus_slave.h"
 #include "string.h"
 
+/**
+ * @brief get date from regs and put into buffer
+ * @param map reg data map
+ * @param buf destination buffer
+ * @param adde read start address
+ * @param len number of regs needed
+ * @return 0
+ */
 static int get_map_buf(const agile_modbus_slave_util_map_t *map, void *buf,
-                       int bufsz) {
+                       int index, int len) {
   modbus_data_type_e modbus_data_type = map->data_type;
-  int len = bufsz;
-
-  if (bufsz > map->data_len) {
-    len = map->data_len;
-  }
+  int start_addr = map->start_addr;
 
   switch (modbus_data_type) {
   case MODBUS_FLOAT: {
     uint16_t *ptr = (uint16_t *)buf;
     modbus_float_u *data = map->data;
 
-    for (int i = 0; i < len / sizeof(float); i++) {
+    for (int i = 0; i < len; i++) {
       // Note: Modbus transfers data in big-endian, which needed to be
       // swapped to fit the little-endian ISA.
-      ptr[i * 2] = data[i].u16[1];
-      ptr[i * 2 + 1] = data[i].u16[0];
+      ptr[i * 2] = data[(index - start_addr) + i].u16[1];
+      ptr[i * 2 + 1] = data[(index - start_addr) + i].u16[0];
     }
     break;
   }
   default:
-    memcpy(buf, map->data, len);
+    memcpy(buf, map->data + (index - start_addr), len);
     break;
   }
 
@@ -35,6 +39,7 @@ static int get_map_buf(const agile_modbus_slave_util_map_t *map, void *buf,
 static int set_map_buf(const agile_modbus_slave_util_map_t *map, int index,
                        int len, void *buf, int bufsz) {
   modbus_data_type_e modbus_data_type = map->data_type;
+
   size_t size = 0;
 
   switch (modbus_data_type) {
@@ -49,7 +54,7 @@ static int set_map_buf(const agile_modbus_slave_util_map_t *map, int index,
     break;
   }
 
-  memcpy(map->data, buf, len * size);
+  memcpy(map->data + index, buf, len * size);
 
   return 0;
 }
@@ -114,6 +119,10 @@ void cluster_input_regs_init(void) {
     cluster_input_regs[i][1].data_len = sizeof(cluster_info_f32[i].reg);
     cluster_input_regs[i][1].data_type = MODBUS_FLOAT;
 
+    for (int j = 0, f = 0; j < 360; j++, f++) {
+      cell_vol[i][j].f32 = f;
+    }
+
     cluster_input_regs[i][2].start_addr = 0xC9;
     cluster_input_regs[i][2].end_addr = 0x398;
     cluster_input_regs[i][2].data = cell_vol[i];
@@ -159,6 +168,11 @@ void cluster_input_bit_regs_init(void) {
     cluster_input_bit_regs[i][0].data = cluster_warning[i].reg;
     cluster_input_bit_regs[i][0].data_len = sizeof(cluster_warning[i].reg);
     cluster_input_bit_regs[i][0].data_type = MODBUS_BIT;
+
+    for (int j = 0; j < 360; j++)
+    {
+      cell_charge_balance_status[i][j] = j % 2;
+    }
 
     cluster_input_bit_regs[i][1].start_addr = 0x65;
     cluster_input_bit_regs[i][1].end_addr = 0x1CC;

@@ -93,28 +93,30 @@ static int read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_info *s
         int map_len = map->end_addr - now_address + 1;
         if (slave_util->get) {
             memset(map_buf, 0, sizeof(map_buf));
-            slave_util->get(map, map_buf, sizeof(map_buf));
-            int index = now_address - map->start_addr;
+
+            // int index = now_address - map->start_addr;
             int need_len = address + nb - now_address;
             if (need_len > map_len) {
                 need_len = map_len;
             }
+            
+            slave_util->get(map, map_buf,now_address ,need_len);
 
             if (function == AGILE_MODBUS_FC_READ_COILS || function == AGILE_MODBUS_FC_READ_DISCRETE_INPUTS) {
                 uint8_t *ptr = map_buf;
                 for (int j = 0; j < need_len; j++) {
-                    agile_modbus_slave_io_set(ctx->send_buf + send_index, i + j, ptr[index + j]);
+                    agile_modbus_slave_io_set(ctx->send_buf + send_index, i + j, ptr[j]);
                 }
             } else {
                 uint16_t *ptr = (uint16_t *)map_buf;
                 for (int j = 0; j < need_len; j++) {
-                    agile_modbus_slave_register_set(ctx->send_buf + send_index, i + j, ptr[index + j]);
+                    agile_modbus_slave_register_set(ctx->send_buf + send_index, i + j, ptr[j]);
                 }
             }
         }
 
-        now_address += map_len - 1;
-        i += map_len - 1;
+        now_address += map_len - 1; // start addr of next sliding window
+        i += map_len - 1; // next map
     }
 
     return 0;
@@ -178,9 +180,6 @@ static int write_registers(agile_modbus_t *ctx, struct agile_modbus_slave_info *
         int map_len = map->end_addr - now_address + 1;
         if (slave_util->set) {
             memset(map_buf, 0, sizeof(map_buf));
-            if (slave_util->get) {
-                slave_util->get(map, map_buf, sizeof(map_buf));
-            }
 
             int index = now_address - map->start_addr;
             int need_len = address + nb - now_address;
@@ -188,26 +187,30 @@ static int write_registers(agile_modbus_t *ctx, struct agile_modbus_slave_info *
                 need_len = map_len;
             }
 
+            if (slave_util->get) {
+                slave_util->get(map, map_buf, now_address, need_len);
+            }
+
             if (function == AGILE_MODBUS_FC_WRITE_SINGLE_COIL || function == AGILE_MODBUS_FC_WRITE_MULTIPLE_COILS) {
                 uint8_t *ptr = map_buf;
                 if (function == AGILE_MODBUS_FC_WRITE_SINGLE_COIL) {
                     int data = *((int *)slave_info->buf);
-                    ptr[index] = data;
+                    ptr[0] = data;
                 } else {
                     for (int j = 0; j < need_len; j++) {
                         uint8_t data = agile_modbus_slave_io_get(slave_info->buf, i + j);
-                        ptr[index + j] = data;
+                        ptr[j] = data;
                     }
                 }
             } else {
                 uint16_t *ptr = (uint16_t *)map_buf;
                 if (function == AGILE_MODBUS_FC_WRITE_SINGLE_REGISTER) {
                     int data = *((int *)slave_info->buf);
-                    ptr[index] = data;
+                    ptr[0] = data;
                 } else {
                     for (int j = 0; j < need_len; j++) {
                         uint16_t data = agile_modbus_slave_register_get(slave_info->buf, i + j);
-                        ptr[index + j] = data;
+                        ptr[j] = data;
                     }
                 }
             }
@@ -251,17 +254,17 @@ static int mask_write_register(agile_modbus_t *ctx, struct agile_modbus_slave_in
     if (slave_util->set) {
         memset(map_buf, 0, sizeof(map_buf));
         if (slave_util->get) {
-            slave_util->get(map, map_buf, sizeof(map_buf));
+            slave_util->get(map, map_buf, address, 1);
         }
 
         int index = address - map->start_addr;
         uint16_t *ptr = (uint16_t *)map_buf;
-        uint16_t data = ptr[index];
+        uint16_t data = ptr[0];
         uint16_t and = (slave_info->buf[0] << 8) + slave_info->buf[1];
         uint16_t or = (slave_info->buf[2] << 8) + slave_info->buf[3];
 
         data = (data & and) | (or &(~and));
-        ptr[index] = data;
+        ptr[0] = data;
 
         int rc = slave_util->set(map, index, 1, map_buf, sizeof(map_buf));
         if (rc != 0)
@@ -305,9 +308,6 @@ static int write_read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_i
         int map_len = map->end_addr - now_address + 1;
         if (slave_util->set) {
             memset(map_buf, 0, sizeof(map_buf));
-            if (slave_util->get) {
-                slave_util->get(map, map_buf, sizeof(map_buf));
-            }
 
             int index = now_address - map->start_addr;
             uint16_t *ptr = (uint16_t *)map_buf;
@@ -316,9 +316,13 @@ static int write_read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_i
                 need_len = map_len;
             }
 
+            if (slave_util->get) {
+                slave_util->get(map, map_buf, now_address, need_len);
+            }
+
             for (int j = 0; j < need_len; j++) {
                 uint16_t data = agile_modbus_slave_register_get(slave_info->buf + 7, i + j);
-                ptr[index + j] = data;
+                ptr[j] = data;
             }
 
             int rc = slave_util->set(map, index, need_len, map_buf, sizeof(map_buf));
@@ -340,16 +344,18 @@ static int write_read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_i
         int map_len = map->end_addr - now_address + 1;
         if (slave_util->get) {
             memset(map_buf, 0, sizeof(map_buf));
-            slave_util->get(map, map_buf, sizeof(map_buf));
-            int index = now_address - map->start_addr;
-            uint16_t *ptr = (uint16_t *)map_buf;
+
+            // int index = now_address - map->start_addr;
             int need_len = address + nb - now_address;
             if (need_len > map_len) {
                 need_len = map_len;
             }
 
+            slave_util->get(map, map_buf, now_address, need_len);
+            uint16_t *ptr = (uint16_t *)map_buf;
+
             for (int j = 0; j < need_len; j++) {
-                agile_modbus_slave_register_set(ctx->send_buf + send_index, i + j, ptr[index + j]);
+                agile_modbus_slave_register_set(ctx->send_buf + send_index, i + j, ptr[j]);
             }
         }
 
@@ -377,7 +383,7 @@ agile_modbus_slave_util_t* get_data_by_slave_addr(struct agile_modbus_slave_info
             return data[i].slave_util;
         }
     }
-    
+
     return NULL;
 }
 
