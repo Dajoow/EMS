@@ -138,7 +138,7 @@ int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host, const char 
       return( MBEDTLS_ERR_NET_UNKNOWN_HOST );
 /* USER CODE BEGIN 4 */
 
-  /* USER CODE END 4 */
+/* USER CODE END 4 */
 
   /* Try the sockaddrs until a connection succeeds */
   ret = MBEDTLS_ERR_NET_UNKNOWN_HOST;

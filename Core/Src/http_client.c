@@ -411,9 +411,11 @@ httpc_connect (httpc_ctx_t *ctx, const char *host, int port)
         }
     }
 
+  // httpc_verify_cert(ctx);
+
 end:
   return ret;
-}
+} 
 
 static int
 httpc_verify_cert (httpc_ctx_t *ctx)

@@ -119,9 +119,10 @@ void cluster_input_regs_init(void) {
     cluster_input_regs[i][1].data_len = sizeof(cluster_info_f32[i].reg);
     cluster_input_regs[i][1].data_type = MODBUS_FLOAT;
 
-    for (int j = 0, f = 0; j < 360; j++, f++) {
-      cell_vol[i][j].f32 = f;
-    }
+    // debug only
+    // for (int j = 0, f = 0; j < 360; j++, f++) {
+    //   cell_vol[i][j].f32 = f;
+    // }
 
     cluster_input_regs[i][2].start_addr = 0xC9;
     cluster_input_regs[i][2].end_addr = 0x398;
@@ -169,10 +170,11 @@ void cluster_input_bit_regs_init(void) {
     cluster_input_bit_regs[i][0].data_len = sizeof(cluster_warning[i].reg);
     cluster_input_bit_regs[i][0].data_type = MODBUS_BIT;
 
-    for (int j = 0; j < 360; j++)
-    {
-      cell_charge_balance_status[i][j] = j % 2;
-    }
+    // debug only
+    // for (int j = 0; j < 360; j++)
+    // {
+    //   cell_charge_balance_status[i][j] = j % 2;
+    // }
 
     cluster_input_bit_regs[i][1].start_addr = 0x65;
     cluster_input_bit_regs[i][1].end_addr = 0x1CC;
