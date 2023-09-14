@@ -192,3 +192,8 @@ dkms.conf
 
 TouchGFX/build
 TouchGFX/simulator/msvs/.vs
+.vscode/
+.idea/
+cmake-build-*/
+EIDE/
+MDK-ARM/BSMU_H750IB/

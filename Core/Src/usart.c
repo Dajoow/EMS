@@ -142,24 +142,26 @@ void MX_USART2_UART_Init(void)
   if(bsmuSetting.RS485Bps == 0){
 	huart2.Init.BaudRate = 115200;
   }
-  if(bsmuSetting.RS485Bps == 1){
+  else if(bsmuSetting.RS485Bps == 1){
 	huart2.Init.BaudRate = 57600;
   }
-  if(bsmuSetting.RS485Bps == 2){
+  else if(bsmuSetting.RS485Bps == 2){
 	huart2.Init.BaudRate = 38400;
   }
-  if(bsmuSetting.RS485Bps == 3){
+  else if(bsmuSetting.RS485Bps == 3){
 	huart2.Init.BaudRate = 19200;
   }
-  if(bsmuSetting.RS485Bps == 4){
+  else if(bsmuSetting.RS485Bps == 4){
 	huart2.Init.BaudRate = 9600;
   }
-  if(bsmuSetting.RS485Bps == 5){
+  else if(bsmuSetting.RS485Bps == 5){
 	huart2.Init.BaudRate = 4800;
+  }else{
+	huart2.Init.BaudRate = 115200;
   }
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-//  huart2.Init.BaudRate = 115200;
+  // huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -456,9 +458,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 /* USER CODE BEGIN 1 */
 //使用之前要清零
+#if defined(__CC_ARM)
 Uart_BUFF uart5_buff __attribute__((at(0x30000000)));
 Uart_BUFF uart4_buff __attribute__((at(0x30001000)));
 Uart_BUFF uart2_buff __attribute__((at(0x30002000)));
+#elif defined(__GNUC__)
+Uart_BUFF uart5_buff __attribute__((section(".RAM_D2")));
+Uart_BUFF uart4_buff __attribute__((section(".RAM_D2")));
+Uart_BUFF uart2_buff __attribute__((section(".RAM_D2")));
+#endif
 
 extern osMutexId DebugUartMutexHandle;
 //初始化打印信息

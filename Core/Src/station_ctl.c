@@ -18,11 +18,18 @@
 #include "CAN_Control.h"
 
 extern BCMU_Mail_t BCMU[cluster_num];
-	
+
+#if defined(__CC_ARM)
 //这20个结构体，包括其中的成员符合内存对齐且没有成员之间的无效值填充
 Client_Sd_t Client_Sd[cluster_num] __attribute__((at(ETHSendBuffAdd))); 
 //电站整理数据
 Client_Sd_Station_t Client_Sd_Station __attribute__((at(StationBuffAdd)));
+#elif  defined(__GNUC__)
+//这20个结构体，包括其中的成员符合内存对齐且没有成员之间的无效值填充
+Client_Sd_t Client_Sd[cluster_num] __attribute__((section(".ETHSendBuff")));
+//电站整理数据
+Client_Sd_Station_t Client_Sd_Station __attribute__((section(".StationBuff")));
+#endif
 //硬件到UI数据
 ModelToViewData modelToViewData;
 
@@ -83,7 +90,7 @@ void CalStationData(void){
   	uint8_t OnlineNUM = 0;
 
 	Client_Sd_Station.frame_header = FRAME_STATION_HEADER;
-	Client_Sd_Station.station_state = 666;
+	Client_Sd_Station.station_state = 20;
 
 	Client_Sd_Station.station_VOL = 0;
 	Client_Sd_Station.station_CUR = 0;

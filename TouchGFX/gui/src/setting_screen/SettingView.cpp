@@ -20,12 +20,14 @@ extern "C"{
 #include "string.h"
 #include "stm32h7xx_hal.h"
 #include "core_cm7.h"	
-};
+
 void SoftReset(void)
 {
     __set_FAULTMASK(1); //关闭所有中断
-    NVIC_SystemReset(); //进行软件复位
+    NVIC_SystemReset();
 }
+};
+#endif
 
 #endif
 

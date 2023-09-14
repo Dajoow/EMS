@@ -20,6 +20,7 @@
 #include "station_ctl.h"
 #include "usart.h"
 #include "at24cxx.h"
+
 osThreadId Client_threadHandle;
 osThreadId TCP_Recv_threadHandle;
 
