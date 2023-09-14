@@ -190,4 +190,5 @@ dkms.conf
 *.s
 !startup*.s
 
-
+TouchGFX/build
+TouchGFX/simulator/msvs/.vs
