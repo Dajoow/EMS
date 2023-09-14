@@ -11,6 +11,7 @@ CustomContainer3Base::CustomContainer3Base()
     setHeight(60);
     box1.setPosition(0, 0, 250, 60);
     box1.setColor(touchgfx::Color::getColorFromRGB(204, 204, 204));
+    add(box1);
 
     textArea1.setPosition(0, 17, 250, 43);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -20,8 +21,6 @@ CustomContainer3Base::CustomContainer3Base()
     touchgfx::Unicode::snprintf(textArea1Buffer2, TEXTAREA1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XTU8).getText());
     textArea1.setWildcard2(textArea1Buffer2);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WQQ3));
-
-    add(box1);
     add(textArea1);
 }
 
@@ -34,4 +33,3 @@ void CustomContainer3Base::initialize()
 {
 
 }
-

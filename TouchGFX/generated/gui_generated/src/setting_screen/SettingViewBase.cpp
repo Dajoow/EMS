@@ -3,297 +3,565 @@
 /*********************************************************************************/
 #include <gui_generated/setting_screen/SettingViewBase.hpp>
 #include <touchgfx/Color.hpp>
-#include <BitmapDatabase.hpp>
+#include <images/BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
 SettingViewBase::SettingViewBase() :
-    frameCountSettingViewTickInterval(0),
+    updateItemCallback(this, &SettingViewBase::updateItemCallbackHandler),
     buttonCallback(this, &SettingViewBase::buttonCallbackHandler),
-    flexButtonCallback(this, &SettingViewBase::flexButtonCallbackHandler),
     sliderValueChangedCallback(this, &SettingViewBase::sliderValueChangedCallbackHandler),
-    updateItemCallback(this, &SettingViewBase::updateItemCallbackHandler)
+    flexButtonCallback(this, &SettingViewBase::flexButtonCallbackHandler),
+    frameCountSettingViewTickInterval(0)
 {
-
     __background.setPosition(0, 0, 1024, 600);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    add(__background);
 
-    main_BG.setPosition(0, 0, 1024, 600);
-    main_BG.setColor(touchgfx::Color::getColorFromRGB(235, 235, 235));
+    button2_1.setXY(411, 259);
+    button2_1.setBitmaps(touchgfx::Bitmap(BITMAP_SETTINGS_FILL0_WGHT400_GRAD0_OPSZ48_ID), touchgfx::Bitmap(BITMAP_SETTINGS_FILL0_WGHT400_GRAD0_OPSZ48_ID));
+    add(button2_1);
 
-    mainBack.setXY(1, 1);
-    mainBack.setBitmaps(touchgfx::Bitmap(BITMAP_STATION_1_ID), touchgfx::Bitmap(BITMAP_STATION_2_ID));
-    mainBack.setLabelText(touchgfx::TypedText(T___SINGLEUSE_FXLG));
-    mainBack.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    mainBack.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    mainBack.setAction(buttonCallback);
+    background.setPosition(-1, 0, 1024, 600);
+    background.setColor(touchgfx::Color::getColorFromRGB(156, 189, 255));
+    add(background);
 
-    biaoti.setXY(112, 12);
-    biaoti.setBitmap(touchgfx::Bitmap(BITMAP_BIAOTI_ID));
+    daohanglan.setPosition(-2, -2, 1023, 207);
+    save_all.setXY(479, 49);
+    save_all.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    save_all.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OIA8));
+    save_all.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    save_all.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 119, 255));
+    save_all.setAction(buttonCallback);
+    daohanglan.add(save_all);
 
-    setting_text.setXY(31, 105);
-    setting_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    setting_text.setLinespacing(0);
-    setting_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TBMY));
+    start.setXY(698, 49);
+    start.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    start.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HXXB));
+    start.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    start.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 119, 255));
+    daohanglan.add(start);
 
-    IPsetting.setXY(518, 283);
-    IPsetting.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
-    IPsetting.setLabelText(touchgfx::TypedText(T___SINGLEUSE_5LR0));
-    IPsetting.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    IPsetting.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    IPsetting.setAction(buttonCallback);
+    add(daohanglan);
 
-    poll_T.setXY(300, 206);
-    poll_T.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_INDICATORS_SLIDER2_ROUND_NOB_ID));
-    poll_T.setupHorizontalSlider(5, 12, 0, 0, 585);
-    poll_T.setValueRange(5, 100);
-    poll_T.setValue(5);
-    poll_T.setNewValueCallback(sliderValueChangedCallback);
+    fwq_4g_ipsetting.setPosition(36, 227, 953, 371);
+    image1.setXY(66, 5);
+    image1.setBitmap(touchgfx::Bitmap(BITMAP_SETSHOWIP_BJ_ID));
+    fwq_4g_ipsetting.add(image1);
 
-    cu_NUM.setXY(300, 144);
-    cu_NUM.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_INDICATORS_SLIDER2_ROUND_NOB_ID));
-    cu_NUM.setupHorizontalSlider(5, 12, 0, 0, 585);
-    cu_NUM.setValueRange(0, 20);
-    cu_NUM.setValue(0);
-    cu_NUM.setNewValueCallback(sliderValueChangedCallback);
+    local_port_button.setXY(615, 158);
+    local_port_button.setBitmaps(touchgfx::Bitmap(BITMAP_S_ID), touchgfx::Bitmap(BITMAP_S_ID));
+    local_port_button.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(local_port_button);
 
-    IPsetting_1.setXY(518, 373);
-    IPsetting_1.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
+    local_ip_button.setXY(536, 96);
+    local_ip_button.setBitmaps(touchgfx::Bitmap(BITMAP_IP_SET_BK_ID), touchgfx::Bitmap(BITMAP_IP_SET_BK_ID));
+    local_ip_button.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(local_ip_button);
+
+    ip_4g_button.setXY(536, 230);
+    ip_4g_button.setBitmaps(touchgfx::Bitmap(BITMAP_IP_SET_BK_ID), touchgfx::Bitmap(BITMAP_IP_SET_BK_ID));
+    ip_4g_button.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(ip_4g_button);
+
+    port_4g_button.setXY(616, 295);
+    port_4g_button.setBitmaps(touchgfx::Bitmap(BITMAP_S_ID), touchgfx::Bitmap(BITMAP_S_ID));
+    port_4g_button.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(port_4g_button);
+
+    IPsetting_1.setXY(139, 139);
+    IPsetting_1.setBitmaps(touchgfx::Bitmap(BITMAP_SETTINGS_FILL0_WGHT400_GRAD0_OPSZ48_ID), touchgfx::Bitmap(BITMAP_SETTINGS_FILL0_WGHT400_GRAD0_OPSZ48_ID));
     IPsetting_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HDM4));
     IPsetting_1.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     IPsetting_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    IPsetting_1.setVisible(false);
     IPsetting_1.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(IPsetting_1);
 
-    caijizhouqi.setXY(21, 211);
-    caijizhouqi.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    caijizhouqi.setLinespacing(0);
-    caijizhouqi.setTypedText(touchgfx::TypedText(T___SINGLEUSE_10OS));
-
-    cuzhuangji.setXY(21, 145);
-    cuzhuangji.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    cuzhuangji.setLinespacing(0);
-    cuzhuangji.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DMPQ));
-
-    benji_1.setXY(707, 258);
-    benji_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    benji_1.setLinespacing(0);
-    benji_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_THEM));
-
-    benji_1_1.setXY(707, 409);
-    benji_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    benji_1_1.setLinespacing(0);
-    benji_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_G75G));
-
-    benji.setXY(43, 293);
-    benji.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    benji.setLinespacing(0);
-    benji.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZFFF));
-
-    IPsetting_2.setXY(518, 467);
-    IPsetting_2.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
+    IPsetting_2.setXY(139, 260);
+    IPsetting_2.setBitmaps(touchgfx::Bitmap(BITMAP_SETTINGS_FILL0_WGHT400_GRAD0_OPSZ48_ID), touchgfx::Bitmap(BITMAP_SETTINGS_FILL0_WGHT400_GRAD0_OPSZ48_ID));
     IPsetting_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_7CSA));
     IPsetting_2.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     IPsetting_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    IPsetting_2.setVisible(false);
     IPsetting_2.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(IPsetting_2);
 
-    bendiwufuqi.setXY(27, 363);
+    bendiwufuqi.setPosition(157, 115, 90, 83);
     bendiwufuqi.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     bendiwufuqi.setLinespacing(0);
     bendiwufuqi.setTypedText(touchgfx::TypedText(T___SINGLEUSE_L11P));
+    fwq_4g_ipsetting.add(bendiwufuqi);
 
-    MODULE_4G.setXY(23, 476);
+    MODULE_4G.setXY(194, 267);
     MODULE_4G.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     MODULE_4G.setLinespacing(0);
     MODULE_4G.setTypedText(touchgfx::TypedText(T___SINGLEUSE_N6NG));
+    fwq_4g_ipsetting.add(MODULE_4G);
 
-    cu_num.setPosition(183, 145, 82, 50);
-    cu_num.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    cu_num.setLinespacing(0);
-    Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XRK5).getText());
-    cu_num.setWildcard(cu_numBuffer);
-    cu_num.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JJH4));
+    IP_ADD2.setPosition(366, 103, 90, 27);
+    IP_ADD2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    IP_ADD2.setLinespacing(0);
+    IP_ADD2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F6SC));
+    fwq_4g_ipsetting.add(IP_ADD2);
 
-    poll_t.setPosition(133, 209, 183, 51);
-    poll_t.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    poll_t.setLinespacing(0);
-    Unicode::snprintf(poll_tBuffer, POLL_T_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_D7W3).getText());
-    poll_t.setWildcard(poll_tBuffer);
-    poll_t.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5GU0));
+    PORT1.setPosition(366, 165, 90, 27);
+    PORT1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    PORT1.setLinespacing(0);
+    PORT1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UY33));
+    fwq_4g_ipsetting.add(PORT1);
 
-    networkText2.setPosition(374, 329, 88, 24);
-    networkText2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    networkText2.setLinespacing(0);
-    touchgfx::Unicode::snprintf(networkText2Buffer1, NETWORKTEXT2BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_A7X7).getText());
-    networkText2.setWildcard1(networkText2Buffer1);
-    touchgfx::Unicode::snprintf(networkText2Buffer2, NETWORKTEXT2BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_8HDW).getText());
-    networkText2.setWildcard2(networkText2Buffer2);
-    networkText2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F36J));
+    IP_ADD3.setPosition(366, 237, 90, 27);
+    IP_ADD3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    IP_ADD3.setLinespacing(0);
+    IP_ADD3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DJT0));
+    fwq_4g_ipsetting.add(IP_ADD3);
 
-    networkText1.setPosition(184, 330, 197, 24);
-    networkText1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    networkText1.setLinespacing(0);
-    touchgfx::Unicode::snprintf(networkText1Buffer1, NETWORKTEXT1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_5JKT).getText());
-    networkText1.setWildcard1(networkText1Buffer1);
-    touchgfx::Unicode::snprintf(networkText1Buffer2, NETWORKTEXT1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_QD93).getText());
-    networkText1.setWildcard2(networkText1Buffer2);
-    networkText1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Z1OB));
+    PORT2.setPosition(366, 293, 90, 27);
+    PORT2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    PORT2.setLinespacing(0);
+    PORT2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TESY));
+    fwq_4g_ipsetting.add(PORT2);
 
-    gateway_text2.setPosition(374, 306, 88, 24);
-    gateway_text2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    gateway_text2.setLinespacing(0);
-    touchgfx::Unicode::snprintf(gateway_text2Buffer1, GATEWAY_TEXT2BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GS8Z).getText());
-    gateway_text2.setWildcard1(gateway_text2Buffer1);
-    touchgfx::Unicode::snprintf(gateway_text2Buffer2, GATEWAY_TEXT2BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_YJKX).getText());
-    gateway_text2.setWildcard2(gateway_text2Buffer2);
-    gateway_text2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_K5Z2));
+    _4G.setPosition(157, 269, 37, 40);
+    _4G.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    _4G.setLinespacing(0);
+    _4G.setTypedText(touchgfx::TypedText(T___SINGLEUSE_V6WJ));
+    fwq_4g_ipsetting.add(_4G);
 
-    gateway_text1.setPosition(184, 306, 195, 25);
-    gateway_text1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    gateway_text1.setLinespacing(0);
-    touchgfx::Unicode::snprintf(gateway_text1Buffer1, GATEWAY_TEXT1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_UGCK).getText());
-    gateway_text1.setWildcard1(gateway_text1Buffer1);
-    touchgfx::Unicode::snprintf(gateway_text1Buffer2, GATEWAY_TEXT1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_SKIC).getText());
-    gateway_text1.setWildcard2(gateway_text1Buffer2);
-    gateway_text1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UOEV));
-
-    ip_text2.setPosition(374, 282, 88, 24);
-    ip_text2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    ip_text2.setLinespacing(0);
-    touchgfx::Unicode::snprintf(ip_text2Buffer1, IP_TEXT2BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_V0BI).getText());
-    ip_text2.setWildcard1(ip_text2Buffer1);
-    touchgfx::Unicode::snprintf(ip_text2Buffer2, IP_TEXT2BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_OIYS).getText());
-    ip_text2.setWildcard2(ip_text2Buffer2);
-    ip_text2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FA8A));
-
-    ip_text1.setPosition(187, 282, 192, 24);
-    ip_text1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    ip_text1.setLinespacing(0);
-    touchgfx::Unicode::snprintf(ip_text1Buffer1, IP_TEXT1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_C5FH).getText());
-    ip_text1.setWildcard1(ip_text1Buffer1);
-    touchgfx::Unicode::snprintf(ip_text1Buffer2, IP_TEXT1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_RK1Z).getText());
-    ip_text1.setWildcard2(ip_text1Buffer2);
-    ip_text1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D3MU));
-
-    ip_text2_1.setPosition(374, 384, 88, 24);
+    ip_text2_1.setXY(671, 103);
     ip_text2_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     ip_text2_1.setLinespacing(0);
     touchgfx::Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_OQTL).getText());
     ip_text2_1.setWildcard1(ip_text2_1Buffer1);
     touchgfx::Unicode::snprintf(ip_text2_1Buffer2, IP_TEXT2_1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_G6TG).getText());
     ip_text2_1.setWildcard2(ip_text2_1Buffer2);
+    ip_text2_1.resizeToCurrentText();
     ip_text2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3I4H));
+    fwq_4g_ipsetting.add(ip_text2_1);
 
-    ip_text1_1.setPosition(187, 384, 192, 24);
+    ip_text1_1.setXY(551, 103);
     ip_text1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     ip_text1_1.setLinespacing(0);
     touchgfx::Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_Z3FK).getText());
     ip_text1_1.setWildcard1(ip_text1_1Buffer1);
     touchgfx::Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_YME3).getText());
     ip_text1_1.setWildcard2(ip_text1_1Buffer2);
+    ip_text1_1.resizeToCurrentText();
     ip_text1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_B8QV));
+    fwq_4g_ipsetting.add(ip_text1_1);
 
-    port_text.setPosition(184, 411, 192, 24);
+    port_text.setPosition(558, 164, 214, 27);
     port_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     port_text.setLinespacing(0);
     Unicode::snprintf(port_textBuffer, PORT_TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_4BUW).getText());
     port_text.setWildcard(port_textBuffer);
     port_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_GV0N));
+    fwq_4g_ipsetting.add(port_text);
 
-    ip_1_text2_1.setPosition(377, 477, 88, 24);
+    ip_1_text2_1.setXY(675, 237);
     ip_1_text2_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     ip_1_text2_1.setLinespacing(0);
     touchgfx::Unicode::snprintf(ip_1_text2_1Buffer1, IP_1_TEXT2_1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VBXP).getText());
     ip_1_text2_1.setWildcard1(ip_1_text2_1Buffer1);
     touchgfx::Unicode::snprintf(ip_1_text2_1Buffer2, IP_1_TEXT2_1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_KQOS).getText());
     ip_1_text2_1.setWildcard2(ip_1_text2_1Buffer2);
+    ip_1_text2_1.resizeToCurrentText();
     ip_1_text2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A8VR));
+    fwq_4g_ipsetting.add(ip_1_text2_1);
 
-    ip_1_text1_1.setPosition(190, 477, 192, 24);
+    ip_1_text1_1.setXY(558, 237);
     ip_1_text1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     ip_1_text1_1.setLinespacing(0);
     touchgfx::Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_LQLE).getText());
     ip_1_text1_1.setWildcard1(ip_1_text1_1Buffer1);
     touchgfx::Unicode::snprintf(ip_1_text1_1Buffer2, IP_1_TEXT1_1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_23WN).getText());
     ip_1_text1_1.setWildcard2(ip_1_text1_1Buffer2);
+    ip_1_text1_1.resizeToCurrentText();
     ip_1_text1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YEMS));
+    fwq_4g_ipsetting.add(ip_1_text1_1);
 
-    port_1_text.setPosition(187, 504, 192, 24);
+    port_1_text.setPosition(569, 305, 192, 27);
     port_1_text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     port_1_text.setLinespacing(0);
     Unicode::snprintf(port_1_textBuffer, PORT_1_TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_22QP).getText());
     port_1_text.setWildcard(port_1_textBuffer);
     port_1_text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JQVT));
+    fwq_4g_ipsetting.add(port_1_text);
 
-    CAN_kbps.setPosition(702, 300, 250, 100);
-    CAN_kbps.setHorizontal(false);
-    CAN_kbps.setCircular(true);
-    CAN_kbps.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
-    CAN_kbps.setSwipeAcceleration(100);
-    CAN_kbps.setDragAcceleration(20);
-    CAN_kbps.setNumberOfItems(5);
-    CAN_kbps.setSelectedItemOffset(20);
-    CAN_kbps.setSelectedItemExtraSize(0, 0);
-    CAN_kbps.setSelectedItemMargin(0, 0);
-    CAN_kbps.setDrawableSize(60, 0);
-    CAN_kbps.setDrawables(CAN_kbpsListItems, updateItemCallback,
-                              CAN_kbpsSelectedListItems, updateItemCallback);
-    CAN_kbps.animateToItem(0, 0);
+    cuzhuangjishu.setXY(142, 29);
+    cuzhuangjishu.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cuzhuangjishu.setLinespacing(0);
+    cuzhuangjishu.setTypedText(touchgfx::TypedText(T___SINGLEUSE_O0GF));
+    fwq_4g_ipsetting.add(cuzhuangjishu);
 
-    RS485_kbps.setPosition(702, 451, 250, 100);
-    RS485_kbps.setHorizontal(false);
-    RS485_kbps.setCircular(true);
-    RS485_kbps.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
-    RS485_kbps.setSwipeAcceleration(100);
-    RS485_kbps.setDragAcceleration(20);
-    RS485_kbps.setNumberOfItems(6);
-    RS485_kbps.setSelectedItemOffset(20);
-    RS485_kbps.setSelectedItemExtraSize(0, 0);
-    RS485_kbps.setSelectedItemMargin(0, 0);
-    RS485_kbps.setDrawableSize(60, 0);
-    RS485_kbps.setDrawables(RS485_kbpsListItems, updateItemCallback,
-                              RS485_kbpsSelectedListItems, updateItemCallback);
-    RS485_kbps.animateToItem(0, 0);
+    poll_tButton.setXY(681, 29);
+    poll_tButton.setBitmaps(touchgfx::Bitmap(BITMAP_S_ID), touchgfx::Bitmap(BITMAP_S_ID));
+    poll_tButton.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(poll_tButton);
 
-    save_all.setXY(473, 20);
-    save_all.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    save_all.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OIA8));
-    save_all.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    save_all.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    save_all.setAction(buttonCallback);
+    zhuangji_numButton.setXY(300, 29);
+    zhuangji_numButton.setBitmaps(touchgfx::Bitmap(BITMAP_S_ID), touchgfx::Bitmap(BITMAP_S_ID));
+    zhuangji_numButton.setAction(buttonCallback);
+    fwq_4g_ipsetting.add(zhuangji_numButton);
 
-    start.setXY(717, 20);
-    start.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    start.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HXXB));
-    start.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    start.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    cu_num.setPosition(321, 36, 59, 41);
+    cu_num.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cu_num.setLinespacing(0);
+    Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XRK5).getText());
+    cu_num.setWildcard(cu_numBuffer);
+    cu_num.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JJH4));
+    fwq_4g_ipsetting.add(cu_num);
 
-    IP_setting_2.setBackground(touchgfx::BitmapId(BITMAP_BG_805X480_ID), 0, 51);
-    IP_setting_2.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    IP_setting_2.setShadeAlpha(150);
+    zhuangji_num.setXY(418, 31);
+    zhuangji_num.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    zhuangji_num.setLinespacing(0);
+    zhuangji_num.setTypedText(touchgfx::TypedText(T___SINGLEUSE_B8U1));
+    fwq_4g_ipsetting.add(zhuangji_num);
+
+    caiji.setXY(527, 29);
+    caiji.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    caiji.setLinespacing(0);
+    caiji.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5HGB));
+    fwq_4g_ipsetting.add(caiji);
+
+    poll_t.setPosition(702, 35, 58, 41);
+    poll_t.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    poll_t.setLinespacing(0);
+    Unicode::snprintf(poll_tBuffer, POLL_T_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_D7W3).getText());
+    poll_t.setWildcard(poll_tBuffer);
+    poll_t.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5GU0));
+    fwq_4g_ipsetting.add(poll_t);
+
+    textArea26.setXY(804, 29);
+    textArea26.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea26.setLinespacing(0);
+    textArea26.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NZWP));
+    fwq_4g_ipsetting.add(textArea26);
+
+    image2.setXY(376, 42);
+    image2.setBitmap(touchgfx::Bitmap(BITMAP_ICON1_ID));
+    image2.setVisible(false);
+    fwq_4g_ipsetting.add(image2);
+
+    image3.setXY(755, 42);
+    image3.setBitmap(touchgfx::Bitmap(BITMAP_ICON1_ID));
+    image3.setVisible(false);
+    fwq_4g_ipsetting.add(image3);
+
+    add(fwq_4g_ipsetting);
+
+    can.setPosition(12, 102, 535, 323);
+    can_display.setPosition(203, 36, 229, 319);
+    can_display.setVisible(false);
+    can_bj.setXY(18, 28);
+    can_bj.setBitmap(touchgfx::Bitmap(BITMAP_CAN_BJ_ID));
+    can_display.add(can_bj);
+
+    button_125_125.setXY(22, 79);
+    button_125_125.setBitmaps(touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_RELEASED_ID), touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_PRESSED_ID));
+    button_125_125.setAction(buttonCallback);
+    can_display.add(button_125_125);
+
+    button_250_250.setXY(22, 119);
+    button_250_250.setBitmaps(touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_RELEASED_ID), touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_PRESSED_ID));
+    button_250_250.setAction(buttonCallback);
+    can_display.add(button_250_250);
+
+    button_500_2000.setXY(22, 239);
+    button_500_2000.setBitmaps(touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_RELEASED_ID), touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_PRESSED_ID));
+    button_500_2000.setAction(buttonCallback);
+    can_display.add(button_500_2000);
+
+    button_500_500.setXY(22, 159);
+    button_500_500.setBitmaps(touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_RELEASED_ID), touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_PRESSED_ID));
+    button_500_500.setAction(buttonCallback);
+    can_display.add(button_500_500);
+
+    button_500_1000.setXY(22, 199);
+    button_500_1000.setBitmaps(touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_RELEASED_ID), touchgfx::Bitmap(BITMAP_CAN_SEL_BACKGROUND_PRESSED_ID));
+    button_500_1000.setAction(buttonCallback);
+    can_display.add(button_500_1000);
+
+    textArea10.setPosition(132, 246, 80, 27);
+    textArea10.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea10.setLinespacing(0);
+    textArea10.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PQ2G));
+    can_display.add(textArea10);
+
+    textArea2.setPosition(132, 86, 80, 27);
+    textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea2.setLinespacing(0);
+    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UXW4));
+    can_display.add(textArea2);
+
+    textArea1.setPosition(34, 86, 80, 27);
+    textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_E3U4));
+    can_display.add(textArea1);
+
+    textArea3.setPosition(34, 126, 80, 27);
+    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea3.setLinespacing(0);
+    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_K77I));
+    can_display.add(textArea3);
+
+    textArea4.setPosition(132, 128, 80, 27);
+    textArea4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea4.setLinespacing(0);
+    textArea4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_C5EY));
+    can_display.add(textArea4);
+
+    textArea5.setPosition(34, 168, 80, 27);
+    textArea5.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea5.setLinespacing(0);
+    textArea5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_X2AE));
+    can_display.add(textArea5);
+
+    textArea6.setPosition(132, 168, 80, 27);
+    textArea6.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea6.setLinespacing(0);
+    textArea6.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6OIF));
+    can_display.add(textArea6);
+
+    textArea7.setPosition(34, 207, 80, 27);
+    textArea7.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea7.setLinespacing(0);
+    textArea7.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CV3O));
+    can_display.add(textArea7);
+
+    textArea8.setPosition(132, 207, 80, 27);
+    textArea8.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea8.setLinespacing(0);
+    textArea8.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KJDF));
+    can_display.add(textArea8);
+
+    textArea9.setPosition(34, 246, 80, 27);
+    textArea9.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea9.setLinespacing(0);
+    textArea9.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EQ7R));
+    can_display.add(textArea9);
+
+    can.add(can_display);
+
+    benji_1.setXY(138, 72);
+    benji_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    benji_1.setLinespacing(0);
+    benji_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_THEM));
+    can.add(benji_1);
+
+    CAN.setPosition(90, 72, 48, 33);
+    CAN.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    CAN.setLinespacing(0);
+    CAN.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EKTX));
+    can.add(CAN);
+
+    kbps.setPosition(435, 71, 65, 33);
+    kbps.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    kbps.setLinespacing(0);
+    kbps.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A5SS));
+    can.add(kbps);
+
+    canbutton.setBitmaps(Bitmap(BITMAP_CANBUTTON_ID), Bitmap(BITMAP_CANBUTTON_PRESSED_ID));
+    canbutton.setBitmapXY(0, 0);
+    canbutton.setAction(flexButtonCallback);
+    canbutton.setPosition(224, 66, 202, 50);
+    can.add(canbutton);
+
+    canbaudrate2.setPosition(333, 74, 60, 30);
+    canbaudrate2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    canbaudrate2.setLinespacing(0);
+    Unicode::snprintf(canbaudrate2Buffer, CANBAUDRATE2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_WCKD).getText());
+    canbaudrate2.setWildcard(canbaudrate2Buffer);
+    canbaudrate2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_L8G9));
+    can.add(canbaudrate2);
+
+    canbaudrate1.setPosition(247, 74, 60, 30);
+    canbaudrate1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    canbaudrate1.setLinespacing(0);
+    Unicode::snprintf(canbaudrate1Buffer, CANBAUDRATE1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_MOEV).getText());
+    canbaudrate1.setWildcard(canbaudrate1Buffer);
+    canbaudrate1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_83A9));
+    can.add(canbaudrate1);
+
+    can_imageup.setXY(393, 78);
+    can_imageup.setBitmap(touchgfx::Bitmap(BITMAP_IMAGEUP_ID));
+    can_imageup.setVisible(false);
+    can.add(can_imageup);
+
+    can_imagedown.setXY(393, 79);
+    can_imagedown.setBitmap(touchgfx::Bitmap(BITMAP_ICON1_ID));
+    can.add(can_imagedown);
+
+    add(can);
+
+    rs485.setPosition(534, 136, 460, 334);
+    rs485_display.setPosition(161, 21, 216, 313);
+    rs485_display.setVisible(false);
+    rs485_bj.setXY(20, 2);
+    rs485_bj.setBitmap(touchgfx::Bitmap(BITMAP_RS485_BJ_ID));
+    rs485_display.add(rs485_bj);
+
+    rs115200.setXY(25, 255);
+    rs115200.setBitmaps(touchgfx::Bitmap(BITMAP_RS485SEL_RELEASED_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_CLICKED_ID));
+    rs115200.setAction(buttonCallback);
+    rs485_display.add(rs115200);
+
+    rs57600.setXY(25, 215);
+    rs57600.setBitmaps(touchgfx::Bitmap(BITMAP_RS485SEL_RELEASED_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_CLICKED_ID));
+    rs57600.setAction(buttonCallback);
+    rs485_display.add(rs57600);
+
+    rs38400.setXY(25, 175);
+    rs38400.setBitmaps(touchgfx::Bitmap(BITMAP_RS485SEL_RELEASED_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_CLICKED_ID));
+    rs38400.setAction(buttonCallback);
+    rs485_display.add(rs38400);
+
+    rs19200.setXY(25, 135);
+    rs19200.setBitmaps(touchgfx::Bitmap(BITMAP_RS485SEL_RELEASED_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_CLICKED_ID));
+    rs19200.setAction(buttonCallback);
+    rs485_display.add(rs19200);
+
+    rs9600.setXY(25, 95);
+    rs9600.setBitmaps(touchgfx::Bitmap(BITMAP_RS485SEL_RELEASED_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_CLICKED_ID));
+    rs9600.setAction(buttonCallback);
+    rs485_display.add(rs9600);
+
+    rs4800.setXY(25, 55);
+    rs4800.setBitmaps(touchgfx::Bitmap(BITMAP_RS485SEL_RELEASED_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_CLICKED_ID));
+    rs4800.setAction(buttonCallback);
+    rs485_display.add(rs4800);
+
+    textArea14.setPosition(60, 259, 80, 32);
+    textArea14.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea14.setLinespacing(0);
+    textArea14.setTypedText(touchgfx::TypedText(T___SINGLEUSE_32PM));
+    rs485_display.add(textArea14);
+
+    textArea15.setPosition(60, 219, 80, 32);
+    textArea15.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea15.setLinespacing(0);
+    textArea15.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FE3S));
+    rs485_display.add(textArea15);
+
+    textArea16.setPosition(60, 183, 80, 32);
+    textArea16.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea16.setLinespacing(0);
+    textArea16.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F7AO));
+    rs485_display.add(textArea16);
+
+    textArea17.setPosition(60, 140, 80, 32);
+    textArea17.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea17.setLinespacing(0);
+    textArea17.setTypedText(touchgfx::TypedText(T___SINGLEUSE_H0R7));
+    rs485_display.add(textArea17);
+
+    textArea18.setPosition(60, 99, 80, 32);
+    textArea18.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea18.setLinespacing(0);
+    textArea18.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0NC6));
+    rs485_display.add(textArea18);
+
+    textArea19.setPosition(60, 59, 80, 32);
+    textArea19.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea19.setLinespacing(0);
+    textArea19.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZFHC));
+    rs485_display.add(textArea19);
+
+    rs485.add(rs485_display);
+
+    RS485.setPosition(38, 38, 66, 33);
+    RS485.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    RS485.setLinespacing(0);
+    RS485.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9OAF));
+    rs485.add(RS485);
+
+    benji_1_1.setPosition(104, 37, 72, 33);
+    benji_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    benji_1_1.setLinespacing(0);
+    benji_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_G75G));
+    rs485.add(benji_1_1);
+
+    bps.setPosition(354, 36, 53, 33);
+    bps.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    bps.setLinespacing(0);
+    bps.setTypedText(touchgfx::TypedText(T___SINGLEUSE_2MB1));
+    rs485.add(bps);
+
+    RS485button.setXY(186, 29);
+    RS485button.setBitmaps(touchgfx::Bitmap(BITMAP_RS485BUTTON_ID), touchgfx::Bitmap(BITMAP_RS485BUTTON_PRESSED_ID));
+    RS485button.setAction(buttonCallback);
+    rs485.add(RS485button);
+
+    rs485text.setPosition(215, 37, 80, 32);
+    rs485text.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    rs485text.setLinespacing(0);
+    Unicode::snprintf(rs485textBuffer, RS485TEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_3Y3U).getText());
+    rs485text.setWildcard(rs485textBuffer);
+    rs485text.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VV6S));
+    rs485.add(rs485text);
+
+    rs485_imageup.setXY(308, 41);
+    rs485_imageup.setBitmap(touchgfx::Bitmap(BITMAP_IMAGEUP_ID));
+    rs485_imageup.setVisible(false);
+    rs485.add(rs485_imageup);
+
+    rs485_imagedown.setXY(308, 42);
+    rs485_imagedown.setBitmap(touchgfx::Bitmap(BITMAP_ICON1_ID));
+    rs485.add(rs485_imagedown);
+
+    add(rs485);
+
+    yunduan.setXY(285, 102);
+    yunduan.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_ON_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_OFF_LIGHT_ID));
+    yunduan.setAction(buttonCallback);
+    add(yunduan);
+
+    local.setXY(285, 32);
+    local.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_ON_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_OFF_LIGHT_ID));
+    local.setAction(buttonCallback);
+    add(local);
+
+    textArea20.setXY(136, 93);
+    textArea20.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea20.setLinespacing(0);
+    textArea20.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0VYU));
+    add(textArea20);
+
+    textArea12.setXY(136, 30);
+    textArea12.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea12.setLinespacing(0);
+    textArea12.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BDOF));
+    add(textArea12);
+
+    container1.setPosition(1, -2, 1023, 600);
+    IP_setting_2.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 90, 120);
+    IP_setting_2.setShadeColor(touchgfx::Color::getColorFromRGB(1, 5, 5));
+    IP_setting_2.setShadeAlpha(210);
     IP_setting_2.hide();
-
-    CloseBut_2.setXY(300, 426);
-    CloseBut_2.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
+    CloseBut_2.setXY(340, 250);
+    CloseBut_2.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     CloseBut_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_G4RS));
     CloseBut_2.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     CloseBut_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     CloseBut_2.setAction(buttonCallback);
     IP_setting_2.add(CloseBut_2);
 
-    SaveBut_2.setXY(10, 426);
-    SaveBut_2.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
+    SaveBut_2.setXY(95, 250);
+    SaveBut_2.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     SaveBut_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_M4ST));
     SaveBut_2.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     SaveBut_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     SaveBut_2.setAction(buttonCallback);
     IP_setting_2.add(SaveBut_2);
 
-    benji_ip_set_1_2_1.setXY(35, 234);
+    benji_ip_set_1_2_1.setPosition(48, 120, 80, 55);
     benji_ip_set_1_2_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     benji_ip_set_1_2_1.setLinespacing(0);
     benji_ip_set_1_2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TAPV));
     IP_setting_2.add(benji_ip_set_1_2_1);
 
-    benji_ip_set_2_1.setXY(17, 111);
+    benji_ip_set_2_1.setPosition(32, 20, 113, 55);
     benji_ip_set_2_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     benji_ip_set_2_1.setLinespacing(0);
     benji_ip_set_2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FK1U));
@@ -301,172 +569,106 @@ SettingViewBase::SettingViewBase() :
 
     IP_ADD_2_1.setBoxWithBorderPosition(0, 0, 120, 60);
     IP_ADD_2_1.setBorderSize(2);
-    IP_ADD_2_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_2_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
     IP_ADD_2_1.setWildcardText(TypedText(T___SINGLEUSE_RQRI));
     Unicode::snprintf(IP_ADD_2_1Buffer, IP_ADD_2_1_SIZE, "%s", TypedText(T___SINGLEUSE_1ZX6).getText());
     IP_ADD_2_1.setWildcardTextBuffer(IP_ADD_2_1Buffer);
     IP_ADD_2_1.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_2_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_2_1.setPosition(150, 107, 120, 60);
     IP_ADD_2_1.setAction(flexButtonCallback);
+    IP_ADD_2_1.setPosition(190, 20, 120, 60);
     IP_setting_2.add(IP_ADD_2_1);
 
     IP_ADD_2_2.setBoxWithBorderPosition(0, 0, 120, 60);
     IP_ADD_2_2.setBorderSize(2);
-    IP_ADD_2_2.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_2_2.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
     IP_ADD_2_2.setWildcardText(TypedText(T___SINGLEUSE_18AR));
     Unicode::snprintf(IP_ADD_2_2Buffer, IP_ADD_2_2_SIZE, "%s", TypedText(T___SINGLEUSE_96JN).getText());
     IP_ADD_2_2.setWildcardTextBuffer(IP_ADD_2_2Buffer);
     IP_ADD_2_2.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_2_2.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_2_2.setPosition(280, 106, 120, 60);
     IP_ADD_2_2.setAction(flexButtonCallback);
+    IP_ADD_2_2.setPosition(360, 20, 120, 60);
     IP_setting_2.add(IP_ADD_2_2);
 
     IP_ADD_2_3.setBoxWithBorderPosition(0, 0, 120, 60);
     IP_ADD_2_3.setBorderSize(2);
-    IP_ADD_2_3.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_2_3.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
     IP_ADD_2_3.setWildcardText(TypedText(T___SINGLEUSE_S2K2));
     Unicode::snprintf(IP_ADD_2_3Buffer, IP_ADD_2_3_SIZE, "%s", TypedText(T___SINGLEUSE_9A4P).getText());
     IP_ADD_2_3.setWildcardTextBuffer(IP_ADD_2_3Buffer);
     IP_ADD_2_3.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_2_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_2_3.setPosition(410, 107, 120, 60);
     IP_ADD_2_3.setAction(flexButtonCallback);
+    IP_ADD_2_3.setPosition(530, 20, 120, 60);
     IP_setting_2.add(IP_ADD_2_3);
 
     IP_ADD_2_4.setBoxWithBorderPosition(0, 0, 120, 60);
     IP_ADD_2_4.setBorderSize(2);
-    IP_ADD_2_4.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_2_4.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
     IP_ADD_2_4.setWildcardText(TypedText(T___SINGLEUSE_UMPH));
     Unicode::snprintf(IP_ADD_2_4Buffer, IP_ADD_2_4_SIZE, "%s", TypedText(T___SINGLEUSE_RJK5).getText());
     IP_ADD_2_4.setWildcardTextBuffer(IP_ADD_2_4Buffer);
     IP_ADD_2_4.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_2_4.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_2_4.setPosition(540, 107, 120, 60);
     IP_ADD_2_4.setAction(flexButtonCallback);
+    IP_ADD_2_4.setPosition(700, 20, 120, 60);
     IP_setting_2.add(IP_ADD_2_4);
 
-    PORT_1.setBoxWithBorderPosition(0, 0, 150, 75);
+    PORT_1.setBoxWithBorderPosition(0, 0, 150, 60);
     PORT_1.setBorderSize(2);
-    PORT_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    PORT_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
     PORT_1.setWildcardText(TypedText(T___SINGLEUSE_FRU2));
     Unicode::snprintf(PORT_1Buffer, PORT_1_SIZE, "%s", TypedText(T___SINGLEUSE_BNAQ).getText());
     PORT_1.setWildcardTextBuffer(PORT_1Buffer);
-    PORT_1.setWildcardTextPosition(0, 15, 150, 75);
+    PORT_1.setWildcardTextPosition(0, 10, 150, 60);
     PORT_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    PORT_1.setPosition(150, 229, 150, 75);
     PORT_1.setAction(flexButtonCallback);
+    PORT_1.setPosition(194, 128, 150, 60);
     IP_setting_2.add(PORT_1);
 
-    IP_setting_1.setBackground(touchgfx::BitmapId(BITMAP_BG_805X480_ID), 0, 51);
-    IP_setting_1.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    IP_setting_1.setShadeAlpha(150);
-    IP_setting_1.hide();
+    container1.add(IP_setting_2);
 
-    CloseBut_1.setXY(300, 426);
-    CloseBut_1.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
-    CloseBut_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_SSZH));
-    CloseBut_1.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    CloseBut_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    CloseBut_1.setAction(buttonCallback);
-    IP_setting_1.add(CloseBut_1);
+    port_4g.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 90, 120);
+    port_4g.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    port_4g.setShadeAlpha(210);
+    port_4g.hide();
+    textArea30.setXY(149, 50);
+    textArea30.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea30.setLinespacing(0);
+    textArea30.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WORO));
+    port_4g.add(textArea30);
 
-    SaveBut_1.setXY(10, 426);
-    SaveBut_1.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
-    SaveBut_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HMR3));
-    SaveBut_1.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    SaveBut_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    SaveBut_1.setAction(buttonCallback);
-    IP_setting_1.add(SaveBut_1);
+    save_4g_portbutton.setXY(115, 231);
+    save_4g_portbutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    save_4g_portbutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_O6PE));
+    save_4g_portbutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    save_4g_portbutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    port_4g.add(save_4g_portbutton);
 
-    benji_ip_set_1_2.setXY(35, 234);
-    benji_ip_set_1_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    benji_ip_set_1_2.setLinespacing(0);
-    benji_ip_set_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D8E3));
-    IP_setting_1.add(benji_ip_set_1_2);
+    close_4g_portbutton.setXY(307, 231);
+    close_4g_portbutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    close_4g_portbutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_VUPT));
+    close_4g_portbutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    close_4g_portbutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    port_4g.add(close_4g_portbutton);
 
-    benji_ip_set_2.setXY(17, 111);
-    benji_ip_set_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    benji_ip_set_2.setLinespacing(0);
-    benji_ip_set_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RTXZ));
-    IP_setting_1.add(benji_ip_set_2);
+    container1.add(port_4g);
 
-    IP_ADD_1_1.setBoxWithBorderPosition(0, 0, 120, 60);
-    IP_ADD_1_1.setBorderSize(2);
-    IP_ADD_1_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    IP_ADD_1_1.setWildcardText(TypedText(T___SINGLEUSE_8CIQ));
-    Unicode::snprintf(IP_ADD_1_1Buffer, IP_ADD_1_1_SIZE, "%s", TypedText(T___SINGLEUSE_LOLL).getText());
-    IP_ADD_1_1.setWildcardTextBuffer(IP_ADD_1_1Buffer);
-    IP_ADD_1_1.setWildcardTextPosition(0, 10, 120, 60);
-    IP_ADD_1_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_1_1.setPosition(150, 107, 120, 60);
-    IP_ADD_1_1.setAction(flexButtonCallback);
-    IP_setting_1.add(IP_ADD_1_1);
-
-    IP_ADD_1_2.setBoxWithBorderPosition(0, 0, 120, 60);
-    IP_ADD_1_2.setBorderSize(2);
-    IP_ADD_1_2.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    IP_ADD_1_2.setWildcardText(TypedText(T___SINGLEUSE_HKQW));
-    Unicode::snprintf(IP_ADD_1_2Buffer, IP_ADD_1_2_SIZE, "%s", TypedText(T___SINGLEUSE_DBFH).getText());
-    IP_ADD_1_2.setWildcardTextBuffer(IP_ADD_1_2Buffer);
-    IP_ADD_1_2.setWildcardTextPosition(0, 10, 120, 60);
-    IP_ADD_1_2.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_1_2.setPosition(280, 106, 120, 60);
-    IP_ADD_1_2.setAction(flexButtonCallback);
-    IP_setting_1.add(IP_ADD_1_2);
-
-    IP_ADD_1_3.setBoxWithBorderPosition(0, 0, 120, 60);
-    IP_ADD_1_3.setBorderSize(2);
-    IP_ADD_1_3.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    IP_ADD_1_3.setWildcardText(TypedText(T___SINGLEUSE_8VKW));
-    Unicode::snprintf(IP_ADD_1_3Buffer, IP_ADD_1_3_SIZE, "%s", TypedText(T___SINGLEUSE_3X6L).getText());
-    IP_ADD_1_3.setWildcardTextBuffer(IP_ADD_1_3Buffer);
-    IP_ADD_1_3.setWildcardTextPosition(0, 10, 120, 60);
-    IP_ADD_1_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_1_3.setPosition(410, 107, 120, 60);
-    IP_ADD_1_3.setAction(flexButtonCallback);
-    IP_setting_1.add(IP_ADD_1_3);
-
-    IP_ADD_1_4.setBoxWithBorderPosition(0, 0, 120, 60);
-    IP_ADD_1_4.setBorderSize(2);
-    IP_ADD_1_4.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    IP_ADD_1_4.setWildcardText(TypedText(T___SINGLEUSE_7EMM));
-    Unicode::snprintf(IP_ADD_1_4Buffer, IP_ADD_1_4_SIZE, "%s", TypedText(T___SINGLEUSE_4VUX).getText());
-    IP_ADD_1_4.setWildcardTextBuffer(IP_ADD_1_4Buffer);
-    IP_ADD_1_4.setWildcardTextPosition(0, 10, 120, 60);
-    IP_ADD_1_4.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_1_4.setPosition(540, 107, 120, 60);
-    IP_ADD_1_4.setAction(flexButtonCallback);
-    IP_setting_1.add(IP_ADD_1_4);
-
-    PORT.setBoxWithBorderPosition(0, 0, 150, 75);
-    PORT.setBorderSize(2);
-    PORT.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(145, 218, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    PORT.setWildcardText(TypedText(T___SINGLEUSE_R3N2));
-    Unicode::snprintf(PORTBuffer, PORT_SIZE, "%s", TypedText(T___SINGLEUSE_CFPD).getText());
-    PORT.setWildcardTextBuffer(PORTBuffer);
-    PORT.setWildcardTextPosition(0, 15, 150, 75);
-    PORT.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    PORT.setPosition(150, 229, 150, 75);
-    PORT.setAction(flexButtonCallback);
-    IP_setting_1.add(PORT);
-
-    IP_setting.setBackground(touchgfx::BitmapId(BITMAP_BG_805X480_ID), 0, 51);
+    IP_setting.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 90, 120);
     IP_setting.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     IP_setting.setShadeAlpha(150);
     IP_setting.hide();
-
     CloseBut.setXY(300, 426);
-    CloseBut.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
+    CloseBut.setBitmaps(touchgfx::Bitmap(BITMAP_BATERY_CU_RELEASED_ID), touchgfx::Bitmap(BITMAP_BATERY_CU_PRESSED_ID));
     CloseBut.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OADY));
     CloseBut.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     CloseBut.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     CloseBut.setAction(buttonCallback);
     IP_setting.add(CloseBut);
 
-    SaveBut.setXY(10, 426);
-    SaveBut.setBitmaps(touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_1_ID), touchgfx::Bitmap(BITMAP_BCMU_BUT_BG_2_ID));
+    SaveBut.setXY(697, 155);
+    SaveBut.setBitmaps(touchgfx::Bitmap(BITMAP_BATERY_CU_RELEASED_ID), touchgfx::Bitmap(BITMAP_BATERY_CU_PRESSED_ID));
     SaveBut.setLabelText(touchgfx::TypedText(T___SINGLEUSE_28QR));
     SaveBut.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     SaveBut.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
@@ -499,8 +701,8 @@ SettingViewBase::SettingViewBase() :
     IP_ADD_1.setWildcardTextBuffer(IP_ADD_1Buffer);
     IP_ADD_1.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_1.setPosition(135, 45, 120, 60);
     IP_ADD_1.setAction(flexButtonCallback);
+    IP_ADD_1.setPosition(135, 45, 120, 60);
     IP_setting.add(IP_ADD_1);
 
     IP_ADD_2.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -511,8 +713,8 @@ SettingViewBase::SettingViewBase() :
     IP_ADD_2.setWildcardTextBuffer(IP_ADD_2Buffer);
     IP_ADD_2.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_2.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_2.setPosition(270, 45, 120, 60);
     IP_ADD_2.setAction(flexButtonCallback);
+    IP_ADD_2.setPosition(270, 45, 120, 60);
     IP_setting.add(IP_ADD_2);
 
     IP_ADD_3.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -523,8 +725,8 @@ SettingViewBase::SettingViewBase() :
     IP_ADD_3.setWildcardTextBuffer(IP_ADD_3Buffer);
     IP_ADD_3.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_3.setPosition(405, 45, 120, 60);
     IP_ADD_3.setAction(flexButtonCallback);
+    IP_ADD_3.setPosition(405, 45, 120, 60);
     IP_setting.add(IP_ADD_3);
 
     IP_ADD_4.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -535,8 +737,8 @@ SettingViewBase::SettingViewBase() :
     IP_ADD_4.setWildcardTextBuffer(IP_ADD_4Buffer);
     IP_ADD_4.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_4.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    IP_ADD_4.setPosition(540, 45, 120, 60);
     IP_ADD_4.setAction(flexButtonCallback);
+    IP_ADD_4.setPosition(540, 45, 120, 60);
     IP_setting.add(IP_ADD_4);
 
     GATEWAY_1.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -547,8 +749,8 @@ SettingViewBase::SettingViewBase() :
     GATEWAY_1.setWildcardTextBuffer(GATEWAY_1Buffer);
     GATEWAY_1.setWildcardTextPosition(0, 10, 120, 60);
     GATEWAY_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    GATEWAY_1.setPosition(135, 150, 120, 60);
     GATEWAY_1.setAction(flexButtonCallback);
+    GATEWAY_1.setPosition(135, 150, 120, 60);
     IP_setting.add(GATEWAY_1);
 
     GATEWAY_2.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -559,8 +761,8 @@ SettingViewBase::SettingViewBase() :
     GATEWAY_2.setWildcardTextBuffer(GATEWAY_2Buffer);
     GATEWAY_2.setWildcardTextPosition(0, 10, 120, 60);
     GATEWAY_2.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    GATEWAY_2.setPosition(270, 150, 120, 60);
     GATEWAY_2.setAction(flexButtonCallback);
+    GATEWAY_2.setPosition(270, 150, 120, 60);
     IP_setting.add(GATEWAY_2);
 
     GATEWAY_3.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -571,8 +773,8 @@ SettingViewBase::SettingViewBase() :
     GATEWAY_3.setWildcardTextBuffer(GATEWAY_3Buffer);
     GATEWAY_3.setWildcardTextPosition(0, 10, 120, 60);
     GATEWAY_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    GATEWAY_3.setPosition(405, 151, 120, 60);
     GATEWAY_3.setAction(flexButtonCallback);
+    GATEWAY_3.setPosition(405, 151, 120, 60);
     IP_setting.add(GATEWAY_3);
 
     GATEWAY_4.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -583,8 +785,8 @@ SettingViewBase::SettingViewBase() :
     GATEWAY_4.setWildcardTextBuffer(GATEWAY_4Buffer);
     GATEWAY_4.setWildcardTextPosition(0, 10, 120, 60);
     GATEWAY_4.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    GATEWAY_4.setPosition(540, 150, 120, 60);
     GATEWAY_4.setAction(flexButtonCallback);
+    GATEWAY_4.setPosition(540, 150, 120, 60);
     IP_setting.add(GATEWAY_4);
 
     NETMASK_1.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -595,8 +797,8 @@ SettingViewBase::SettingViewBase() :
     NETMASK_1.setWildcardTextBuffer(NETMASK_1Buffer);
     NETMASK_1.setWildcardTextPosition(0, 10, 120, 60);
     NETMASK_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    NETMASK_1.setPosition(135, 258, 120, 60);
     NETMASK_1.setAction(flexButtonCallback);
+    NETMASK_1.setPosition(135, 258, 120, 60);
     IP_setting.add(NETMASK_1);
 
     NETMASK_2.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -607,8 +809,8 @@ SettingViewBase::SettingViewBase() :
     NETMASK_2.setWildcardTextBuffer(NETMASK_2Buffer);
     NETMASK_2.setWildcardTextPosition(0, 10, 120, 60);
     NETMASK_2.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    NETMASK_2.setPosition(270, 258, 120, 60);
     NETMASK_2.setAction(flexButtonCallback);
+    NETMASK_2.setPosition(270, 258, 120, 60);
     IP_setting.add(NETMASK_2);
 
     NETMASK_3.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -619,8 +821,8 @@ SettingViewBase::SettingViewBase() :
     NETMASK_3.setWildcardTextBuffer(NETMASK_3Buffer);
     NETMASK_3.setWildcardTextPosition(0, 10, 120, 60);
     NETMASK_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    NETMASK_3.setPosition(405, 258, 120, 60);
     NETMASK_3.setAction(flexButtonCallback);
+    NETMASK_3.setPosition(405, 258, 120, 60);
     IP_setting.add(NETMASK_3);
 
     NETMASK_4.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -631,65 +833,393 @@ SettingViewBase::SettingViewBase() :
     NETMASK_4.setWildcardTextBuffer(NETMASK_4Buffer);
     NETMASK_4.setWildcardTextPosition(0, 10, 120, 60);
     NETMASK_4.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
-    NETMASK_4.setPosition(540, 258, 120, 60);
     NETMASK_4.setAction(flexButtonCallback);
+    NETMASK_4.setPosition(540, 258, 120, 60);
     IP_setting.add(NETMASK_4);
 
-    keyboard1.setXY(662, 238);
-    keyboard1.setVisible(false);
+    container1.add(IP_setting);
 
-    add(__background);
-    add(main_BG);
-    add(mainBack);
-    add(biaoti);
-    add(setting_text);
-    add(IPsetting);
-    add(poll_T);
-    add(cu_NUM);
-    add(IPsetting_1);
-    add(caijizhouqi);
-    add(cuzhuangji);
-    add(benji_1);
-    add(benji_1_1);
-    add(benji);
-    add(IPsetting_2);
-    add(bendiwufuqi);
-    add(MODULE_4G);
-    add(cu_num);
-    add(poll_t);
-    add(networkText2);
-    add(networkText1);
-    add(gateway_text2);
-    add(gateway_text1);
-    add(ip_text2);
-    add(ip_text1);
-    add(ip_text2_1);
-    add(ip_text1_1);
-    add(port_text);
-    add(ip_1_text2_1);
-    add(ip_1_text1_1);
-    add(port_1_text);
-    add(CAN_kbps);
-    add(RS485_kbps);
-    add(save_all);
-    add(start);
-    add(IP_setting_2);
-    add(IP_setting_1);
-    add(IP_setting);
+    local_port.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 90, 120);
+    local_port.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_port.setShadeAlpha(210);
+    local_port.hide();
+    save_local_portbutton.setXY(84, 225);
+    save_local_portbutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    save_local_portbutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OASN));
+    save_local_portbutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    save_local_portbutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    local_port.add(save_local_portbutton);
+
+    close_local_portbutton.setXY(288, 223);
+    close_local_portbutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    close_local_portbutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_KM1S));
+    close_local_portbutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    close_local_portbutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    local_port.add(close_local_portbutton);
+
+    textArea29.setXY(112, 36);
+    textArea29.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea29.setLinespacing(0);
+    textArea29.setTypedText(touchgfx::TypedText(T___SINGLEUSE_970U));
+    local_port.add(textArea29);
+
+    container1.add(local_port);
+
+    IP_setting_1.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 90, 120);
+    IP_setting_1.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    IP_setting_1.setShadeAlpha(210);
+    IP_setting_1.hide();
+    CloseBut_1.setXY(314, 249);
+    CloseBut_1.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    CloseBut_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_SSZH));
+    CloseBut_1.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    CloseBut_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    CloseBut_1.setAction(buttonCallback);
+    IP_setting_1.add(CloseBut_1);
+
+    SaveBut_1.setXY(102, 249);
+    SaveBut_1.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    SaveBut_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HMR3));
+    SaveBut_1.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    SaveBut_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    SaveBut_1.setAction(buttonCallback);
+    IP_setting_1.add(SaveBut_1);
+
+    benji_ip_set_2.setXY(32, 20);
+    benji_ip_set_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    benji_ip_set_2.setLinespacing(0);
+    benji_ip_set_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RTXZ));
+    IP_setting_1.add(benji_ip_set_2);
+
+    IP_ADD_1_2.setBoxWithBorderPosition(0, 0, 120, 60);
+    IP_ADD_1_2.setBorderSize(2);
+    IP_ADD_1_2.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_1_2.setWildcardText(TypedText(T___SINGLEUSE_HKQW));
+    Unicode::snprintf(IP_ADD_1_2Buffer, IP_ADD_1_2_SIZE, "%s", TypedText(T___SINGLEUSE_DBFH).getText());
+    IP_ADD_1_2.setWildcardTextBuffer(IP_ADD_1_2Buffer);
+    IP_ADD_1_2.setWildcardTextPosition(0, 10, 120, 60);
+    IP_ADD_1_2.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    IP_ADD_1_2.setAction(flexButtonCallback);
+    IP_ADD_1_2.setPosition(360, 20, 120, 60);
+    IP_setting_1.add(IP_ADD_1_2);
+
+    IP_ADD_1_3.setBoxWithBorderPosition(0, 0, 120, 60);
+    IP_ADD_1_3.setBorderSize(2);
+    IP_ADD_1_3.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_1_3.setWildcardText(TypedText(T___SINGLEUSE_8VKW));
+    Unicode::snprintf(IP_ADD_1_3Buffer, IP_ADD_1_3_SIZE, "%s", TypedText(T___SINGLEUSE_3X6L).getText());
+    IP_ADD_1_3.setWildcardTextBuffer(IP_ADD_1_3Buffer);
+    IP_ADD_1_3.setWildcardTextPosition(0, 10, 120, 60);
+    IP_ADD_1_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    IP_ADD_1_3.setAction(flexButtonCallback);
+    IP_ADD_1_3.setPosition(530, 20, 120, 60);
+    IP_setting_1.add(IP_ADD_1_3);
+
+    IP_ADD_1_4.setBoxWithBorderPosition(0, 0, 120, 60);
+    IP_ADD_1_4.setBorderSize(2);
+    IP_ADD_1_4.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_1_4.setWildcardText(TypedText(T___SINGLEUSE_7EMM));
+    Unicode::snprintf(IP_ADD_1_4Buffer, IP_ADD_1_4_SIZE, "%s", TypedText(T___SINGLEUSE_4VUX).getText());
+    IP_ADD_1_4.setWildcardTextBuffer(IP_ADD_1_4Buffer);
+    IP_ADD_1_4.setWildcardTextPosition(0, 10, 120, 60);
+    IP_ADD_1_4.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    IP_ADD_1_4.setAction(flexButtonCallback);
+    IP_ADD_1_4.setPosition(700, 20, 120, 60);
+    IP_setting_1.add(IP_ADD_1_4);
+
+    PORT.setBoxWithBorderPosition(0, 0, 150, 60);
+    PORT.setBorderSize(2);
+    PORT.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    PORT.setWildcardText(TypedText(T___SINGLEUSE_R3N2));
+    Unicode::snprintf(PORTBuffer, PORT_SIZE, "%s", TypedText(T___SINGLEUSE_CFPD).getText());
+    PORT.setWildcardTextBuffer(PORTBuffer);
+    PORT.setWildcardTextPosition(0, 10, 150, 60);
+    PORT.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    PORT.setAction(flexButtonCallback);
+    PORT.setPosition(197, 131, 150, 60);
+    IP_setting_1.add(PORT);
+
+    textArea31.setXY(48, 134);
+    textArea31.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea31.setLinespacing(0);
+    textArea31.setTypedText(touchgfx::TypedText(T___SINGLEUSE_T2K0));
+    IP_setting_1.add(textArea31);
+
+    IP_ADD_1_1.setBoxWithBorderPosition(0, 0, 120, 60);
+    IP_ADD_1_1.setBorderSize(2);
+    IP_ADD_1_1.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    IP_ADD_1_1.setWildcardText(TypedText(T___SINGLEUSE_8CIQ));
+    Unicode::snprintf(IP_ADD_1_1Buffer, IP_ADD_1_1_SIZE, "%s", TypedText(T___SINGLEUSE_LOLL).getText());
+    IP_ADD_1_1.setWildcardTextBuffer(IP_ADD_1_1Buffer);
+    IP_ADD_1_1.setWildcardTextPosition(0, 10, 120, 60);
+    IP_ADD_1_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    IP_ADD_1_1.setAction(flexButtonCallback);
+    IP_ADD_1_1.setPosition(190, 20, 120, 60);
+    IP_setting_1.add(IP_ADD_1_1);
+
+    container1.add(IP_setting_1);
+
+    t_set.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 100, 120);
+    t_set.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    t_set.setShadeAlpha(210);
+    t_set.hide();
+    textArea28.setXY(88, 37);
+    textArea28.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea28.setLinespacing(0);
+    textArea28.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4LVX));
+    t_set.add(textArea28);
+
+    t_closebutton.setXY(272, 229);
+    t_closebutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    t_closebutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_ONJT));
+    t_closebutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    t_closebutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    t_closebutton.setAction(buttonCallback);
+    t_set.add(t_closebutton);
+
+    t_savabutton.setXY(77, 233);
+    t_savabutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    t_savabutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_DHKC));
+    t_savabutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    t_savabutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    t_savabutton.setAction(buttonCallback);
+    t_set.add(t_savabutton);
+
+    t_setbutton.forceState(true);
+    t_setbutton.setBoxWithBorderPosition(0, 0, 137, 60);
+    t_setbutton.setBorderSize(5);
+    t_setbutton.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    t_setbutton.setWildcardText(TypedText(T___SINGLEUSE_ANX9));
+    Unicode::snprintf(t_setbuttonBuffer, T_SETBUTTON_SIZE, "%s", TypedText(T___SINGLEUSE_V95R).getText());
+    t_setbutton.setWildcardTextBuffer(t_setbuttonBuffer);
+    t_setbutton.setWildcardTextPosition(0, 6, 137, 60);
+    t_setbutton.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    t_setbutton.setAlpha(210);
+    t_setbutton.setAction(flexButtonCallback);
+    t_setbutton.setPosition(146, 119, 137, 60);
+    t_set.add(t_setbutton);
+
+    container1.add(t_set);
+
+    zu_set.setBackground(touchgfx::BitmapId(BITMAP_SETSHOWIP_BJ_ID), 100, 120);
+    zu_set.setShadeColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    zu_set.setShadeAlpha(210);
+    zu_set.hide();
+    zu_closebutton.setXY(323, 246);
+    zu_closebutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    zu_closebutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_7FWB));
+    zu_closebutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    zu_closebutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 153, 204));
+    zu_closebutton.setAction(buttonCallback);
+    zu_set.add(zu_closebutton);
+
+    zu_savebutton.setXY(113, 246);
+    zu_savebutton.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    zu_savebutton.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OTUT));
+    zu_savebutton.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    zu_savebutton.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 153, 204));
+    zu_savebutton.setAction(buttonCallback);
+    zu_set.add(zu_savebutton);
+
+    zu_setbutton.forceState(true);
+    zu_setbutton.setBoxWithBorderPosition(0, 0, 122, 77);
+    zu_setbutton.setBorderSize(5);
+    zu_setbutton.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    zu_setbutton.setWildcardText(TypedText(T___SINGLEUSE_UQUX));
+    Unicode::snprintf(zu_setbuttonBuffer, ZU_SETBUTTON_SIZE, "%s", TypedText(T___SINGLEUSE_XREB).getText());
+    zu_setbutton.setWildcardTextBuffer(zu_setbuttonBuffer);
+    zu_setbutton.setWildcardTextPosition(0, 17, 122, 77);
+    zu_setbutton.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
+    zu_setbutton.setAction(flexButtonCallback);
+    zu_setbutton.setPosition(219, 121, 122, 77);
+    zu_set.add(zu_setbutton);
+
+    textArea27.setXY(125, 48);
+    textArea27.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea27.setLinespacing(0);
+    textArea27.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HCIZ));
+    zu_set.add(textArea27);
+
+    container1.add(zu_set);
+
+    IPsetting.setXY(497, 285);
+    IPsetting.setBitmaps(touchgfx::Bitmap(BITMAP_BATERY_CU_RELEASED_ID), touchgfx::Bitmap(BITMAP_BATERY_CU_PRESSED_ID));
+    IPsetting.setLabelText(touchgfx::TypedText(T___SINGLEUSE_5LR0));
+    IPsetting.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    IPsetting.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    IPsetting.setVisible(false);
+    IPsetting.setAction(buttonCallback);
+    container1.add(IPsetting);
+
+    poll_T.setXY(300, 207);
+    poll_T.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_INDICATORS_SLIDER2_ROUND_NOB_ID));
+    poll_T.setupHorizontalSlider(5, 12, 0, 0, 585);
+    poll_T.setValueRange(5, 100);
+    poll_T.setValue(5);
+    poll_T.setVisible(false);
+    poll_T.setNewValueCallback(sliderValueChangedCallback);
+    container1.add(poll_T);
+
+    cu_NUM.setXY(300, 144);
+    cu_NUM.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_SLIDER2_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_LARGE_INDICATORS_SLIDER2_ROUND_NOB_ID));
+    cu_NUM.setupHorizontalSlider(5, 12, 0, 0, 585);
+    cu_NUM.setValueRange(0, 20);
+    cu_NUM.setValue(0);
+    cu_NUM.setVisible(false);
+    cu_NUM.setNewValueCallback(sliderValueChangedCallback);
+    container1.add(cu_NUM);
+
+    caijizhouqi.setXY(23, 209);
+    caijizhouqi.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    caijizhouqi.setLinespacing(0);
+    caijizhouqi.setTypedText(touchgfx::TypedText(T___SINGLEUSE_10OS));
+    caijizhouqi.setVisible(false);
+    container1.add(caijizhouqi);
+
+    cuzhuangji.setXY(23, 145);
+    cuzhuangji.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cuzhuangji.setLinespacing(0);
+    cuzhuangji.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DMPQ));
+    cuzhuangji.setVisible(false);
+    container1.add(cuzhuangji);
+
+    benji.setXY(45, 300);
+    benji.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    benji.setLinespacing(0);
+    benji.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZFFF));
+    benji.setVisible(false);
+    container1.add(benji);
+
+    NETMASK.setPosition(160, 334, 90, 27);
+    NETMASK.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    NETMASK.setLinespacing(0);
+    NETMASK.setTypedText(touchgfx::TypedText(T___SINGLEUSE_C8RH));
+    NETMASK.setVisible(false);
+    container1.add(NETMASK);
+
+    IP_ADD1.setPosition(160, 270, 90, 27);
+    IP_ADD1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    IP_ADD1.setLinespacing(0);
+    IP_ADD1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_M614));
+    IP_ADD1.setVisible(false);
+    container1.add(IP_ADD1);
+
+    GATEWAY.setPosition(160, 302, 90, 27);
+    GATEWAY.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    GATEWAY.setLinespacing(0);
+    GATEWAY.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OM2E));
+    GATEWAY.setVisible(false);
+    container1.add(GATEWAY);
+
+    RS485_kbps.setPosition(702, 452, 250, 97);
+    RS485_kbps.setHorizontal(false);
+    RS485_kbps.setCircular(true);
+    RS485_kbps.setEasingEquation(touchgfx::EasingEquations::backEaseIn);
+    RS485_kbps.setSwipeAcceleration(100);
+    RS485_kbps.setDragAcceleration(20);
+    RS485_kbps.setNumberOfItems(6);
+    RS485_kbps.setSelectedItemOffset(20);
+    RS485_kbps.setSelectedItemExtraSize(0, 0);
+    RS485_kbps.setSelectedItemMargin(0, 0);
+    RS485_kbps.setDrawableSize(60, 0);
+    RS485_kbps.setDrawables(RS485_kbpsListItems, updateItemCallback,
+    
+                          RS485_kbpsSelectedListItems, updateItemCallback);
+    RS485_kbps.animateToItem(0, 0);
+    RS485_kbps.setVisible(false);
+    container1.add(RS485_kbps);
+
+    networkText2.setPosition(369, 334, 80, 27);
+    networkText2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    networkText2.setLinespacing(0);
+    touchgfx::Unicode::snprintf(networkText2Buffer1, NETWORKTEXT2BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_A7X7).getText());
+    networkText2.setWildcard1(networkText2Buffer1);
+    touchgfx::Unicode::snprintf(networkText2Buffer2, NETWORKTEXT2BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_8HDW).getText());
+    networkText2.setWildcard2(networkText2Buffer2);
+    networkText2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F36J));
+    networkText2.setVisible(false);
+    container1.add(networkText2);
+
+    networkText1.setPosition(272, 334, 95, 27);
+    networkText1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    networkText1.setLinespacing(0);
+    touchgfx::Unicode::snprintf(networkText1Buffer1, NETWORKTEXT1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_5JKT).getText());
+    networkText1.setWildcard1(networkText1Buffer1);
+    touchgfx::Unicode::snprintf(networkText1Buffer2, NETWORKTEXT1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_QD93).getText());
+    networkText1.setWildcard2(networkText1Buffer2);
+    networkText1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Z1OB));
+    networkText1.setVisible(false);
+    container1.add(networkText1);
+
+    gateway_text2.setPosition(369, 302, 80, 27);
+    gateway_text2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    gateway_text2.setLinespacing(0);
+    touchgfx::Unicode::snprintf(gateway_text2Buffer1, GATEWAY_TEXT2BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GS8Z).getText());
+    gateway_text2.setWildcard1(gateway_text2Buffer1);
+    touchgfx::Unicode::snprintf(gateway_text2Buffer2, GATEWAY_TEXT2BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_YJKX).getText());
+    gateway_text2.setWildcard2(gateway_text2Buffer2);
+    gateway_text2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_K5Z2));
+    gateway_text2.setVisible(false);
+    container1.add(gateway_text2);
+
+    gateway_text1.setPosition(272, 302, 95, 27);
+    gateway_text1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    gateway_text1.setLinespacing(0);
+    touchgfx::Unicode::snprintf(gateway_text1Buffer1, GATEWAY_TEXT1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_UGCK).getText());
+    gateway_text1.setWildcard1(gateway_text1Buffer1);
+    touchgfx::Unicode::snprintf(gateway_text1Buffer2, GATEWAY_TEXT1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_SKIC).getText());
+    gateway_text1.setWildcard2(gateway_text1Buffer2);
+    gateway_text1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UOEV));
+    gateway_text1.setVisible(false);
+    container1.add(gateway_text1);
+
+    ip_text2.setPosition(369, 270, 80, 27);
+    ip_text2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    ip_text2.setLinespacing(0);
+    touchgfx::Unicode::snprintf(ip_text2Buffer1, IP_TEXT2BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_V0BI).getText());
+    ip_text2.setWildcard1(ip_text2Buffer1);
+    touchgfx::Unicode::snprintf(ip_text2Buffer2, IP_TEXT2BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_OIYS).getText());
+    ip_text2.setWildcard2(ip_text2Buffer2);
+    ip_text2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FA8A));
+    ip_text2.setVisible(false);
+    container1.add(ip_text2);
+
+    ip_text1.setPosition(272, 270, 95, 27);
+    ip_text1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    ip_text1.setLinespacing(0);
+    touchgfx::Unicode::snprintf(ip_text1Buffer1, IP_TEXT1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_C5FH).getText());
+    ip_text1.setWildcard1(ip_text1Buffer1);
+    touchgfx::Unicode::snprintf(ip_text1Buffer2, IP_TEXT1BUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_RK1Z).getText());
+    ip_text1.setWildcard2(ip_text1Buffer2);
+    ip_text1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D3MU));
+    ip_text1.setVisible(false);
+    container1.add(ip_text1);
+
+    add(container1);
+
+    keyboard1.setXY(563, 149);
+    keyboard1.setVisible(false);
     add(keyboard1);
+
+    textArea25.setXY(941, 49);
+    textArea25.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea25.setLinespacing(0);
+    textArea25.setTypedText(touchgfx::TypedText(T___SINGLEUSE_18O7));
+    add(textArea25);
+
+    backButton.setXY(957, 1);
+    backButton.setBitmaps(touchgfx::Bitmap(BITMAP_HOME_FILL0_WGHT400_GRAD0_OPSZ48_ID), touchgfx::Bitmap(BITMAP_HOME_FILL0_WGHT400_GRAD0_OPSZ48_ID));
+    backButton.setAction(buttonCallback);
+    add(backButton);
+}
+
+SettingViewBase::~SettingViewBase()
+{
+
 }
 
 void SettingViewBase::setupScreen()
 {
-    CAN_kbps.initialize();
-    for (int i = 0; i < CAN_kbpsListItems.getNumberOfDrawables(); i++)
-    {
-        CAN_kbpsListItems[i].initialize();
-    }
-    for (int i = 0; i < CAN_kbpsSelectedListItems.getNumberOfDrawables(); i++)
-    {
-        CAN_kbpsSelectedListItems[i].initialize();
-    }
     RS485_kbps.initialize();
     for (int i = 0; i < RS485_kbpsListItems.getNumberOfDrawables(); i++)
     {
@@ -702,7 +1232,460 @@ void SettingViewBase::setupScreen()
     keyboard1.initialize();
 }
 
-//Handles tick based events
+void SettingViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &IPsetting)
+    {
+        //IP_setting
+        //When IPsetting clicked call virtual function
+        //Call IP_setting_fun
+        IP_setting_fun();
+    }
+    if (&src == &CloseBut)
+    {
+        //CloseSetting
+        //When CloseBut clicked call virtual function
+        //Call CloseSetting_fun
+        CloseSetting_fun();
+    }
+    if (&src == &SaveBut)
+    {
+        //SaveFun
+        //When SaveBut clicked call virtual function
+        //Call SaveFun
+        SaveFun();
+    }
+    if (&src == &IPsetting_1)
+    {
+        //IP_setting_1
+        //When IPsetting_1 clicked call virtual function
+        //Call IP_setting_1_fun
+        IP_setting_1_fun();
+    }
+    if (&src == &CloseBut_1)
+    {
+        //CloseSetting_1
+        //When CloseBut_1 clicked call virtual function
+        //Call CloseSetting_1_fun
+        CloseSetting_1_fun();
+    }
+    if (&src == &IPsetting_2)
+    {
+        //IP_setting_2
+        //When IPsetting_2 clicked call virtual function
+        //Call IP_setting_2_fun
+        IP_setting_2_fun();
+    }
+    if (&src == &CloseBut_2)
+    {
+        //CloseSetting_2
+        //When CloseBut_2 clicked call virtual function
+        //Call CloseSetting_2_fun
+        CloseSetting_2_fun();
+    }
+    if (&src == &SaveBut_1)
+    {
+        //Save_1
+        //When SaveBut_1 clicked call virtual function
+        //Call Save_1_Fun
+        Save_1_Fun();
+    }
+    if (&src == &SaveBut_2)
+    {
+        //Save_2
+        //When SaveBut_2 clicked call virtual function
+        //Call Save_2_Fun
+        Save_2_Fun();
+    }
+    if (&src == &save_all)
+    {
+        //save_all
+        //When save_all clicked call virtual function
+        //Call save_all_fun
+        save_all_fun();
+    }
+    if (&src == &button_125_125)
+    {
+        //setcanbaudrate125_125
+        //When button_125_125 clicked call virtual function
+        //Call setcanbaudrate125_125
+        setcanbaudrate125_125();
+    }
+    if (&src == &button_250_250)
+    {
+        //setcanbaudrate250_250
+        //When button_250_250 clicked call virtual function
+        //Call setcanbaudrate250_250
+        setcanbaudrate250_250();
+    }
+    if (&src == &button_500_2000)
+    {
+        //setcanbaudrate500_2000
+        //When button_500_2000 clicked call virtual function
+        //Call setcanbaudrate500_2000
+        setcanbaudrate500_2000();
+    }
+    if (&src == &button_500_500)
+    {
+        //setcanbaudrate500_500
+        //When button_500_500 clicked call virtual function
+        //Call setcanbaudrate500_500
+        setcanbaudrate500_500();
+    }
+    if (&src == &button_500_1000)
+    {
+        //setcanbaudrate500_1000
+        //When button_500_1000 clicked call virtual function
+        //Call setcanbaudrate500_1000
+        setcanbaudrate500_1000();
+    }
+    if (&src == &rs4800)
+    {
+        //setRS485baudrate_4800
+        //When rs4800 clicked call virtual function
+        //Call setRS485baudrate_4800
+        setRS485baudrate_4800();
+    }
+    if (&src == &rs9600)
+    {
+        //setRS485baudrate_9600
+        //When rs9600 clicked call virtual function
+        //Call setRS485baudrate_9600
+        setRS485baudrate_9600();
+    }
+    if (&src == &rs19200)
+    {
+        //setRS485baudrate_19200
+        //When rs19200 clicked call virtual function
+        //Call setRS485baudrate_19200
+        setRS485baudrate_19200();
+    }
+    if (&src == &rs38400)
+    {
+        //setRS485baudrate_38400
+        //When rs38400 clicked call virtual function
+        //Call setRS485baudrate_38400
+        setRS485baudrate_38400();
+    }
+    if (&src == &rs115200)
+    {
+        //setRS485baudrate_115200
+        //When rs115200 clicked call virtual function
+        //Call setRS485baudrate_115200
+        setRS485baudrate_115200();
+    }
+    if (&src == &rs57600)
+    {
+        //setRS485baudrate_57600
+        //When rs57600 clicked call virtual function
+        //Call setRS485baudrate_57600
+        setRS485baudrate_57600();
+    }
+    if (&src == &RS485button)
+    {
+        //RS485button_clicked
+        //When RS485button clicked call virtual function
+        //Call RS485button_clicked
+        RS485button_clicked();
+    }
+    if (&src == &backButton)
+    {
+        //backMainScreen
+        //When backButton clicked change screen to MainScreen
+        //Go to MainScreen with no screen transition
+        application().gotoMainScreenScreenNoTransition();
+    }
+    if (&src == &poll_tButton)
+    {
+        //poll_t_set
+        //When poll_tButton clicked call virtual function
+        //Call poll_t_set
+        poll_t_set();
+    }
+    if (&src == &zhuangji_numButton)
+    {
+        //zhuangji_set
+        //When zhuangji_numButton clicked call virtual function
+        //Call zhuangji_set
+        zhuangji_set();
+    }
+    if (&src == &zu_closebutton)
+    {
+        //zu_set_close
+        //When zu_closebutton clicked call virtual function
+        //Call zu_set_close
+        zu_set_close();
+    }
+    if (&src == &zu_savebutton)
+    {
+        //zu_set_save
+        //When zu_savebutton clicked call virtual function
+        //Call zu_set_save
+        zu_set_save();
+    }
+    if (&src == &t_savabutton)
+    {
+        //t_set_save
+        //When t_savabutton clicked call virtual function
+        //Call t_set_save
+        t_set_save();
+    }
+    if (&src == &t_closebutton)
+    {
+        //t_set_close
+        //When t_closebutton clicked call virtual function
+        //Call t_set_close
+        t_set_close();
+    }
+    if (&src == &local)
+    {
+        //localnet_state
+        //When local clicked call virtual function
+        //Call localnet_state
+        localnet_state();
+    }
+    if (&src == &yunduan)
+    {
+        //yunduannet_state
+        //When yunduan clicked call virtual function
+        //Call yunduannet_state
+        yunduannet_state();
+    }
+    if (&src == &local_ip_button)
+    {
+        //local_ip_set
+        //When local_ip_button clicked call virtual function
+        //Call local_ip_set
+        local_ip_set();
+    }
+    if (&src == &local_port_button)
+    {
+        //local_port_set
+        //When local_port_button clicked call virtual function
+        //Call local_port_set
+        local_port_set();
+        //local_port_fun
+        //When local_port_button clicked call virtual function
+        //Call local_port_fun
+        local_port_fun();
+    }
+    if (&src == &ip_4g_button)
+    {
+        //ip_4g_set
+        //When ip_4g_button clicked call virtual function
+        //Call ip_4g_set
+        ip_4g_set();
+    }
+    if (&src == &port_4g_button)
+    {
+        //port_4g_set
+        //When port_4g_button clicked call virtual function
+        //Call port_4g_set
+        port_4g_set();
+        //port_4g_fun
+        //When port_4g_button clicked call virtual function
+        //Call port_4g_fun
+        port_4g_fun();
+    }
+}
+
+void SettingViewBase::sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value)
+{
+    if (&src == &cu_NUM)
+    {
+        //set_cu_num
+        //When cu_NUM value changed call virtual function
+        //Call SetCuNum
+        SetCuNum(value);
+    }
+    if (&src == &poll_T)
+    {
+        //set_poll_t
+        //When poll_T value changed call virtual function
+        //Call SetPoll_T
+        SetPoll_T(value);
+    }
+}
+
+void SettingViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
+{
+    if (&src == &IP_ADD_1_1)
+    {
+        //IP_ADD_1_1
+        //When IP_ADD_1_1 clicked call virtual function
+        //Call IP_ADD_1_1_fun
+        IP_ADD_1_1_fun();
+    }
+    if (&src == &IP_ADD_1_2)
+    {
+        //IP_ADD_1_2
+        //When IP_ADD_1_2 clicked call virtual function
+        //Call IP_ADD_1_2_fun
+        IP_ADD_1_2_fun();
+    }
+    if (&src == &IP_ADD_1_3)
+    {
+        //IP_ADD_1_3
+        //When IP_ADD_1_3 clicked call virtual function
+        //Call IP_ADD_1_3_fun
+        IP_ADD_1_3_fun();
+    }
+    if (&src == &IP_ADD_1_4)
+    {
+        //IP_ADD_1_4
+        //When IP_ADD_1_4 clicked call virtual function
+        //Call IP_ADD_1_4_fun
+        IP_ADD_1_4_fun();
+    }
+    if (&src == &PORT)
+    {
+        //PORT_fun
+        //When PORT clicked call virtual function
+        //Call PORT_fun
+        PORT_fun();
+    }
+    if (&src == &IP_ADD_1)
+    {
+        //IP_ADD_1
+        //When IP_ADD_1 clicked call virtual function
+        //Call IP_ADD_1_fun
+        IP_ADD_1_fun();
+    }
+    if (&src == &IP_ADD_2)
+    {
+        //IP_ADD_2
+        //When IP_ADD_2 clicked call virtual function
+        //Call IP_ADD_2_fun
+        IP_ADD_2_fun();
+    }
+    if (&src == &IP_ADD_3)
+    {
+        //IP_ADD_3
+        //When IP_ADD_3 clicked call virtual function
+        //Call IP_ADD_3_fun
+        IP_ADD_3_fun();
+    }
+    if (&src == &IP_ADD_4)
+    {
+        //IP_ADD_4
+        //When IP_ADD_4 clicked call virtual function
+        //Call IP_ADD_4_fun
+        IP_ADD_4_fun();
+    }
+    if (&src == &GATEWAY_1)
+    {
+        //GATEWAY_1
+        //When GATEWAY_1 clicked call virtual function
+        //Call GATEWAY_1_fun
+        GATEWAY_1_fun();
+    }
+    if (&src == &GATEWAY_2)
+    {
+        //GATEWAY_2
+        //When GATEWAY_2 clicked call virtual function
+        //Call GATEWAY_2_fun
+        GATEWAY_2_fun();
+    }
+    if (&src == &GATEWAY_3)
+    {
+        //GATEWAY_3
+        //When GATEWAY_3 clicked call virtual function
+        //Call GATEWAY_3_fun
+        GATEWAY_3_fun();
+    }
+    if (&src == &GATEWAY_4)
+    {
+        //GATEWAY_4
+        //When GATEWAY_4 clicked call virtual function
+        //Call GATEWAY_4_fun
+        GATEWAY_4_fun();
+    }
+    if (&src == &NETMASK_1)
+    {
+        //NETMASK_1
+        //When NETMASK_1 clicked call virtual function
+        //Call NETMASK_1_fun
+        NETMASK_1_fun();
+    }
+    if (&src == &NETMASK_2)
+    {
+        //NETMASK_2
+        //When NETMASK_2 clicked call virtual function
+        //Call NETMASK_2_fun
+        NETMASK_2_fun();
+    }
+    if (&src == &NETMASK_3)
+    {
+        //NETMASK_3
+        //When NETMASK_3 clicked call virtual function
+        //Call NETMASK_3_fun
+        NETMASK_3_fun();
+    }
+    if (&src == &NETMASK_4)
+    {
+        //NETMASK_4
+        //When NETMASK_4 clicked call virtual function
+        //Call NETMASK_4_fun
+        NETMASK_4_fun();
+    }
+    if (&src == &IP_ADD_2_1)
+    {
+        //IP_ADD_2_1
+        //When IP_ADD_2_1 clicked call virtual function
+        //Call IP_ADD_2_1_fun
+        IP_ADD_2_1_fun();
+    }
+    if (&src == &IP_ADD_2_2)
+    {
+        //IP_ADD_2_2
+        //When IP_ADD_2_2 clicked call virtual function
+        //Call IP_ADD_2_2_fun
+        IP_ADD_2_2_fun();
+    }
+    if (&src == &IP_ADD_2_3)
+    {
+        //IP_ADD_2_3
+        //When IP_ADD_2_3 clicked call virtual function
+        //Call IP_ADD_2_3_fun
+        IP_ADD_2_3_fun();
+    }
+    if (&src == &IP_ADD_2_4)
+    {
+        //IP_ADD_2_4
+        //When IP_ADD_2_4 clicked call virtual function
+        //Call IP_ADD_2_4_fun
+        IP_ADD_2_4_fun();
+    }
+    if (&src == &PORT_1)
+    {
+        //PORT_1
+        //When PORT_1 clicked call virtual function
+        //Call PORT_1_fun
+        PORT_1_fun();
+    }
+    if (&src == &canbutton)
+    {
+        //canbutton_clicked
+        //When canbutton clicked call virtual function
+        //Call canbutton_clicked
+        canbutton_clicked();
+    }
+    if (&src == &zu_setbutton)
+    {
+        //zu_setbutton_fun
+        //When zu_setbutton clicked call virtual function
+        //Call zu_setbutton_fun
+        zu_setbutton_fun();
+    }
+    if (&src == &t_setbutton)
+    {
+        //t_setbutton_fun
+        //When t_setbutton clicked call virtual function
+        //Call t_setbutton_fun
+        t_setbutton_fun();
+    }
+}
+
 void SettingViewBase::handleTickEvent()
 {
     frameCountSettingViewTickInterval++;
@@ -714,287 +1697,17 @@ void SettingViewBase::handleTickEvent()
         SettingViewTick();
         frameCountSettingViewTickInterval = 0;
     }
-
-}
-
-void SettingViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
-{
-    if (&src == &mainBack)
-    {
-        //MainBack
-        //When mainBack clicked change screen to MainScreen
-        //Go to MainScreen with no screen transition
-        application().gotoMainScreenScreenNoTransition();
-    }
-    else if (&src == &IPsetting)
-    {
-        //IP_setting
-        //When IPsetting clicked call virtual function
-        //Call IP_setting_fun
-        IP_setting_fun();
-    }
-    else if (&src == &IPsetting_1)
-    {
-        //IP_setting_1
-        //When IPsetting_1 clicked call virtual function
-        //Call IP_setting_1_fun
-        IP_setting_1_fun();
-    }
-    else if (&src == &IPsetting_2)
-    {
-        //IP_setting_2
-        //When IPsetting_2 clicked call virtual function
-        //Call IP_setting_2_fun
-        IP_setting_2_fun();
-    }
-    else if (&src == &save_all)
-    {
-        //save_all
-        //When save_all clicked call virtual function
-        //Call save_all_fun
-        save_all_fun();
-    }
-    else if (&src == &CloseBut_2)
-    {
-        //CloseSetting_2
-        //When CloseBut_2 clicked call virtual function
-        //Call CloseSetting_2_fun
-        CloseSetting_2_fun();
-    }
-    else if (&src == &SaveBut_2)
-    {
-        //Save_2
-        //When SaveBut_2 clicked call virtual function
-        //Call Save_2_Fun
-        Save_2_Fun();
-    }
-    else if (&src == &CloseBut_1)
-    {
-        //CloseSetting_1
-        //When CloseBut_1 clicked call virtual function
-        //Call CloseSetting_1_fun
-        CloseSetting_1_fun();
-    }
-    else if (&src == &SaveBut_1)
-    {
-        //Save_1
-        //When SaveBut_1 clicked call virtual function
-        //Call Save_1_Fun
-        Save_1_Fun();
-    }
-    else if (&src == &CloseBut)
-    {
-        //CloseSetting
-        //When CloseBut clicked call virtual function
-        //Call CloseSetting_fun
-        CloseSetting_fun();
-    }
-    else if (&src == &SaveBut)
-    {
-        //SaveFun
-        //When SaveBut clicked call virtual function
-        //Call SaveFun
-        SaveFun();
-    }
-}
-
-void SettingViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
-{
-    if (&src == &IP_ADD_2_1)
-    {
-        //IP_ADD_2_1
-        //When IP_ADD_2_1 clicked call virtual function
-        //Call IP_ADD_2_1_fun
-        IP_ADD_2_1_fun();
-    }
-    else if (&src == &IP_ADD_2_2)
-    {
-        //IP_ADD_2_2
-        //When IP_ADD_2_2 clicked call virtual function
-        //Call IP_ADD_2_2_fun
-        IP_ADD_2_2_fun();
-    }
-    else if (&src == &IP_ADD_2_3)
-    {
-        //IP_ADD_2_3
-        //When IP_ADD_2_3 clicked call virtual function
-        //Call IP_ADD_2_3_fun
-        IP_ADD_2_3_fun();
-    }
-    else if (&src == &IP_ADD_2_4)
-    {
-        //IP_ADD_2_4
-        //When IP_ADD_2_4 clicked call virtual function
-        //Call IP_ADD_2_4_fun
-        IP_ADD_2_4_fun();
-    }
-    else if (&src == &PORT_1)
-    {
-        //PORT_1
-        //When PORT_1 clicked call virtual function
-        //Call PORT_1_fun
-        PORT_1_fun();
-    }
-    else if (&src == &IP_ADD_1_1)
-    {
-        //IP_ADD_1_1
-        //When IP_ADD_1_1 clicked call virtual function
-        //Call IP_ADD_1_1_fun
-        IP_ADD_1_1_fun();
-    }
-    else if (&src == &IP_ADD_1_2)
-    {
-        //IP_ADD_1_2
-        //When IP_ADD_1_2 clicked call virtual function
-        //Call IP_ADD_1_2_fun
-        IP_ADD_1_2_fun();
-    }
-    else if (&src == &IP_ADD_1_3)
-    {
-        //IP_ADD_1_3
-        //When IP_ADD_1_3 clicked call virtual function
-        //Call IP_ADD_1_3_fun
-        IP_ADD_1_3_fun();
-    }
-    else if (&src == &IP_ADD_1_4)
-    {
-        //IP_ADD_1_4
-        //When IP_ADD_1_4 clicked call virtual function
-        //Call IP_ADD_1_4_fun
-        IP_ADD_1_4_fun();
-    }
-    else if (&src == &PORT)
-    {
-        //PORT_fun
-        //When PORT clicked call virtual function
-        //Call PORT_fun
-        PORT_fun();
-    }
-    else if (&src == &IP_ADD_1)
-    {
-        //IP_ADD_1
-        //When IP_ADD_1 clicked call virtual function
-        //Call IP_ADD_1_fun
-        IP_ADD_1_fun();
-    }
-    else if (&src == &IP_ADD_2)
-    {
-        //IP_ADD_2
-        //When IP_ADD_2 clicked call virtual function
-        //Call IP_ADD_2_fun
-        IP_ADD_2_fun();
-    }
-    else if (&src == &IP_ADD_3)
-    {
-        //IP_ADD_3
-        //When IP_ADD_3 clicked call virtual function
-        //Call IP_ADD_3_fun
-        IP_ADD_3_fun();
-    }
-    else if (&src == &IP_ADD_4)
-    {
-        //IP_ADD_4
-        //When IP_ADD_4 clicked call virtual function
-        //Call IP_ADD_4_fun
-        IP_ADD_4_fun();
-    }
-    else if (&src == &GATEWAY_1)
-    {
-        //GATEWAY_1
-        //When GATEWAY_1 clicked call virtual function
-        //Call GATEWAY_1_fun
-        GATEWAY_1_fun();
-    }
-    else if (&src == &GATEWAY_2)
-    {
-        //GATEWAY_2
-        //When GATEWAY_2 clicked call virtual function
-        //Call GATEWAY_2_fun
-        GATEWAY_2_fun();
-    }
-    else if (&src == &GATEWAY_3)
-    {
-        //GATEWAY_3
-        //When GATEWAY_3 clicked call virtual function
-        //Call GATEWAY_3_fun
-        GATEWAY_3_fun();
-    }
-    else if (&src == &GATEWAY_4)
-    {
-        //GATEWAY_4
-        //When GATEWAY_4 clicked call virtual function
-        //Call GATEWAY_4_fun
-        GATEWAY_4_fun();
-    }
-    else if (&src == &NETMASK_1)
-    {
-        //NETMASK_1
-        //When NETMASK_1 clicked call virtual function
-        //Call NETMASK_1_fun
-        NETMASK_1_fun();
-    }
-    else if (&src == &NETMASK_2)
-    {
-        //NETMASK_2
-        //When NETMASK_2 clicked call virtual function
-        //Call NETMASK_2_fun
-        NETMASK_2_fun();
-    }
-    else if (&src == &NETMASK_3)
-    {
-        //NETMASK_3
-        //When NETMASK_3 clicked call virtual function
-        //Call NETMASK_3_fun
-        NETMASK_3_fun();
-    }
-    else if (&src == &NETMASK_4)
-    {
-        //NETMASK_4
-        //When NETMASK_4 clicked call virtual function
-        //Call NETMASK_4_fun
-        NETMASK_4_fun();
-    }
-}
-
-void SettingViewBase::sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value)
-{
-    if (&src == &poll_T)
-    {
-        //set_poll_t
-        //When poll_T value changed call virtual function
-        //Call SetPoll_T
-        SetPoll_T(value);
-    }
-    else if (&src == &cu_NUM)
-    {
-        //set_cu_num
-        //When cu_NUM value changed call virtual function
-        //Call SetCuNum
-        SetCuNum(value);
-    }
 }
 
 void SettingViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
 {
-    if (items == &CAN_kbpsListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        CustomContainer3* cc = (CustomContainer3*)d;
-        CAN_kbpsUpdateItem(*cc, itemIndex);
-    }
-    else if (items == &CAN_kbpsSelectedListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        CustomContainer4* cc = (CustomContainer4*)d;
-        CAN_kbpsUpdateCenterItem(*cc, itemIndex);
-    }
     if (items == &RS485_kbpsListItems)
     {
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
         CustomContainer1* cc = (CustomContainer1*)d;
         RS485_kbpsUpdateItem(*cc, itemIndex);
     }
-    else if (items == &RS485_kbpsSelectedListItems)
+    if (items == &RS485_kbpsSelectedListItems)
     {
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
         CustomContainer2* cc = (CustomContainer2*)d;

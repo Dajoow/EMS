@@ -3,134 +3,130 @@
 /*********************************************************************************/
 #include <gui_generated/containers/keyboardBase.hpp>
 #include <touchgfx/Color.hpp>
-#include <BitmapDatabase.hpp>
+#include <images/BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 
 keyboardBase::keyboardBase() :
     buttonCallback(this, &keyboardBase::buttonCallbackHandler)
 {
-    setWidth(362);
-    setHeight(362);
-    boxWithBorder2.setPosition(0, 0, 362, 362);
+    setWidth(350);
+    setHeight(292);
+    boxWithBorder2.setPosition(0, 84, 350, 270);
     boxWithBorder2.setColor(touchgfx::Color::getColorFromRGB(236, 236, 236));
-    boxWithBorder2.setBorderColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    boxWithBorder2.setBorderColor(touchgfx::Color::getColorFromRGB(236, 236, 236));
     boxWithBorder2.setBorderSize(1);
+    add(boxWithBorder2);
 
     num_1.setXY(7, 92);
-    num_1.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_1.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_KC1P));
     num_1.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_1.setAction(buttonCallback);
+    add(num_1);
 
-    num_2.setXY(96, 92);
-    num_2.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_2.setXY(92, 92);
+    num_2.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_2.setLabelText(touchgfx::TypedText(T___SINGLEUSE_8GD3));
     num_2.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_2.setAction(buttonCallback);
+    add(num_2);
 
-    num_3.setXY(185, 92);
-    num_3.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_3.setXY(177, 92);
+    num_3.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_3.setLabelText(touchgfx::TypedText(T___SINGLEUSE_2BUI));
     num_3.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_3.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_3.setAction(buttonCallback);
+    add(num_3);
 
-    num_4.setXY(7, 161);
-    num_4.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_4.setXY(7, 158);
+    num_4.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_4.setLabelText(touchgfx::TypedText(T___SINGLEUSE_IS6N));
     num_4.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_4.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_4.setAction(buttonCallback);
+    add(num_4);
 
-    num_5.setXY(96, 161);
-    num_5.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_5.setXY(92, 158);
+    num_5.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_5.setLabelText(touchgfx::TypedText(T___SINGLEUSE_0RRQ));
     num_5.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_5.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_5.setAction(buttonCallback);
+    add(num_5);
 
-    num_6.setXY(185, 161);
-    num_6.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_6.setXY(177, 158);
+    num_6.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_6.setLabelText(touchgfx::TypedText(T___SINGLEUSE_NSP4));
     num_6.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_6.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_6.setAction(buttonCallback);
+    add(num_6);
 
-    num_7.setXY(7, 230);
-    num_7.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_7.setXY(7, 224);
+    num_7.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_7.setLabelText(touchgfx::TypedText(T___SINGLEUSE_XRMA));
     num_7.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_7.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_7.setAction(buttonCallback);
+    add(num_7);
 
-    num_8.setXY(96, 230);
-    num_8.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_8.setXY(92, 224);
+    num_8.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_8.setLabelText(touchgfx::TypedText(T___SINGLEUSE_0QFY));
     num_8.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_8.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_8.setAction(buttonCallback);
+    add(num_8);
 
-    num_9.setXY(185, 230);
-    num_9.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_9.setXY(177, 224);
+    num_9.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_9.setLabelText(touchgfx::TypedText(T___SINGLEUSE_5VJ2));
     num_9.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_9.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_9.setAction(buttonCallback);
+    add(num_9);
 
-    but_de.setXY(274, 92);
-    but_de.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    but_de.setXY(263, 92);
+    but_de.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     but_de.setLabelText(touchgfx::TypedText(T___SINGLEUSE_GSH0));
     but_de.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     but_de.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     but_de.setAction(buttonCallback);
+    add(but_de);
 
-    but_ce.setXY(274, 161);
-    but_ce.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    but_ce.setXY(263, 158);
+    but_ce.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID));
     but_ce.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OXSY));
     but_ce.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     but_ce.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     but_ce.setAction(buttonCallback);
+    add(but_ce);
 
-    but_ok.setXY(274, 230);
-    but_ok.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    but_ok.setXY(7, 292);
+    but_ok.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_CONFIRN_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_CONFIRN_ID));
     but_ok.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OJHM));
     but_ok.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     but_ok.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     but_ok.setAction(buttonCallback);
+    add(but_ok);
 
-    dot.setXY(7, 298);
-    dot.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
-    dot.setLabelText(touchgfx::TypedText(T___SINGLEUSE_4DCL));
-    dot.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    dot.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    dot.setAction(buttonCallback);
-
-    num_0.setXY(96, 298);
-    num_0.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
+    num_0.setXY(263, 224);
+    num_0.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
     num_0.setLabelText(touchgfx::TypedText(T___SINGLEUSE_55MX));
     num_0.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     num_0.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     num_0.setAction(buttonCallback);
-
-    jinhao.setXY(185, 298);
-    jinhao.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
-    jinhao.setLabelText(touchgfx::TypedText(T___SINGLEUSE_JEGH));
-    jinhao.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    jinhao.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    jinhao.setAction(buttonCallback);
-
-    weizhi.setXY(274, 298);
-    weizhi.setBitmaps(touchgfx::Bitmap(BITMAP_BMU_BUT_1_ID), touchgfx::Bitmap(BITMAP_BMU_BUT_2_ID));
-    weizhi.setLabelText(touchgfx::TypedText(T___SINGLEUSE_J1C0));
-    weizhi.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    weizhi.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    add(num_0);
 
     boxWithBorder1.setPosition(7, 15, 349, 69);
     boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxWithBorder1.setBorderSize(2);
+    boxWithBorder1.setVisible(false);
+    add(boxWithBorder1);
 
     shownum.setPosition(126, 27, 222, 57);
     shownum.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -138,26 +134,16 @@ keyboardBase::keyboardBase() :
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_4VB6).getText());
     shownum.setWildcard(shownumBuffer);
     shownum.setTypedText(touchgfx::TypedText(T___SINGLEUSE_90QN));
-
-    add(boxWithBorder2);
-    add(num_1);
-    add(num_2);
-    add(num_3);
-    add(num_4);
-    add(num_5);
-    add(num_6);
-    add(num_7);
-    add(num_8);
-    add(num_9);
-    add(but_de);
-    add(but_ce);
-    add(but_ok);
-    add(dot);
-    add(num_0);
-    add(jinhao);
-    add(weizhi);
-    add(boxWithBorder1);
+    shownum.setVisible(false);
     add(shownum);
+
+    delete_icon.setXY(291, 113);
+    delete_icon.setBitmap(touchgfx::Bitmap(BITMAP_DELETE_ID));
+    add(delete_icon);
+
+    keboard_icon.setXY(38, 315);
+    keboard_icon.setBitmap(touchgfx::Bitmap(BITMAP_KEYBOARD_ICON_ID));
+    add(keboard_icon);
 }
 
 keyboardBase::~keyboardBase()
@@ -179,103 +165,88 @@ void keyboardBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //Call fun_num_1
         fun_num_1();
     }
-    else if (&src == &num_2)
+    if (&src == &num_2)
     {
         //fun_num_2
         //When num_2 clicked call virtual function
         //Call fun_num_2
         fun_num_2();
     }
-    else if (&src == &num_3)
+    if (&src == &num_3)
     {
         //fun_num_3
         //When num_3 clicked call virtual function
         //Call fun_num_3
         fun_num_3();
     }
-    else if (&src == &num_4)
+    if (&src == &num_4)
     {
         //fun_num_4
         //When num_4 clicked call virtual function
         //Call fun_num_4
         fun_num_4();
     }
-    else if (&src == &num_5)
+    if (&src == &num_5)
     {
         //fun_num_5
         //When num_5 clicked call virtual function
         //Call fun_num_5
         fun_num_5();
     }
-    else if (&src == &num_6)
+    if (&src == &num_6)
     {
         //fun_num_6
         //When num_6 clicked call virtual function
         //Call fun_num_6
         fun_num_6();
     }
-    else if (&src == &num_7)
+    if (&src == &num_7)
     {
         //fun_num_7
         //When num_7 clicked call virtual function
         //Call fun_num_7
         fun_num_7();
     }
-    else if (&src == &num_8)
+    if (&src == &num_8)
     {
         //fun_num_8
         //When num_8 clicked call virtual function
         //Call fun_num_8
         fun_num_8();
     }
-    else if (&src == &num_9)
+    if (&src == &num_9)
     {
         //fun_num_9
         //When num_9 clicked call virtual function
         //Call fun_num_9
         fun_num_9();
     }
-    else if (&src == &but_de)
-    {
-        //fun_de
-        //When but_de clicked call virtual function
-        //Call fun_de
-        fun_de();
-    }
-    else if (&src == &but_ce)
-    {
-        //fun_ce
-        //When but_ce clicked call virtual function
-        //Call fun_ce
-        fun_ce();
-    }
-    else if (&src == &but_ok)
-    {
-        //fun_ok
-        //When but_ok clicked call virtual function
-        //Call fun_ok
-        fun_ok();
-    }
-    else if (&src == &dot)
-    {
-        //fun_dot
-        //When dot clicked call virtual function
-        //Call fun_dot
-        fun_dot();
-    }
-    else if (&src == &num_0)
+    if (&src == &num_0)
     {
         //fun_num_0
         //When num_0 clicked call virtual function
         //Call fun_num_0
         fun_num_0();
     }
-    else if (&src == &jinhao)
+    if (&src == &but_ok)
     {
-        //fun_jinhao
-        //When jinhao clicked call virtual function
-        //Call fun_jinhao
-        fun_jinhao();
+        //fun_ok
+        //When but_ok clicked call virtual function
+        //Call fun_ok
+        fun_ok();
+    }
+    if (&src == &but_ce)
+    {
+        //fun_ce
+        //When but_ce clicked call virtual function
+        //Call fun_ce
+        fun_ce();
+    }
+    if (&src == &but_de)
+    {
+        //fun_de
+        //When but_de clicked call virtual function
+        //Call fun_de
+        fun_de();
     }
 }
-

@@ -13,6 +13,7 @@
 #ifndef SIMULATOR
 extern "C"{
 #include "string.h"
+
 };
 #endif
 
@@ -41,11 +42,11 @@ void keyboard::SetBufPar(void* p, uint8_t size)
 
 void keyboard::fun_num_1()
 {
-    if(weishu == 0){
+    if(weishu == 0){ //当初值为0，点击1后，数值为1
         buff = 1;
         weishu = 1;
     }
-    else{
+    else{//初值不为0
         buff = buff*10 + 1;
         weishu++;
         if(buff >= 65535){
@@ -54,8 +55,11 @@ void keyboard::fun_num_1()
         }
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
+
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_2()
 {
     if(weishu == 0){
@@ -72,7 +76,9 @@ void keyboard::fun_num_2()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_3()
 {
     if(weishu == 0){
@@ -89,6 +95,7 @@ void keyboard::fun_num_3()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
 void keyboard::fun_num_4()
 {
@@ -106,7 +113,9 @@ void keyboard::fun_num_4()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_5()
 {
     if(weishu == 0){
@@ -123,7 +132,9 @@ void keyboard::fun_num_5()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_6()
 {
     if(weishu == 0){
@@ -140,7 +151,9 @@ void keyboard::fun_num_6()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_7()
 {
     if(weishu == 0){
@@ -157,7 +170,9 @@ void keyboard::fun_num_7()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_8()
 {
     if(weishu == 0){
@@ -174,7 +189,9 @@ void keyboard::fun_num_8()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_9()
 {
     if(weishu == 0){
@@ -191,7 +208,9 @@ void keyboard::fun_num_9()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
 void keyboard::fun_num_0()
 {
     if(weishu == 0){
@@ -199,7 +218,7 @@ void keyboard::fun_num_0()
         weishu = 0;
     }
     else{
-        buff = buff*10 + 0;
+        buff = buff*10;
         weishu++;
         if(buff >= 65535){
             buff = 65535;
@@ -208,7 +227,10 @@ void keyboard::fun_num_0()
     }
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
+//清零
 void keyboard::fun_ce()
 {
     buff = 0;
@@ -216,14 +238,17 @@ void keyboard::fun_ce()
     touchgfx_printf("buff: %d , weishu:%d\n", buff, weishu);
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
+
+//删除末位
 void keyboard::fun_de()
 {
-    if(!buff){
+    if(!buff){//初值为0
         buff = 0;
         weishu = 0;
     }
-    else{
+    else{//初值不为0
         buff = buff/10;
         weishu--;
         if(!buff){
@@ -234,6 +259,7 @@ void keyboard::fun_de()
     touchgfx_printf("buff: %d , weishu:%d\n", buff, weishu);
     Unicode::snprintf(shownumBuffer, SHOWNUM_SIZE, "%d", buff);
     shownum.invalidate();
+    fun_ok();
 }
 
 void keyboard::fun_ok()
@@ -242,7 +268,7 @@ void keyboard::fun_ok()
     tem = buff;
     if(des!=NULL){
         refreshFlag = 1;
-        if(dessize == 1){
+        if(dessize == 1){ //变量的字节数
             if(tem > 255)
                 tem = 255;
             *(uint8_t*)(des) = tem;

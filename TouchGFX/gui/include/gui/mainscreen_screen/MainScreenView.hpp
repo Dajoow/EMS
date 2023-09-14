@@ -5,6 +5,7 @@
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 
 #include <gui/common/GuiTransTypes.hpp>
+#include <gui_generated/setting_screen/SettingViewBase.hpp>
 
 //BCMU按键相关参数
 #define online 1
@@ -85,9 +86,13 @@ public:
     virtual void BMU29_clicked();
     virtual void BMU30_clicked();
 
-    bool GetCellShowState();
+    virtual void show_shouye();
+    virtual void show_batteryshowarea();
+
+    //bool GetCellShowState();
     virtual void CellStateShow();
     virtual void CellStateShow_OFF();
+    
 
 #ifndef SIMULATOR
 //model更改
@@ -99,6 +104,8 @@ protected:
 		int counter;
     int counter2;
     BMUMenuCallback_t BMUMenuCallback;
+    //Unicode::UnicodeChar chinese_buf[10];
+ /*   SettingView& dskjsk;*/
 };
 
 #endif // MAINSCREENVIEW_HPP

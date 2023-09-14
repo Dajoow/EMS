@@ -8,38 +8,28 @@
 #include <mvp/View.hpp>
 #include <gui/setting_screen/SettingPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
+#include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
-#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/containers/buttons/Buttons.hpp>
+#include <touchgfx/widgets/ToggleButton.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
+#include <touchgfx/containers/ModalWindow.hpp>
+#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
-#include <gui/containers/CustomContainer3.hpp>
-#include <gui/containers/CustomContainer4.hpp>
 #include <gui/containers/CustomContainer1.hpp>
 #include <gui/containers/CustomContainer2.hpp>
-#include <touchgfx/containers/ModalWindow.hpp>
-#include <touchgfx/Color.hpp>
-#include <touchgfx/containers/buttons/Buttons.hpp>
 #include <gui/containers/keyboard.hpp>
 
 class SettingViewBase : public touchgfx::View<SettingPresenter>
 {
 public:
     SettingViewBase();
-    virtual ~SettingViewBase() {}
+    virtual ~SettingViewBase();
     virtual void setupScreen();
-    virtual void handleTickEvent();
-
-    virtual void CAN_kbpsUpdateItem(CustomContainer3& item, int16_t itemIndex)
-    {
-        // Override and implement this function in Setting
-    }
-
-    virtual void CAN_kbpsUpdateCenterItem(CustomContainer4& item, int16_t itemIndex)
-    {
-        // Override and implement this function in Setting
-    }
 
     virtual void RS485_kbpsUpdateItem(CustomContainer1& item, int16_t itemIndex)
     {
@@ -50,6 +40,7 @@ public:
     {
         // Override and implement this function in Setting
     }
+    virtual void handleTickEvent();
 
     /*
      * Virtual Action Handlers
@@ -58,173 +49,255 @@ public:
     {
         // Override and implement this function in Setting
     }
-
     virtual void CloseSetting_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void SetCuNum(int value)
     {
         // Override and implement this function in Setting
     }
-
     virtual void SetPoll_T(int value)
     {
         // Override and implement this function in Setting
     }
-
     virtual void SaveFun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_setting_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void CloseSetting_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_1_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void SettingViewTick()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_1_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_1_3_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_1_4_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void PORT_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_3_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_4_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void GATEWAY_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void GATEWAY_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void GATEWAY_3_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void GATEWAY_4_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void NETMASK_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void NETMASK_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void NETMASK_3_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void NETMASK_4_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_setting_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void CloseSetting_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_2_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_2_2_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_2_3_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void IP_ADD_2_4_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void PORT_1_fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void Save_1_Fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void Save_2_Fun()
     {
         // Override and implement this function in Setting
     }
-
     virtual void save_all_fun()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void canbutton_clicked()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setcanbaudrate125_125()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setcanbaudrate250_250()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setcanbaudrate500_2000()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setcanbaudrate500_500()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setcanbaudrate500_1000()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setRS485baudrate_4800()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setRS485baudrate_9600()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setRS485baudrate_19200()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setRS485baudrate_38400()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setRS485baudrate_115200()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void setRS485baudrate_57600()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void RS485button_clicked()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void poll_t_set()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void zhuangji_set()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void zu_set_close()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void zu_set_save()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void zu_setbutton_fun()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void t_set_save()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void t_setbutton_fun()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void t_set_close()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void localnet_state()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void yunduannet_state()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void local_ip_set()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void local_port_set()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void ip_4g_set()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void port_4g_set()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void local_port_fun()
+    {
+        // Override and implement this function in Setting
+    }
+    virtual void port_4g_fun()
     {
         // Override and implement this function in Setting
     }
@@ -238,44 +311,95 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Box main_BG;
-    touchgfx::ButtonWithLabel mainBack;
-    touchgfx::Image biaoti;
-    touchgfx::TextArea setting_text;
-    touchgfx::ButtonWithLabel IPsetting;
-    touchgfx::Slider poll_T;
-    touchgfx::Slider cu_NUM;
+    touchgfx::Button button2_1;
+    touchgfx::Box background;
+    touchgfx::Container daohanglan;
+    touchgfx::ButtonWithLabel save_all;
+    touchgfx::ButtonWithLabel start;
+    touchgfx::Container fwq_4g_ipsetting;
+    touchgfx::Image image1;
+    touchgfx::Button local_port_button;
+    touchgfx::Button local_ip_button;
+    touchgfx::Button ip_4g_button;
+    touchgfx::Button port_4g_button;
     touchgfx::ButtonWithLabel IPsetting_1;
-    touchgfx::TextArea caijizhouqi;
-    touchgfx::TextArea cuzhuangji;
-    touchgfx::TextArea benji_1;
-    touchgfx::TextArea benji_1_1;
-    touchgfx::TextArea benji;
     touchgfx::ButtonWithLabel IPsetting_2;
     touchgfx::TextArea bendiwufuqi;
     touchgfx::TextArea MODULE_4G;
-    touchgfx::TextAreaWithOneWildcard cu_num;
-    touchgfx::TextAreaWithOneWildcard poll_t;
-    touchgfx::TextAreaWithTwoWildcards networkText2;
-    touchgfx::TextAreaWithTwoWildcards networkText1;
-    touchgfx::TextAreaWithTwoWildcards gateway_text2;
-    touchgfx::TextAreaWithTwoWildcards gateway_text1;
-    touchgfx::TextAreaWithTwoWildcards ip_text2;
-    touchgfx::TextAreaWithTwoWildcards ip_text1;
+    touchgfx::TextArea IP_ADD2;
+    touchgfx::TextArea PORT1;
+    touchgfx::TextArea IP_ADD3;
+    touchgfx::TextArea PORT2;
+    touchgfx::TextArea _4G;
     touchgfx::TextAreaWithTwoWildcards ip_text2_1;
     touchgfx::TextAreaWithTwoWildcards ip_text1_1;
     touchgfx::TextAreaWithOneWildcard port_text;
     touchgfx::TextAreaWithTwoWildcards ip_1_text2_1;
     touchgfx::TextAreaWithTwoWildcards ip_1_text1_1;
     touchgfx::TextAreaWithOneWildcard port_1_text;
-    touchgfx::ScrollWheelWithSelectionStyle CAN_kbps;
-    touchgfx::DrawableListItems<CustomContainer3, 4> CAN_kbpsListItems;
-    touchgfx::DrawableListItems<CustomContainer4, 2> CAN_kbpsSelectedListItems;
-    touchgfx::ScrollWheelWithSelectionStyle RS485_kbps;
-    touchgfx::DrawableListItems<CustomContainer1, 4> RS485_kbpsListItems;
-    touchgfx::DrawableListItems<CustomContainer2, 2> RS485_kbpsSelectedListItems;
-    touchgfx::ButtonWithLabel save_all;
-    touchgfx::ButtonWithLabel start;
+    touchgfx::TextArea cuzhuangjishu;
+    touchgfx::Button poll_tButton;
+    touchgfx::Button zhuangji_numButton;
+    touchgfx::TextAreaWithOneWildcard cu_num;
+    touchgfx::TextArea zhuangji_num;
+    touchgfx::TextArea caiji;
+    touchgfx::TextAreaWithOneWildcard poll_t;
+    touchgfx::TextArea textArea26;
+    touchgfx::Image image2;
+    touchgfx::Image image3;
+    touchgfx::Container can;
+    touchgfx::Container can_display;
+    touchgfx::Image can_bj;
+    touchgfx::Button button_125_125;
+    touchgfx::Button button_250_250;
+    touchgfx::Button button_500_2000;
+    touchgfx::Button button_500_500;
+    touchgfx::Button button_500_1000;
+    touchgfx::TextArea textArea10;
+    touchgfx::TextArea textArea2;
+    touchgfx::TextArea textArea1;
+    touchgfx::TextArea textArea3;
+    touchgfx::TextArea textArea4;
+    touchgfx::TextArea textArea5;
+    touchgfx::TextArea textArea6;
+    touchgfx::TextArea textArea7;
+    touchgfx::TextArea textArea8;
+    touchgfx::TextArea textArea9;
+    touchgfx::TextArea benji_1;
+    touchgfx::TextArea CAN;
+    touchgfx::TextArea kbps;
+    touchgfx::ImageButtonStyle< touchgfx::ClickButtonTrigger >  canbutton;
+    touchgfx::TextAreaWithOneWildcard canbaudrate2;
+    touchgfx::TextAreaWithOneWildcard canbaudrate1;
+    touchgfx::Image can_imageup;
+    touchgfx::Image can_imagedown;
+    touchgfx::Container rs485;
+    touchgfx::Container rs485_display;
+    touchgfx::Image rs485_bj;
+    touchgfx::Button rs115200;
+    touchgfx::Button rs57600;
+    touchgfx::Button rs38400;
+    touchgfx::Button rs19200;
+    touchgfx::Button rs9600;
+    touchgfx::Button rs4800;
+    touchgfx::TextArea textArea14;
+    touchgfx::TextArea textArea15;
+    touchgfx::TextArea textArea16;
+    touchgfx::TextArea textArea17;
+    touchgfx::TextArea textArea18;
+    touchgfx::TextArea textArea19;
+    touchgfx::TextArea RS485;
+    touchgfx::TextArea benji_1_1;
+    touchgfx::TextArea bps;
+    touchgfx::Button RS485button;
+    touchgfx::TextAreaWithOneWildcard rs485text;
+    touchgfx::Image rs485_imageup;
+    touchgfx::Image rs485_imagedown;
+    touchgfx::ToggleButton yunduan;
+    touchgfx::ClickListener< touchgfx::ToggleButton > local;
+    touchgfx::TextArea textArea20;
+    touchgfx::TextArea textArea12;
+    touchgfx::Container container1;
     touchgfx::ModalWindow IP_setting_2;
     touchgfx::ButtonWithLabel CloseBut_2;
     touchgfx::ButtonWithLabel SaveBut_2;
@@ -286,16 +410,10 @@ protected:
     touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_3;
     touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_4;
     touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  PORT_1;
-    touchgfx::ModalWindow IP_setting_1;
-    touchgfx::ButtonWithLabel CloseBut_1;
-    touchgfx::ButtonWithLabel SaveBut_1;
-    touchgfx::TextArea benji_ip_set_1_2;
-    touchgfx::TextArea benji_ip_set_2;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_1;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_2;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_3;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_4;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  PORT;
+    touchgfx::ModalWindow port_4g;
+    touchgfx::TextArea textArea30;
+    touchgfx::ButtonWithLabel save_4g_portbutton;
+    touchgfx::ButtonWithLabel close_4g_portbutton;
     touchgfx::ModalWindow IP_setting;
     touchgfx::ButtonWithLabel CloseBut;
     touchgfx::ButtonWithLabel SaveBut;
@@ -314,39 +432,55 @@ protected:
     touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  NETMASK_2;
     touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  NETMASK_3;
     touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  NETMASK_4;
+    touchgfx::ModalWindow local_port;
+    touchgfx::ButtonWithLabel save_local_portbutton;
+    touchgfx::ButtonWithLabel close_local_portbutton;
+    touchgfx::TextArea textArea29;
+    touchgfx::ModalWindow IP_setting_1;
+    touchgfx::ButtonWithLabel CloseBut_1;
+    touchgfx::ButtonWithLabel SaveBut_1;
+    touchgfx::TextArea benji_ip_set_2;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_2;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_3;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_4;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  PORT;
+    touchgfx::TextArea textArea31;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_1_1;
+    touchgfx::ModalWindow t_set;
+    touchgfx::TextArea textArea28;
+    touchgfx::ButtonWithLabel t_closebutton;
+    touchgfx::ButtonWithLabel t_savabutton;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  t_setbutton;
+    touchgfx::ModalWindow zu_set;
+    touchgfx::ButtonWithLabel zu_closebutton;
+    touchgfx::ButtonWithLabel zu_savebutton;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  zu_setbutton;
+    touchgfx::TextArea textArea27;
+    touchgfx::ButtonWithLabel IPsetting;
+    touchgfx::Slider poll_T;
+    touchgfx::Slider cu_NUM;
+    touchgfx::TextArea caijizhouqi;
+    touchgfx::TextArea cuzhuangji;
+    touchgfx::TextArea benji;
+    touchgfx::TextArea NETMASK;
+    touchgfx::TextArea IP_ADD1;
+    touchgfx::TextArea GATEWAY;
+    touchgfx::ScrollWheelWithSelectionStyle RS485_kbps;
+    touchgfx::DrawableListItems<CustomContainer1, 4> RS485_kbpsListItems;
+    touchgfx::DrawableListItems<CustomContainer2, 2> RS485_kbpsSelectedListItems;
+    touchgfx::TextAreaWithTwoWildcards networkText2;
+    touchgfx::TextAreaWithTwoWildcards networkText1;
+    touchgfx::TextAreaWithTwoWildcards gateway_text2;
+    touchgfx::TextAreaWithTwoWildcards gateway_text1;
+    touchgfx::TextAreaWithTwoWildcards ip_text2;
+    touchgfx::TextAreaWithTwoWildcards ip_text1;
     keyboard keyboard1;
+    touchgfx::TextArea textArea25;
+    touchgfx::Button backButton;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t CU_NUM_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar cu_numBuffer[CU_NUM_SIZE];
-    static const uint16_t POLL_T_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar poll_tBuffer[POLL_T_SIZE];
-    static const uint16_t NETWORKTEXT2BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar networkText2Buffer1[NETWORKTEXT2BUFFER1_SIZE];
-    static const uint16_t NETWORKTEXT2BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar networkText2Buffer2[NETWORKTEXT2BUFFER2_SIZE];
-    static const uint16_t NETWORKTEXT1BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar networkText1Buffer1[NETWORKTEXT1BUFFER1_SIZE];
-    static const uint16_t NETWORKTEXT1BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar networkText1Buffer2[NETWORKTEXT1BUFFER2_SIZE];
-    static const uint16_t GATEWAY_TEXT2BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar gateway_text2Buffer1[GATEWAY_TEXT2BUFFER1_SIZE];
-    static const uint16_t GATEWAY_TEXT2BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar gateway_text2Buffer2[GATEWAY_TEXT2BUFFER2_SIZE];
-    static const uint16_t GATEWAY_TEXT1BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar gateway_text1Buffer1[GATEWAY_TEXT1BUFFER1_SIZE];
-    static const uint16_t GATEWAY_TEXT1BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar gateway_text1Buffer2[GATEWAY_TEXT1BUFFER2_SIZE];
-    static const uint16_t IP_TEXT2BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar ip_text2Buffer1[IP_TEXT2BUFFER1_SIZE];
-    static const uint16_t IP_TEXT2BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar ip_text2Buffer2[IP_TEXT2BUFFER2_SIZE];
-    static const uint16_t IP_TEXT1BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar ip_text1Buffer1[IP_TEXT1BUFFER1_SIZE];
-    static const uint16_t IP_TEXT1BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar ip_text1Buffer2[IP_TEXT1BUFFER2_SIZE];
     static const uint16_t IP_TEXT2_1BUFFER1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar ip_text2_1Buffer1[IP_TEXT2_1BUFFER1_SIZE];
     static const uint16_t IP_TEXT2_1BUFFER2_SIZE = 10;
@@ -367,6 +501,16 @@ protected:
     touchgfx::Unicode::UnicodeChar ip_1_text1_1Buffer2[IP_1_TEXT1_1BUFFER2_SIZE];
     static const uint16_t PORT_1_TEXT_SIZE = 10;
     touchgfx::Unicode::UnicodeChar port_1_textBuffer[PORT_1_TEXT_SIZE];
+    static const uint16_t CU_NUM_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar cu_numBuffer[CU_NUM_SIZE];
+    static const uint16_t POLL_T_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar poll_tBuffer[POLL_T_SIZE];
+    static const uint16_t CANBAUDRATE2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar canbaudrate2Buffer[CANBAUDRATE2_SIZE];
+    static const uint16_t CANBAUDRATE1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar canbaudrate1Buffer[CANBAUDRATE1_SIZE];
+    static const uint16_t RS485TEXT_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar rs485textBuffer[RS485TEXT_SIZE];
     static const uint16_t IP_ADD_2_1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar IP_ADD_2_1Buffer[IP_ADD_2_1_SIZE];
     static const uint16_t IP_ADD_2_2_SIZE = 10;
@@ -377,16 +521,6 @@ protected:
     touchgfx::Unicode::UnicodeChar IP_ADD_2_4Buffer[IP_ADD_2_4_SIZE];
     static const uint16_t PORT_1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar PORT_1Buffer[PORT_1_SIZE];
-    static const uint16_t IP_ADD_1_1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_1_1Buffer[IP_ADD_1_1_SIZE];
-    static const uint16_t IP_ADD_1_2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_1_2Buffer[IP_ADD_1_2_SIZE];
-    static const uint16_t IP_ADD_1_3_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_1_3Buffer[IP_ADD_1_3_SIZE];
-    static const uint16_t IP_ADD_1_4_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_1_4Buffer[IP_ADD_1_4_SIZE];
-    static const uint16_t PORT_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar PORTBuffer[PORT_SIZE];
     static const uint16_t IP_ADD_1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar IP_ADD_1Buffer[IP_ADD_1_SIZE];
     static const uint16_t IP_ADD_2_SIZE = 10;
@@ -411,30 +545,68 @@ protected:
     touchgfx::Unicode::UnicodeChar NETMASK_3Buffer[NETMASK_3_SIZE];
     static const uint16_t NETMASK_4_SIZE = 10;
     touchgfx::Unicode::UnicodeChar NETMASK_4Buffer[NETMASK_4_SIZE];
+    static const uint16_t IP_ADD_1_2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_1_2Buffer[IP_ADD_1_2_SIZE];
+    static const uint16_t IP_ADD_1_3_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_1_3Buffer[IP_ADD_1_3_SIZE];
+    static const uint16_t IP_ADD_1_4_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_1_4Buffer[IP_ADD_1_4_SIZE];
+    static const uint16_t PORT_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar PORTBuffer[PORT_SIZE];
+    static const uint16_t IP_ADD_1_1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_1_1Buffer[IP_ADD_1_1_SIZE];
+    static const uint16_t T_SETBUTTON_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar t_setbuttonBuffer[T_SETBUTTON_SIZE];
+    static const uint16_t ZU_SETBUTTON_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar zu_setbuttonBuffer[ZU_SETBUTTON_SIZE];
+    static const uint16_t NETWORKTEXT2BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar networkText2Buffer1[NETWORKTEXT2BUFFER1_SIZE];
+    static const uint16_t NETWORKTEXT2BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar networkText2Buffer2[NETWORKTEXT2BUFFER2_SIZE];
+    static const uint16_t NETWORKTEXT1BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar networkText1Buffer1[NETWORKTEXT1BUFFER1_SIZE];
+    static const uint16_t NETWORKTEXT1BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar networkText1Buffer2[NETWORKTEXT1BUFFER2_SIZE];
+    static const uint16_t GATEWAY_TEXT2BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar gateway_text2Buffer1[GATEWAY_TEXT2BUFFER1_SIZE];
+    static const uint16_t GATEWAY_TEXT2BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar gateway_text2Buffer2[GATEWAY_TEXT2BUFFER2_SIZE];
+    static const uint16_t GATEWAY_TEXT1BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar gateway_text1Buffer1[GATEWAY_TEXT1BUFFER1_SIZE];
+    static const uint16_t GATEWAY_TEXT1BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar gateway_text1Buffer2[GATEWAY_TEXT1BUFFER2_SIZE];
+    static const uint16_t IP_TEXT2BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar ip_text2Buffer1[IP_TEXT2BUFFER1_SIZE];
+    static const uint16_t IP_TEXT2BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar ip_text2Buffer2[IP_TEXT2BUFFER2_SIZE];
+    static const uint16_t IP_TEXT1BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar ip_text1Buffer1[IP_TEXT1BUFFER1_SIZE];
+    static const uint16_t IP_TEXT1BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar ip_text1Buffer2[IP_TEXT1BUFFER2_SIZE];
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<SettingViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
+    touchgfx::Callback<SettingViewBase, const touchgfx::AbstractButton&> buttonCallback;
+    touchgfx::Callback<SettingViewBase, const touchgfx::Slider&, int> sliderValueChangedCallback;
+    touchgfx::Callback<SettingViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
+    void sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value);
+    void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
 
     /*
      * Tick Counter Declarations
      */
     static const uint32_t TICK_SETTINGVIEWTICK_INTERVAL = 10;
     uint32_t frameCountSettingViewTickInterval;
-
-    /*
-     * Callback Declarations
-     */
-    touchgfx::Callback<SettingViewBase, const touchgfx::AbstractButton&> buttonCallback;
-    touchgfx::Callback<SettingViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
-    touchgfx::Callback<SettingViewBase, const touchgfx::Slider&, int> sliderValueChangedCallback;
-    touchgfx::Callback<SettingViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
-
-    /*
-     * Callback Handler Declarations
-     */
-    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
-    void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
-    void sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value);
-    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
 };
 

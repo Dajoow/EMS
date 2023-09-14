@@ -9,6 +9,7 @@
 #include <touchgfx/widgets/BoxWithBorder.hpp>
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/Image.hpp>
 
 class keyboardBase : public touchgfx::Container
 {
@@ -24,72 +25,50 @@ public:
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_2()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_3()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_4()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_5()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_6()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_7()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_8()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_9()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_num_0()
     {
         // Override and implement this function in keyboard
     }
-
-    virtual void fun_dot()
-    {
-        // Override and implement this function in keyboard
-    }
-
-    virtual void fun_jinhao()
-    {
-        // Override and implement this function in keyboard
-    }
-
     virtual void fun_ok()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_ce()
     {
         // Override and implement this function in keyboard
     }
-
     virtual void fun_de()
     {
         // Override and implement this function in keyboard
@@ -116,12 +95,11 @@ protected:
     touchgfx::ButtonWithLabel but_de;
     touchgfx::ButtonWithLabel but_ce;
     touchgfx::ButtonWithLabel but_ok;
-    touchgfx::ButtonWithLabel dot;
     touchgfx::ButtonWithLabel num_0;
-    touchgfx::ButtonWithLabel jinhao;
-    touchgfx::ButtonWithLabel weizhi;
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::TextAreaWithOneWildcard shownum;
+    touchgfx::Image delete_icon;
+    touchgfx::Image keboard_icon;
 
     /*
      * Wildcard Buffers

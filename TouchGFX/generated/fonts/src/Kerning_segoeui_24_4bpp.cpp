@@ -1,0 +1,31 @@
+#include <touchgfx/Font.hpp>
+
+FONT_KERNING_LOCATION_FLASH_PRAGMA
+KEEP extern const touchgfx::KerningNode kerning_segoeui_24_4bpp[] FONT_KERNING_LOCATION_FLASH_ATTRIBUTE = {
+    { 0x0044, -1 },  // (First char = [0x0044, D], Second char = [0x002E, .], Kerning dist = -1)
+    { 0x004F, -1 },  // (First char = [0x004F, O], Second char = [0x002E, .], Kerning dist = -1)
+    { 0x0050, -4 },  // (First char = [0x0050, P], Second char = [0x002E, .], Kerning dist = -4)
+    { 0x0054, -2 },  // (First char = [0x0054, T], Second char = [0x002E, .], Kerning dist = -2)
+    { 0x0056, -3 },  // (First char = [0x0056, V], Second char = [0x002E, .], Kerning dist = -3)
+    { 0x0057, -1 },  // (First char = [0x0057, W], Second char = [0x002E, .], Kerning dist = -1)
+    { 0x006B,  1 },  // (First char = [0x006B, k], Second char = [0x002E, .], Kerning dist = 1)
+    { 0x0077, -1 },  // (First char = [0x0077, w], Second char = [0x002E, .], Kerning dist = -1)
+    { 0x0050, -2 },  // (First char = [0x0050, P], Second char = [0x0041, A], Kerning dist = -2)
+    { 0x0054, -2 },  // (First char = [0x0054, T], Second char = [0x0041, A], Kerning dist = -2)
+    { 0x0056, -1 },  // (First char = [0x0056, V], Second char = [0x0041, A], Kerning dist = -1)
+    { 0x0057, -1 },  // (First char = [0x0057, W], Second char = [0x0041, A], Kerning dist = -1)
+    { 0x0043, -1 },  // (First char = [0x0043, C], Second char = [0x0043, C], Kerning dist = -1)
+    { 0x0054, -1 },  // (First char = [0x0054, T], Second char = [0x0043, C], Kerning dist = -1)
+    { 0x0054, -1 },  // (First char = [0x0054, T], Second char = [0x004F, O], Kerning dist = -1)
+    { 0x0041, -2 },  // (First char = [0x0041, A], Second char = [0x0054, T], Kerning dist = -2)
+    { 0x0044, -1 },  // (First char = [0x0044, D], Second char = [0x0054, T], Kerning dist = -1)
+    { 0x004F, -1 },  // (First char = [0x004F, O], Second char = [0x0054, T], Kerning dist = -1)
+    { 0x0052, -1 },  // (First char = [0x0052, R], Second char = [0x0054, T], Kerning dist = -1)
+    { 0x0041, -1 },  // (First char = [0x0041, A], Second char = [0x0056, V], Kerning dist = -1)
+    { 0x0041, -1 },  // (First char = [0x0041, A], Second char = [0x0057, W], Kerning dist = -1)
+    { 0x0054, -2 },  // (First char = [0x0054, T], Second char = [0x0070, p], Kerning dist = -2)
+    { 0x0056, -1 },  // (First char = [0x0056, V], Second char = [0x0070, p], Kerning dist = -1)
+    { 0x0054, -2 },  // (First char = [0x0054, T], Second char = [0x0073, s], Kerning dist = -2)
+    { 0x0056, -1 },  // (First char = [0x0056, V], Second char = [0x0073, s], Kerning dist = -1)
+    { 0x0054, -1 },  // (First char = [0x0054, T], Second char = [0x0077, w], Kerning dist = -1)
+};

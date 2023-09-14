@@ -9,41 +9,44 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId typography)
 {
     switch (typography)
     {
-    case Typography::KAITI_34:
-        // STKAITI_TTF_40_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[0]);
     case Typography::DEFAULT:
-        // verdana_20_4bpp
+        // segoeui_20_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[0]);
+    case Typography::SEGOEUI_24:
+        // segoeui_24_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[1]);
-    case Typography::LARGE:
-        // verdana_40_4bpp
+    case Typography::STXIHEI_22:
+        // STXIHEI_TTF_22_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[2]);
-    case Typography::SMALL:
-        // verdana_10_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[3]);
-    case Typography::CHINESE_22:
-        // STSONG_TTF_22_8bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[4]);
-    case Typography::TIMERS_NEW_ROMAN_18:
-        // times_18_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[5]);
-    case Typography::TIMERS_NEW_ROMAN_36:
-        // times_36_8bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[6]);
-    case Typography::TIMERS_NEW_ROMAN_22:
-        // timesbd_22_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[7]);
-    case Typography::CHINESE_32:
-        // STFANGSO_TTF_32_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[8]);
-    case Typography::TIMERS_NEW_ROMAN_18_BOLD:
-        // timesbd_18_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[9]);
-    case Typography::XIHEI_20:
+    case Typography::STXIHEI_24:
         // STXIHEI_TTF_24_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[3]);
+    case Typography::STXIHEI_40:
+        // STXIHEI_TTF_40_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[4]);
+    case Typography::SEGOEUI_20:
+        // segoeui_20_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[0]);
+    case Typography::STXIHEI_20:
+        // STXIHEI_TTF_20_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[5]);
+    case Typography::STXIHEI_30:
+        // STXIHEI_TTF_30_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[6]);
+    case Typography::SEGOEUI_30:
+        // segoeui_30_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[7]);
+    case Typography::STXIHEI_60:
+        // STXIHEI_TTF_60_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[8]);
+    case Typography::SEGOEUI_18:
+        // seguisb_17_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[9]);
+    case Typography::UIBOLD20:
+        // seguisb_20_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[10]);
-    case Typography::STSONG_18:
-        // STSONG_TTF_18_4bpp
+    case Typography::SEGOEUI_22:
+        // segoeui_22_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[11]);
     default:
         return 0;

@@ -8,22 +8,24 @@
 #include <mvp/View.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/widgets/Button.hpp>
-#include <touchgfx/containers/ScrollableContainer.hpp>
-#include <touchgfx/widgets/ButtonWithLabel.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/containers/buttons/Buttons.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
 #include <touchgfx/containers/Container.hpp>
-#include <touchgfx/containers/SlideMenu.hpp>
-#include <touchgfx/widgets/BoxWithBorder.hpp>
+#include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/containers/progress_indicators/BoxProgress.hpp>
+#include <touchgfx/containers/SlideMenu.hpp>
+#include <touchgfx/containers/ScrollableContainer.hpp>
+#include <touchgfx/widgets/ScalableImage.hpp>
+#include <touchgfx/widgets/ButtonWithLabel.hpp>
+#include <touchgfx/widgets/BoxWithBorder.hpp>
 
 class MainScreenViewBase : public touchgfx::View<MainScreenPresenter>
 {
 public:
     MainScreenViewBase();
-    virtual ~MainScreenViewBase() {}
+    virtual ~MainScreenViewBase();
     virtual void setupScreen();
 
     /*
@@ -33,248 +35,215 @@ public:
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU2_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU3_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU4_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU5_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU6_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU7_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU8_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU9_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU10_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU11_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU12_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU13_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU14_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU15_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU16_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU17_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU18_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU19_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BCMU20_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU1_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU2_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU3_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU4_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU5_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU6_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU7_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU8_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU9_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU10_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU11_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU12_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU13_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU14_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU15_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU16_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU17_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU18_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU20_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU21_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU22_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU23_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU24_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU25_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU26_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU27_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU28_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU29_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU30_clicked()
     {
         // Override and implement this function in MainScreen
     }
-
     virtual void BMU19_clicked()
+    {
+        // Override and implement this function in MainScreen
+    }
+    virtual void turntobattery()
+    {
+        // Override and implement this function in MainScreen
+    }
+    virtual void turntoshouye()
+    {
+        // Override and implement this function in MainScreen
+    }
+    virtual void show_shouye()
+    {
+        // Override and implement this function in MainScreen
+    }
+    virtual void show_batteryshowarea()
     {
         // Override and implement this function in MainScreen
     }
@@ -288,76 +257,28 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Box main_BG;
-    touchgfx::Image station;
-    touchgfx::Image WIFI;
-    touchgfx::Image ETH;
-    touchgfx::Button setting;
-    touchgfx::ScrollableContainer BCMU_Container;
-    touchgfx::Box BCMU_BG;
-    touchgfx::Box BCMU_SEL_BOX;
-    touchgfx::ButtonWithLabel BCMU20;
-    touchgfx::ButtonWithLabel BCMU19;
-    touchgfx::ButtonWithLabel BCMU18;
-    touchgfx::ButtonWithLabel BCMU17;
-    touchgfx::ButtonWithLabel BCMU16;
-    touchgfx::ButtonWithLabel BCMU15;
-    touchgfx::ButtonWithLabel BCMU14;
-    touchgfx::ButtonWithLabel BCMU13;
-    touchgfx::ButtonWithLabel BCMU12;
-    touchgfx::ButtonWithLabel BCMU11;
-    touchgfx::ButtonWithLabel BCMU10;
-    touchgfx::ButtonWithLabel BCMU9;
-    touchgfx::ButtonWithLabel BCMU8;
-    touchgfx::ButtonWithLabel BCMU7;
-    touchgfx::ButtonWithLabel BCMU6;
-    touchgfx::ButtonWithLabel BCMU5;
-    touchgfx::ButtonWithLabel BCMU4;
-    touchgfx::ButtonWithLabel BCMU3;
-    touchgfx::ButtonWithLabel BCMU2;
-    touchgfx::ButtonWithLabel BCMU1;
-    touchgfx::TextArea cu_text;
-    touchgfx::TextAreaWithOneWildcard cu;
+    touchgfx::Box box2;
+    touchgfx::Box box1;
     touchgfx::TextAreaWithOneWildcard FrameRateText;
-    touchgfx::Image biaoti;
-    touchgfx::Container benjixinxi_menu;
-    touchgfx::Image benjixinxi_BG;
-    touchgfx::TextArea benjixinxi_biaoti;
-    touchgfx::TextArea bendi_IP;
-    touchgfx::TextArea bendifuwuqi_IP;
-    touchgfx::TextArea yunduan_IP;
-    touchgfx::Container dianzhan_info;
-    touchgfx::Image dianzhanxinxi_BG;
-    touchgfx::TextArea dianzhanxinxi;
-    touchgfx::TextAreaWithOneWildcard zhuangjirongliang;
-    touchgfx::TextAreaWithOneWildcard dianchicushuliang;
-    touchgfx::TextAreaWithOneWildcard zongdianliu;
-    touchgfx::TextAreaWithOneWildcard zongdianya;
-    touchgfx::TextAreaWithOneWildcard chongdiangonglv;
-    touchgfx::TextAreaWithOneWildcard fangdiangonglv;
-    touchgfx::Container cu_info;
-    touchgfx::Image cuxinxi_BG;
-    touchgfx::TextArea dancushishishuju;
-    touchgfx::TextAreaWithOneWildcard cudianya;
-    touchgfx::TextAreaWithOneWildcard zhengjueyuan;
-    touchgfx::TextAreaWithOneWildcard fujueyuan;
-    touchgfx::TextAreaWithOneWildcard zushuliang;
-    touchgfx::TextAreaWithOneWildcard cubianhao;
-    touchgfx::TextAreaWithOneWildcard cudianliu;
-    touchgfx::SlideMenu CellShow;
+    touchgfx::TextArea chunengdianzhan;
+    touchgfx::ClickListener< touchgfx::ImageButtonStyle< touchgfx::ClickButtonTrigger >  > buttonMain;
+    touchgfx::ClickListener< touchgfx::ImageButtonStyle< touchgfx::ClickButtonTrigger >  > buttonState;
+    touchgfx::ImageButtonStyle< touchgfx::ClickButtonTrigger >  buttonSetting;
+    touchgfx::Container batteryshowarea;
+    touchgfx::Container batterygroup;
     touchgfx::Image legend;
-    touchgfx::BoxWithBorder CELL1_BOX;
-    touchgfx::BoxWithBorder CELL2_BOX;
-    touchgfx::BoxWithBorder CELL3_BOX;
-    touchgfx::BoxWithBorder CELL4_BOX;
-    touchgfx::BoxWithBorder CELL5_BOX;
-    touchgfx::BoxWithBorder CELL6_BOX;
-    touchgfx::BoxWithBorder CELL7_BOX;
-    touchgfx::BoxWithBorder CELL8_BOX;
-    touchgfx::BoxWithBorder CELL9_BOX;
-    touchgfx::BoxWithBorder CELL10_BOX;
-    touchgfx::BoxWithBorder CELL11_BOX;
-    touchgfx::BoxWithBorder CELL12_BOX;
+    touchgfx::Image image3;
+    touchgfx::Image image4;
+    touchgfx::Image image5;
+    touchgfx::Image image6;
+    touchgfx::Image image7;
+    touchgfx::Image image8;
+    touchgfx::Image image9;
+    touchgfx::Image image10;
+    touchgfx::Image image11;
+    touchgfx::Image image12;
+    touchgfx::Image image13;
+    touchgfx::Image image2;
     touchgfx::TextAreaWithOneWildcard CellText1;
     touchgfx::TextAreaWithOneWildcard CellText2;
     touchgfx::TextAreaWithOneWildcard CellText3;
@@ -419,11 +340,47 @@ protected:
     touchgfx::TextAreaWithOneWildcard CellTempText11;
     touchgfx::TextAreaWithOneWildcard CellTempText12;
     touchgfx::TextAreaWithTwoWildcards dianchixinxi;
+    touchgfx::TextArea S12;
+    touchgfx::TextArea S11;
+    touchgfx::TextArea S10;
+    touchgfx::TextArea S9;
+    touchgfx::TextArea S8;
+    touchgfx::TextArea S7;
+    touchgfx::TextArea S6;
+    touchgfx::TextArea S5;
+    touchgfx::TextArea S4;
+    touchgfx::TextArea S3;
+    touchgfx::TextArea S2;
+    touchgfx::TextArea S1;
+    touchgfx::TextArea F12;
+    touchgfx::TextArea F11;
+    touchgfx::TextArea F10;
+    touchgfx::TextArea F9;
+    touchgfx::TextArea F8;
+    touchgfx::TextArea F7;
+    touchgfx::TextArea F6;
+    touchgfx::TextArea F5;
+    touchgfx::TextArea F4;
+    touchgfx::TextArea F3;
+    touchgfx::TextArea F2;
+    touchgfx::TextArea F1;
+    touchgfx::TextArea V12;
+    touchgfx::TextArea V11;
+    touchgfx::TextArea V10;
+    touchgfx::TextArea V9;
+    touchgfx::TextArea V8;
+    touchgfx::TextArea V7;
+    touchgfx::TextArea V6;
+    touchgfx::TextArea V5;
+    touchgfx::TextArea V4;
+    touchgfx::TextArea V3;
+    touchgfx::TextArea V2;
+    touchgfx::TextArea v1;
     touchgfx::SlideMenu BMUMenu;
     touchgfx::Box BMU_BG_1;
     touchgfx::ScrollableContainer BMU_Container;
     touchgfx::Box BMU_BG;
-    touchgfx::Box BMU_SEL_BOX;
+    touchgfx::ScalableImage BMU_SEL_BOX;
     touchgfx::ButtonWithLabel BMU30;
     touchgfx::ButtonWithLabel BMU29;
     touchgfx::ButtonWithLabel BMU28;
@@ -456,44 +413,99 @@ protected:
     touchgfx::ButtonWithLabel BMU1;
     touchgfx::TextAreaWithOneWildcard zu;
     touchgfx::TextArea zu_text;
+    touchgfx::ScrollableContainer BCMU_Container;
+    touchgfx::Box BCMU_BG;
+    touchgfx::ScalableImage BCMU_SEL_BOX;
+    touchgfx::ButtonWithLabel BCMU20;
+    touchgfx::ButtonWithLabel BCMU19;
+    touchgfx::ButtonWithLabel BCMU18;
+    touchgfx::ButtonWithLabel BCMU17;
+    touchgfx::ButtonWithLabel BCMU16;
+    touchgfx::ButtonWithLabel BCMU15;
+    touchgfx::ButtonWithLabel BCMU14;
+    touchgfx::ButtonWithLabel BCMU13;
+    touchgfx::ButtonWithLabel BCMU12;
+    touchgfx::ButtonWithLabel BCMU11;
+    touchgfx::ButtonWithLabel BCMU10;
+    touchgfx::ButtonWithLabel BCMU9;
+    touchgfx::ButtonWithLabel BCMU8;
+    touchgfx::ButtonWithLabel BCMU7;
+    touchgfx::ButtonWithLabel BCMU6;
+    touchgfx::ButtonWithLabel BCMU5;
+    touchgfx::ButtonWithLabel BCMU4;
+    touchgfx::ButtonWithLabel BCMU3;
+    touchgfx::ButtonWithLabel BCMU2;
+    touchgfx::ButtonWithLabel BCMU1;
+    touchgfx::TextArea cu_text;
+    touchgfx::TextAreaWithOneWildcard cu;
+    touchgfx::Container shouye;
+    touchgfx::Image baojingxinxi;
     touchgfx::Container PCS_menu;
     touchgfx::BoxWithBorder PCS_BG;
     touchgfx::TextArea PCS_biaoti;
+    touchgfx::TextArea PCS;
     touchgfx::Container baojingxinxi_menu;
-    touchgfx::BoxWithBorder baojing_BG;
     touchgfx::TextArea baojing_biaoti;
+    touchgfx::Image cubj;
+    touchgfx::Image linecu;
+    touchgfx::Container cu_info;
+    touchgfx::TextArea Unit_kohm2;
+    touchgfx::TextArea Unit_kohm1;
+    touchgfx::TextArea Unit_V1;
+    touchgfx::TextArea Unit_A1;
+    touchgfx::TextArea Unit__zu;
+    touchgfx::TextArea Unit_hao;
+    touchgfx::TextAreaWithOneWildcard fujueyuan;
+    touchgfx::TextAreaWithOneWildcard zhengjueyuan;
+    touchgfx::TextAreaWithOneWildcard cudianya;
+    touchgfx::TextAreaWithOneWildcard cudianliu;
+    touchgfx::TextAreaWithOneWildcard zushuliang;
+    touchgfx::TextAreaWithOneWildcard cubianhao;
+    touchgfx::TextArea Chinese_2;
+    touchgfx::TextArea Chinese_fujueyuan;
+    touchgfx::TextArea Chinese_1;
+    touchgfx::TextArea Chinese_zhengjueyuan;
+    touchgfx::TextArea Chinese_cudianya;
+    touchgfx::TextArea Chinese_cudianliu;
+    touchgfx::TextArea Chinese_dianchizushuliang;
+    touchgfx::TextArea Chinese_cubianhao;
+    touchgfx::TextArea dancushishishuju;
+    touchgfx::Image dianzhanbj;
+    touchgfx::Image linedianzhan;
+    touchgfx::Container dianzhan_info;
+    touchgfx::TextArea Unit_W2;
+    touchgfx::TextArea Unit_W1;
+    touchgfx::TextArea Unit_V;
+    touchgfx::TextArea Unit_A;
+    touchgfx::TextArea Unit_cu;
+    touchgfx::TextArea Unit_kwh;
+    touchgfx::TextAreaWithOneWildcard fangdiangonglv;
+    touchgfx::TextAreaWithOneWildcard chongdiangonglv;
+    touchgfx::TextAreaWithOneWildcard zongdianya;
+    touchgfx::TextAreaWithOneWildcard zongdianliu;
+    touchgfx::TextAreaWithOneWildcard dianchicushuliang;
+    touchgfx::TextAreaWithOneWildcard zhuangjirongliang;
+    touchgfx::TextArea Chinese_fangdiangonglv;
+    touchgfx::TextArea Chinese_chongdiangonglv;
+    touchgfx::TextArea Chinese_zongdianya;
+    touchgfx::TextArea Chinese_zongdianliu;
+    touchgfx::TextArea Chinese_dianchicushuliang;
+    touchgfx::TextArea Chinese_zongzhuangjirongliang;
+    touchgfx::TextArea dianzhanxinxi;
+    touchgfx::Image benjixinxi_BG;
+    touchgfx::Container benjixinxi_menu;
+    touchgfx::TextArea IP3;
+    touchgfx::TextArea yunduan_IP;
+    touchgfx::TextArea IP2;
+    touchgfx::TextArea bendifuwuqi_IP;
+    touchgfx::TextArea IP1;
+    touchgfx::TextArea bendi_IP;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t CU_SIZE = 8;
-    touchgfx::Unicode::UnicodeChar cuBuffer[CU_SIZE];
     static const uint16_t FRAMERATETEXT_SIZE = 10;
     touchgfx::Unicode::UnicodeChar FrameRateTextBuffer[FRAMERATETEXT_SIZE];
-    static const uint16_t ZHUANGJIRONGLIANG_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar zhuangjirongliangBuffer[ZHUANGJIRONGLIANG_SIZE];
-    static const uint16_t DIANCHICUSHULIANG_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar dianchicushuliangBuffer[DIANCHICUSHULIANG_SIZE];
-    static const uint16_t ZONGDIANLIU_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar zongdianliuBuffer[ZONGDIANLIU_SIZE];
-    static const uint16_t ZONGDIANYA_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar zongdianyaBuffer[ZONGDIANYA_SIZE];
-    static const uint16_t CHONGDIANGONGLV_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar chongdiangonglvBuffer[CHONGDIANGONGLV_SIZE];
-    static const uint16_t FANGDIANGONGLV_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar fangdiangonglvBuffer[FANGDIANGONGLV_SIZE];
-    static const uint16_t CUDIANYA_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar cudianyaBuffer[CUDIANYA_SIZE];
-    static const uint16_t ZHENGJUEYUAN_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar zhengjueyuanBuffer[ZHENGJUEYUAN_SIZE];
-    static const uint16_t FUJUEYUAN_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar fujueyuanBuffer[FUJUEYUAN_SIZE];
-    static const uint16_t ZUSHULIANG_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar zushuliangBuffer[ZUSHULIANG_SIZE];
-    static const uint16_t CUBIANHAO_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar cubianhaoBuffer[CUBIANHAO_SIZE];
-    static const uint16_t CUDIANLIU_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar cudianliuBuffer[CUDIANLIU_SIZE];
     static const uint16_t CELLTEXT1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar CellText1Buffer[CELLTEXT1_SIZE];
     static const uint16_t CELLTEXT2_SIZE = 10;
@@ -572,6 +584,32 @@ protected:
     touchgfx::Unicode::UnicodeChar dianchixinxiBuffer2[DIANCHIXINXIBUFFER2_SIZE];
     static const uint16_t ZU_SIZE = 8;
     touchgfx::Unicode::UnicodeChar zuBuffer[ZU_SIZE];
+    static const uint16_t CU_SIZE = 8;
+    touchgfx::Unicode::UnicodeChar cuBuffer[CU_SIZE];
+    static const uint16_t FUJUEYUAN_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar fujueyuanBuffer[FUJUEYUAN_SIZE];
+    static const uint16_t ZHENGJUEYUAN_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar zhengjueyuanBuffer[ZHENGJUEYUAN_SIZE];
+    static const uint16_t CUDIANYA_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar cudianyaBuffer[CUDIANYA_SIZE];
+    static const uint16_t CUDIANLIU_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar cudianliuBuffer[CUDIANLIU_SIZE];
+    static const uint16_t ZUSHULIANG_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar zushuliangBuffer[ZUSHULIANG_SIZE];
+    static const uint16_t CUBIANHAO_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar cubianhaoBuffer[CUBIANHAO_SIZE];
+    static const uint16_t FANGDIANGONGLV_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar fangdiangonglvBuffer[FANGDIANGONGLV_SIZE];
+    static const uint16_t CHONGDIANGONGLV_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar chongdiangonglvBuffer[CHONGDIANGONGLV_SIZE];
+    static const uint16_t ZONGDIANYA_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar zongdianyaBuffer[ZONGDIANYA_SIZE];
+    static const uint16_t ZONGDIANLIU_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar zongdianliuBuffer[ZONGDIANLIU_SIZE];
+    static const uint16_t DIANCHICUSHULIANG_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar dianchicushuliangBuffer[DIANCHICUSHULIANG_SIZE];
+    static const uint16_t ZHUANGJIRONGLIANG_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar zhuangjirongliangBuffer[ZHUANGJIRONGLIANG_SIZE];
 
 private:
 
@@ -579,11 +617,13 @@ private:
      * Callback Declarations
      */
     touchgfx::Callback<MainScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
+    touchgfx::Callback<MainScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
 
     /*
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
+    void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
 
 };
 

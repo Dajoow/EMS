@@ -13,34 +13,36 @@ class FlashDataReader;
 
 struct Typography
 {
-    static const touchgfx::FontId KAITI_34 = 0;
-    static const touchgfx::FontId DEFAULT = 1;
-    static const touchgfx::FontId LARGE = 2;
-    static const touchgfx::FontId SMALL = 3;
-    static const touchgfx::FontId CHINESE_22 = 4;
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_18 = 5;
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_36 = 6;
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_22 = 7;
-    static const touchgfx::FontId CHINESE_32 = 8;
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_18_BOLD = 9;
-    static const touchgfx::FontId XIHEI_20 = 10;
-    static const touchgfx::FontId STSONG_18 = 11;
+    static const touchgfx::FontId DEFAULT = 0;
+    static const touchgfx::FontId SEGOEUI_24 = 1;
+    static const touchgfx::FontId STXIHEI_22 = 2;
+    static const touchgfx::FontId STXIHEI_24 = 3;
+    static const touchgfx::FontId STXIHEI_40 = 4;
+    static const touchgfx::FontId SEGOEUI_20 = 5;
+    static const touchgfx::FontId STXIHEI_20 = 6;
+    static const touchgfx::FontId STXIHEI_30 = 7;
+    static const touchgfx::FontId SEGOEUI_30 = 8;
+    static const touchgfx::FontId STXIHEI_60 = 9;
+    static const touchgfx::FontId SEGOEUI_18 = 10;
+    static const touchgfx::FontId UIBOLD20 = 11;
+    static const touchgfx::FontId SEGOEUI_22 = 12;
 };
 
 struct TypographyFontIndex
 {
-    static const touchgfx::FontId KAITI_34 = 0;                 // STKAITI_TTF_40_4bpp
-    static const touchgfx::FontId DEFAULT = 1;                  // verdana_20_4bpp
-    static const touchgfx::FontId LARGE = 2;                    // verdana_40_4bpp
-    static const touchgfx::FontId SMALL = 3;                    // verdana_10_4bpp
-    static const touchgfx::FontId CHINESE_22 = 4;               // STSONG_TTF_22_8bpp
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_18 = 5;      // times_18_4bpp
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_36 = 6;      // times_36_8bpp
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_22 = 7;      // timesbd_22_4bpp
-    static const touchgfx::FontId CHINESE_32 = 8;               // STFANGSO_TTF_32_4bpp
-    static const touchgfx::FontId TIMERS_NEW_ROMAN_18_BOLD = 9; // timesbd_18_4bpp
-    static const touchgfx::FontId XIHEI_20 = 10;                 // STXIHEI_TTF_24_4bpp
-    static const touchgfx::FontId STSONG_18 = 11;                // STSONG_TTF_18_4bpp
+    static const touchgfx::FontId DEFAULT = 0;    // segoeui_20_4bpp
+    static const touchgfx::FontId SEGOEUI_24 = 1; // segoeui_24_4bpp
+    static const touchgfx::FontId STXIHEI_22 = 2; // STXIHEI_TTF_22_4bpp
+    static const touchgfx::FontId STXIHEI_24 = 3; // STXIHEI_TTF_24_4bpp
+    static const touchgfx::FontId STXIHEI_40 = 4; // STXIHEI_TTF_40_4bpp
+    static const touchgfx::FontId SEGOEUI_20 = 0; // segoeui_20_4bpp
+    static const touchgfx::FontId STXIHEI_20 = 5; // STXIHEI_TTF_20_4bpp
+    static const touchgfx::FontId STXIHEI_30 = 6; // STXIHEI_TTF_30_4bpp
+    static const touchgfx::FontId SEGOEUI_30 = 7; // segoeui_30_4bpp
+    static const touchgfx::FontId STXIHEI_60 = 8; // STXIHEI_TTF_60_4bpp
+    static const touchgfx::FontId SEGOEUI_18 = 9; // seguisb_17_4bpp
+    static const touchgfx::FontId UIBOLD20 = 10;   // seguisb_20_4bpp
+    static const touchgfx::FontId SEGOEUI_22 = 11; // segoeui_22_4bpp
     static const uint16_t NUMBER_OF_FONTS = 12;
 };
 

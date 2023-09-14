@@ -33,6 +33,7 @@ public:
     virtual void fun_de();
     virtual void fun_ok();
 
+
     virtual void initialize();
     void SetBufPar(void* p, uint8_t size);
 

@@ -16,40 +16,39 @@ KEEP extern const touchgfx::GlyphNode glyphs_STXIHEI_TTF_24_4bpp[] FONT_TABLE_LO
     {   852, 0x0038,  13,  17,  17,   0,  13,   0,   0, 0x00 },
     {   971, 0x0039,  11,  18,  17,   1,  13,   0,   0, 0x00 },
     {  1079, 0x003F,  11,  17,  17,   2,  14,   0,   0, 0x00 },
-    {  1181, 0x0041,  18,  18,  18,   0,  18,   0,   0, 0x00 },
-    {  1343, 0x0056,  16,  17,  17,   0,  17,   0,   0, 0x00 },
-    {  1479, 0x0057,  21,  17,  17,   1,  23,   0,   0, 0x00 },
-    {  1666, 0x0068,  12,  18,  18,   1,  15,   0,   0, 0x00 },
-    {  1774, 0x006B,  11,  18,  18,   1,  12,   0,   0, 0x00 },
-    {  1882, 0x006D,  20,  13,  13,   1,  23,   0,   0, 0x00 },
-    {  2012, 0x006F,  14,  13,  13,   1,  16,   0,   0, 0x00 },
-    {  2103, 0x0077,  20,  13,  13,   0,  20,   0,   0, 0x00 },
-    {     0, 0x4FE1,  23,  23,  19,   0,  24,   0,   0, 0x00 },
+    {     0, 0x4E91,  21,  21,  17,   1,  24,   0,   0, 0x00 },
+    {   231, 0x4FE1,  23,  23,  19,   0,  24,   0,   0, 0x00 },
     {     0, 0x5145,  22,  22,  18,   1,  24,   0,   0, 0x00 },
     {   242, 0x5185,  19,  22,  18,   3,  24,   0,   0, 0x00 },
     {   462, 0x529F,  22,  23,  19,   1,  24,   0,   0, 0x00 },
     {   715, 0x538B,  23,  20,  17,   0,  24,   0,   0, 0x00 },
     {   955, 0x53F7,  22,  21,  17,   1,  24,   0,   0, 0x00 },
+    {  1186, 0x5730,  24,  22,  19,   0,  24,   0,   0, 0x00 },
     {     0, 0x5BB9,  22,  23,  19,   1,  24,   0,   0, 0x00 },
     {     0, 0x603B,  22,  22,  19,   1,  24,   0,   0, 0x00 },
     {   242, 0x606F,  23,  23,  19,   0,  24,   0,   0, 0x00 },
     {   518, 0x653E,  22,  22,  18,   1,  24,   0,   0, 0x00 },
     {   760, 0x6570,  22,  22,  18,   1,  24,   0,   0, 0x00 },
-    {  1002, 0x673A,  24,  23,  19,   0,  24,   0,   0, 0x00 },
+    {  1002, 0x672C,  22,  23,  19,   1,  24,   0,   0, 0x00 },
+    {  1255, 0x673A,  24,  23,  19,   0,  24,   0,   0, 0x00 },
     {     0, 0x6C60,  23,  23,  19,   1,  24,   0,   0, 0x00 },
-    {   276, 0x6D41,  22,  23,  19,   1,  24,   0,   0, 0x00 },
-    {     0, 0x7387,  22,  23,  19,   1,  24,   0,   0, 0x00 },
-    {   253, 0x7535,  20,  23,  19,   3,  24,   0,   0, 0x00 },
-    {     0, 0x7B2C,  22,  23,  19,   1,  24,   0,   0, 0x00 },
-    {   253, 0x7C07,  23,  24,  19,   1,  24,   0,   0, 0x00 },
-    {   541, 0x7EC4,  23,  21,  18,   1,  24,   0,   0, 0x00 },
-    {   793, 0x7EDD,  23,  22,  19,   1,  24,   0,   0, 0x00 },
-    {  1057, 0x7F16,  21,  22,  18,   1,  24,   0,   0, 0x00 },
-    {  1299, 0x7F18,  23,  23,  19,   1,  24,   0,   0, 0x00 },
+    {   276, 0x6CE2,  21,  23,  19,   1,  24,   0,   0, 0x00 },
+    {   529, 0x6D41,  22,  23,  19,   1,  24,   0,   0, 0x00 },
+    {     0, 0x7279,  23,  23,  19,   0,  24,   0,   0, 0x00 },
+    {   276, 0x7387,  22,  23,  19,   1,  24,   0,   0, 0x00 },
+    {   529, 0x7535,  20,  23,  19,   3,  24,   0,   0, 0x00 },
+    {     0, 0x7AEF,  23,  22,  18,   0,  24,   0,   0, 0x00 },
+    {   264, 0x7B2C,  22,  23,  19,   1,  24,   0,   0, 0x00 },
+    {   517, 0x7C07,  23,  24,  19,   1,  24,   0,   0, 0x00 },
+    {   805, 0x7EC4,  23,  21,  18,   1,  24,   0,   0, 0x00 },
+    {  1057, 0x7EDC,  23,  23,  19,   1,  24,   0,   0, 0x00 },
+    {  1333, 0x7EDD,  23,  22,  19,   1,  24,   0,   0, 0x00 },
+    {  1597, 0x7F16,  21,  22,  18,   1,  24,   0,   0, 0x00 },
+    {  1839, 0x7F18,  23,  23,  19,   1,  24,   0,   0, 0x00 },
+    {  2115, 0x7F51,  20,  21,  17,   2,  24,   0,   0, 0x00 },
     {     0, 0x88C5,  22,  23,  19,   1,  24,   0,   0, 0x00 },
     {     0, 0x91CF,  22,  21,  17,   1,  24,   0,   0, 0x00 },
-    {   231, 0x963B,  22,  21,  17,   1,  24,   0,   0, 0x00 },
-    {     0, 0xFF1A,   4,  13,  13,   4,  24,   0,   0, 0x00 }
+    {   231, 0x963B,  22,  21,  17,   1,  24,   0,   0, 0x00 }
 };
 
 // STXIHEI_TTF_24_4bpp
@@ -75,8 +74,6 @@ FONT_GLYPH_LOCATION_FLASH_PRAGMA
 KEEP extern const uint8_t unicodes_STXIHEI_TTF_24_4bpp_17[] FONT_GLYPH_LOCATION_FLASH_ATTRIBUTE;
 FONT_GLYPH_LOCATION_FLASH_PRAGMA
 KEEP extern const uint8_t unicodes_STXIHEI_TTF_24_4bpp_18[] FONT_GLYPH_LOCATION_FLASH_ATTRIBUTE;
-FONT_GLYPH_LOCATION_FLASH_PRAGMA
-KEEP extern const uint8_t unicodes_STXIHEI_TTF_24_4bpp_31[] FONT_GLYPH_LOCATION_FLASH_ATTRIBUTE;
 FONT_SEARCHTABLE_LOCATION_FLASH_PRAGMA
 KEEP extern const uint8_t* const unicodes_STXIHEI_TTF_24_4bpp[] FONT_SEARCHTABLE_LOCATION_FLASH_ATTRIBUTE = {
     unicodes_STXIHEI_TTF_24_4bpp_0,
@@ -97,20 +94,7 @@ KEEP extern const uint8_t* const unicodes_STXIHEI_TTF_24_4bpp[] FONT_SEARCHTABLE
     unicodes_STXIHEI_TTF_24_4bpp_15,
     0,
     unicodes_STXIHEI_TTF_24_4bpp_17,
-    unicodes_STXIHEI_TTF_24_4bpp_18,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    unicodes_STXIHEI_TTF_24_4bpp_31
+    unicodes_STXIHEI_TTF_24_4bpp_18
 };
 FONT_KERNING_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::KerningNode kerning_STXIHEI_TTF_24_4bpp[] FONT_KERNING_LOCATION_FLASH_ATTRIBUTE;
@@ -118,6 +102,6 @@ touchgfx::GeneratedFont& getFont_STXIHEI_TTF_24_4bpp();
 
 touchgfx::GeneratedFont& getFont_STXIHEI_TTF_24_4bpp()
 {
-    static touchgfx::GeneratedFont STXIHEI_TTF_24_4bpp(glyphs_STXIHEI_TTF_24_4bpp, 46, 24, 5, 4, 1, 0, 0, unicodes_STXIHEI_TTF_24_4bpp, kerning_STXIHEI_TTF_24_4bpp, 63, 0, 0, 0);
+    static touchgfx::GeneratedFont STXIHEI_TTF_24_4bpp(glyphs_STXIHEI_TTF_24_4bpp, 45, 29, 24, 0, 0, 4, 1, 0, 0, unicodes_STXIHEI_TTF_24_4bpp, kerning_STXIHEI_TTF_24_4bpp, 63, 0, 0, 0);
     return STXIHEI_TTF_24_4bpp;
 }

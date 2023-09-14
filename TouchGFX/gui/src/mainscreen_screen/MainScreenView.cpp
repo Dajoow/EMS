@@ -21,23 +21,23 @@ MainScreenView::MainScreenView()
 void BMUMenuCallback_t::execute(const SlideMenu& menu)
 {
   touchgfx_printf("BMUMenuCallback\n");
-  if(view_.GetCellShowState())
-    view_.CellStateShow_OFF();
-  else
-    view_.CellStateShow();
+  //if(view_.GetCellShowState())
+  //  view_.CellStateShow_OFF();
+  //else
+  //  view_.CellStateShow();
 }
 
 /**
  * @description: 查询电池显示的情况
  * @return {*}
  */
-bool MainScreenView::GetCellShowState()
-{
-  if (CellShow.getState() ==touchgfx::SlideMenu::EXPANDED)
-    return true;
-  else
-    return false;
-}
+//bool MainScreenView::GetCellShowState()
+//{
+//  if (CellShow.getState() ==touchgfx::SlideMenu::EXPANDED)
+//    return true;
+//  else
+//    return false;
+//}
 
 /**
  * @description: 展开BMU菜单
@@ -46,7 +46,7 @@ bool MainScreenView::GetCellShowState()
 void MainScreenView::CellStateShow()
 {
     BMUMenu.animateToState(touchgfx::SlideMenu::EXPANDED);
-    CellShow.animateToState(touchgfx::SlideMenu::EXPANDED);
+    //CellShow.animateToState(touchgfx::SlideMenu::EXPANDED);
     BMU_SEL_BOX.setVisible(true);
     BMU_SEL_BOX.invalidate();
 }
@@ -57,11 +57,11 @@ void MainScreenView::CellStateShow()
  */
 void MainScreenView::CellStateShow_OFF()
 {
-    // BCMU_SEL_BOX.setVisible(false);
-    // BCMU_SEL_BOX.invalidate();
-    // BMU_SEL_BOX.setVisible(false);
-    // BMU_SEL_BOX.invalidate();
-    // viewToModelData.BCMU_SEL = 1;   //1-20
+     BCMU_SEL_BOX.setVisible(false);
+     BCMU_SEL_BOX.invalidate();
+     BMU_SEL_BOX.setVisible(false);
+     BMU_SEL_BOX.invalidate();
+     viewToModelData.BCMU_SEL = 1;   //1-20
     viewToModelData.BMU_SEL = 1;    //1-30
     
     BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2, BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
@@ -72,7 +72,7 @@ void MainScreenView::CellStateShow_OFF()
     presenter->ViewtoModelDat(viewToModelData);
 
     BMUMenu.animateToState(touchgfx::SlideMenu::COLLAPSED);
-    CellShow.animateToState(touchgfx::SlideMenu::COLLAPSED);
+  /*  CellShow.animateToState(touchgfx::SlideMenu::COLLAPSED)*/;
 
 }
 
@@ -80,6 +80,10 @@ void MainScreenView::setupScreen()
 {
     MainScreenViewBase::setupScreen();
 	//通知model更新数据
+
+
+
+
 	viewToModelData.reflashFlag = true;
 	presenter->ViewtoModelDat(viewToModelData);
 }
@@ -89,6 +93,22 @@ void MainScreenView::tearDownScreen()
     MainScreenViewBase::tearDownScreen();
 }
 
+//按键切换显示内容
+void MainScreenView::show_shouye() 
+{
+    shouye.setVisible(true);
+    batteryshowarea.setVisible(false);
+    shouye.invalidate();
+    batteryshowarea.invalidate();
+}
+
+void MainScreenView::show_batteryshowarea()
+{
+    shouye.setVisible(false);
+    batteryshowarea.setVisible(true);
+    shouye.invalidate();
+    batteryshowarea.invalidate();
+}
 
 void MainScreenView::BCMU1_clicked()
 {
