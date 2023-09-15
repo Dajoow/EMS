@@ -648,16 +648,7 @@ httpc_task (void const *args)
   while (1)
     {
       int ret = 0;
-      struct dhcp *dhcp;
-
-      // todo: clear it
-      // warning: this is a hack to display ip addr, do not use in productive
-      // environment
-      dhcp = netif_dhcp_data (&gnetif);
-      memcpy (bsmuSetting.IP_ADD, &dhcp->offered_ip_addr, 4);
-      memcpy (bsmuSetting.NETMASK, &dhcp->offered_sn_mask, 4);
-      memcpy (bsmuSetting.GATEWAY, &dhcp->offered_gw_addr, 4);
-
+      
       httpc_connect (&http_client, HOST, HTTPS_PORT);
 
       httpc_send_data_statistics (&http_client);
@@ -689,4 +680,45 @@ http_client_init (void)
   osThreadDef (http_client, httpc_task, osPriorityNormal, 0, 2 * 1024);
   httpc_handle = osThreadCreate (osThread (http_client), NULL);
 #endif
+}
+
+/**
+ * @brief
+ * @param
+ * @return
+*/
+int http_get_cloud_ip(char *ip_str, uint8_t len) {
+  char *str_p;
+  int str_len;
+
+  str_p = ipaddr_ntoa(&http_client.host_ip); 
+  str_len = strlen(str_p);
+
+  if (str_len > len){
+      Debug_printf("http_get_cloud_ip: buffer is too short.\r\n");
+      return -1;
+  }
+
+  memcpy(ip_str, str_p, len);
+
+  return 0;
+}
+
+int http_get_wan_ip(char *ip_str, uint8_t len){
+  struct dhcp *dhcp;
+  char *str_p;
+  int str_len;
+
+  dhcp = netif_dhcp_data (&gnetif);
+  str_p = ipaddr_ntoa(&dhcp->offered_ip_addr);
+  str_len = strlen(str_p);
+
+  if (str_len > len){
+      Debug_printf("http_get_wan_ip: buffer is too short.\r\n");
+      return -1;
+  }
+
+  memcpy(ip_str, str_p, len);
+
+  return 0;
 }
