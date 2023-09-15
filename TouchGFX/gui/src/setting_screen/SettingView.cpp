@@ -29,9 +29,6 @@ void SoftReset(void)
 };
 #endif
 
-#endif
-
-
 SettingView::SettingView() {
 
 }

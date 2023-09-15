@@ -327,7 +327,7 @@ cjson_init ()
 }
 
 static int
-httpc_connect (httpc_ctx_t *ctx, const char *host, int port)
+httpc_connect (httpc_ctx_t *ctx, const char *host, char *port)
 {
   int ret;
 
@@ -355,7 +355,7 @@ httpc_connect (httpc_ctx_t *ctx, const char *host, int port)
    * 2. Start the connection
    */
   if ((ret = mbedtls_net_connect (ctx->mbedtls.net_ctx, inet_ntoa (ctx->host_ip),
-                                  HTTPS_PORT, MBEDTLS_NET_PROTO_TCP))
+                                  port, MBEDTLS_NET_PROTO_TCP))
       != 0)
     {
       Debug_printf ("failed! mbedtls_net_connect returned %d\n\n", ret);
