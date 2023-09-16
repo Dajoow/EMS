@@ -27,6 +27,9 @@ void SoftReset(void)
     NVIC_SystemReset(); //进行软件复位
 }
 
+#endif
+
+
 SettingView::SettingView() {
 
 }

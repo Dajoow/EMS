@@ -65,21 +65,6 @@ public:
     virtual void Save_2_Fun(void);
     virtual void save_all_fun(void);
 
-   /* virtual void IP_ADD_1_fun();
-    virtual void IP_ADD_2_fun();
-    virtual void IP_ADD_3_fun();
-    virtual void IP_ADD_4_fun();
-
-    virtual void GATEWAY_1_fun();
-    virtual void GATEWAY_2_fun();
-    virtual void GATEWAY_3_fun();
-    virtual void GATEWAY_4_fun();
-
-    virtual void NETMASK_1_fun();
-    virtual void NETMASK_2_fun();
-    virtual void NETMASK_3_fun();
-    virtual void NETMASK_4_fun();*/
-
     virtual void IP_ADD_1_1_fun();
     virtual void IP_ADD_1_2_fun();
     virtual void IP_ADD_1_3_fun();
@@ -121,7 +106,7 @@ public:
 
     virtual void t_set_save();
     virtual void t_set_close();
-    virtual void t_setbutton_fun();
+  
 
     virtual void localnet_state(); //toggle组件开关，对应本地网络连接开关
     virtual void yunduannet_state();//toggle组件开关，对应云端网络连接开关
@@ -134,8 +119,9 @@ public:
 
 
 protected:
-    EEPROM_BSMU_tem SettingBuff;
+    EEPROM_BSMU_tem SettingBuff;//最终存入EEPROM的结构体数组
     EEPROM_BSMU_tem SettingBuff_temp;//该临时结构体用于临时保存数据，根据保存或取消指令来判断是否对数据进行保存
+
     //按键数组，存储每个弹窗里所有的按键数量
     WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >* IP_setting_butAry[12];
     WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >* IP_setting_1_butAry[5];
