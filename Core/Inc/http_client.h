@@ -31,4 +31,8 @@ typedef struct
 
 void http_client_init(void);
 
+int http_get_cloud_ip(char *ip_str, uint8_t len);
+
+int http_get_wan_ip(char *ip_str, uint8_t len);
+
 #endif

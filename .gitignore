@@ -197,3 +197,4 @@ TouchGFX/simulator/msvs/.vs
 cmake-build-*/
 EIDE/
 MDK-ARM/BSMU_H750IB/
+touchgfx_backup*
