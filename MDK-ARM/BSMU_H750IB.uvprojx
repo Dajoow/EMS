@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H750IBTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.3.1.1</PackID>
+          <PackID>Keil.STM32H7xx_DFP.2.4.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x24000000-0x2407FFFF) IROM(0x8000000-0x801FFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx,NDEBUG,MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../Drivers/BSP/Components/my_iic;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../agile_modbus/inc;../wolfSSL;../Middlewares/Third_Party/wolfSSL_wolfSSL_wolfSSL/wolfssl/;../cJSON/;../MBEDTLS/App;../Middlewares/Third_Party/mbedTLS/include;../Middlewares/Third_Party/mbedTLS/include/mbedtls</IncludePath>
+              <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../Drivers/BSP/Components/my_iic;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../agile_modbus/inc;../wolfSSL;../Middlewares/Third_Party/wolfSSL_wolfSSL_wolfSSL/wolfssl/;../cJSON/;../MBEDTLS/App;../Middlewares/Third_Party/mbedTLS/include;../Middlewares/Third_Party/mbedTLS/include/mbedtls;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1951,6 +1951,11 @@
               <FilePath>../touchgfx/generated/images/src/image_battery6.cpp</FilePath>
             </File>
             <File>
+              <FileName>image_battery_empty100x80.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_battery_empty100x80.cpp</FilePath>
+            </File>
+            <File>
               <FileName>image_batterystate_pressed.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_batterystate_pressed.cpp</FilePath>
@@ -1961,9 +1966,39 @@
               <FilePath>../touchgfx/generated/images/src/image_batterystate_released.cpp</FilePath>
             </File>
             <File>
+              <FileName>image_BCMU_BUT_BG_1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_bcmu_but_bg_1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_BCMU_BUT_BG_2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_bcmu_but_bg_2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_BENJI_BG.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_benji_bg.cpp</FilePath>
+            </File>
+            <File>
               <FileName>image_benji_bj.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_benji_bj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_BG_805x480.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_bg_805x480.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_BG_94x487.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_bg_94x487.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_biaoti.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_biaoti.cpp</FilePath>
             </File>
             <File>
               <FileName>image_bj_white.cpp</FileName>
@@ -2066,6 +2101,11 @@
               <FilePath>../touchgfx/generated/images/src/image_dianzhanxinxi_bj.cpp</FilePath>
             </File>
             <File>
+              <FileName>image_ethON_50x50.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_ethon_50x50.cpp</FilePath>
+            </File>
+            <File>
               <FileName>image_home_FILL0_wght400_GRAD0_opsz48.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_home_fill0_wght400_grad0_opsz48.cpp</FilePath>
@@ -2079,6 +2119,11 @@
               <FileName>image_imageup.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_imageup.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_info_BG.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_info_bg.cpp</FilePath>
             </File>
             <File>
               <FileName>image_ip_set_bk.cpp</FileName>
@@ -2131,6 +2176,16 @@
               <FilePath>../touchgfx/generated/images/src/image_mainpage_chunengdianzhan_w.cpp</FilePath>
             </File>
             <File>
+              <FileName>image_menu_expand_1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_menu_expand_1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_menu_expand_2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_menu_expand_2.cpp</FilePath>
+            </File>
+            <File>
               <FileName>image_rs485_bj.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_rs485_bj.cpp</FilePath>
@@ -2176,6 +2231,16 @@
               <FilePath>../touchgfx/generated/images/src/image_setshowip_bj.cpp</FilePath>
             </File>
             <File>
+              <FileName>image_setting_1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_setting_1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_setting_2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_setting_2.cpp</FilePath>
+            </File>
+            <File>
               <FileName>image_setting_pressed.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_setting_pressed.cpp</FilePath>
@@ -2189,6 +2254,21 @@
               <FileName>image_settings_FILL0_wght400_GRAD0_opsz48.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_settings_fill0_wght400_grad0_opsz48.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_station.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_station.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_station_1.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_station_1.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_station_2.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_station_2.cpp</FilePath>
             </File>
             <File>
               <FileName>image_t1_pressed.cpp</FileName>
@@ -2209,6 +2289,11 @@
               <FileName>image_Vector2.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_vector2.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_wifiON.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_wifion.cpp</FilePath>
             </File>
             <File>
               <FileName>image_zubeijing.cpp</FileName>
