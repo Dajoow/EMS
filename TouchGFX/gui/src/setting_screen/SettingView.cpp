@@ -31,29 +31,21 @@ void SoftReset(void)
 #endif
 
 
+
 SettingView::SettingView() {
+  
 
 }
 
 void SettingView::setupScreen()
 {
-    //按键数组的初始化,使其对应界面上的按键
+    /*按键数组的初始化, 对应界面上的按键，用于按键输入时选择相应的输入框*/
 
-    //IP_setting界面的按键
-    IP_setting_butAry[0] = &IP_ADD_1;
-    IP_setting_butAry[1] = &IP_ADD_2;
-    IP_setting_butAry[2] = &IP_ADD_3;
-    IP_setting_butAry[3] = &IP_ADD_4;
+    //zu_set界面的按键
+    zu_set_butAry[0] = &zu_setbutton;//对应簇装机数的按键
 
-    IP_setting_butAry[4] = &GATEWAY_1;
-    IP_setting_butAry[5] = &GATEWAY_2;
-    IP_setting_butAry[6] = &GATEWAY_3;
-    IP_setting_butAry[7] = &GATEWAY_4;
-
-    IP_setting_butAry[8] = &NETMASK_1;
-    IP_setting_butAry[9] = &NETMASK_2;
-    IP_setting_butAry[10] = &NETMASK_3;
-    IP_setting_butAry[11] = &NETMASK_4;
+    //t_set界面的按键
+    t_set_butAry[0] = &t_setbutton;//对应采集周期的按键
 
     //IP_setting_1界面的按键
     IP_setting_1_butAry[0] = &IP_ADD_1_1; //对应本地服务器IP设置的4个按键
@@ -69,28 +61,6 @@ void SettingView::setupScreen()
     IP_setting_2_butAry[3] = &IP_ADD_2_4;
     IP_setting_2_butAry[4] = &PORT_1;//端口
 
-    //zu_set界面的按键
-    zu_set_butAry[0] = &zu_setbutton;//对应簇装机数的按键
-
-    //t_set界面的按键
-    t_set_butAry[0] = &t_setbutton;//对应采集周期的按键
-
-    //还要SettingBuff和EEPROM中一致（赋初值）
-    /*SettingBuff.IP_ADD[0] = 0;
-    SettingBuff.IP_ADD[1] = 0;
-    SettingBuff.IP_ADD[2] = 0;
-    SettingBuff.IP_ADD[3] = 0;*/
-
-   /* SettingBuff.GATEWAY[0] = 0;
-    SettingBuff.GATEWAY[1] = 0;
-    SettingBuff.GATEWAY[2] = 0;
-    SettingBuff.GATEWAY[3] = 0;
-
-    SettingBuff.NETMASK[0] = 0;
-    SettingBuff.NETMASK[1] = 0;
-    SettingBuff.NETMASK[2] = 0;
-    SettingBuff.NETMASK[3] = 0;*/
-
     SettingBuff.IP_ADD_1[0] = 0;
     SettingBuff.IP_ADD_1[1] = 0;
     SettingBuff.IP_ADD_1[2] = 0;
@@ -103,9 +73,14 @@ void SettingView::setupScreen()
     SettingBuff.IP_ADD_2[3] = 0;
     SettingBuff.port_1 = 0;
 
-    SettingBuff.cu_num = 20;
-    SettingBuff.poll_T = 5;
+    SettingBuff.cu_num = 0;
+    SettingBuff.poll_T = 0;
 
+    SettingBuff.canBps = 0;
+    SettingBuff.RS485Bps=0;			//485波特率
+    SettingBuff.local_flag=0;     //开、关本地网络
+    SettingBuff.yunduan_flag=0;   //开、关云端服务器
+   
     //在设置过程中使用的临时变量
     SettingBuff_temp.IP_ADD_1[0] = 0;
     SettingBuff_temp.IP_ADD_1[1] = 0;
@@ -119,8 +94,8 @@ void SettingView::setupScreen()
     SettingBuff_temp.IP_ADD_2[3] = 0;
     SettingBuff_temp.port_1 = 0;
 
-    SettingBuff_temp.cu_num = 20;
-    SettingBuff_temp.poll_T = 5;
+    SettingBuff_temp.cu_num = 0;
+    SettingBuff_temp.poll_T = 0;
 
 
     //不在模拟器中,在实际中要将EEPROM中的数据拷贝过来
@@ -128,49 +103,118 @@ void SettingView::setupScreen()
     memcpy(&SettingBuff, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
 #endif
 
-    //以下为界面初始化数据的显示
+    //以下为拷贝了EEPROM中的值后，setting界面数据信息显示
+    
+    //初始化轮询周期数据
+    Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%d", SettingBuff.cu_num);
+    cu_num.invalidate();
 
     //初始化簇装机数数据
     Unicode::snprintf(poll_tBuffer, POLL_T_SIZE, "%d", SettingBuff.poll_T); //轮询中x10去掉
     poll_t.invalidate();
 
-    //初始化轮询周期数据
-    Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%d", SettingBuff.cu_num);
-    cu_num.invalidate();
 
-    //初始化本地服务器IP、端口数据
-    Unicode::snprintf(Buffer1[0], 10, "%03d", SettingBuff_temp.IP_ADD_1[0]);
+    //初始化界面和弹窗的本地服务器IP、端口数据
+    Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[0]); //本地服务器ip更新
+    Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[1]);
+    ip_text1_1.invalidate();
+    Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[2]);
+    Unicode::snprintf(ip_text2_1Buffer2, IP_TEXT2_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[3]);
+    ip_text2_1.invalidate();
+    Unicode::snprintf(port_textBuffer, PORT_TEXT_SIZE, "%d", SettingBuff.port);//本地服务器port更新
+    port_text.invalidate();
+
+    Unicode::snprintf(Buffer1[0], 10, "%03d", SettingBuff.IP_ADD_1[0]); //本地服务器设置界面更新
     IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
     IP_ADD_1_1.invalidate();
-    Unicode::snprintf(Buffer1[1], 10, "%03d", SettingBuff_temp.IP_ADD_1[1]);
+    Unicode::snprintf(Buffer1[1], 10, "%03d", SettingBuff.IP_ADD_1[1]);
     IP_ADD_1_2.setWildcardTextBuffer(Buffer1[1]);
     IP_ADD_1_2.invalidate();
-    Unicode::snprintf(Buffer1[2], 10, "%03d", SettingBuff_temp.IP_ADD_1[2]);
+    Unicode::snprintf(Buffer1[2], 10, "%03d", SettingBuff.IP_ADD_1[2]);
     IP_ADD_1_3.setWildcardTextBuffer(Buffer1[2]);
     IP_ADD_1_3.invalidate();
-    Unicode::snprintf(Buffer1[3], 10, "%03d", SettingBuff_temp.IP_ADD_1[3]);
+    Unicode::snprintf(Buffer1[3], 10, "%03d", SettingBuff.IP_ADD_1[3]);
     IP_ADD_1_4.setWildcardTextBuffer(Buffer1[3]);
     IP_ADD_1_4.invalidate();
-    Unicode::snprintf(Buffer1[4], 10, "%d", SettingBuff_temp.port);
+    Unicode::snprintf(Buffer1[4], 10, "%d", SettingBuff.port);
     PORT.setWildcardTextBuffer(Buffer1[4]);
     PORT.invalidate();
 
-    //初始化4G模块IP、端口数据
-    Unicode::snprintf(Buffer2[0], 10, "%03d", SettingBuff_temp.IP_ADD_2[0]);
+    //初始化界面和弹窗的4G模块IP、端口数据
+    Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[0]);//本地服务器ip更新
+    Unicode::snprintf(ip_1_text1_1Buffer2, IP_1_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_2[1]);
+    ip_1_text1_1.invalidate();
+    Unicode::snprintf(ip_1_text2_1Buffer1, IP_1_TEXT2_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[2]);
+    Unicode::snprintf(ip_1_text2_1Buffer2, IP_1_TEXT2_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_2[3]);
+    ip_1_text2_1.invalidate();
+    Unicode::snprintf(port_1_textBuffer, PORT_1_TEXT_SIZE, "%d", SettingBuff.port_1);//本地服务器port更新
+    port_1_text.invalidate();
+
+    Unicode::snprintf(Buffer2[0], 10, "%03d", SettingBuff.IP_ADD_2[0]);//本地服务器设置界面更新
     IP_ADD_2_1.setWildcardTextBuffer(Buffer2[0]);
     IP_ADD_2_1.invalidate();
-    Unicode::snprintf(Buffer2[1], 10, "%03d", SettingBuff_temp.IP_ADD_2[1]);
+    Unicode::snprintf(Buffer2[1], 10, "%03d", SettingBuff.IP_ADD_2[1]);
     IP_ADD_2_2.setWildcardTextBuffer(Buffer2[1]);
     IP_ADD_2_2.invalidate();
-    Unicode::snprintf(Buffer2[2], 10, "%03d", SettingBuff_temp.IP_ADD_2[2]);
+    Unicode::snprintf(Buffer2[2], 10, "%03d", SettingBuff.IP_ADD_2[2]);
     IP_ADD_2_3.setWildcardTextBuffer(Buffer2[2]);
     IP_ADD_2_3.invalidate();
-    Unicode::snprintf(Buffer2[3], 10, "%03d", SettingBuff_temp.IP_ADD_2[3]);
+    Unicode::snprintf(Buffer2[3], 10, "%03d", SettingBuff.IP_ADD_2[3]);
     IP_ADD_2_4.setWildcardTextBuffer(Buffer2[3]);
     IP_ADD_2_4.invalidate();
-    Unicode::snprintf(Buffer2[4], 10, "%d", SettingBuff_temp.port_1);
+    Unicode::snprintf(Buffer2[4], 10, "%d", SettingBuff.port_1);
     PORT_1.setWildcardTextBuffer(Buffer2[4]);
     PORT_1.invalidate();
+
+    //初始化界面本地、云端网络切换更新
+    local.forceState(false);
+    local.invalidate();
+    yunduan.forceState(false);
+    yunduan.invalidate();
+
+    if (SettingBuff.local_flag == 1)     local.forceState(true);
+    else local.forceState(false);
+    local.invalidate();
+
+    if (SettingBuff.yunduan_flag == 1)   yunduan.forceState(true);
+    else yunduan.forceState(false);
+    yunduan.invalidate();
+
+    //初始化界面can、rs485波特率更新
+    switch(SettingBuff.canBps)
+    {
+    case 0:setcanbaudrate500_2000();
+        break;
+    case 1:setcanbaudrate500_1000();
+        break;
+    case 2:setcanbaudrate500_500();
+        break;
+    case 3:setcanbaudrate250_250();
+        break;
+    case 4:setcanbaudrate125_125();
+        break;
+    default:setcanbaudrate500_2000();
+        break;
+    }
+
+    switch (SettingBuff.RS485Bps)
+    {
+    case 0:setRS485baudrate_115200();
+        break;
+    case 1:setRS485baudrate_57600();
+        break;
+    case 2:setRS485baudrate_38400();
+        break;
+    case 3:setRS485baudrate_19200();
+        break;
+    case 4:setRS485baudrate_9600();
+        break;
+    case 5:setRS485baudrate_4800();
+        break;
+    default:setRS485baudrate_115200();
+        break;
+    }
+
 }
 
 void SettingView::tearDownScreen()
@@ -183,7 +227,7 @@ void SettingView::SettingViewTick()
 {
     //在本地服务器设置弹窗界面可见时
     if (IP_setting_1.isVisible() == true) {
-        //如果虚拟键盘的任意按键按下，更新设置框内的数据
+        //如果虚拟键盘的任意按键按下，更新设置框内的数据,后续根据保存、取消按键来选择是否保存数据
         if (keyboard1.refreshFlag) {
             keyboard1.refreshFlag = 0;
             Unicode::snprintf(Buffer1[0], 10, "%03d", SettingBuff_temp.IP_ADD_1[0]);
@@ -258,63 +302,43 @@ void SettingView::SettingViewTick()
         }
     }
 }
-//IP_setting
-void SettingView::IP_setting_fun()//IP_setting按键按下
-{
-    IP_setting.setVisible(true);//打开IP设置弹窗
-    IP_setting.invalidate();
-
-    keyboard1.initialize(); //打开键盘输入，并初始化
-    keyboard1.setVisible(true);
-    keyboard1.invalidate();
-}
-
-//CloseSetting
-void SettingView::CloseSetting_fun() //关闭弹窗
-{
-    IP_setting.setVisible(false);
-    IP_setting.invalidate();
-    keyboard1.setVisible(false);
-    keyboard1.invalidate();
-    SetButState(IP_setting_butAry, 5, false);
-}
-
-//IP_setting保存按钮
-void SettingView::SaveFun(void) //当Save_but按键按下，将结构体中的数据存入EEPROM 用于ip_setting弹窗
-{
-    /*往AT24C02写入*/
-#ifndef SIMULATOR
-    /*在下面更新过
-    eeprom_bsmu_WR.cu_num
-    eeprom_bsmu_WR.poll_T
-    */
-    // eeprom_bsmu_WR.IP_ADD[0] = IP_ADD_1.getSelectedItem();
-    memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
-    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
-#endif
-
-    ////本机IP更新显示
-    //Unicode::snprintf(ip_text1Buffer1, IP_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[0]);
-    //Unicode::snprintf(ip_text1Buffer2, IP_TEXT1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD[1]);
-    //ip_text1.invalidate();
-    //Unicode::snprintf(ip_text2Buffer1, IP_TEXT2BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[2]);
-    //Unicode::snprintf(ip_text2Buffer2, IP_TEXT2BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD[3]);
-    //ip_text2.invalidate();
-
-    //Unicode::snprintf(gateway_text1Buffer1, GATEWAY_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.GATEWAY[0]);
-    //Unicode::snprintf(gateway_text1Buffer2, GATEWAY_TEXT1BUFFER2_SIZE, "%03d", SettingBuff.GATEWAY[1]);
-    //gateway_text1.invalidate();
-    //Unicode::snprintf(gateway_text2Buffer1, GATEWAY_TEXT2BUFFER1_SIZE, "%03d", SettingBuff.GATEWAY[2]);
-    //Unicode::snprintf(gateway_text2Buffer2, GATEWAY_TEXT2BUFFER2_SIZE, "%03d", SettingBuff.GATEWAY[3]);
-    //gateway_text2.invalidate();
-
-    //Unicode::snprintf(networkText1Buffer1, NETWORKTEXT1BUFFER1_SIZE, "%03d", SettingBuff.NETMASK[0]);
-    //Unicode::snprintf(networkText1Buffer2, NETWORKTEXT1BUFFER2_SIZE, "%03d", SettingBuff.NETMASK[1]);
-    //networkText1.invalidate();
-    //Unicode::snprintf(networkText2Buffer1, NETWORKTEXT2BUFFER1_SIZE, "%03d", SettingBuff.NETMASK[2]);
-    //Unicode::snprintf(networkText2Buffer2, NETWORKTEXT2BUFFER2_SIZE, "%03d", SettingBuff.NETMASK[3]);
-    //networkText2.invalidate();
-}
+////IP_setting
+//void SettingView::IP_setting_fun()//IP_setting按键按下
+//{
+//    IP_setting.setVisible(true);//打开IP设置弹窗
+//    IP_setting.invalidate();
+//
+//    keyboard1.initialize(); //打开键盘输入，并初始化
+//    keyboard1.setVisible(true);
+//    keyboard1.invalidate();
+//}
+//
+////CloseSetting
+//void SettingView::CloseSetting_fun() //关闭弹窗
+//{
+//    IP_setting.setVisible(false);
+//    IP_setting.invalidate();
+//    keyboard1.setVisible(false);
+//    keyboard1.invalidate();
+//    SetButState(IP_setting_butAry, 5, false);
+//}
+//
+////IP_setting保存按钮
+//void SettingView::SaveFun(void) //当Save_but按键按下，将结构体中的数据存入EEPROM 用于ip_setting弹窗
+//{
+//    /*往AT24C02写入*/
+//#ifndef SIMULATOR
+//    /*在下面更新过
+//    eeprom_bsmu_WR.cu_num
+//    eeprom_bsmu_WR.poll_T
+//    */
+//    // eeprom_bsmu_WR.IP_ADD[0] = IP_ADD_1.getSelectedItem();
+//    memcpy(eerom_data.WriteBuff, &SettingBuff, sizeof(SettingBuff));
+//    AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
+//#endif
+//
+//   
+//}
 
 
 void SettingView::save_all_fun(void) //点击save_all后，将所有数据进行保存
@@ -338,15 +362,15 @@ void SettingView::save_all_fun(void) //点击save_all后，将所有数据进行
 }
 
 //IP_setting_1
-void SettingView::IP_setting_1_fun()//IP_setting_1按键按下
-{
-    IP_setting_1.setVisible(true);//打开本地服务器设置弹窗
-    IP_setting_1.invalidate();
-
-    keyboard1.initialize(); //打开键盘输入，并初始化
-    keyboard1.setVisible(true);
-    keyboard1.invalidate();
-}
+//void SettingView::IP_setting_1_fun()//本地服务器设置按键按下
+//{
+//    IP_setting_1.setVisible(true);//打开本地服务器设置弹窗
+//    IP_setting_1.invalidate();
+//
+//    keyboard1.initialize(); //打开键盘输入，并初始化
+//    keyboard1.setVisible(true);
+//    keyboard1.invalidate();
+//}
 
 //CloseSetting_1
 void SettingView::CloseSetting_1_fun()//CloseSetting_1按键按下
@@ -380,9 +404,9 @@ void SettingView::CloseSetting_1_fun()//CloseSetting_1按键按下
     IP_setting_1.setVisible(false);//关闭本地服务器设置弹窗
     IP_setting_1.invalidate();
 
+    keyboard1.initialize();//初键盘始化
     keyboard1.setVisible(false);//关闭键盘输入
     keyboard1.invalidate();
-
 }
 
 //IP_setting_1保存按钮
@@ -394,8 +418,8 @@ void SettingView::Save_1_Fun(void) //点击保存按键
     SettingBuff.IP_ADD_1[3] = SettingBuff_temp.IP_ADD_1[3];
     SettingBuff.port = SettingBuff_temp.port;
 
-    //本地服务器更新，显示设置输入框内的数据，作用是下一次打开设置时，显示的设置值跟未保存前一致
-    IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
+    //本地服务器更新显示设置后的ip和端口
+    //IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
     Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[0]);
     Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[1]);
     ip_text1_1.invalidate();
@@ -408,21 +432,22 @@ void SettingView::Save_1_Fun(void) //点击保存按键
     IP_setting_1.setVisible(false);//关闭本地服务器设置弹窗
     IP_setting_1.invalidate();
 
+    keyboard1.initialize();//初键盘始化
     keyboard1.setVisible(false);//关闭键盘输入
     keyboard1.invalidate();
 }
 
 
 //IP_setting_2
-void SettingView::IP_setting_2_fun()//IP_setting_2按键按下
-{
-    IP_setting_2.setVisible(true);//打开4G模块设计弹窗
-    IP_setting_2.invalidate();
-
-    keyboard1.initialize();//打开键盘输入，并初始化
-    keyboard1.setVisible(true);
-    keyboard1.invalidate();
-}
+//void SettingView::IP_setting_2_fun()//IP_setting_2按键按下
+//{
+//    IP_setting_2.setVisible(true);//打开4G模块设计弹窗
+//    IP_setting_2.invalidate();
+//
+//    keyboard1.initialize();//打开键盘输入，并初始化
+//    keyboard1.setVisible(true);
+//    keyboard1.invalidate();
+//}
 
 //CloseSetting_2
 void SettingView::CloseSetting_2_fun()//CloseSetting_2按键按下
@@ -457,6 +482,7 @@ void SettingView::CloseSetting_2_fun()//CloseSetting_2按键按下
     IP_setting_2.setVisible(false);//关闭弹窗
     IP_setting_2.invalidate();
 
+    keyboard1.initialize();//初键盘始化
     keyboard1.setVisible(false);
     keyboard1.invalidate();
 
@@ -486,6 +512,7 @@ void SettingView::Save_2_Fun(void)
     IP_setting_2.setVisible(false);//关闭本地服务器设置弹窗
     IP_setting_2.invalidate();
 
+    keyboard1.initialize();//初键盘始化
     keyboard1.setVisible(false);//关闭键盘输入
     keyboard1.invalidate();
 
@@ -999,12 +1026,12 @@ void SettingView::port_4g_set()
     keyboard1.invalidate();
 }
 
-void SettingView::get_local_ip( Unicode::UnicodeChar  *buffer[4], int len)
-{
-   /* buffer = IP_ADD_1[0] + IP_ADD_1[1] + IP_ADD_1[2] + IP_ADD_1[3];
-    UnicodeChar::snprintf();*/
-    Unicode::snprintf(buffer[0], 10, "%d", SettingBuff.IP_ADD_1[0]);
-    Unicode::snprintf(buffer[1], 10, "%d", SettingBuff.IP_ADD_1[1]);
-    Unicode::snprintf(buffer[2], 10, "%d", SettingBuff.IP_ADD_1[2]);
-    Unicode::snprintf(buffer[3], 10, "%d", SettingBuff.IP_ADD_1[3]);
-}
+//void SettingView::get_local_ip( Unicode::UnicodeChar  *buffer[4], int len)
+//{
+//   ///* buffer = IP_ADD_1[0] + IP_ADD_1[1] + IP_ADD_1[2] + IP_ADD_1[3];
+//   // UnicodeChar::snprintf();*/
+//   // Unicode::snprintf(buffer[0], 10, "%d", SettingBuff.IP_ADD_1[0]);
+//   // Unicode::snprintf(buffer[1], 10, "%d", SettingBuff.IP_ADD_1[1]);
+//   // Unicode::snprintf(buffer[2], 10, "%d", SettingBuff.IP_ADD_1[2]);
+//   // Unicode::snprintf(buffer[3], 10, "%d", SettingBuff.IP_ADD_1[3]);
+//}

@@ -95,7 +95,7 @@ void MainScreenView::setupScreen()
     http_get_wan_ip(local_ip_buff,16);
     http_get_cloud_ip(cloud_server_ip_buff, 16);
 
-    Unicode::snprintf(local_ipBuffer, LOCAL_SERVER_IP_SIZE, "%s", local_ip_buff);
+    Unicode::snprintf(local_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", local_ip_buff);
     local_ip.invalidate();
 
     Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%d", cloud_server_ip_buff);
@@ -104,8 +104,15 @@ void MainScreenView::setupScreen()
 
     /*bsmuSetting.cu_num = ;*/
 
-    /*Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", SettingView::SettingBuff.IP_ADD_1[0]);
-    local_server_ip.invalidate();*/
+    Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", bsmuSetting.IP_ADD_1[0]);
+    Unicode::snprintf(local_server_ip2Buffer, LOCAL_SERVER_IP2_SIZE, "%d", bsmuSetting.IP_ADD_1[1]);
+    Unicode::snprintf(local_server_ip3Buffer, LOCAL_SERVER_IP3_SIZE, "%d", bsmuSetting.IP_ADD_1[2]);
+    Unicode::snprintf(local_server_ip4Buffer, LOCAL_SERVER_IP4_SIZE, "%d", bsmuSetting.IP_ADD_1[3]);
+    local_server_ip.invalidate();
+    local_server_ip2.invalidate();
+    local_server_ip3.invalidate();
+    local_server_ip4.invalidate();
+
 #endif
 }
 

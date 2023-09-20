@@ -24,9 +24,9 @@
             "Height": 78,
             "LockPosition": true,
             "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
+              "Red": 237,
+              "Green": 237,
+              "Blue": 237
             }
           },
           {
@@ -2873,16 +2873,6 @@
             "Height": 522,
             "Components": [
               {
-                "Type": "Image",
-                "Name": "baojingxinxi",
-                "X": 789,
-                "Y": 79,
-                "Width": 200,
-                "Height": 350,
-                "LockPosition": true,
-                "RelativeFilename": "baojingbj.png"
-              },
-              {
                 "Type": "Container",
                 "Name": "PCS_menu",
                 "X": 810,
@@ -2930,30 +2920,244 @@
               },
               {
                 "Type": "Container",
-                "Name": "baojingxinxi_menu",
-                "X": 780,
-                "Y": 69,
+                "Name": "benjixinxi",
+                "X": 40,
+                "Y": 148,
                 "Width": 220,
                 "Height": 373,
-                "LockPosition": true,
                 "Components": [
                   {
+                    "Type": "Image",
+                    "Name": "baojingxinxi",
+                    "X": 8,
+                    "Y": 14,
+                    "Width": 190,
+                    "Height": 345,
+                    "LockPosition": true,
+                    "RelativeFilename": "baojingbj.png"
+                  },
+                  {
+                    "Type": "ScalableImage",
+                    "Name": "scalableImage2",
+                    "X": 12,
+                    "Y": 230,
+                    "Width": 180,
+                    "Height": 4,
+                    "Filename": "line.png",
+                    "ScalingAlgorithm": "Nearest-neighbor"
+                  },
+                  {
+                    "Type": "ScalableImage",
+                    "Name": "scalableImage1",
+                    "X": 12,
+                    "Y": 115,
+                    "Width": 180,
+                    "Height": 4,
+                    "Filename": "line.png",
+                    "ScalingAlgorithm": "Nearest-neighbor"
+                  },
+                  {
                     "Type": "TextArea",
-                    "Name": "baojing_biaoti",
-                    "X": 50,
-                    "Y": 10,
-                    "Width": 120,
-                    "Height": 42,
-                    "TextId": "__SingleUse_CFYG",
+                    "Name": "local_ip",
+                    "X": 18,
+                    "Y": 66,
+                    "Width": 171,
+                    "Height": 32,
+                    "TextId": "__SingleUse_NYTC",
+                    "TextRotation": "0",
+                    "AutoSize": true,
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_89JO",
+                      "UseBuffer": true,
+                      "BufferSize": 20
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_ip2",
+                    "X": 40,
+                    "Y": 131,
+                    "Width": 80,
+                    "Height": 27,
+                    "Visible": false,
+                    "TextId": "__SingleUse_YM4E",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_ip3",
+                    "X": 120,
+                    "Y": 131,
+                    "Width": 80,
+                    "Height": 27,
+                    "Visible": false,
+                    "TextId": "__SingleUse_ZSOL",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_ip4",
+                    "X": 200,
+                    "Y": 131,
+                    "Width": 80,
+                    "Height": 27,
+                    "Visible": false,
+                    "TextId": "__SingleUse_3FE9",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_server_ip",
+                    "X": 18,
+                    "Y": 180,
+                    "Width": 44,
+                    "Height": 32,
+                    "TextId": "__SingleUse_YRYK",
+                    "TextRotation": "0",
+                    "AutoSize": true,
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_B2G5",
+                      "UseBuffer": true,
+                      "BufferSize": 16
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_server_ip2",
+                    "X": 62,
+                    "Y": 180,
+                    "Width": 44,
+                    "Height": 32,
+                    "TextId": "__SingleUse_IXPA",
+                    "TextRotation": "0",
+                    "AutoSize": true,
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_RGHW",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_server_ip3",
+                    "X": 106,
+                    "Y": 180,
+                    "Width": 44,
+                    "Height": 32,
+                    "TextId": "__SingleUse_W9CS",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_UZT2",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "local_server_ip4",
+                    "X": 151,
+                    "Y": 180,
+                    "Width": 39,
+                    "Height": 32,
+                    "TextId": "__SingleUse_S5YA",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_XGKH",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "cloud_server_ip",
+                    "X": 18,
+                    "Y": 298,
+                    "Width": 171,
+                    "Height": 32,
+                    "TextId": "__SingleUse_HUKM",
+                    "TextRotation": "0",
+                    "AutoSize": true,
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_SAF9",
+                      "UseBuffer": true,
+                      "BufferSize": 20
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "IP3",
+                    "X": 151,
+                    "Y": 255,
+                    "Width": 20,
+                    "Height": 27,
+                    "TextId": "__SingleUse_5Z6N",
                     "TextRotation": "0"
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "yunduan_IP",
+                    "X": 32,
+                    "Y": 254,
+                    "Width": 120,
+                    "Height": 34,
+                    "TextId": "__SingleUse_0XWV",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "IP2",
+                    "X": 152,
+                    "Y": 134,
+                    "Width": 20,
+                    "Height": 34,
+                    "TextId": "__SingleUse_MN9S",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "bendifuwuqi_IP",
+                    "X": 32,
+                    "Y": 133,
+                    "Width": 120,
+                    "Height": 34,
+                    "TextId": "__SingleUse_E3C0",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "IP1",
+                    "X": 115,
+                    "Y": 26,
+                    "Width": 20,
+                    "Height": 32,
+                    "TextId": "__SingleUse_MXGN",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "bendi_IP",
+                    "X": 67,
+                    "Y": 26,
+                    "Width": 48,
+                    "Height": 34,
+                    "TextId": "__SingleUse_6R2W",
+                    "TextRotation": "0",
+                    "AutoSize": true
                   }
                 ]
               },
               {
                 "Type": "Image",
                 "Name": "cubj",
-                "X": 416,
-                "Y": 155,
+                "X": 659,
+                "Y": 162,
                 "Width": 320,
                 "Height": 345,
                 "LockPosition": true,
@@ -2962,18 +3166,17 @@
               {
                 "Type": "Image",
                 "Name": "linecu",
-                "X": 425,
-                "Y": 229,
+                "X": 668,
+                "Y": 228,
                 "Width": 300,
                 "Height": 4,
-                "LockPosition": true,
                 "RelativeFilename": "line.png"
               },
               {
                 "Type": "Container",
                 "Name": "cu_info",
-                "X": 435,
-                "Y": 157,
+                "X": 678,
+                "Y": 164,
                 "Width": 296,
                 "Height": 345,
                 "LockPosition": true,
@@ -2981,8 +3184,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_kohm2",
-                    "X": 219,
-                    "Y": 297,
+                    "X": 221,
+                    "Y": 288,
                     "Width": 60,
                     "Height": 32,
                     "TextId": "__SingleUse_RGR6",
@@ -2991,8 +3194,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_kohm1",
-                    "X": 219,
-                    "Y": 258,
+                    "X": 221,
+                    "Y": 249,
                     "Width": 60,
                     "Height": 32,
                     "TextId": "__SingleUse_97UZ",
@@ -3001,8 +3204,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_V1",
-                    "X": 226,
-                    "Y": 216,
+                    "X": 228,
+                    "Y": 207,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_BLN2",
@@ -3011,8 +3214,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_A1",
-                    "X": 226,
-                    "Y": 174,
+                    "X": 228,
+                    "Y": 165,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_09OZ",
@@ -3021,8 +3224,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit__zu",
-                    "X": 226,
-                    "Y": 130,
+                    "X": 228,
+                    "Y": 121,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_U8MT",
@@ -3031,8 +3234,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_hao",
-                    "X": 226,
-                    "Y": 90,
+                    "X": 228,
+                    "Y": 81,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_YHEU",
@@ -3041,8 +3244,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "fujueyuan",
-                    "X": 141,
-                    "Y": 299,
+                    "X": 143,
+                    "Y": 290,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_LBXL",
@@ -3056,8 +3259,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "zhengjueyuan",
-                    "X": 141,
-                    "Y": 257,
+                    "X": 143,
+                    "Y": 248,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_CTBR",
@@ -3071,8 +3274,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "cudianya",
-                    "X": 141,
-                    "Y": 217,
+                    "X": 143,
+                    "Y": 208,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_6JWP",
@@ -3086,8 +3289,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "cudianliu",
-                    "X": 141,
-                    "Y": 176,
+                    "X": 143,
+                    "Y": 167,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_TRJ5",
@@ -3101,8 +3304,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "zushuliang",
-                    "X": 141,
-                    "Y": 132,
+                    "X": 143,
+                    "Y": 123,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_WPKB",
@@ -3116,8 +3319,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "cubianhao",
-                    "X": 141,
-                    "Y": 90,
+                    "X": 143,
+                    "Y": 81,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_P9CI",
@@ -3131,8 +3334,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_2",
-                    "X": 121,
-                    "Y": 298,
+                    "X": 122,
+                    "Y": 290,
                     "Width": 18,
                     "Height": 33,
                     "TextId": "__SingleUse_ABHS",
@@ -3141,8 +3344,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_fujueyuan",
-                    "X": 13,
-                    "Y": 298,
+                    "X": 15,
+                    "Y": 289,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_SZPO",
@@ -3151,8 +3354,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_1",
-                    "X": 123,
-                    "Y": 256,
+                    "X": 122,
+                    "Y": 249,
                     "Width": 13,
                     "Height": 33,
                     "TextId": "__SingleUse_1K2C",
@@ -3161,8 +3364,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_zhengjueyuan",
-                    "X": 13,
-                    "Y": 256,
+                    "X": 15,
+                    "Y": 247,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_R9NS",
@@ -3171,8 +3374,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_cudianya",
-                    "X": 13,
-                    "Y": 215,
+                    "X": 15,
+                    "Y": 206,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_TYYR",
@@ -3181,8 +3384,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_cudianliu",
-                    "X": 13,
-                    "Y": 174,
+                    "X": 15,
+                    "Y": 165,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_OOS5",
@@ -3191,8 +3394,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_dianchizushuliang",
-                    "X": 13,
-                    "Y": 130,
+                    "X": 15,
+                    "Y": 121,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_MME9",
@@ -3201,8 +3404,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_cubianhao",
-                    "X": 13,
-                    "Y": 88,
+                    "X": 15,
+                    "Y": 79,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_S49A",
@@ -3211,10 +3414,10 @@
                   {
                     "Type": "TextArea",
                     "Name": "dancushishishuju",
-                    "X": 24,
+                    "X": 47,
                     "Y": 10,
-                    "Width": 240,
-                    "Height": 56,
+                    "Width": 192,
+                    "Height": 45,
                     "TextId": "__SingleUse_Q7HF",
                     "TextRotation": "0",
                     "AutoSize": true
@@ -3224,8 +3427,8 @@
               {
                 "Type": "Image",
                 "Name": "dianzhanbj",
-                "X": 48,
-                "Y": 155,
+                "X": 287,
+                "Y": 162,
                 "Width": 320,
                 "Height": 345,
                 "LockPosition": true,
@@ -3234,18 +3437,17 @@
               {
                 "Type": "Image",
                 "Name": "linedianzhan",
-                "X": 55,
-                "Y": 229,
+                "X": 294,
+                "Y": 226,
                 "Width": 300,
                 "Height": 4,
-                "LockPosition": true,
                 "RelativeFilename": "line.png"
               },
               {
                 "Type": "Container",
                 "Name": "dianzhan_info",
-                "X": 69,
-                "Y": 157,
+                "X": 308,
+                "Y": 164,
                 "Width": 279,
                 "Height": 345,
                 "LockPosition": true,
@@ -3253,8 +3455,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_W2",
-                    "X": 226,
-                    "Y": 300,
+                    "X": 230,
+                    "Y": 290,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_H9YI",
@@ -3263,8 +3465,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_W1",
-                    "X": 226,
-                    "Y": 258,
+                    "X": 230,
+                    "Y": 248,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_P6RZ",
@@ -3273,8 +3475,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_V",
-                    "X": 226,
-                    "Y": 216,
+                    "X": 230,
+                    "Y": 206,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_TQWW",
@@ -3283,8 +3485,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_A",
-                    "X": 226,
-                    "Y": 174,
+                    "X": 230,
+                    "Y": 164,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_4HV7",
@@ -3293,8 +3495,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_cu",
-                    "X": 226,
-                    "Y": 130,
+                    "X": 230,
+                    "Y": 120,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_1S40",
@@ -3303,8 +3505,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Unit_kwh",
-                    "X": 226,
-                    "Y": 90,
+                    "X": 230,
+                    "Y": 80,
                     "Width": 43,
                     "Height": 32,
                     "TextId": "__SingleUse_4UA0",
@@ -3313,8 +3515,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "fangdiangonglv",
-                    "X": 141,
-                    "Y": 300,
+                    "X": 145,
+                    "Y": 290,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_0AWV",
@@ -3328,8 +3530,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "chongdiangonglv",
-                    "X": 141,
-                    "Y": 258,
+                    "X": 145,
+                    "Y": 248,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_L26J",
@@ -3343,8 +3545,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "zongdianya",
-                    "X": 141,
-                    "Y": 216,
+                    "X": 145,
+                    "Y": 206,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_RFUM",
@@ -3358,8 +3560,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "zongdianliu",
-                    "X": 141,
-                    "Y": 174,
+                    "X": 145,
+                    "Y": 164,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_X0PW",
@@ -3373,8 +3575,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "dianchicushuliang",
-                    "X": 141,
-                    "Y": 132,
+                    "X": 145,
+                    "Y": 122,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_ZHO4",
@@ -3388,8 +3590,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "zhuangjirongliang",
-                    "X": 141,
-                    "Y": 90,
+                    "X": 145,
+                    "Y": 80,
                     "Width": 82,
                     "Height": 28,
                     "TextId": "__SingleUse_NRXJ",
@@ -3403,8 +3605,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_fangdiangonglv",
-                    "X": 13,
-                    "Y": 298,
+                    "X": 17,
+                    "Y": 288,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_GJH9",
@@ -3413,8 +3615,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_chongdiangonglv",
-                    "X": 13,
-                    "Y": 256,
+                    "X": 17,
+                    "Y": 246,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_9G7S",
@@ -3423,8 +3625,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_zongdianya",
-                    "X": 13,
-                    "Y": 214,
+                    "X": 17,
+                    "Y": 204,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_ZSEM",
@@ -3433,8 +3635,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_zongdianliu",
-                    "X": 13,
-                    "Y": 172,
+                    "X": 17,
+                    "Y": 162,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_HSCB",
@@ -3443,8 +3645,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_dianchicushuliang",
-                    "X": 13,
-                    "Y": 130,
+                    "X": 17,
+                    "Y": 120,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_WP3H",
@@ -3453,8 +3655,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "Chinese_zongzhuangjirongliang",
-                    "X": 13,
-                    "Y": 88,
+                    "X": 17,
+                    "Y": 78,
                     "Width": 120,
                     "Height": 33,
                     "TextId": "__SingleUse_SCZM",
@@ -3463,10 +3665,10 @@
                   {
                     "Type": "TextArea",
                     "Name": "dianzhanxinxi",
-                    "X": 61,
+                    "X": 75,
                     "Y": 10,
-                    "Width": 160,
-                    "Height": 56,
+                    "Width": 128,
+                    "Height": 45,
                     "TextId": "__SingleUse_5L69",
                     "TextRotation": "0",
                     "AutoSize": true
@@ -3474,178 +3676,33 @@
                 ]
               },
               {
-                "Type": "Image",
-                "Name": "benjixinxi_BG",
-                "X": 48,
-                "Y": 24,
-                "Width": 690,
-                "Height": 110,
-                "LockPosition": true,
-                "RelativeFilename": "benji_bj.png"
-              },
-              {
                 "Type": "Container",
-                "Name": "benjixinxi_menu",
-                "X": 50,
-                "Y": 16,
-                "Width": 699,
-                "Height": 125,
-                "LockPosition": true,
+                "Name": "baojingxinxi_container",
+                "X": 2,
+                "Y": 2,
+                "Width": 1024,
+                "Height": 160,
                 "Components": [
                   {
-                    "Type": "TextArea",
-                    "Name": "IP3",
-                    "X": 121,
-                    "Y": 82,
-                    "Width": 20,
-                    "Height": 27,
-                    "TextId": "__SingleUse_5Z6N",
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "yunduan_IP",
-                    "X": 19,
-                    "Y": 82,
-                    "Width": 100,
-                    "Height": 27,
-                    "TextId": "__SingleUse_0XWV",
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "IP2",
-                    "X": 121,
-                    "Y": 49,
-                    "Width": 20,
-                    "Height": 27,
-                    "TextId": "__SingleUse_MN9S",
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "bendifuwuqi_IP",
-                    "X": 19,
-                    "Y": 48,
-                    "Width": 100,
-                    "Height": 27,
-                    "TextId": "__SingleUse_E3C0",
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "IP1",
-                    "X": 89,
+                    "Type": "Image",
+                    "Name": "benjixinxi_BG",
+                    "X": 47,
                     "Y": 15,
-                    "Width": 20,
-                    "Height": 27,
-                    "TextId": "__SingleUse_MXGN",
-                    "TextRotation": "0"
+                    "Width": 930,
+                    "Height": 130,
+                    "RelativeFilename": "benji_bj.png"
                   },
                   {
                     "Type": "TextArea",
-                    "Name": "bendi_IP",
-                    "X": 49,
+                    "Name": "baojing_biaoti",
+                    "X": 51,
                     "Y": 15,
-                    "Width": 40,
-                    "Height": 27,
-                    "TextId": "__SingleUse_6R2W",
+                    "Width": 97,
+                    "Height": 35,
+                    "TextId": "__SingleUse_CFYG",
                     "TextRotation": "0"
                   }
                 ]
-              },
-              {
-                "Type": "TextArea",
-                "Name": "local_ip",
-                "X": 251,
-                "Y": 31,
-                "Width": 263,
-                "Height": 27,
-                "TextId": "__SingleUse_NYTC",
-                "TextRotation": "0",
-                "Wildcard1": {
-                  "TextId": "__SingleUse_89JO",
-                  "UseBuffer": true,
-                  "BufferSize": 16
-                }
-              },
-              {
-                "Type": "TextArea",
-                "Name": "local_ip2",
-                "X": 290,
-                "Y": 31,
-                "Width": 80,
-                "Height": 27,
-                "Visible": false,
-                "TextId": "__SingleUse_YM4E",
-                "TextRotation": "0",
-                "AutoSize": true
-              },
-              {
-                "Type": "TextArea",
-                "Name": "local_ip3",
-                "X": 370,
-                "Y": 31,
-                "Width": 80,
-                "Height": 27,
-                "Visible": false,
-                "TextId": "__SingleUse_ZSOL",
-                "TextRotation": "0",
-                "AutoSize": true
-              },
-              {
-                "Type": "TextArea",
-                "Name": "local_ip4",
-                "X": 450,
-                "Y": 31,
-                "Width": 80,
-                "Height": 27,
-                "Visible": false,
-                "TextId": "__SingleUse_3FE9",
-                "TextRotation": "0",
-                "AutoSize": true
-              },
-              {
-                "Type": "TextArea",
-                "Name": "local_server_ip",
-                "X": 251,
-                "Y": 66,
-                "Width": 262,
-                "Height": 34,
-                "TextId": "__SingleUse_YRYK",
-                "TextRotation": "0",
-                "Wildcard1": {
-                  "TextId": "__SingleUse_B2G5",
-                  "UseBuffer": true,
-                  "BufferSize": 16
-                }
-              },
-              {
-                "Type": "TextArea",
-                "Name": "local_server_ip2",
-                "X": 292,
-                "Y": 65,
-                "Width": 80,
-                "Height": 27,
-                "Visible": false,
-                "TextId": "__SingleUse_IXPA",
-                "TextRotation": "0",
-                "AutoSize": true
-              },
-              {
-                "Type": "TextArea",
-                "Name": "cloud_server_ip",
-                "X": 263,
-                "Y": 100,
-                "Width": 238,
-                "Height": 34,
-                "TextId": "__SingleUse_HUKM",
-                "TextRotation": "0",
-                "Wildcard1": {
-                  "TextId": "__SingleUse_SAF9",
-                  "UseBuffer": true,
-                  "BufferSize": 16
-                }
               }
             ]
           }
@@ -4318,8 +4375,8 @@
               {
                 "Type": "ButtonWithLabel",
                 "Name": "save_all",
-                "X": 479,
-                "Y": 49,
+                "X": 536,
+                "Y": 31,
                 "Width": 124,
                 "Height": 74,
                 "Pressed": "ipset_bj_pressed.png",
@@ -4334,8 +4391,8 @@
               {
                 "Type": "ButtonWithLabel",
                 "Name": "start",
-                "X": 698,
-                "Y": 49,
+                "X": 744,
+                "Y": 31,
                 "Width": 124,
                 "Height": 74,
                 "Pressed": "ipset_bj_pressed.png",
@@ -5266,33 +5323,31 @@
           {
             "Type": "ToggleButton",
             "Name": "yunduan",
-            "X": 285,
-            "Y": 102,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_round_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_round_small_on_normal.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\round_neutral.json"
+            "X": 276,
+            "Y": 84,
+            "Width": 138,
+            "Height": 50,
+            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_on_dark.png",
+            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_off_normal.png"
           },
           {
             "Type": "ToggleButton",
             "Name": "local",
-            "X": 285,
-            "Y": 32,
-            "Width": 62,
-            "Height": 34,
-            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_small_round_small_off_light.png",
-            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_small_round_small_on_normal.png",
-            "Preset": "alternate_theme\\presets\\togglebutton\\small\\round_neutral.json",
+            "X": 81,
+            "Y": 84,
+            "Width": 138,
+            "Height": 50,
+            "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_on_dark.png",
+            "Released": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_off_normal.png",
             "Clickable": true
           },
           {
             "Type": "TextArea",
             "Name": "textArea20",
-            "X": 136,
-            "Y": 93,
-            "Width": 96,
-            "Height": 34,
+            "X": 282,
+            "Y": 25,
+            "Width": 120,
+            "Height": 42,
             "TextId": "__SingleUse_0VYU",
             "TextRotation": "0",
             "AutoSize": true
@@ -5300,10 +5355,10 @@
           {
             "Type": "TextArea",
             "Name": "textArea12",
-            "X": 136,
-            "Y": 30,
-            "Width": 96,
-            "Height": 34,
+            "X": 90,
+            "Y": 25,
+            "Width": 120,
+            "Height": 42,
             "TextId": "__SingleUse_BDOF",
             "TextRotation": "0",
             "AutoSize": true

@@ -26,7 +26,7 @@ SettingViewBase::SettingViewBase() :
     add(background);
 
     daohanglan.setPosition(-2, -2, 1023, 207);
-    save_all.setXY(479, 49);
+    save_all.setXY(536, 31);
     save_all.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     save_all.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OIA8));
     save_all.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -34,7 +34,7 @@ SettingViewBase::SettingViewBase() :
     save_all.setAction(buttonCallback);
     daohanglan.add(save_all);
 
-    start.setXY(698, 49);
+    start.setXY(744, 31);
     start.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     start.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HXXB));
     start.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -512,23 +512,23 @@ SettingViewBase::SettingViewBase() :
 
     add(rs485);
 
-    yunduan.setXY(285, 102);
-    yunduan.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_ON_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_OFF_LIGHT_ID));
+    yunduan.setXY(276, 84);
+    yunduan.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_OFF_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_ON_DARK_ID));
     yunduan.setAction(buttonCallback);
     add(yunduan);
 
-    local.setXY(285, 32);
-    local.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_ON_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_SMALL_ROUND_SMALL_OFF_LIGHT_ID));
+    local.setXY(81, 84);
+    local.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_OFF_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_ON_DARK_ID));
     local.setAction(buttonCallback);
     add(local);
 
-    textArea20.setXY(136, 93);
+    textArea20.setXY(282, 25);
     textArea20.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea20.setLinespacing(0);
     textArea20.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0VYU));
     add(textArea20);
 
-    textArea12.setXY(136, 30);
+    textArea12.setXY(90, 25);
     textArea12.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea12.setLinespacing(0);
     textArea12.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BDOF));

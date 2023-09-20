@@ -443,13 +443,29 @@ protected:
     touchgfx::TextAreaWithOneWildcard avg_soc;
     touchgfx::TextAreaWithOneWildcard avg_v;
     touchgfx::Container shouye;
-    touchgfx::Image baojingxinxi;
     touchgfx::Container PCS_menu;
     touchgfx::BoxWithBorder PCS_BG;
     touchgfx::TextArea PCS_biaoti;
     touchgfx::TextArea PCS;
-    touchgfx::Container baojingxinxi_menu;
-    touchgfx::TextArea baojing_biaoti;
+    touchgfx::Container benjixinxi;
+    touchgfx::Image baojingxinxi;
+    touchgfx::ScalableImage scalableImage2;
+    touchgfx::ScalableImage scalableImage1;
+    touchgfx::TextAreaWithOneWildcard local_ip;
+    touchgfx::TextArea local_ip2;
+    touchgfx::TextArea local_ip3;
+    touchgfx::TextArea local_ip4;
+    touchgfx::TextAreaWithOneWildcard local_server_ip;
+    touchgfx::TextAreaWithOneWildcard local_server_ip2;
+    touchgfx::TextAreaWithOneWildcard local_server_ip3;
+    touchgfx::TextAreaWithOneWildcard local_server_ip4;
+    touchgfx::TextAreaWithOneWildcard cloud_server_ip;
+    touchgfx::TextArea IP3;
+    touchgfx::TextArea yunduan_IP;
+    touchgfx::TextArea IP2;
+    touchgfx::TextArea bendifuwuqi_IP;
+    touchgfx::TextArea IP1;
+    touchgfx::TextArea bendi_IP;
     touchgfx::Image cubj;
     touchgfx::Image linecu;
     touchgfx::Container cu_info;
@@ -496,21 +512,9 @@ protected:
     touchgfx::TextArea Chinese_dianchicushuliang;
     touchgfx::TextArea Chinese_zongzhuangjirongliang;
     touchgfx::TextArea dianzhanxinxi;
+    touchgfx::Container baojingxinxi_container;
     touchgfx::Image benjixinxi_BG;
-    touchgfx::Container benjixinxi_menu;
-    touchgfx::TextArea IP3;
-    touchgfx::TextArea yunduan_IP;
-    touchgfx::TextArea IP2;
-    touchgfx::TextArea bendifuwuqi_IP;
-    touchgfx::TextArea IP1;
-    touchgfx::TextArea bendi_IP;
-    touchgfx::TextAreaWithOneWildcard local_ip;
-    touchgfx::TextArea local_ip2;
-    touchgfx::TextArea local_ip3;
-    touchgfx::TextArea local_ip4;
-    touchgfx::TextAreaWithOneWildcard local_server_ip;
-    touchgfx::TextArea local_server_ip2;
-    touchgfx::TextAreaWithOneWildcard cloud_server_ip;
+    touchgfx::TextArea baojing_biaoti;
 
     /*
      * Wildcard Buffers
@@ -601,6 +605,18 @@ protected:
     touchgfx::Unicode::UnicodeChar avg_temBuffer[AVG_TEM_SIZE];
     static const uint16_t AVG_V_SIZE = 10;
     touchgfx::Unicode::UnicodeChar avg_vBuffer[AVG_V_SIZE];
+    static const uint16_t LOCAL_IP_SIZE = 20;
+    touchgfx::Unicode::UnicodeChar local_ipBuffer[LOCAL_IP_SIZE];
+    static const uint16_t LOCAL_SERVER_IP_SIZE = 16;
+    touchgfx::Unicode::UnicodeChar local_server_ipBuffer[LOCAL_SERVER_IP_SIZE];
+    static const uint16_t LOCAL_SERVER_IP2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar local_server_ip2Buffer[LOCAL_SERVER_IP2_SIZE];
+    static const uint16_t LOCAL_SERVER_IP3_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar local_server_ip3Buffer[LOCAL_SERVER_IP3_SIZE];
+    static const uint16_t LOCAL_SERVER_IP4_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar local_server_ip4Buffer[LOCAL_SERVER_IP4_SIZE];
+    static const uint16_t CLOUD_SERVER_IP_SIZE = 20;
+    touchgfx::Unicode::UnicodeChar cloud_server_ipBuffer[CLOUD_SERVER_IP_SIZE];
     static const uint16_t FUJUEYUAN_SIZE = 10;
     touchgfx::Unicode::UnicodeChar fujueyuanBuffer[FUJUEYUAN_SIZE];
     static const uint16_t ZHENGJUEYUAN_SIZE = 10;
@@ -625,12 +641,6 @@ protected:
     touchgfx::Unicode::UnicodeChar dianchicushuliangBuffer[DIANCHICUSHULIANG_SIZE];
     static const uint16_t ZHUANGJIRONGLIANG_SIZE = 10;
     touchgfx::Unicode::UnicodeChar zhuangjirongliangBuffer[ZHUANGJIRONGLIANG_SIZE];
-    static const uint16_t LOCAL_IP_SIZE = 16;
-    touchgfx::Unicode::UnicodeChar local_ipBuffer[LOCAL_IP_SIZE];
-    static const uint16_t LOCAL_SERVER_IP_SIZE = 16;
-    touchgfx::Unicode::UnicodeChar local_server_ipBuffer[LOCAL_SERVER_IP_SIZE];
-    static const uint16_t CLOUD_SERVER_IP_SIZE = 16;
-    touchgfx::Unicode::UnicodeChar cloud_server_ipBuffer[CLOUD_SERVER_IP_SIZE];
 
 private:
 

@@ -27,6 +27,7 @@ public:
 
     virtual ~SettingPresenter() {};
 
+
 private:
     SettingPresenter();
 

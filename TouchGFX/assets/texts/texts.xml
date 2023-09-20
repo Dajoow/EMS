@@ -97,8 +97,23 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_IXPA" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">New Text</Translation>
+      <Text Id="__SingleUse_XGKH" Alignment="Left" TypographyId="SegoeUI_24">
+        <Translation Language="GB">255</Translation>
+      </Text>
+      <Text Id="__SingleUse_UZT2" Alignment="Left" TypographyId="SegoeUI_24">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_RGHW" Alignment="Left" TypographyId="STXihei_24">
+        <Translation Language="GB">255</Translation>
+      </Text>
+      <Text Id="__SingleUse_S5YA" Alignment="Left" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_W9CS" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;.</Translation>
+      </Text>
+      <Text Id="__SingleUse_IXPA" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;.</Translation>
       </Text>
       <Text Id="__SingleUse_3FE9" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">New Text</Translation>
@@ -131,18 +146,18 @@
         <Translation Language="GB">255.255.255.255</Translation>
       </Text>
       <Text Id="__SingleUse_B2G5" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">255.255.255.255</Translation>
+        <Translation Language="GB">255</Translation>
       </Text>
       <Text Id="__SingleUse_89JO" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">255.255.255.255</Translation>
       </Text>
-      <Text Id="__SingleUse_HUKM" Alignment="Center" TypographyId="SegoeUI_20">
+      <Text Id="__SingleUse_HUKM" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_YRYK" Alignment="Center" TypographyId="SegoeUI_20">
-        <Translation Language="GB">&lt;value&gt;</Translation>
+      <Text Id="__SingleUse_YRYK" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;.</Translation>
       </Text>
-      <Text Id="__SingleUse_NYTC" Alignment="Center" TypographyId="SegoeUI_20">
+      <Text Id="__SingleUse_NYTC" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_T2K0" Alignment="Left" TypographyId="STXihei_40">
@@ -208,7 +223,7 @@
       <Text Id="__SingleUse_5HGB" Alignment="Left" TypographyId="STxihei_30">
         <Translation Language="GB">采集周期</Translation>
       </Text>
-      <Text Id="__SingleUse_0VYU" Alignment="Left" TypographyId="STXihei_24">
+      <Text Id="__SingleUse_0VYU" Alignment="Left" TypographyId="STxihei_30">
         <Translation Language="GB">云端网络</Translation>
       </Text>
       <Text Id="__SingleUse_3Y3U" Alignment="Left" TypographyId="SegoeUI_22">
@@ -235,7 +250,7 @@
       <Text Id="__SingleUse_VV6S" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_BDOF" Alignment="Left" TypographyId="STXihei_24">
+      <Text Id="__SingleUse_BDOF" Alignment="Left" TypographyId="STxihei_30">
         <Translation Language="GB">本地网络</Translation>
       </Text>
       <Text Id="__SingleUse_O0GF" Alignment="Left" TypographyId="STxihei_30">
@@ -760,25 +775,25 @@
       <Text Id="__SingleUse_5258" Alignment="Center" TypographyId="SegoeUI_18">
         <Translation Language="GB">BMU30</Translation>
       </Text>
-      <Text Id="__SingleUse_6R2W" Alignment="Center" TypographyId="STxihei_20">
+      <Text Id="__SingleUse_6R2W" Alignment="Center" TypographyId="STXihei_24">
         <Translation Language="GB">本地</Translation>
       </Text>
-      <Text Id="__SingleUse_MXGN" Alignment="Center" TypographyId="SegoeUI_20">
+      <Text Id="__SingleUse_MXGN" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">IP</Translation>
       </Text>
-      <Text Id="__SingleUse_E3C0" Alignment="Center" TypographyId="STxihei_20">
+      <Text Id="__SingleUse_E3C0" Alignment="Center" TypographyId="STXihei_24">
         <Translation Language="GB">本地服务器</Translation>
       </Text>
-      <Text Id="__SingleUse_MN9S" Alignment="Center" TypographyId="SegoeUI_20">
+      <Text Id="__SingleUse_MN9S" Alignment="Center" TypographyId="STXihei_24">
         <Translation Language="GB">IP</Translation>
       </Text>
-      <Text Id="__SingleUse_0XWV" Alignment="Center" TypographyId="STxihei_20">
+      <Text Id="__SingleUse_0XWV" Alignment="Center" TypographyId="STXihei_24">
         <Translation Language="GB">云端服务器</Translation>
       </Text>
-      <Text Id="__SingleUse_5Z6N" Alignment="Center" TypographyId="SegoeUI_20">
+      <Text Id="__SingleUse_5Z6N" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">IP</Translation>
       </Text>
-      <Text Id="__SingleUse_5L69" Alignment="Left" TypographyId="STXihei_40">
+      <Text Id="__SingleUse_5L69" Alignment="Left" TypographyId="STxihei_32">
         <Translation Language="GB">电站信息</Translation>
       </Text>
       <Text Id="__SingleUse_SCZM" Alignment="Center" TypographyId="STXihei_24">
@@ -853,7 +868,7 @@
       <Text Id="__SingleUse_H9YI" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">W</Translation>
       </Text>
-      <Text Id="__SingleUse_Q7HF" Alignment="Left" TypographyId="STXihei_40">
+      <Text Id="__SingleUse_Q7HF" Alignment="Left" TypographyId="STxihei_32">
         <Translation Language="GB">单簇实时数据</Translation>
       </Text>
       <Text Id="__SingleUse_S49A" Alignment="Center" TypographyId="STXihei_24">
@@ -934,7 +949,7 @@
       <Text Id="__SingleUse_RGR6" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">kΩ</Translation>
       </Text>
-      <Text Id="__SingleUse_CFYG" Alignment="Left" TypographyId="STxihei_30">
+      <Text Id="__SingleUse_CFYG" Alignment="Left" TypographyId="STXihei_24">
         <Translation Language="GB">报警信息</Translation>
       </Text>
       <Text Id="__SingleUse_B1X3" Alignment="Center" TypographyId="SegoeUI_30">
@@ -1397,5 +1412,6 @@
     <Typography Id="SegoeUI_18" Font="seguisb.ttf" Size="17" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="uibold20" Font="seguisb.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_22" Font="segoeui.ttf" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="STxihei_32" Font="STXIHEI.TTF" Size="32" Bpp="4" Direction="LTR" FallbackCharacter="?" />
   </Typographies>
 </TextDatabase>

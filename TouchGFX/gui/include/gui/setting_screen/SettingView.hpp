@@ -18,11 +18,11 @@
 typedef struct
 {
     uint16_t cu_num;
-	uint16_t poll_T;      //这里的单位是10ms,使用的时候记得乘以10	
+	uint16_t poll_T;      
     uint16_t IP_ADD_1[4];	 //本地服务器
-	uint16_t port;
+	uint16_t port; //本地服务器port
     uint16_t IP_ADD_2[4];	 //4G
-	uint16_t port_1;
+	uint16_t port_1;//4g模块port
     uint16_t canBps;			//CAN波特率
     uint16_t RS485Bps;			//485波特率
     uint16_t local_flag;     //开、关本地网络
@@ -45,15 +45,15 @@ public:
 
     virtual void SettingViewTick();
 
-    virtual void IP_setting_fun();
-    virtual void IP_setting_1_fun();
-    virtual void IP_setting_2_fun();
+    //virtual void IP_setting_fun();
+    //virtual void IP_setting_1_fun();
+    //virtual void IP_setting_2_fun();
 
-    virtual void CloseSetting_fun();
+    //virtual void CloseSetting_fun();
     virtual void CloseSetting_1_fun();
     virtual void CloseSetting_2_fun();
 
-    virtual void SaveFun(void);
+ /*   virtual void SaveFun(void);*/
     virtual void Save_1_Fun(void);
     virtual void Save_2_Fun(void);
     virtual void save_all_fun(void);
@@ -109,10 +109,13 @@ public:
     virtual void ip_4g_set();
     virtual void port_4g_set();
 
-    void get_local_ip(Unicode::UnicodeChar *buffer[4], int len);
+  /*  void get_local_ip(Unicode::UnicodeChar *buffer[4], int len);*/
 
+
+
+   
 protected:
-    EEPROM_BSMU_tem SettingBuff ;//最终存入EEPROM的结构体数组
+    EEPROM_BSMU_tem SettingBuff;//最终存入EEPROM的结构体数组
     EEPROM_BSMU_tem SettingBuff_temp;//该临时结构体用于临时保存数据，根据保存或取消指令来判断是否对数据进行保存
 
     //按键数组，存储每个弹窗里所有的按键数量
@@ -122,12 +125,12 @@ protected:
     WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >* zu_set_butAry[1]; 
     WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >* t_set_butAry[1];
 
-    Unicode::UnicodeChar Buffer[12][10]; //临时变量
-    Unicode::UnicodeChar Buffer1[5][10]; //临时变量
-    Unicode::UnicodeChar Buffer2[5][10]; //临时变量
+    Unicode::UnicodeChar Buffer[12][10] ; //临时变量
+    Unicode::UnicodeChar Buffer1[5][10] ; //临时变量
+    Unicode::UnicodeChar Buffer2[5][10] ; //临时变量
 
-    Unicode::UnicodeChar zu_Buffer[1][10]; //临时变量
-    Unicode::UnicodeChar t_Buffer[1][10]; //临时变量
+    Unicode::UnicodeChar zu_Buffer[1][10] ; //临时变量
+    Unicode::UnicodeChar t_Buffer[1][10]  ; //临时变量
 
 
 	// Callback which is executed when a item in the scroll whell is selected to as selected style.

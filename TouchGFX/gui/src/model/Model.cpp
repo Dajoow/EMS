@@ -30,6 +30,7 @@ ViewToModelData viewToModelDataTemp;
 Model::Model() : modelListener(0)
 {
 
+   
 }
 
 

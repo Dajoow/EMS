@@ -48,6 +48,9 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId typography)
     case Typography::SEGOEUI_22:
         // segoeui_22_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[11]);
+    case Typography::STXIHEI_32:
+        // STXIHEI_TTF_32_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[12]);
     default:
         return 0;
     }
