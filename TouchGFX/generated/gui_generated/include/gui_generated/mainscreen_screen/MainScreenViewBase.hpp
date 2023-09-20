@@ -438,6 +438,10 @@ protected:
     touchgfx::ButtonWithLabel BCMU1;
     touchgfx::TextArea cu_text;
     touchgfx::TextAreaWithOneWildcard cu;
+    touchgfx::Container debug_show;
+    touchgfx::TextAreaWithOneWildcard avg_tem;
+    touchgfx::TextAreaWithOneWildcard avg_soc;
+    touchgfx::TextAreaWithOneWildcard avg_v;
     touchgfx::Container shouye;
     touchgfx::Image baojingxinxi;
     touchgfx::Container PCS_menu;
@@ -500,6 +504,13 @@ protected:
     touchgfx::TextArea bendifuwuqi_IP;
     touchgfx::TextArea IP1;
     touchgfx::TextArea bendi_IP;
+    touchgfx::TextAreaWithOneWildcard local_ip;
+    touchgfx::TextArea local_ip2;
+    touchgfx::TextArea local_ip3;
+    touchgfx::TextArea local_ip4;
+    touchgfx::TextAreaWithOneWildcard local_server_ip;
+    touchgfx::TextArea local_server_ip2;
+    touchgfx::TextAreaWithOneWildcard cloud_server_ip;
 
     /*
      * Wildcard Buffers
@@ -586,6 +597,10 @@ protected:
     touchgfx::Unicode::UnicodeChar zuBuffer[ZU_SIZE];
     static const uint16_t CU_SIZE = 8;
     touchgfx::Unicode::UnicodeChar cuBuffer[CU_SIZE];
+    static const uint16_t AVG_TEM_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar avg_temBuffer[AVG_TEM_SIZE];
+    static const uint16_t AVG_V_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar avg_vBuffer[AVG_V_SIZE];
     static const uint16_t FUJUEYUAN_SIZE = 10;
     touchgfx::Unicode::UnicodeChar fujueyuanBuffer[FUJUEYUAN_SIZE];
     static const uint16_t ZHENGJUEYUAN_SIZE = 10;
@@ -610,6 +625,12 @@ protected:
     touchgfx::Unicode::UnicodeChar dianchicushuliangBuffer[DIANCHICUSHULIANG_SIZE];
     static const uint16_t ZHUANGJIRONGLIANG_SIZE = 10;
     touchgfx::Unicode::UnicodeChar zhuangjirongliangBuffer[ZHUANGJIRONGLIANG_SIZE];
+    static const uint16_t LOCAL_IP_SIZE = 16;
+    touchgfx::Unicode::UnicodeChar local_ipBuffer[LOCAL_IP_SIZE];
+    static const uint16_t LOCAL_SERVER_IP_SIZE = 16;
+    touchgfx::Unicode::UnicodeChar local_server_ipBuffer[LOCAL_SERVER_IP_SIZE];
+    static const uint16_t CLOUD_SERVER_IP_SIZE = 16;
+    touchgfx::Unicode::UnicodeChar cloud_server_ipBuffer[CLOUD_SERVER_IP_SIZE];
 
 private:
 

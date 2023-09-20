@@ -55,6 +55,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
+    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
     legend.setXY(618, 622);
     legend.setBitmap(touchgfx::Bitmap(BITMAP_LEGEND_2_ID));
@@ -835,7 +836,6 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU_SEL_BOX.setBitmap(touchgfx::Bitmap(BITMAP_SEL_ZU_ID));
     BMU_SEL_BOX.setPosition(0, 0, 90, 66);
     BMU_SEL_BOX.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
-    BMU_SEL_BOX.setVisible(false);
     BMU_Container.add(BMU_SEL_BOX);
 
     BMU30.setXY(4, 1749);
@@ -1110,7 +1110,6 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU_SEL_BOX.setBitmap(touchgfx::Bitmap(BITMAP_SEL_CU_ID));
     BCMU_SEL_BOX.setPosition(-1, 26, 111, 68);
     BCMU_SEL_BOX.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
-    BCMU_SEL_BOX.setVisible(false);
     BCMU_Container.add(BCMU_SEL_BOX);
 
     BCMU20.setXY(4, 1247);
@@ -1291,10 +1290,35 @@ MainScreenViewBase::MainScreenViewBase() :
     cu.setVisible(false);
     batteryshowarea.add(cu);
 
+    debug_show.setPosition(258, -2, 250, 97);
+    avg_tem.setPosition(33, 69, 221, 24);
+    avg_tem.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    avg_tem.setLinespacing(0);
+    Unicode::snprintf(avg_temBuffer, AVG_TEM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_BMV2).getText());
+    avg_tem.setWildcard(avg_temBuffer);
+    avg_tem.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FEIO));
+    debug_show.add(avg_tem);
+
+    avg_soc.setPosition(26, 42, 233, 27);
+    avg_soc.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    avg_soc.setLinespacing(0);
+    avg_soc.setWildcard(touchgfx::TypedText(T___SINGLEUSE_X6YL).getText());
+    avg_soc.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EPD9));
+    debug_show.add(avg_soc);
+
+    avg_v.setPosition(33, 15, 226, 27);
+    avg_v.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    avg_v.setLinespacing(0);
+    Unicode::snprintf(avg_vBuffer, AVG_V_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_I5VS).getText());
+    avg_v.setWildcard(avg_vBuffer);
+    avg_v.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OHJG));
+    debug_show.add(avg_v);
+
+    batteryshowarea.add(debug_show);
+
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
-    shouye.setVisible(false);
     baojingxinxi.setXY(789, 79);
     baojingxinxi.setBitmap(touchgfx::Bitmap(BITMAP_BAOJINGBJ_ID));
     shouye.add(baojingxinxi);
@@ -1658,6 +1682,58 @@ MainScreenViewBase::MainScreenViewBase() :
     benjixinxi_menu.add(bendi_IP);
 
     shouye.add(benjixinxi_menu);
+
+    local_ip.setPosition(251, 31, 263, 27);
+    local_ip.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_ip.setLinespacing(0);
+    Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_89JO).getText());
+    local_ip.setWildcard(local_ipBuffer);
+    local_ip.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NYTC));
+    shouye.add(local_ip);
+
+    local_ip2.setXY(290, 31);
+    local_ip2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_ip2.setLinespacing(0);
+    local_ip2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YM4E));
+    local_ip2.setVisible(false);
+    shouye.add(local_ip2);
+
+    local_ip3.setXY(370, 31);
+    local_ip3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_ip3.setLinespacing(0);
+    local_ip3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZSOL));
+    local_ip3.setVisible(false);
+    shouye.add(local_ip3);
+
+    local_ip4.setXY(450, 31);
+    local_ip4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_ip4.setLinespacing(0);
+    local_ip4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3FE9));
+    local_ip4.setVisible(false);
+    shouye.add(local_ip4);
+
+    local_server_ip.setPosition(251, 66, 262, 34);
+    local_server_ip.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_server_ip.setLinespacing(0);
+    Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_B2G5).getText());
+    local_server_ip.setWildcard(local_server_ipBuffer);
+    local_server_ip.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YRYK));
+    shouye.add(local_server_ip);
+
+    local_server_ip2.setXY(292, 65);
+    local_server_ip2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    local_server_ip2.setLinespacing(0);
+    local_server_ip2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IXPA));
+    local_server_ip2.setVisible(false);
+    shouye.add(local_server_ip2);
+
+    cloud_server_ip.setPosition(263, 100, 238, 34);
+    cloud_server_ip.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cloud_server_ip.setLinespacing(0);
+    Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_SAF9).getText());
+    cloud_server_ip.setWildcard(cloud_server_ipBuffer);
+    cloud_server_ip.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HUKM));
+    shouye.add(cloud_server_ip);
 
     add(shouye);
 }

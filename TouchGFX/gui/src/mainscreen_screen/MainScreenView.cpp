@@ -2,6 +2,15 @@
 #include <touchgfx/Utils.hpp>
 #include <touchgfx/Callback.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <gui/setting_screen/SettingView.hpp>
+
+#ifndef SIMULATOR
+extern "C" {
+#include "at24cxx.h"
+#include "http_client.h"	
+};
+#endif
+
 MainScreenView::MainScreenView()
 :BMUMenuCallback(*this)
 {
@@ -14,6 +23,7 @@ MainScreenView::MainScreenView()
 
   /*先不显示BCMU选择块*/
   BCMU_SEL_BOX.setVisible(false);
+  BMU_SEL_BOX.setVisible(false);
   /*setStateChangedCallback() 函数注册回调函数*/
   BMUMenu.setStateChangedCallback(BMUMenuCallback);
 }
@@ -21,71 +31,82 @@ MainScreenView::MainScreenView()
 void BMUMenuCallback_t::execute(const SlideMenu& menu)
 {
   touchgfx_printf("BMUMenuCallback\n");
-  //if(view_.GetCellShowState())
-  //  view_.CellStateShow_OFF();
-  //else
-  //  view_.CellStateShow();
+  if(view_.show_batteryshowarea_State())
+    view_.show_batteryshowarea_on();
+  else
+    view_.show_batteryshowarea_off();
 }
 
-/**
- * @description: 查询电池显示的情况
- * @return {*}
- */
-//bool MainScreenView::GetCellShowState()
-//{
-//  if (CellShow.getState() ==touchgfx::SlideMenu::EXPANDED)
-//    return true;
-//  else
-//    return false;
-//}
+bool MainScreenView::show_batteryshowarea_State()//电池界面是否显示
+{
+    if (batteryshowarea.isVisible())
+        return true;
+    else
+        return false;
+}
 
 /**
  * @description: 展开BMU菜单
  * @return {*}
  */
-void MainScreenView::CellStateShow()
+void MainScreenView::show_batteryshowarea_on() //电池界面显示
 {
-    BMUMenu.animateToState(touchgfx::SlideMenu::EXPANDED);
-    //CellShow.animateToState(touchgfx::SlideMenu::EXPANDED);
     BMU_SEL_BOX.setVisible(true);
     BMU_SEL_BOX.invalidate();
+
+    BCMU_SEL_BOX.setVisible(true);
+    BCMU_SEL_BOX.invalidate();
 }
 
 /**
  * @description: 收回BMU菜单
  * @return {*}
  */
-void MainScreenView::CellStateShow_OFF()
+void MainScreenView::show_batteryshowarea_off() //电池界面不显示
 {
-     BCMU_SEL_BOX.setVisible(false);
-     BCMU_SEL_BOX.invalidate();
-     BMU_SEL_BOX.setVisible(false);
-     BMU_SEL_BOX.invalidate();
-     viewToModelData.BCMU_SEL = 1;   //1-20
+    BCMU_SEL_BOX.setVisible(false);
+    BCMU_SEL_BOX.invalidate();
+    BMU_SEL_BOX.setVisible(false);
+    BMU_SEL_BOX.invalidate();
+
+    viewToModelData.BCMU_SEL = 1;   //1-20
     viewToModelData.BMU_SEL = 1;    //1-30
     
-    BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2, BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
-    BMU_BG.invalidate();
+ /*   BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2, BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
+    BMU_BG.invalidate();*/
     //更新选定组编号
     Unicode::snprintf(zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate();
+
     presenter->ViewtoModelDat(viewToModelData);
-
-    BMUMenu.animateToState(touchgfx::SlideMenu::COLLAPSED);
-  /*  CellShow.animateToState(touchgfx::SlideMenu::COLLAPSED)*/;
-
 }
+
 
 void MainScreenView::setupScreen()
 {
     MainScreenViewBase::setupScreen();
 	//通知model更新数据
-
-
-
-
 	viewToModelData.reflashFlag = true;
 	presenter->ViewtoModelDat(viewToModelData);
+  /*  Unicode::UnicodeChar **buffer[4];
+    SettingView::get_local_ip(buffer[4], 8);*/
+
+#ifndef SIMULATOR 
+    http_get_wan_ip(local_ip_buff,16);
+    http_get_cloud_ip(cloud_server_ip_buff, 16);
+
+    Unicode::snprintf(local_ipBuffer, LOCAL_SERVER_IP_SIZE, "%s", local_ip_buff);
+    local_ip.invalidate();
+
+    Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%d", cloud_server_ip_buff);
+    cloud_server_ip.invalidate();
+
+
+    /*bsmuSetting.cu_num = ;*/
+
+    /*Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", SettingView::SettingBuff.IP_ADD_1[0]);
+    local_server_ip.invalidate();*/
+#endif
 }
 
 void MainScreenView::tearDownScreen()

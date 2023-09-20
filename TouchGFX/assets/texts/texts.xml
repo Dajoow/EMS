@@ -97,6 +97,54 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_IXPA" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_3FE9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZSOL" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_YM4E" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_BMV2" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_X6YL" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_I5VS" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_FEIO" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">平均温度  &lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OHJG" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">平均电压&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_EPD9" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">平均百分比&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_SAF9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">255.255.255.255</Translation>
+      </Text>
+      <Text Id="__SingleUse_B2G5" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">255.255.255.255</Translation>
+      </Text>
+      <Text Id="__SingleUse_89JO" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">255.255.255.255</Translation>
+      </Text>
+      <Text Id="__SingleUse_HUKM" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YRYK" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_NYTC" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_T2K0" Alignment="Left" TypographyId="STXihei_40">
         <Translation Language="GB">端口</Translation>
       </Text>

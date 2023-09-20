@@ -117,6 +117,7 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
+            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -540,7 +541,7 @@
                     "Name": "CELL11_Name",
                     "X": 379,
                     "Y": 344,
-                    "Width": 49,
+                    "Width": 50,
                     "Height": 23,
                     "TextId": "__SingleUse_JY20",
                     "TextRotation": "0",
@@ -1612,7 +1613,6 @@
                         "Name": "BMU_SEL_BOX",
                         "Width": 90,
                         "Height": 66,
-                        "Visible": false,
                         "Filename": "sel_zu.png",
                         "ScalingAlgorithm": "Nearest-neighbor"
                       },
@@ -2337,7 +2337,6 @@
                     "Y": 26,
                     "Width": 111,
                     "Height": 68,
-                    "Visible": false,
                     "Filename": "sel_cu.png",
                     "ScalingAlgorithm": "Nearest-neighbor"
                   },
@@ -2809,6 +2808,59 @@
                   "UseBuffer": true,
                   "BufferSize": 8
                 }
+              },
+              {
+                "Type": "Container",
+                "Name": "debug_show",
+                "X": 258,
+                "Y": -2,
+                "Width": 250,
+                "Height": 97,
+                "Components": [
+                  {
+                    "Type": "TextArea",
+                    "Name": "avg_tem",
+                    "X": 33,
+                    "Y": 69,
+                    "Width": 221,
+                    "Height": 24,
+                    "TextId": "__SingleUse_FEIO",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_BMV2",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "avg_soc",
+                    "X": 26,
+                    "Y": 42,
+                    "Width": 233,
+                    "Height": 27,
+                    "TextId": "__SingleUse_EPD9",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_X6YL"
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "avg_v",
+                    "X": 33,
+                    "Y": 15,
+                    "Width": 226,
+                    "Height": 27,
+                    "TextId": "__SingleUse_OHJG",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_I5VS",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -2819,7 +2871,6 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
-            "Visible": false,
             "Components": [
               {
                 "Type": "Image",
@@ -3502,6 +3553,99 @@
                     "TextRotation": "0"
                   }
                 ]
+              },
+              {
+                "Type": "TextArea",
+                "Name": "local_ip",
+                "X": 251,
+                "Y": 31,
+                "Width": 263,
+                "Height": 27,
+                "TextId": "__SingleUse_NYTC",
+                "TextRotation": "0",
+                "Wildcard1": {
+                  "TextId": "__SingleUse_89JO",
+                  "UseBuffer": true,
+                  "BufferSize": 16
+                }
+              },
+              {
+                "Type": "TextArea",
+                "Name": "local_ip2",
+                "X": 290,
+                "Y": 31,
+                "Width": 80,
+                "Height": 27,
+                "Visible": false,
+                "TextId": "__SingleUse_YM4E",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "local_ip3",
+                "X": 370,
+                "Y": 31,
+                "Width": 80,
+                "Height": 27,
+                "Visible": false,
+                "TextId": "__SingleUse_ZSOL",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "local_ip4",
+                "X": 450,
+                "Y": 31,
+                "Width": 80,
+                "Height": 27,
+                "Visible": false,
+                "TextId": "__SingleUse_3FE9",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "local_server_ip",
+                "X": 251,
+                "Y": 66,
+                "Width": 262,
+                "Height": 34,
+                "TextId": "__SingleUse_YRYK",
+                "TextRotation": "0",
+                "Wildcard1": {
+                  "TextId": "__SingleUse_B2G5",
+                  "UseBuffer": true,
+                  "BufferSize": 16
+                }
+              },
+              {
+                "Type": "TextArea",
+                "Name": "local_server_ip2",
+                "X": 292,
+                "Y": 65,
+                "Width": 80,
+                "Height": 27,
+                "Visible": false,
+                "TextId": "__SingleUse_IXPA",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "cloud_server_ip",
+                "X": 263,
+                "Y": 100,
+                "Width": 238,
+                "Height": 34,
+                "TextId": "__SingleUse_HUKM",
+                "TextRotation": "0",
+                "Wildcard1": {
+                  "TextId": "__SingleUse_SAF9",
+                  "UseBuffer": true,
+                  "BufferSize": 16
+                }
               }
             ]
           }

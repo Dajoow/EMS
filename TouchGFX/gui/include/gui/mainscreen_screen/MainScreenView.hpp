@@ -3,9 +3,9 @@
 
 #include <gui_generated/mainscreen_screen/MainScreenViewBase.hpp>
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
-
 #include <gui/common/GuiTransTypes.hpp>
 #include <gui_generated/setting_screen/SettingViewBase.hpp>
+#include <gui/setting_screen/SettingView.hpp>
 
 //BCMU按键相关参数
 #define online 1
@@ -25,7 +25,16 @@ public:
 
 private:
   MainScreenView& view_;
+ 
 };
+//class local_ip_data :public SettingView {
+//public:
+//        static int a[] = { 0 };
+//        a[0] = SettingBuff.IP_ADD_1[0];
+//        a[1] = SettingBuff.IP_ADD_1[1];
+//        a[2] = SettingBuff.IP_ADD_1[2];
+//        a[3] = SettingBuff.IP_ADD_1[3];
+//};
 
 class MainScreenView : public MainScreenViewBase
 {
@@ -89,10 +98,9 @@ public:
     virtual void show_shouye();
     virtual void show_batteryshowarea();
 
-    //bool GetCellShowState();
-    virtual void CellStateShow();
-    virtual void CellStateShow_OFF();
-    
+    bool show_batteryshowarea_State();
+    virtual void show_batteryshowarea_on();
+    virtual void show_batteryshowarea_off();
 
 #ifndef SIMULATOR
 //model更改
@@ -101,9 +109,14 @@ public:
 
 protected:
     ViewToModelData viewToModelData;
-		int counter;
+	int counter;
     int counter2;
     BMUMenuCallback_t BMUMenuCallback;
+
+    char local_ip_buff[16];
+    char local_server_ip_buff[16];
+    char cloud_server_ip_buff[16];
+
     //Unicode::UnicodeChar chinese_buf[10];
  /*   SettingView& dskjsk;*/
 };

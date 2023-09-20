@@ -1728,6 +1728,11 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_20_4bpp_13.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_20_4bpp_14.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_20_4bpp_14.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_20_4bpp_15.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_20_4bpp_15.cpp</FilePath>

@@ -19,7 +19,8 @@ extern "C" {
 #include "at24cxx.h"
 #include "string.h"
 #include "stm32h7xx_hal.h"
-#include "core_cm7.h"	
+#include "core_cm7.h"
+#include "stdio.h"
 };
 void SoftReset(void)
 {
@@ -75,12 +76,12 @@ void SettingView::setupScreen()
     t_set_butAry[0] = &t_setbutton;//对应采集周期的按键
 
     //还要SettingBuff和EEPROM中一致（赋初值）
-    SettingBuff.IP_ADD[0] = 0;
+    /*SettingBuff.IP_ADD[0] = 0;
     SettingBuff.IP_ADD[1] = 0;
     SettingBuff.IP_ADD[2] = 0;
-    SettingBuff.IP_ADD[3] = 0;
+    SettingBuff.IP_ADD[3] = 0;*/
 
-    SettingBuff.GATEWAY[0] = 0;
+   /* SettingBuff.GATEWAY[0] = 0;
     SettingBuff.GATEWAY[1] = 0;
     SettingBuff.GATEWAY[2] = 0;
     SettingBuff.GATEWAY[3] = 0;
@@ -88,7 +89,7 @@ void SettingView::setupScreen()
     SettingBuff.NETMASK[0] = 0;
     SettingBuff.NETMASK[1] = 0;
     SettingBuff.NETMASK[2] = 0;
-    SettingBuff.NETMASK[3] = 0;
+    SettingBuff.NETMASK[3] = 0;*/
 
     SettingBuff.IP_ADD_1[0] = 0;
     SettingBuff.IP_ADD_1[1] = 0;
@@ -292,27 +293,27 @@ void SettingView::SaveFun(void) //当Save_but按键按下，将结构体中的�
     AT24Cxx_SeqWrite(0x00, CAPACITY_SIZE, eerom_data.WriteBuff);
 #endif
 
-    //本机IP更新显示
-    Unicode::snprintf(ip_text1Buffer1, IP_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[0]);
-    Unicode::snprintf(ip_text1Buffer2, IP_TEXT1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD[1]);
-    ip_text1.invalidate();
-    Unicode::snprintf(ip_text2Buffer1, IP_TEXT2BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[2]);
-    Unicode::snprintf(ip_text2Buffer2, IP_TEXT2BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD[3]);
-    ip_text2.invalidate();
+    ////本机IP更新显示
+    //Unicode::snprintf(ip_text1Buffer1, IP_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[0]);
+    //Unicode::snprintf(ip_text1Buffer2, IP_TEXT1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD[1]);
+    //ip_text1.invalidate();
+    //Unicode::snprintf(ip_text2Buffer1, IP_TEXT2BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD[2]);
+    //Unicode::snprintf(ip_text2Buffer2, IP_TEXT2BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD[3]);
+    //ip_text2.invalidate();
 
-    Unicode::snprintf(gateway_text1Buffer1, GATEWAY_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.GATEWAY[0]);
-    Unicode::snprintf(gateway_text1Buffer2, GATEWAY_TEXT1BUFFER2_SIZE, "%03d", SettingBuff.GATEWAY[1]);
-    gateway_text1.invalidate();
-    Unicode::snprintf(gateway_text2Buffer1, GATEWAY_TEXT2BUFFER1_SIZE, "%03d", SettingBuff.GATEWAY[2]);
-    Unicode::snprintf(gateway_text2Buffer2, GATEWAY_TEXT2BUFFER2_SIZE, "%03d", SettingBuff.GATEWAY[3]);
-    gateway_text2.invalidate();
+    //Unicode::snprintf(gateway_text1Buffer1, GATEWAY_TEXT1BUFFER1_SIZE, "%03d", SettingBuff.GATEWAY[0]);
+    //Unicode::snprintf(gateway_text1Buffer2, GATEWAY_TEXT1BUFFER2_SIZE, "%03d", SettingBuff.GATEWAY[1]);
+    //gateway_text1.invalidate();
+    //Unicode::snprintf(gateway_text2Buffer1, GATEWAY_TEXT2BUFFER1_SIZE, "%03d", SettingBuff.GATEWAY[2]);
+    //Unicode::snprintf(gateway_text2Buffer2, GATEWAY_TEXT2BUFFER2_SIZE, "%03d", SettingBuff.GATEWAY[3]);
+    //gateway_text2.invalidate();
 
-    Unicode::snprintf(networkText1Buffer1, NETWORKTEXT1BUFFER1_SIZE, "%03d", SettingBuff.NETMASK[0]);
-    Unicode::snprintf(networkText1Buffer2, NETWORKTEXT1BUFFER2_SIZE, "%03d", SettingBuff.NETMASK[1]);
-    networkText1.invalidate();
-    Unicode::snprintf(networkText2Buffer1, NETWORKTEXT2BUFFER1_SIZE, "%03d", SettingBuff.NETMASK[2]);
-    Unicode::snprintf(networkText2Buffer2, NETWORKTEXT2BUFFER2_SIZE, "%03d", SettingBuff.NETMASK[3]);
-    networkText2.invalidate();
+    //Unicode::snprintf(networkText1Buffer1, NETWORKTEXT1BUFFER1_SIZE, "%03d", SettingBuff.NETMASK[0]);
+    //Unicode::snprintf(networkText1Buffer2, NETWORKTEXT1BUFFER2_SIZE, "%03d", SettingBuff.NETMASK[1]);
+    //networkText1.invalidate();
+    //Unicode::snprintf(networkText2Buffer1, NETWORKTEXT2BUFFER1_SIZE, "%03d", SettingBuff.NETMASK[2]);
+    //Unicode::snprintf(networkText2Buffer2, NETWORKTEXT2BUFFER2_SIZE, "%03d", SettingBuff.NETMASK[3]);
+    //networkText2.invalidate();
 }
 
 
@@ -996,4 +997,14 @@ void SettingView::port_4g_set()
     keyboard1.initialize();
     keyboard1.setVisible(true);
     keyboard1.invalidate();
+}
+
+void SettingView::get_local_ip( Unicode::UnicodeChar  *buffer[4], int len)
+{
+   /* buffer = IP_ADD_1[0] + IP_ADD_1[1] + IP_ADD_1[2] + IP_ADD_1[3];
+    UnicodeChar::snprintf();*/
+    Unicode::snprintf(buffer[0], 10, "%d", SettingBuff.IP_ADD_1[0]);
+    Unicode::snprintf(buffer[1], 10, "%d", SettingBuff.IP_ADD_1[1]);
+    Unicode::snprintf(buffer[2], 10, "%d", SettingBuff.IP_ADD_1[2]);
+    Unicode::snprintf(buffer[3], 10, "%d", SettingBuff.IP_ADD_1[3]);
 }

@@ -17,23 +17,19 @@
 //这个结构体要和EEPROM中的结构体EEPROM_BSMU保持一致
 typedef struct
 {
-	uint8_t cu_num;
-	uint16_t poll_T;      //这里的单位是10ms,使用的时候记得乘以10
-	uint8_t IP_ADD[4];	 //本机网络配置
-	uint8_t GATEWAY[4];	
-	uint8_t NETMASK[4];	
-	uint8_t IP_ADD_1[4];	 //本地服务器
+    uint16_t cu_num;
+	uint16_t poll_T;      //这里的单位是10ms,使用的时候记得乘以10	
+    uint16_t IP_ADD_1[4];	 //本地服务器
 	uint16_t port;
-    uint8_t IP_ADD_2[4];	 //4G
+    uint16_t IP_ADD_2[4];	 //4G
 	uint16_t port_1;
-	uint8_t canBps;			//CAN波特率
-	uint8_t RS485Bps;			//485波特率
-	uint8_t checksum;
-    uint8_t Scroll1;
-    uint8_t local_flag;     //开、关本地网络
-    uint8_t yunduan_flag;   //开、关云端服务器
+    uint16_t canBps;			//CAN波特率
+    uint16_t RS485Bps;			//485波特率
+    uint16_t local_flag;     //开、关本地网络
+    uint16_t yunduan_flag;   //开、关云端服务器
     //.c的头文件修改相应
-}EEPROM_BSMU_tem;
+} EEPROM_BSMU_tem;
+
 
 
 class SettingView : public SettingViewBase
@@ -48,9 +44,6 @@ public:
     virtual void RS485button_clicked();
 
     virtual void SettingViewTick();
-
-    //virtual void SetCuNum(int value);
-    //virtual void SetPoll_T(int value);
 
     virtual void IP_setting_fun();
     virtual void IP_setting_1_fun();
@@ -116,10 +109,10 @@ public:
     virtual void ip_4g_set();
     virtual void port_4g_set();
 
-
+    void get_local_ip(Unicode::UnicodeChar *buffer[4], int len);
 
 protected:
-    EEPROM_BSMU_tem SettingBuff;//最终存入EEPROM的结构体数组
+    EEPROM_BSMU_tem SettingBuff ;//最终存入EEPROM的结构体数组
     EEPROM_BSMU_tem SettingBuff_temp;//该临时结构体用于临时保存数据，根据保存或取消指令来判断是否对数据进行保存
 
     //按键数组，存储每个弹窗里所有的按键数量
