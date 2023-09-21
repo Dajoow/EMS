@@ -54,18 +54,16 @@ typedef struct EEPROM_ST
 //存储结构体(我们用来测试的)
 typedef struct EEPROM_BSMU_t
 {
-	uint8_t cu_num;
-	uint8_t poll_T;      //这里的单位是10ms,使用的时候记得乘以10
-	uint8_t IP_ADD[4];	 //本机网络配置
-	uint8_t GATEWAY[4];	
-	uint8_t NETMASK[4];	
-	uint8_t IP_ADD_1[4];	 //本地服务器
-	uint16_t port;
-    uint8_t IP_ADD_2[4];	 //4G
-	uint16_t port_1;
-	uint8_t canBps;			//CAN波特率
-	uint8_t RS485Bps;			//CAN波特率
-	uint8_t checksum;
+	 uint16_t cu_num;
+	uint16_t poll_T;      
+    uint16_t IP_ADD_1[4];	 //本地服务器
+	uint16_t port; //本地服务器port
+    uint16_t IP_ADD_2[4];	 //4G
+	uint16_t port_1;//4g模块port
+    uint16_t canBps;			//CAN波特率
+    uint16_t RS485Bps;			//485波特率
+    uint16_t local_flag;     //开、关本地网络
+    uint16_t yunduan_flag;   //开、关云端服务器
 }EEPROM_BSMU;
 
 extern EEPROM_DATA eerom_data;

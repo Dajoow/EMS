@@ -3083,7 +3083,7 @@
                     "Wildcard1": {
                       "TextId": "__SingleUse_SAF9",
                       "UseBuffer": true,
-                      "BufferSize": 20
+                      "BufferSize": 10
                     }
                   },
                   {
@@ -3112,7 +3112,7 @@
                     "Name": "IP2",
                     "X": 152,
                     "Y": 134,
-                    "Width": 20,
+                    "Width": 19,
                     "Height": 34,
                     "TextId": "__SingleUse_MN9S",
                     "TextRotation": "0",
@@ -4415,13 +4415,17 @@
             "Height": 371,
             "Components": [
               {
-                "Type": "Image",
-                "Name": "image1",
-                "X": 66,
-                "Y": 5,
+                "Type": "Box",
+                "Name": "box1",
+                "X": 55,
+                "Y": 2,
                 "Width": 842,
-                "Height": 360,
-                "RelativeFilename": "setshowip_bj.png"
+                "Height": 358,
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                }
               },
               {
                 "Type": "Button",
@@ -5833,7 +5837,7 @@
                     "Name": "benji_ip_set",
                     "X": 15,
                     "Y": 49,
-                    "Width": 56,
+                    "Width": 57,
                     "Height": 28,
                     "TextId": "__SingleUse_EP85",
                     "TextRotation": "0",
@@ -6624,7 +6628,7 @@
                     "X": 112,
                     "Y": 36,
                     "Width": 300,
-                    "Height": 41,
+                    "Height": 42,
                     "TextId": "__SingleUse_970U",
                     "TextRotation": "0",
                     "AutoSize": true

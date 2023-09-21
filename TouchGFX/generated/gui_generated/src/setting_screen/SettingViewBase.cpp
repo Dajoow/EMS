@@ -44,9 +44,9 @@ SettingViewBase::SettingViewBase() :
     add(daohanglan);
 
     fwq_4g_ipsetting.setPosition(36, 227, 953, 371);
-    image1.setXY(66, 5);
-    image1.setBitmap(touchgfx::Bitmap(BITMAP_SETSHOWIP_BJ_ID));
-    fwq_4g_ipsetting.add(image1);
+    box1.setPosition(55, 2, 842, 358);
+    box1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    fwq_4g_ipsetting.add(box1);
 
     local_port_button.setXY(615, 158);
     local_port_button.setBitmaps(touchgfx::Bitmap(BITMAP_S_ID), touchgfx::Bitmap(BITMAP_S_ID));

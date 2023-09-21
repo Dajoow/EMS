@@ -89,4 +89,7 @@ void Model::ViewtoModelDat(const ViewToModelData& Data){
 }
 
 
+void Model::get_err_info(unsigned char* err, int len)
+{
 
+}

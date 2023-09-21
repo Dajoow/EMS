@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
-
   <SchemaVersion>2.1</SchemaVersion>
-
   <Header>### uVision Project, (C) Keil Software</Header>
-
   <Targets>
     <Target>
       <TargetName>BSMU_H750IB</TargetName>
@@ -1976,11 +1973,6 @@
               <FilePath>../touchgfx/generated/images/src/image_battery6.cpp</FilePath>
             </File>
             <File>
-              <FileName>image_battery_empty100x80.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_battery_empty100x80.cpp</FilePath>
-            </File>
-            <File>
               <FileName>image_batterystate_pressed.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_batterystate_pressed.cpp</FilePath>
@@ -1991,16 +1983,6 @@
               <FilePath>../touchgfx/generated/images/src/image_batterystate_released.cpp</FilePath>
             </File>
             <File>
-              <FileName>image_BCMU_BUT_BG_1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_bcmu_but_bg_1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_BCMU_BUT_BG_2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_bcmu_but_bg_2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>image_BENJI_BG.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_benji_bg.cpp</FilePath>
@@ -2009,21 +1991,6 @@
               <FileName>image_benji_bj.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_benji_bj.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_BG_805x480.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_bg_805x480.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_BG_94x487.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_bg_94x487.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_biaoti.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_biaoti.cpp</FilePath>
             </File>
             <File>
               <FileName>image_bj_white.cpp</FileName>
@@ -2059,16 +2026,6 @@
               <FileName>image_Blue_Slider_Horizontal_Large_Slider2_Round_fill.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/__designer/image_blue_slider_horizontal_large_slider2_round_fill.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_BMU_BUT_1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_bmu_but_1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_BMU_BUT_2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_bmu_but_2.cpp</FilePath>
             </File>
             <File>
               <FileName>image_button_shouye_pressed.cpp</FileName>
@@ -2126,11 +2083,6 @@
               <FilePath>../touchgfx/generated/images/src/image_dianzhanxinxi_bj.cpp</FilePath>
             </File>
             <File>
-              <FileName>image_ethON_50x50.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_ethon_50x50.cpp</FilePath>
-            </File>
-            <File>
               <FileName>image_home_FILL0_wght400_GRAD0_opsz48.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_home_fill0_wght400_grad0_opsz48.cpp</FilePath>
@@ -2144,11 +2096,6 @@
               <FileName>image_imageup.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_imageup.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_info_BG.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_info_bg.cpp</FilePath>
             </File>
             <File>
               <FileName>image_ip_set_bk.cpp</FileName>
@@ -2201,16 +2148,6 @@
               <FilePath>../touchgfx/generated/images/src/image_mainpage_chunengdianzhan_w.cpp</FilePath>
             </File>
             <File>
-              <FileName>image_menu_expand_1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_menu_expand_1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_menu_expand_2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_menu_expand_2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>image_rs485_bj.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_rs485_bj.cpp</FilePath>
@@ -2256,16 +2193,6 @@
               <FilePath>../touchgfx/generated/images/src/image_setshowip_bj.cpp</FilePath>
             </File>
             <File>
-              <FileName>image_setting_1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_setting_1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_setting_2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_setting_2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>image_setting_pressed.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_setting_pressed.cpp</FilePath>
@@ -2279,21 +2206,6 @@
               <FileName>image_settings_FILL0_wght400_GRAD0_opsz48.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_settings_fill0_wght400_grad0_opsz48.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_station.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_station.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_station_1.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_station_1.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_station_2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_station_2.cpp</FilePath>
             </File>
             <File>
               <FileName>image_t1_pressed.cpp</FileName>
@@ -2314,11 +2226,6 @@
               <FileName>image_Vector2.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_vector2.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_wifiON.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/images/src/image_wifion.cpp</FilePath>
             </File>
             <File>
               <FileName>image_zubeijing.cpp</FileName>
@@ -10721,20 +10628,18 @@
       </Groups>
     </Target>
   </Targets>
-
   <RTE>
-    <apis/>
+    <apis></apis>
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
+        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"></package>
         <targetInfos>
-          <targetInfo name="BSMU_H750IB"/>
+          <targetInfo name="BSMU_H750IB"></targetInfo>
         </targetInfos>
       </component>
     </components>
-    <files/>
+    <files></files>
   </RTE>
-
   <LayerInfo>
     <Layers>
       <Layer>
@@ -10743,5 +10648,4 @@
       </Layer>
     </Layers>
   </LayerInfo>
-
 </Project>

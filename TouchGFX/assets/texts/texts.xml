@@ -1400,7 +1400,7 @@
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="SegoeUI_24" Font="segoeui.ttf" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="SegoeUI_24" Font="segoeui.ttf" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="!" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_24" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_40" Font="STXIHEI.TTF" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />

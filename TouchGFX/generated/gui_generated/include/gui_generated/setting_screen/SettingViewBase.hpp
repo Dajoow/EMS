@@ -11,9 +11,9 @@
 #include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
-#include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/mixins/ClickListener.hpp>
@@ -317,7 +317,7 @@ protected:
     touchgfx::ButtonWithLabel save_all;
     touchgfx::ButtonWithLabel start;
     touchgfx::Container fwq_4g_ipsetting;
-    touchgfx::Image image1;
+    touchgfx::Box box1;
     touchgfx::Button local_port_button;
     touchgfx::Button local_ip_button;
     touchgfx::Button ip_4g_button;

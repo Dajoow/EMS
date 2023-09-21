@@ -101,6 +101,7 @@ void SettingView::setupScreen()
     //不在模拟器中,在实际中要将EEPROM中的数据拷贝过来
 #ifndef SIMULATOR
     memcpy(&SettingBuff, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
+    memcpy(&SettingBuff_temp, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
 #endif
 
     //以下为拷贝了EEPROM中的值后，setting界面数据信息显示
