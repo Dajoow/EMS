@@ -2,6 +2,7 @@
 
 FONT_KERNING_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::KerningNode kerning_segoeui_24_4bpp[] FONT_KERNING_LOCATION_FLASH_ATTRIBUTE = {
+    { 0x006B, -2 },  // (First char = [0x006B, k], Second char = [0x002D, -], Kerning dist = -2)
     { 0x0044, -1 },  // (First char = [0x0044, D], Second char = [0x002E, .], Kerning dist = -1)
     { 0x004F, -1 },  // (First char = [0x004F, O], Second char = [0x002E, .], Kerning dist = -1)
     { 0x0050, -4 },  // (First char = [0x0050, P], Second char = [0x002E, .], Kerning dist = -4)

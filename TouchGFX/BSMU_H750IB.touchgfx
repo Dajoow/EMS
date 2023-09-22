@@ -3083,7 +3083,7 @@
                     "Wildcard1": {
                       "TextId": "__SingleUse_SAF9",
                       "UseBuffer": true,
-                      "BufferSize": 10
+                      "BufferSize": 20
                     }
                   },
                   {
@@ -3701,6 +3701,52 @@
                     "Height": 35,
                     "TextId": "__SingleUse_CFYG",
                     "TextRotation": "0"
+                  }
+                ]
+              },
+              {
+                "Type": "ScrollableContainer",
+                "Name": "scrollableContainer1",
+                "X": 48,
+                "Y": 17,
+                "Width": 931,
+                "Height": 130,
+                "HorizontalScrollEnabled": true,
+                "ScrollbarsVisibleOnPressed": true,
+                "ScrollbarsAlpha": 255,
+                "Components": [
+                  {
+                    "Type": "TextArea",
+                    "Name": "textArea1",
+                    "X": 10,
+                    "Y": 43,
+                    "Width": 153,
+                    "Height": 34,
+                    "TextId": "__SingleUse_QAG6",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "textArea2",
+                    "X": 941,
+                    "Y": 43,
+                    "Width": 184,
+                    "Height": 34,
+                    "TextId": "__SingleUse_VDPZ",
+                    "TextRotation": "0",
+                    "AutoSize": true
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "textArea3",
+                    "X": 1322,
+                    "Y": 43,
+                    "Width": 197,
+                    "Height": 34,
+                    "TextId": "__SingleUse_9JAV",
+                    "TextRotation": "0",
+                    "AutoSize": true
                   }
                 ]
               }

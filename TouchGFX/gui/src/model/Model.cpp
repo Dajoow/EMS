@@ -88,8 +88,7 @@ void Model::ViewtoModelDat(const ViewToModelData& Data){
     touchgfx_printf("\n");    
 }
 
-
-void Model::get_err_info(unsigned char* err, int len)
-{
-
-}
+//void Model::err_inf(const err_info& err)
+//{
+//
+//}

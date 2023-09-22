@@ -27,6 +27,14 @@ public:
   ViewToModelData(): reflashFlag(false), BCMU_SEL(1), BMU_SEL(1){}
 };
 
+//class err_info {
+//public:
+//	bool err_reflashFlag;
+//	unsigned char err_num;
+//	unsigned char err_type;
+//
+//	err_info(): err_reflashFlag(false), err_num(0), err_type(' ') {}
+//};
 
 //写在station_ctl.h中
 // //硬件到UI数据

@@ -1766,6 +1766,30 @@ MainScreenViewBase::MainScreenViewBase() :
 
     shouye.add(baojingxinxi_container);
 
+    scrollableContainer1.setPosition(48, 17, 931, 130);
+    scrollableContainer1.enableVerticalScroll(false);
+    scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    scrollableContainer1.setScrollbarsAlpha(255);
+    textArea1.setXY(10, 43);
+    textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QAG6));
+    scrollableContainer1.add(textArea1);
+
+    textArea2.setXY(941, 43);
+    textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea2.setLinespacing(0);
+    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VDPZ));
+    scrollableContainer1.add(textArea2);
+
+    textArea3.setXY(1322, 43);
+    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea3.setLinespacing(0);
+    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9JAV));
+    scrollableContainer1.add(textArea3);
+
+    shouye.add(scrollableContainer1);
+
     add(shouye);
 }
 

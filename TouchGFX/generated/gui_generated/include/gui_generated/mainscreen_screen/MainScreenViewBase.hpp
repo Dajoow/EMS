@@ -515,6 +515,10 @@ protected:
     touchgfx::Container baojingxinxi_container;
     touchgfx::Image benjixinxi_BG;
     touchgfx::TextArea baojing_biaoti;
+    touchgfx::ScrollableContainer scrollableContainer1;
+    touchgfx::TextArea textArea1;
+    touchgfx::TextArea textArea2;
+    touchgfx::TextArea textArea3;
 
     /*
      * Wildcard Buffers
@@ -615,7 +619,7 @@ protected:
     touchgfx::Unicode::UnicodeChar local_server_ip3Buffer[LOCAL_SERVER_IP3_SIZE];
     static const uint16_t LOCAL_SERVER_IP4_SIZE = 10;
     touchgfx::Unicode::UnicodeChar local_server_ip4Buffer[LOCAL_SERVER_IP4_SIZE];
-    static const uint16_t CLOUD_SERVER_IP_SIZE = 10;
+    static const uint16_t CLOUD_SERVER_IP_SIZE = 20;
     touchgfx::Unicode::UnicodeChar cloud_server_ipBuffer[CLOUD_SERVER_IP_SIZE];
     static const uint16_t FUJUEYUAN_SIZE = 10;
     touchgfx::Unicode::UnicodeChar fujueyuanBuffer[FUJUEYUAN_SIZE];

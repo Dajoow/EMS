@@ -91,14 +91,25 @@ void MainScreenView::setupScreen()
   /*  Unicode::UnicodeChar **buffer[4];
     SettingView::get_local_ip(buffer[4], 8);*/
 
+    //char a[] = {"255.133.233.111"};
+    //Unicode::UnicodeChar buf[16];
+    //Unicode::strncpy(buf, a,16);
+    //Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", buf);
+    //local_ip.invalidate();
+
+    ////Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", a);
+    ////cloud_server_ip.invalidate();
 #ifndef SIMULATOR 
-    char a[] = {'1','2','.'};
-    http_get_wan_ip(local_ip_buff,1);//本地IP
-    Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%c", a);
+    http_get_wan_ip(local_ip_buff,16);//给local_ip_buff赋值char类型的变量
+    Unicode::UnicodeChar wan_ip_buf[16];
+    Unicode::strncpy(wan_ip_buf, local_ip_buff, 16);
+    Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);
     local_ip.invalidate();
 
     http_get_cloud_ip(cloud_server_ip_buff, 16);//云端服务器IP
-    Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", a);
+    Unicode::UnicodeChar cloud_ip_buf[16];
+    Unicode::strncpy(cloud_ip_buf, cloud_server_ipBuffer, 16);
+    Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", cloud_ip_buf);
     cloud_server_ip.invalidate();
 
     Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%03d", bsmuSetting.IP_ADD_1[0]);//本地服务器IP

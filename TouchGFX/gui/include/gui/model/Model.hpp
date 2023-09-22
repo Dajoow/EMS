@@ -18,7 +18,7 @@ public:
     void tick();
     void ViewtoModelDat(const ViewToModelData& Data);
 
-    void get_err_info(unsigned char *err,int len);
+    //void err_inf(const err_info& err);
 protected:
     ModelListener* modelListener;
 };
