@@ -28,6 +28,8 @@
 
 #define  MAX_ERROR                400
 
+#define  MAX_ERROR                400
+
 #define  FRAME_HEADER             0x01											 //TCP段中帧头(电池簇)
 #define  FRAME_TAIL               0x0A0D0000 							  //TCP段中帧尾  
 
