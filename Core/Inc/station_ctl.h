@@ -31,8 +31,8 @@
 
 #define  FRAME_STATION_HEADER     0x02											 //TCP段中帧头(整个电站的帧头)
 
-#define  CLIENT_SD_ERR_OFT        2180
-#define  CLIENT_SD_TAIL_OFT       2184
+#define  CLIENT_SD_ERR_OFT        2184
+#define  CLIENT_SD_TAIL_OFT       2188
 #define  CLIENT_SD_TAIL_LEN       8
 
 
@@ -44,28 +44,32 @@ typedef struct
   uint16_t frame_header;
   uint16_t cluster_No;
   uint16_t work_state;
-  uint16_t cluster_VOL;
-  int16_t  cluster_CUR;
-  uint16_t cluster_SOC;
-  uint16_t cluster_SOH;
-  uint16_t insulation_res_p;
-  uint16_t insulation_res_n;
+  uint16_t cluster_VOL; // 0.1V
+  int16_t  cluster_CUR; // 200mA
+  uint16_t cluster_SOC; // 0.1%
+  uint16_t cluster_SOH; // 0.1%
+  uint16_t insulation_res_p; // 1k
+  uint16_t insulation_res_n; // 1k
   uint8_t  grp_num;
   uint8_t  grp_bat_num; // offset: 19
-  uint16_t BAT_VOL[TOTOL_BAT_num]; // offset: 20
-  uint16_t BAT_TMP[TOTOL_BAT_num]; // offset: 740
-  uint16_t BAT_SOC[TOTOL_BAT_num]; // offset: 1460
+  uint32_t bal_state; // [29:0] grp30-grp1 balance state offset:20
+  uint16_t BAT_VOL[TOTOL_BAT_num]; // 0.1mV offset: 24
+  uint16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C offset: 744
+  uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1% offset: 1464
   // uint16_t BAT_FAULT[TOTOL_BAT_num];
-  uint32_t error_count; // offset: 2180
-  uint32_t checksum; // offset: 2184
+  uint32_t error_count; // offset: 2184
+  uint32_t checksum; // offset: 2188
   uint32_t frame_tail;
 }Client_Sd_t;
 
 typedef struct
 {
-  uint16_t error_type;
+  uint8_t error_id_h;
+  uint8_t error_id_l;
   uint16_t error_code;
 } error_info_t;
+
+extern uint8_t bmu_offline[cluster_num][GRP_num];
 
 //电站数据包结构
 //注意内存对齐   现在这个结构体的大小为4的倍数
@@ -76,8 +80,8 @@ typedef struct
   uint16_t station_state;
   uint16_t station_VOL;
   int16_t  station_CUR;
-  uint16_t station_SOC;
-  uint16_t station_SOH;
+  uint16_t station_SOC; // 0.1%
+  uint16_t station_SOH; // 0.1%
   uint32_t charge_power;
   uint32_t discharge_power;
 	uint32_t checksum;

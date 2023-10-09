@@ -323,6 +323,20 @@ void CAN_DataHandle(uint8_t Queue_NUM_t, uint8_t cmd, void *data,
   memcpy((void *)Client_errors[Queue_NUM_POLL], ptr_err_start, error_data_len);
   memcpy((void *)(&Client_Sd[Queue_NUM_POLL].checksum), ptr_tail_start, CLIENT_SD_TAIL_LEN);
 
+  memset (bmu_offline[Queue_NUM_POLL], 0,
+          sizeof (bmu_offline[Queue_NUM_POLL]));
+  for (int i = 0; i < error_data_num; i++){
+    // group err
+    uint8_t err_id_h = Client_errors[Queue_NUM_POLL][i].error_id_h;
+    if(err_id_h >= 0x01 && err_id_h <= 0x1f){
+        //BMU(组内)板错误
+        if (Client_errors[Queue_NUM_POLL][i].error_id_l == 0x00){
+          bmu_offline[Queue_NUM_POLL][err_id_h - 1]
+            = Client_errors[Queue_NUM_POLL][i].error_code & 0x01; // judge bmu online state
+        }
+    }
+  }
+
   if (Queue_NUM_t == Queue_NUM_POLL) {
     xTaskNotifyGive(CAN_Poll_TaskHandle);
   } else {
