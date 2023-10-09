@@ -229,4 +229,7 @@ void bsmu_modbus_data_init(void) {
     bsmu_modbus_data[i + 1].slave_addr = i + 2;
     bsmu_modbus_data[i + 1].slave_util = &cluster_info[i];
   }
+
+  // set protocol version
+  station_info_u16.data.protocol_version = 1;
 }
