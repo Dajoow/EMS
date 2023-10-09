@@ -949,7 +949,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
   //更新CELLSHOW中提示
 	Unicode::snprintf(dianchixinxiBuffer1, DIANCHIXINXIBUFFER1_SIZE, "%d", viewToModelData.BCMU_SEL);
-  Unicode::snprintf(dianchixinxiBuffer2, DIANCHIXINXIBUFFER2_SIZE, "%d", viewToModelData.BMU_SEL);
+    Unicode::snprintf(dianchixinxiBuffer2, DIANCHIXINXIBUFFER2_SIZE, "%d", viewToModelData.BMU_SEL);
 	dianchixinxi.invalidate();
   
 	//更新所有单体电池电压(原/10000  现在/1000)
