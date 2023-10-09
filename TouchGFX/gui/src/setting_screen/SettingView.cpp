@@ -990,7 +990,6 @@ void SettingView::local_ip_set()
 {
     IP_setting_1.setVisible(true);
     IP_setting_1.invalidate();
-    SettingView.
     keyboard1.initialize();
     keyboard1.setVisible(true);
     keyboard1.invalidate();
