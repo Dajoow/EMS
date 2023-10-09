@@ -116,25 +116,25 @@ void SettingView::setupScreen()
 
 
     //初始化界面和弹窗的本地服务器IP、端口数据
-    Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[0]); //本地服务器ip更新
-    Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[1]);
+    Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_1[0]); //本地服务器ip更新
+    Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_1[1]);
     ip_text1_1.invalidate();
-    Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[2]);
-    Unicode::snprintf(ip_text2_1Buffer2, IP_TEXT2_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[3]);
+    Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_1[2]);
+    Unicode::snprintf(ip_text2_1Buffer2, IP_TEXT2_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_1[3]);
     ip_text2_1.invalidate();
     Unicode::snprintf(port_textBuffer, PORT_TEXT_SIZE, "%d", SettingBuff.port);//本地服务器port更新
     port_text.invalidate();
 
-    Unicode::snprintf(Buffer1[0], 10, "%03d", SettingBuff.IP_ADD_1[0]); //本地服务器设置界面更新
+    Unicode::snprintf(Buffer1[0], 10, "%d", SettingBuff.IP_ADD_1[0]); //本地服务器设置界面更新
     IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
     IP_ADD_1_1.invalidate();
-    Unicode::snprintf(Buffer1[1], 10, "%03d", SettingBuff.IP_ADD_1[1]);
+    Unicode::snprintf(Buffer1[1], 10, "%d", SettingBuff.IP_ADD_1[1]);
     IP_ADD_1_2.setWildcardTextBuffer(Buffer1[1]);
     IP_ADD_1_2.invalidate();
-    Unicode::snprintf(Buffer1[2], 10, "%03d", SettingBuff.IP_ADD_1[2]);
+    Unicode::snprintf(Buffer1[2], 10, "%d", SettingBuff.IP_ADD_1[2]);
     IP_ADD_1_3.setWildcardTextBuffer(Buffer1[2]);
     IP_ADD_1_3.invalidate();
-    Unicode::snprintf(Buffer1[3], 10, "%03d", SettingBuff.IP_ADD_1[3]);
+    Unicode::snprintf(Buffer1[3], 10, "%d", SettingBuff.IP_ADD_1[3]);
     IP_ADD_1_4.setWildcardTextBuffer(Buffer1[3]);
     IP_ADD_1_4.invalidate();
     Unicode::snprintf(Buffer1[4], 10, "%d", SettingBuff.port);
@@ -142,25 +142,25 @@ void SettingView::setupScreen()
     PORT.invalidate();
 
     //初始化界面和弹窗的4G模块IP、端口数据
-    Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[0]);//本地服务器ip更新
-    Unicode::snprintf(ip_1_text1_1Buffer2, IP_1_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_2[1]);
+    Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_2[0]);//本地服务器ip更新
+    Unicode::snprintf(ip_1_text1_1Buffer2, IP_1_TEXT1_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_2[1]);
     ip_1_text1_1.invalidate();
-    Unicode::snprintf(ip_1_text2_1Buffer1, IP_1_TEXT2_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[2]);
-    Unicode::snprintf(ip_1_text2_1Buffer2, IP_1_TEXT2_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_2[3]);
+    Unicode::snprintf(ip_1_text2_1Buffer1, IP_1_TEXT2_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_2[2]);
+    Unicode::snprintf(ip_1_text2_1Buffer2, IP_1_TEXT2_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_2[3]);
     ip_1_text2_1.invalidate();
     Unicode::snprintf(port_1_textBuffer, PORT_1_TEXT_SIZE, "%d", SettingBuff.port_1);//本地服务器port更新
     port_1_text.invalidate();
 
-    Unicode::snprintf(Buffer2[0], 10, "%03d", SettingBuff.IP_ADD_2[0]);//本地服务器设置界面更新
+    Unicode::snprintf(Buffer2[0], 10, "%d", SettingBuff.IP_ADD_2[0]);//本地服务器设置界面更新
     IP_ADD_2_1.setWildcardTextBuffer(Buffer2[0]);
     IP_ADD_2_1.invalidate();
-    Unicode::snprintf(Buffer2[1], 10, "%03d", SettingBuff.IP_ADD_2[1]);
+    Unicode::snprintf(Buffer2[1], 10, "%d", SettingBuff.IP_ADD_2[1]);
     IP_ADD_2_2.setWildcardTextBuffer(Buffer2[1]);
     IP_ADD_2_2.invalidate();
-    Unicode::snprintf(Buffer2[2], 10, "%03d", SettingBuff.IP_ADD_2[2]);
+    Unicode::snprintf(Buffer2[2], 10, "%d", SettingBuff.IP_ADD_2[2]);
     IP_ADD_2_3.setWildcardTextBuffer(Buffer2[2]);
     IP_ADD_2_3.invalidate();
-    Unicode::snprintf(Buffer2[3], 10, "%03d", SettingBuff.IP_ADD_2[3]);
+    Unicode::snprintf(Buffer2[3], 10, "%d", SettingBuff.IP_ADD_2[3]);
     IP_ADD_2_4.setWildcardTextBuffer(Buffer2[3]);
     IP_ADD_2_4.invalidate();
     Unicode::snprintf(Buffer2[4], 10, "%d", SettingBuff.port_1);
@@ -231,19 +231,19 @@ void SettingView::SettingViewTick()
         //如果虚拟键盘的任意按键按下，更新设置框内的数据,后续根据保存、取消按键来选择是否保存数据
         if (keyboard1.refreshFlag) {
             keyboard1.refreshFlag = 0;
-            Unicode::snprintf(Buffer1[0], 10, "%03d", SettingBuff_temp.IP_ADD_1[0]);
+            Unicode::snprintf(Buffer1[0], 10, "%d", SettingBuff_temp.IP_ADD_1[0]);
             IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
             IP_ADD_1_1.invalidate();
 
-            Unicode::snprintf(Buffer1[1], 10, "%03d", SettingBuff_temp.IP_ADD_1[1]);
+            Unicode::snprintf(Buffer1[1], 10, "%d", SettingBuff_temp.IP_ADD_1[1]);
             IP_ADD_1_2.setWildcardTextBuffer(Buffer1[1]);
             IP_ADD_1_2.invalidate();
 
-            Unicode::snprintf(Buffer1[2], 10, "%03d", SettingBuff_temp.IP_ADD_1[2]);
+            Unicode::snprintf(Buffer1[2], 10, "%d", SettingBuff_temp.IP_ADD_1[2]);
             IP_ADD_1_3.setWildcardTextBuffer(Buffer1[2]);
             IP_ADD_1_3.invalidate();
 
-            Unicode::snprintf(Buffer1[3], 10, "%03d", SettingBuff_temp.IP_ADD_1[3]);
+            Unicode::snprintf(Buffer1[3], 10, "%d", SettingBuff_temp.IP_ADD_1[3]);
             IP_ADD_1_4.setWildcardTextBuffer(Buffer1[3]);
             IP_ADD_1_4.invalidate();
 
@@ -258,19 +258,19 @@ void SettingView::SettingViewTick()
         //如果虚拟键盘的任意按键按下，更新设置框内的数据
         if (keyboard1.refreshFlag) {
             keyboard1.refreshFlag = 0;
-            Unicode::snprintf(Buffer2[0], 10, "%03d", SettingBuff_temp.IP_ADD_2[0]);
+            Unicode::snprintf(Buffer2[0], 10, "%d", SettingBuff_temp.IP_ADD_2[0]);
             IP_ADD_2_1.setWildcardTextBuffer(Buffer2[0]);
             IP_ADD_2_1.invalidate();
 
-            Unicode::snprintf(Buffer2[1], 10, "%03d", SettingBuff_temp.IP_ADD_2[1]);
+            Unicode::snprintf(Buffer2[1], 10, "%d", SettingBuff_temp.IP_ADD_2[1]);
             IP_ADD_2_2.setWildcardTextBuffer(Buffer2[1]);
             IP_ADD_2_2.invalidate();
 
-            Unicode::snprintf(Buffer2[2], 10, "%03d", SettingBuff_temp.IP_ADD_2[2]);
+            Unicode::snprintf(Buffer2[2], 10, "%d", SettingBuff_temp.IP_ADD_2[2]);
             IP_ADD_2_3.setWildcardTextBuffer(Buffer2[2]);
             IP_ADD_2_3.invalidate();
 
-            Unicode::snprintf(Buffer2[3], 10, "%03d", SettingBuff_temp.IP_ADD_2[3]);
+            Unicode::snprintf(Buffer2[3], 10, "%d", SettingBuff_temp.IP_ADD_2[3]);
             IP_ADD_2_4.setWildcardTextBuffer(Buffer2[3]);
             IP_ADD_2_4.invalidate();
 
@@ -382,19 +382,19 @@ void SettingView::CloseSetting_1_fun()//CloseSetting_1按键按下
     SettingBuff_temp.IP_ADD_1[3] = SettingBuff.IP_ADD_1[3];
     SettingBuff_temp.port = SettingBuff.port;
 
-    Unicode::snprintf(Buffer1[0], 10, "%03d", SettingBuff_temp.IP_ADD_1[0]); //更新设置输入框内的数据，作用是下一次打开设置时，显示的设置值跟未保存前一致
+    Unicode::snprintf(Buffer1[0], 10, "%d", SettingBuff_temp.IP_ADD_1[0]); //更新设置输入框内的数据，作用是下一次打开设置时，显示的设置值跟未保存前一致
     IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
     IP_ADD_1_1.invalidate();
 
-    Unicode::snprintf(Buffer1[1], 10, "%03d", SettingBuff_temp.IP_ADD_1[1]);
+    Unicode::snprintf(Buffer1[1], 10, "%d", SettingBuff_temp.IP_ADD_1[1]);
     IP_ADD_1_2.setWildcardTextBuffer(Buffer1[1]);
     IP_ADD_1_2.invalidate();
 
-    Unicode::snprintf(Buffer1[2], 10, "%03d", SettingBuff_temp.IP_ADD_1[2]);
+    Unicode::snprintf(Buffer1[2], 10, "%d", SettingBuff_temp.IP_ADD_1[2]);
     IP_ADD_1_3.setWildcardTextBuffer(Buffer1[2]);
     IP_ADD_1_3.invalidate();
 
-    Unicode::snprintf(Buffer1[3], 10, "%03d", SettingBuff_temp.IP_ADD_1[3]);
+    Unicode::snprintf(Buffer1[3], 10, "%d", SettingBuff_temp.IP_ADD_1[3]);
     IP_ADD_1_4.setWildcardTextBuffer(Buffer1[3]);
     IP_ADD_1_4.invalidate();
 
@@ -421,11 +421,11 @@ void SettingView::Save_1_Fun(void) //点击保存按键
 
     //本地服务器更新显示设置后的ip和端口
     //IP_ADD_1_1.setWildcardTextBuffer(Buffer1[0]);
-    Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[0]);
-    Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[1]);
+    Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_1[0]);
+    Unicode::snprintf(ip_text1_1Buffer2, IP_TEXT1_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_1[1]);
     ip_text1_1.invalidate();
-    Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_1[2]);
-    Unicode::snprintf(ip_text2_1Buffer2, IP_TEXT2_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_1[3]);
+    Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_1[2]);
+    Unicode::snprintf(ip_text2_1Buffer2, IP_TEXT2_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_1[3]);
     ip_text2_1.invalidate();
     Unicode::snprintf(port_textBuffer, PORT_TEXT_SIZE, "%d", SettingBuff.port);
     port_text.invalidate();
@@ -459,19 +459,19 @@ void SettingView::CloseSetting_2_fun()//CloseSetting_2按键按下
     SettingBuff_temp.IP_ADD_2[3] = SettingBuff.IP_ADD_2[3];
     SettingBuff_temp.port_1 = SettingBuff.port_1;
 
-    Unicode::snprintf(Buffer2[0], 10, "%03d", SettingBuff_temp.IP_ADD_2[0]);
+    Unicode::snprintf(Buffer2[0], 10, "%d", SettingBuff_temp.IP_ADD_2[0]);
     IP_ADD_2_1.setWildcardTextBuffer(Buffer2[0]);
     IP_ADD_2_1.invalidate();
 
-    Unicode::snprintf(Buffer2[1], 10, "%03d", SettingBuff_temp.IP_ADD_2[1]);
+    Unicode::snprintf(Buffer2[1], 10, "%d", SettingBuff_temp.IP_ADD_2[1]);
     IP_ADD_2_2.setWildcardTextBuffer(Buffer2[1]);
     IP_ADD_2_2.invalidate();
 
-    Unicode::snprintf(Buffer2[2], 10, "%03d", SettingBuff_temp.IP_ADD_2[2]);
+    Unicode::snprintf(Buffer2[2], 10, "%d", SettingBuff_temp.IP_ADD_2[2]);
     IP_ADD_2_3.setWildcardTextBuffer(Buffer2[2]);
     IP_ADD_2_3.invalidate();
 
-    Unicode::snprintf(Buffer2[3], 10, "%03d", SettingBuff_temp.IP_ADD_2[3]);
+    Unicode::snprintf(Buffer2[3], 10, "%d", SettingBuff_temp.IP_ADD_2[3]);
     IP_ADD_2_4.setWildcardTextBuffer(Buffer2[3]);
     IP_ADD_2_4.invalidate();
 
@@ -499,12 +499,12 @@ void SettingView::Save_2_Fun(void)
     SettingBuff.port_1 = SettingBuff_temp.port_1;
 
     //4G模块更新显示，用于设置输入框内数据的更新显示
-    Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[0]);
-    Unicode::snprintf(ip_1_text1_1Buffer2, IP_1_TEXT1_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_2[1]);
+    Unicode::snprintf(ip_1_text1_1Buffer1, IP_1_TEXT1_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_2[0]);
+    Unicode::snprintf(ip_1_text1_1Buffer2, IP_1_TEXT1_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_2[1]);
     ip_1_text1_1.invalidate();
 
-    Unicode::snprintf(ip_1_text2_1Buffer1, IP_1_TEXT2_1BUFFER1_SIZE, "%03d", SettingBuff.IP_ADD_2[2]);
-    Unicode::snprintf(ip_1_text2_1Buffer2, IP_1_TEXT2_1BUFFER2_SIZE, "%03d", SettingBuff.IP_ADD_2[3]);
+    Unicode::snprintf(ip_1_text2_1Buffer1, IP_1_TEXT2_1BUFFER1_SIZE, "%d", SettingBuff.IP_ADD_2[2]);
+    Unicode::snprintf(ip_1_text2_1Buffer2, IP_1_TEXT2_1BUFFER2_SIZE, "%d", SettingBuff.IP_ADD_2[3]);
     ip_1_text2_1.invalidate();
 
     Unicode::snprintf(port_1_textBuffer, PORT_1_TEXT_SIZE, "%d", SettingBuff.port_1);
@@ -914,7 +914,7 @@ void SettingView::zu_set_save()//点击保存按键
 void SettingView::zu_set_close()//如果取消的话，将原来的SettingBuff.cu_num再覆盖掉SettingBuff_temp.cu_num,防止出现设置界面的设置值为上一次取消时的值
 {
     SettingBuff_temp.cu_num = SettingBuff.cu_num;
-    Unicode::snprintf(zu_Buffer[0], 10, "%02d", SettingBuff.cu_num);
+    Unicode::snprintf(zu_Buffer[0], 10, "%d", SettingBuff.cu_num);
     zu_setbutton.setWildcardTextBuffer(zu_Buffer[0]);
     zu_setbutton.invalidate();//取消按键，对temp的值进行覆盖，并更新显示
 
@@ -929,7 +929,7 @@ void SettingView::zu_set_close()//如果取消的话，将原来的SettingBuff.c
 
 void SettingView::t_set_save()
 {
-    if (SettingBuff.poll_T >= 1000) SettingBuff_temp.poll_T = 1000;
+    if (SettingBuff_temp.poll_T >= 1000) SettingBuff_temp.poll_T = 1000;
     SettingBuff.poll_T = SettingBuff_temp.poll_T; //完成赋值操作
 
     Unicode::snprintf(poll_tBuffer, 10, "%d", SettingBuff.poll_T);
@@ -946,7 +946,7 @@ void SettingView::t_set_save()
 void SettingView::t_set_close()
 {
     SettingBuff_temp.poll_T = SettingBuff.poll_T;
-    Unicode::snprintf(t_Buffer[0], 10, "%02d", SettingBuff_temp.poll_T);
+    Unicode::snprintf(t_Buffer[0], 10, "%d", SettingBuff_temp.poll_T);
     t_setbutton.setWildcardTextBuffer(t_Buffer[0]);
     t_setbutton.invalidate();//取消按键，对temp的值进行覆盖，并更新显示
 

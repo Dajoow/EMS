@@ -113,7 +113,7 @@ protected:
     int counter2;
     BMUMenuCallback_t BMUMenuCallback;
 
-    char local_ip_buff[16];
+    char local_ip_buff[17];
     char local_server_ip_buff[16];
     char cloud_server_ip_buff[16];
 

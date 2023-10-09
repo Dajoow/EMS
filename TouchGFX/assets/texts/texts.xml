@@ -1048,8 +1048,8 @@
       <Text Id="__SingleUse_LQLE" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">255</Translation>
       </Text>
-      <Text Id="__SingleUse_YEMS" Alignment="Left" TypographyId="SegoeUI_24">
-        <Translation Language="GB"> &lt;value&gt; . &lt;value&gt; .</Translation>
+      <Text Id="__SingleUse_YEMS" Alignment="Right" TypographyId="SegoeUI_24">
+        <Translation Language="GB"> &lt;value&gt; . &lt;value&gt; </Translation>
       </Text>
       <Text Id="__SingleUse_KQOS" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">255</Translation>
@@ -1058,7 +1058,7 @@
         <Translation Language="GB">255</Translation>
       </Text>
       <Text Id="__SingleUse_A8VR" Alignment="Left" TypographyId="SegoeUI_24">
-        <Translation Language="GB">&lt;value&gt; . &lt;value&gt;</Translation>
+        <Translation Language="GB">. &lt;value&gt; . &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_4BUW" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">9000</Translation>
@@ -1097,7 +1097,7 @@
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_FK1U" Alignment="Left" TypographyId="STXihei_40">
-        <Translation Language="GB">IP地址</Translation>
+        <Translation Language="GB">地址</Translation>
       </Text>
       <Text Id="__SingleUse_TAPV" Alignment="Left" TypographyId="STXihei_40">
         <Translation Language="GB">端口</Translation>
@@ -1222,8 +1222,8 @@
       <Text Id="__SingleUse_Z3FK" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">255</Translation>
       </Text>
-      <Text Id="__SingleUse_B8QV" Alignment="Left" TypographyId="SegoeUI_24">
-        <Translation Language="GB"> &lt;value&gt; . &lt;value&gt; .</Translation>
+      <Text Id="__SingleUse_B8QV" Alignment="Right" TypographyId="SegoeUI_24">
+        <Translation Language="GB"> &lt;value&gt; . &lt;value&gt; </Translation>
       </Text>
       <Text Id="__SingleUse_G6TG" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">255</Translation>
@@ -1232,7 +1232,7 @@
         <Translation Language="GB">255</Translation>
       </Text>
       <Text Id="__SingleUse_3I4H" Alignment="Left" TypographyId="SegoeUI_24">
-        <Translation Language="GB">&lt;value&gt; . &lt;value&gt;</Translation>
+        <Translation Language="GB">. &lt;value&gt; . &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_SSZH" Alignment="Center" TypographyId="STxihei_30">
         <Translation Language="GB">关闭</Translation>
@@ -1271,7 +1271,7 @@
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_RTXZ" Alignment="Left" TypographyId="STXihei_40">
-        <Translation Language="GB">IP地址</Translation>
+        <Translation Language="GB">地址</Translation>
       </Text>
       <Text Id="__SingleUse_4VB6" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">0</Translation>

@@ -110,12 +110,14 @@ void MainScreenView::setupScreen()
     Unicode::UnicodeChar cloud_ip_buf[16];
     Unicode::strncpy(cloud_ip_buf, cloud_server_ipBuffer, 16);
     Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", cloud_ip_buf);
+ /*   Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", cloud_server_ip_buff);*/
+
     cloud_server_ip.invalidate();
 
-    Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%03d", bsmuSetting.IP_ADD_1[0]);//本地服务器IP
-    Unicode::snprintf(local_server_ip2Buffer, LOCAL_SERVER_IP2_SIZE, "%03d", bsmuSetting.IP_ADD_1[1]);
-    Unicode::snprintf(local_server_ip3Buffer, LOCAL_SERVER_IP3_SIZE, "%03d", bsmuSetting.IP_ADD_1[2]);
-    Unicode::snprintf(local_server_ip4Buffer, LOCAL_SERVER_IP4_SIZE, "%03d", bsmuSetting.IP_ADD_1[3]);
+    Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", bsmuSetting.IP_ADD_1[0]);//本地服务器IP
+    Unicode::snprintf(local_server_ip2Buffer, LOCAL_SERVER_IP2_SIZE, "%d", bsmuSetting.IP_ADD_1[1]);
+    Unicode::snprintf(local_server_ip3Buffer, LOCAL_SERVER_IP3_SIZE, "%d", bsmuSetting.IP_ADD_1[2]);
+    Unicode::snprintf(local_server_ip4Buffer, LOCAL_SERVER_IP4_SIZE, "%d", bsmuSetting.IP_ADD_1[3]);
     local_server_ip.invalidate();
     local_server_ip2.invalidate();
     local_server_ip3.invalidate();

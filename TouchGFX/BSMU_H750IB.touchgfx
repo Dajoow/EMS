@@ -541,7 +541,7 @@
                     "Name": "CELL11_Name",
                     "X": 379,
                     "Y": 344,
-                    "Width": 50,
+                    "Width": 49,
                     "Height": 23,
                     "TextId": "__SingleUse_JY20",
                     "TextRotation": "0",
@@ -4623,9 +4623,9 @@
               {
                 "Type": "TextArea",
                 "Name": "ip_text2_1",
-                "X": 671,
+                "X": 662,
                 "Y": 103,
-                "Width": 96,
+                "Width": 108,
                 "Height": 32,
                 "TextId": "__SingleUse_3I4H",
                 "TextRotation": "0",
@@ -4639,14 +4639,15 @@
                   "TextId": "__SingleUse_G6TG",
                   "UseBuffer": true,
                   "BufferSize": 10
-                }
+                },
+                "Clickable": true
               },
               {
                 "Type": "TextArea",
                 "Name": "ip_text1_1",
-                "X": 551,
+                "X": 552,
                 "Y": 103,
-                "Width": 114,
+                "Width": 109,
                 "Height": 32,
                 "TextId": "__SingleUse_B8QV",
                 "TextRotation": "0",
@@ -4660,7 +4661,8 @@
                   "TextId": "__SingleUse_YME3",
                   "UseBuffer": true,
                   "BufferSize": 10
-                }
+                },
+                "Clickable": true
               },
               {
                 "Type": "TextArea",
@@ -4680,9 +4682,9 @@
               {
                 "Type": "TextArea",
                 "Name": "ip_1_text2_1",
-                "X": 675,
+                "X": 667,
                 "Y": 237,
-                "Width": 96,
+                "Width": 108,
                 "Height": 32,
                 "TextId": "__SingleUse_A8VR",
                 "TextRotation": "0",
@@ -4703,7 +4705,7 @@
                 "Name": "ip_1_text1_1",
                 "X": 558,
                 "Y": 237,
-                "Width": 114,
+                "Width": 109,
                 "Height": 32,
                 "TextId": "__SingleUse_YEMS",
                 "TextRotation": "0",
@@ -5422,355 +5424,6 @@
             "Height": 600,
             "LockPosition": true,
             "Components": [
-              {
-                "Type": "ModalWindow",
-                "Name": "IP_setting_2",
-                "Width": 1023,
-                "Height": 600,
-                "Visible": false,
-                "FileName": "setshowip_bj.png",
-                "Color": {
-                  "Red": 1,
-                  "Green": 5,
-                  "Blue": 5
-                },
-                "ModalX": 90,
-                "ModalY": 120,
-                "ModalWidth": 842,
-                "ModalHeight": 360,
-                "Alpha": 210,
-                "Components": [
-                  {
-                    "Type": "ButtonWithLabel",
-                    "Name": "CloseBut_2",
-                    "X": 340,
-                    "Y": 250,
-                    "Width": 124,
-                    "Height": 74,
-                    "Pressed": "ipset_bj_pressed.png",
-                    "Released": "ipset_bj_released.png",
-                    "TextId": "__SingleUse_G4RS",
-                    "PressedColor": {
-                      "Red": 255,
-                      "Green": 255,
-                      "Blue": 255
-                    },
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "ButtonWithLabel",
-                    "Name": "SaveBut_2",
-                    "X": 95,
-                    "Y": 250,
-                    "Width": 124,
-                    "Height": 74,
-                    "Pressed": "ipset_bj_pressed.png",
-                    "Released": "ipset_bj_released.png",
-                    "TextId": "__SingleUse_M4ST",
-                    "PressedColor": {
-                      "Red": 255,
-                      "Green": 255,
-                      "Blue": 255
-                    },
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "benji_ip_set_1_2_1",
-                    "X": 48,
-                    "Y": 120,
-                    "Width": 80,
-                    "Height": 55,
-                    "TextId": "__SingleUse_TAPV",
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "benji_ip_set_2_1",
-                    "X": 32,
-                    "Y": 20,
-                    "Width": 113,
-                    "Height": 55,
-                    "TextId": "__SingleUse_FK1U",
-                    "TextRotation": "0"
-                  },
-                  {
-                    "Type": "FlexButton",
-                    "Name": "IP_ADD_2_1",
-                    "X": 190,
-                    "Y": 20,
-                    "Width": 120,
-                    "Height": 60,
-                    "ButtonTrigger": {
-                      "Type": "ToggleButtonTrigger"
-                    },
-                    "ButtonStyles": [
-                      {
-                        "Type": "TextButtonStyle",
-                        "Y": 10,
-                        "TextId": "__SingleUse_RQRI",
-                        "TextRotation": "0",
-                        "Wildcard1": {
-                          "TextId": "__SingleUse_1ZX6",
-                          "UseBuffer": true,
-                          "BufferSize": 10
-                        },
-                        "ColorReleased": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        },
-                        "ColorPressed": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        }
-                      },
-                      {
-                        "Type": "BoxWithBorderButtonStyle",
-                        "Width": 120,
-                        "Height": 60,
-                        "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
-                        "ColorReleased": {
-                          "Red": 255,
-                          "Green": 255,
-                          "Blue": 255
-                        },
-                        "ColorPressed": {
-                          "Green": 153,
-                          "Blue": 204
-                        },
-                        "ColorBorderPressed": {
-                          "Red": 51,
-                          "Green": 102,
-                          "Blue": 153
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "Type": "FlexButton",
-                    "Name": "IP_ADD_2_2",
-                    "X": 360,
-                    "Y": 20,
-                    "Width": 120,
-                    "Height": 60,
-                    "ButtonTrigger": {
-                      "Type": "ToggleButtonTrigger"
-                    },
-                    "ButtonStyles": [
-                      {
-                        "Type": "TextButtonStyle",
-                        "Y": 10,
-                        "TextId": "__SingleUse_18AR",
-                        "TextRotation": "0",
-                        "Wildcard1": {
-                          "TextId": "__SingleUse_96JN",
-                          "UseBuffer": true,
-                          "BufferSize": 10
-                        },
-                        "ColorReleased": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        },
-                        "ColorPressed": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        }
-                      },
-                      {
-                        "Type": "BoxWithBorderButtonStyle",
-                        "Width": 120,
-                        "Height": 60,
-                        "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
-                        "ColorReleased": {
-                          "Red": 255,
-                          "Green": 255,
-                          "Blue": 255
-                        },
-                        "ColorPressed": {
-                          "Green": 153,
-                          "Blue": 204
-                        },
-                        "ColorBorderPressed": {
-                          "Red": 51,
-                          "Green": 102,
-                          "Blue": 153
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "Type": "FlexButton",
-                    "Name": "IP_ADD_2_3",
-                    "X": 530,
-                    "Y": 20,
-                    "Width": 120,
-                    "Height": 60,
-                    "ButtonTrigger": {
-                      "Type": "ToggleButtonTrigger"
-                    },
-                    "ButtonStyles": [
-                      {
-                        "Type": "TextButtonStyle",
-                        "Y": 10,
-                        "TextId": "__SingleUse_S2K2",
-                        "TextRotation": "0",
-                        "Wildcard1": {
-                          "TextId": "__SingleUse_9A4P",
-                          "UseBuffer": true,
-                          "BufferSize": 10
-                        },
-                        "ColorReleased": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        },
-                        "ColorPressed": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        }
-                      },
-                      {
-                        "Type": "BoxWithBorderButtonStyle",
-                        "Width": 120,
-                        "Height": 60,
-                        "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
-                        "ColorReleased": {
-                          "Red": 255,
-                          "Green": 255,
-                          "Blue": 255
-                        },
-                        "ColorPressed": {
-                          "Green": 153,
-                          "Blue": 204
-                        },
-                        "ColorBorderPressed": {
-                          "Red": 51,
-                          "Green": 102,
-                          "Blue": 153
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "Type": "FlexButton",
-                    "Name": "IP_ADD_2_4",
-                    "X": 700,
-                    "Y": 20,
-                    "Width": 120,
-                    "Height": 60,
-                    "ButtonTrigger": {
-                      "Type": "ToggleButtonTrigger"
-                    },
-                    "ButtonStyles": [
-                      {
-                        "Type": "TextButtonStyle",
-                        "Y": 10,
-                        "TextId": "__SingleUse_UMPH",
-                        "TextRotation": "0",
-                        "Wildcard1": {
-                          "TextId": "__SingleUse_RJK5",
-                          "UseBuffer": true,
-                          "BufferSize": 10
-                        },
-                        "ColorReleased": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        },
-                        "ColorPressed": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        }
-                      },
-                      {
-                        "Type": "BoxWithBorderButtonStyle",
-                        "Width": 120,
-                        "Height": 60,
-                        "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
-                        "ColorReleased": {
-                          "Red": 255,
-                          "Green": 255,
-                          "Blue": 255
-                        },
-                        "ColorPressed": {
-                          "Green": 153,
-                          "Blue": 204
-                        },
-                        "ColorBorderPressed": {
-                          "Red": 51,
-                          "Green": 102,
-                          "Blue": 153
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "Type": "FlexButton",
-                    "Name": "PORT_1",
-                    "X": 194,
-                    "Y": 128,
-                    "Width": 150,
-                    "Height": 60,
-                    "ButtonTrigger": {
-                      "Type": "ToggleButtonTrigger"
-                    },
-                    "ButtonStyles": [
-                      {
-                        "Type": "TextButtonStyle",
-                        "Y": 10,
-                        "TextId": "__SingleUse_FRU2",
-                        "TextRotation": "0",
-                        "Wildcard1": {
-                          "TextId": "__SingleUse_BNAQ",
-                          "UseBuffer": true,
-                          "BufferSize": 10
-                        },
-                        "ColorReleased": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        },
-                        "ColorPressed": {
-                          "Red": 10,
-                          "Green": 10,
-                          "Blue": 10
-                        }
-                      },
-                      {
-                        "Type": "BoxWithBorderButtonStyle",
-                        "Width": 150,
-                        "Height": 60,
-                        "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
-                        "ColorReleased": {
-                          "Red": 255,
-                          "Green": 255,
-                          "Blue": 255
-                        },
-                        "ColorPressed": {
-                          "Green": 153,
-                          "Blue": 204
-                        },
-                        "ColorBorderPressed": {
-                          "Red": 51,
-                          "Green": 102,
-                          "Blue": 153
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
               {
                 "Type": "ModalWindow",
                 "Name": "port_4g",
@@ -6683,6 +6336,355 @@
               },
               {
                 "Type": "ModalWindow",
+                "Name": "IP_setting_2",
+                "Width": 1023,
+                "Height": 600,
+                "Visible": false,
+                "FileName": "setshowip_bj.png",
+                "Color": {
+                  "Red": 1,
+                  "Green": 5,
+                  "Blue": 5
+                },
+                "ModalX": 90,
+                "ModalY": 120,
+                "ModalWidth": 842,
+                "ModalHeight": 360,
+                "Alpha": 210,
+                "Components": [
+                  {
+                    "Type": "ButtonWithLabel",
+                    "Name": "CloseBut_2",
+                    "X": 340,
+                    "Y": 250,
+                    "Width": 124,
+                    "Height": 74,
+                    "Pressed": "ipset_bj_pressed.png",
+                    "Released": "ipset_bj_released.png",
+                    "TextId": "__SingleUse_G4RS",
+                    "PressedColor": {
+                      "Red": 255,
+                      "Green": 255,
+                      "Blue": 255
+                    },
+                    "TextRotation": "0"
+                  },
+                  {
+                    "Type": "ButtonWithLabel",
+                    "Name": "SaveBut_2",
+                    "X": 95,
+                    "Y": 250,
+                    "Width": 124,
+                    "Height": 74,
+                    "Pressed": "ipset_bj_pressed.png",
+                    "Released": "ipset_bj_released.png",
+                    "TextId": "__SingleUse_M4ST",
+                    "PressedColor": {
+                      "Red": 255,
+                      "Green": 255,
+                      "Blue": 255
+                    },
+                    "TextRotation": "0"
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "benji_ip_set_1_2_1",
+                    "X": 48,
+                    "Y": 120,
+                    "Width": 80,
+                    "Height": 55,
+                    "TextId": "__SingleUse_TAPV",
+                    "TextRotation": "0"
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "benji_ip_set_2_1",
+                    "X": 48,
+                    "Y": 23,
+                    "Width": 113,
+                    "Height": 55,
+                    "TextId": "__SingleUse_FK1U",
+                    "TextRotation": "0"
+                  },
+                  {
+                    "Type": "FlexButton",
+                    "Name": "IP_ADD_2_1",
+                    "X": 190,
+                    "Y": 20,
+                    "Width": 120,
+                    "Height": 60,
+                    "ButtonTrigger": {
+                      "Type": "ToggleButtonTrigger"
+                    },
+                    "ButtonStyles": [
+                      {
+                        "Type": "TextButtonStyle",
+                        "Y": 10,
+                        "TextId": "__SingleUse_RQRI",
+                        "TextRotation": "0",
+                        "Wildcard1": {
+                          "TextId": "__SingleUse_1ZX6",
+                          "UseBuffer": true,
+                          "BufferSize": 10
+                        },
+                        "ColorReleased": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        },
+                        "ColorPressed": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        }
+                      },
+                      {
+                        "Type": "BoxWithBorderButtonStyle",
+                        "Width": 120,
+                        "Height": 60,
+                        "LockToFlexButtonSize": true,
+                        "BorderSize": 1,
+                        "ColorReleased": {
+                          "Red": 255,
+                          "Green": 255,
+                          "Blue": 255
+                        },
+                        "ColorPressed": {
+                          "Green": 153,
+                          "Blue": 204
+                        },
+                        "ColorBorderPressed": {
+                          "Red": 51,
+                          "Green": 102,
+                          "Blue": 153
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "FlexButton",
+                    "Name": "IP_ADD_2_2",
+                    "X": 360,
+                    "Y": 20,
+                    "Width": 120,
+                    "Height": 60,
+                    "ButtonTrigger": {
+                      "Type": "ToggleButtonTrigger"
+                    },
+                    "ButtonStyles": [
+                      {
+                        "Type": "TextButtonStyle",
+                        "Y": 10,
+                        "TextId": "__SingleUse_18AR",
+                        "TextRotation": "0",
+                        "Wildcard1": {
+                          "TextId": "__SingleUse_96JN",
+                          "UseBuffer": true,
+                          "BufferSize": 10
+                        },
+                        "ColorReleased": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        },
+                        "ColorPressed": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        }
+                      },
+                      {
+                        "Type": "BoxWithBorderButtonStyle",
+                        "Width": 120,
+                        "Height": 60,
+                        "LockToFlexButtonSize": true,
+                        "BorderSize": 1,
+                        "ColorReleased": {
+                          "Red": 255,
+                          "Green": 255,
+                          "Blue": 255
+                        },
+                        "ColorPressed": {
+                          "Green": 153,
+                          "Blue": 204
+                        },
+                        "ColorBorderPressed": {
+                          "Red": 51,
+                          "Green": 102,
+                          "Blue": 153
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "FlexButton",
+                    "Name": "IP_ADD_2_3",
+                    "X": 530,
+                    "Y": 20,
+                    "Width": 120,
+                    "Height": 60,
+                    "ButtonTrigger": {
+                      "Type": "ToggleButtonTrigger"
+                    },
+                    "ButtonStyles": [
+                      {
+                        "Type": "TextButtonStyle",
+                        "Y": 10,
+                        "TextId": "__SingleUse_S2K2",
+                        "TextRotation": "0",
+                        "Wildcard1": {
+                          "TextId": "__SingleUse_9A4P",
+                          "UseBuffer": true,
+                          "BufferSize": 10
+                        },
+                        "ColorReleased": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        },
+                        "ColorPressed": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        }
+                      },
+                      {
+                        "Type": "BoxWithBorderButtonStyle",
+                        "Width": 120,
+                        "Height": 60,
+                        "LockToFlexButtonSize": true,
+                        "BorderSize": 1,
+                        "ColorReleased": {
+                          "Red": 255,
+                          "Green": 255,
+                          "Blue": 255
+                        },
+                        "ColorPressed": {
+                          "Green": 153,
+                          "Blue": 204
+                        },
+                        "ColorBorderPressed": {
+                          "Red": 51,
+                          "Green": 102,
+                          "Blue": 153
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "FlexButton",
+                    "Name": "IP_ADD_2_4",
+                    "X": 700,
+                    "Y": 20,
+                    "Width": 120,
+                    "Height": 60,
+                    "ButtonTrigger": {
+                      "Type": "ToggleButtonTrigger"
+                    },
+                    "ButtonStyles": [
+                      {
+                        "Type": "TextButtonStyle",
+                        "Y": 10,
+                        "TextId": "__SingleUse_UMPH",
+                        "TextRotation": "0",
+                        "Wildcard1": {
+                          "TextId": "__SingleUse_RJK5",
+                          "UseBuffer": true,
+                          "BufferSize": 10
+                        },
+                        "ColorReleased": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        },
+                        "ColorPressed": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        }
+                      },
+                      {
+                        "Type": "BoxWithBorderButtonStyle",
+                        "Width": 120,
+                        "Height": 60,
+                        "LockToFlexButtonSize": true,
+                        "BorderSize": 1,
+                        "ColorReleased": {
+                          "Red": 255,
+                          "Green": 255,
+                          "Blue": 255
+                        },
+                        "ColorPressed": {
+                          "Green": 153,
+                          "Blue": 204
+                        },
+                        "ColorBorderPressed": {
+                          "Red": 51,
+                          "Green": 102,
+                          "Blue": 153
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "FlexButton",
+                    "Name": "PORT_1",
+                    "X": 188,
+                    "Y": 120,
+                    "Width": 120,
+                    "Height": 60,
+                    "ButtonTrigger": {
+                      "Type": "ToggleButtonTrigger"
+                    },
+                    "ButtonStyles": [
+                      {
+                        "Type": "TextButtonStyle",
+                        "Y": 10,
+                        "TextId": "__SingleUse_FRU2",
+                        "TextRotation": "0",
+                        "Wildcard1": {
+                          "TextId": "__SingleUse_BNAQ",
+                          "UseBuffer": true,
+                          "BufferSize": 10
+                        },
+                        "ColorReleased": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        },
+                        "ColorPressed": {
+                          "Red": 10,
+                          "Green": 10,
+                          "Blue": 10
+                        }
+                      },
+                      {
+                        "Type": "BoxWithBorderButtonStyle",
+                        "Width": 120,
+                        "Height": 60,
+                        "LockToFlexButtonSize": true,
+                        "BorderSize": 1,
+                        "ColorReleased": {
+                          "Red": 255,
+                          "Green": 255,
+                          "Blue": 255
+                        },
+                        "ColorPressed": {
+                          "Green": 153,
+                          "Blue": 204
+                        },
+                        "ColorBorderPressed": {
+                          "Red": 51,
+                          "Green": 102,
+                          "Blue": 153
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Type": "ModalWindow",
                 "Name": "IP_setting_1",
                 "Width": 1023,
                 "Height": 600,
@@ -6731,9 +6733,9 @@
                   {
                     "Type": "TextArea",
                     "Name": "benji_ip_set_2",
-                    "X": 32,
-                    "Y": 20,
-                    "Width": 113,
+                    "X": 51,
+                    "Y": 28,
+                    "Width": 80,
                     "Height": 56,
                     "TextId": "__SingleUse_RTXZ",
                     "TextRotation": "0",
@@ -6776,7 +6778,7 @@
                         "Width": 120,
                         "Height": 60,
                         "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
+                        "BorderSize": 1,
                         "ColorReleased": {
                           "Red": 255,
                           "Green": 255,
@@ -6831,7 +6833,7 @@
                         "Width": 120,
                         "Height": 60,
                         "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
+                        "BorderSize": 1,
                         "ColorReleased": {
                           "Red": 255,
                           "Green": 255,
@@ -6886,7 +6888,7 @@
                         "Width": 120,
                         "Height": 60,
                         "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
+                        "BorderSize": 1,
                         "ColorReleased": {
                           "Red": 255,
                           "Green": 255,
@@ -6907,9 +6909,9 @@
                   {
                     "Type": "FlexButton",
                     "Name": "PORT",
-                    "X": 197,
-                    "Y": 131,
-                    "Width": 150,
+                    "X": 190,
+                    "Y": 134,
+                    "Width": 120,
                     "Height": 60,
                     "ButtonTrigger": {
                       "Type": "ToggleButtonTrigger"
@@ -6938,10 +6940,10 @@
                       },
                       {
                         "Type": "BoxWithBorderButtonStyle",
-                        "Width": 150,
+                        "Width": 120,
                         "Height": 60,
                         "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
+                        "BorderSize": 1,
                         "ColorReleased": {
                           "Red": 255,
                           "Green": 255,
@@ -6962,7 +6964,7 @@
                   {
                     "Type": "TextArea",
                     "Name": "textArea31",
-                    "X": 48,
+                    "X": 51,
                     "Y": 134,
                     "Width": 80,
                     "Height": 56,
@@ -7007,7 +7009,7 @@
                         "Width": 120,
                         "Height": 60,
                         "LockToFlexButtonSize": true,
-                        "BorderSize": 2,
+                        "BorderSize": 1,
                         "ColorReleased": {
                           "Red": 255,
                           "Green": 255,

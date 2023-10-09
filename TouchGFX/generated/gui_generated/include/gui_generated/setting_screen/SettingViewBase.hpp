@@ -13,10 +13,10 @@
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
-#include <touchgfx/mixins/ClickListener.hpp>
 #include <touchgfx/containers/ModalWindow.hpp>
 #include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
@@ -331,8 +331,8 @@ protected:
     touchgfx::TextArea IP_ADD3;
     touchgfx::TextArea PORT2;
     touchgfx::TextArea _4G;
-    touchgfx::TextAreaWithTwoWildcards ip_text2_1;
-    touchgfx::TextAreaWithTwoWildcards ip_text1_1;
+    touchgfx::ClickListener< touchgfx::TextAreaWithTwoWildcards > ip_text2_1;
+    touchgfx::ClickListener< touchgfx::TextAreaWithTwoWildcards > ip_text1_1;
     touchgfx::TextAreaWithOneWildcard port_text;
     touchgfx::TextAreaWithTwoWildcards ip_1_text2_1;
     touchgfx::TextAreaWithTwoWildcards ip_1_text1_1;
@@ -400,16 +400,6 @@ protected:
     touchgfx::TextArea textArea20;
     touchgfx::TextArea textArea12;
     touchgfx::Container container1;
-    touchgfx::ModalWindow IP_setting_2;
-    touchgfx::ButtonWithLabel CloseBut_2;
-    touchgfx::ButtonWithLabel SaveBut_2;
-    touchgfx::TextArea benji_ip_set_1_2_1;
-    touchgfx::TextArea benji_ip_set_2_1;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_1;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_2;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_3;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_4;
-    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  PORT_1;
     touchgfx::ModalWindow port_4g;
     touchgfx::TextArea textArea30;
     touchgfx::ButtonWithLabel save_4g_portbutton;
@@ -436,6 +426,16 @@ protected:
     touchgfx::ButtonWithLabel save_local_portbutton;
     touchgfx::ButtonWithLabel close_local_portbutton;
     touchgfx::TextArea textArea29;
+    touchgfx::ModalWindow IP_setting_2;
+    touchgfx::ButtonWithLabel CloseBut_2;
+    touchgfx::ButtonWithLabel SaveBut_2;
+    touchgfx::TextArea benji_ip_set_1_2_1;
+    touchgfx::TextArea benji_ip_set_2_1;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_1;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_2;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_3;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  IP_ADD_2_4;
+    touchgfx::WildcardTextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ToggleButtonTrigger >  >  PORT_1;
     touchgfx::ModalWindow IP_setting_1;
     touchgfx::ButtonWithLabel CloseBut_1;
     touchgfx::ButtonWithLabel SaveBut_1;
@@ -511,16 +511,6 @@ protected:
     touchgfx::Unicode::UnicodeChar canbaudrate1Buffer[CANBAUDRATE1_SIZE];
     static const uint16_t RS485TEXT_SIZE = 10;
     touchgfx::Unicode::UnicodeChar rs485textBuffer[RS485TEXT_SIZE];
-    static const uint16_t IP_ADD_2_1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_2_1Buffer[IP_ADD_2_1_SIZE];
-    static const uint16_t IP_ADD_2_2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_2_2Buffer[IP_ADD_2_2_SIZE];
-    static const uint16_t IP_ADD_2_3_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_2_3Buffer[IP_ADD_2_3_SIZE];
-    static const uint16_t IP_ADD_2_4_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar IP_ADD_2_4Buffer[IP_ADD_2_4_SIZE];
-    static const uint16_t PORT_1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar PORT_1Buffer[PORT_1_SIZE];
     static const uint16_t IP_ADD_1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar IP_ADD_1Buffer[IP_ADD_1_SIZE];
     static const uint16_t IP_ADD_2_SIZE = 10;
@@ -545,6 +535,16 @@ protected:
     touchgfx::Unicode::UnicodeChar NETMASK_3Buffer[NETMASK_3_SIZE];
     static const uint16_t NETMASK_4_SIZE = 10;
     touchgfx::Unicode::UnicodeChar NETMASK_4Buffer[NETMASK_4_SIZE];
+    static const uint16_t IP_ADD_2_1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_2_1Buffer[IP_ADD_2_1_SIZE];
+    static const uint16_t IP_ADD_2_2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_2_2Buffer[IP_ADD_2_2_SIZE];
+    static const uint16_t IP_ADD_2_3_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_2_3Buffer[IP_ADD_2_3_SIZE];
+    static const uint16_t IP_ADD_2_4_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar IP_ADD_2_4Buffer[IP_ADD_2_4_SIZE];
+    static const uint16_t PORT_1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar PORT_1Buffer[PORT_1_SIZE];
     static const uint16_t IP_ADD_1_2_SIZE = 10;
     touchgfx::Unicode::UnicodeChar IP_ADD_1_2Buffer[IP_ADD_1_2_SIZE];
     static const uint16_t IP_ADD_1_3_SIZE = 10;
