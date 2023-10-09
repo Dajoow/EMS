@@ -117,6 +117,8 @@ protected:
     char local_server_ip_buff[16];
     char cloud_server_ip_buff[16];
 
+    ButtonWithLabel* BCMU[20];
+    ButtonWithLabel* BMU[30];
     //Unicode::UnicodeChar chinese_buf[10];
  /*   SettingView& dskjsk;*/
 };
