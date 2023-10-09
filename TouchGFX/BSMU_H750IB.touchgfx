@@ -117,7 +117,6 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
-            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -128,6 +127,16 @@
                 "Width": 756,
                 "Height": 503,
                 "Components": [
+                  {
+                    "Type": "TextArea",
+                    "Name": "S10_1",
+                    "X": 263,
+                    "Y": 418,
+                    "Width": 22,
+                    "Height": 25,
+                    "TextId": "__SingleUse_RF8D",
+                    "TextRotation": "0"
+                  },
                   {
                     "Type": "Image",
                     "Name": "legend",
@@ -1625,7 +1634,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_5258",
+                        "TextId": "BMU30",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1647,7 +1656,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_D2LS",
+                        "TextId": "BMU29",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1669,7 +1678,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_MZL9",
+                        "TextId": "BMU28",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1691,7 +1700,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_K4K9",
+                        "TextId": "BMU27",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1713,7 +1722,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_IYJV",
+                        "TextId": "BMU26",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1735,7 +1744,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_JNYL",
+                        "TextId": "BMU25",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1757,7 +1766,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_J3PZ",
+                        "TextId": "BMU24",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1779,7 +1788,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_9KDM",
+                        "TextId": "BMU23",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1801,7 +1810,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_X9TI",
+                        "TextId": "BMU22",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1823,7 +1832,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_YRTT",
+                        "TextId": "BMU21",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1845,7 +1854,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_ZNWQ",
+                        "TextId": "BMU20",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1867,7 +1876,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_UXSL",
+                        "TextId": "BMU19",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1889,7 +1898,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_SDS2",
+                        "TextId": "BMU18",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1911,7 +1920,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_8S5K",
+                        "TextId": "BMU17",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1933,7 +1942,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_APLT",
+                        "TextId": "BMU16",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1955,7 +1964,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_MZIA",
+                        "TextId": "BMU15",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1977,7 +1986,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_X5BB",
+                        "TextId": "BMU14",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -1999,7 +2008,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_Y3W5",
+                        "TextId": "BMU13",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2021,7 +2030,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_3E81",
+                        "TextId": "BMU12",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2043,7 +2052,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_FU7X",
+                        "TextId": "BMU11",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2065,7 +2074,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_CS3Q",
+                        "TextId": "BMU10",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2087,7 +2096,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_EAMQ",
+                        "TextId": "BMU9",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2109,7 +2118,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_MK5G",
+                        "TextId": "BMU8",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2131,7 +2140,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_UXII",
+                        "TextId": "BMU7",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2153,7 +2162,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_6WBQ",
+                        "TextId": "BMU6",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2175,7 +2184,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_KODX",
+                        "TextId": "BMU5",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2197,7 +2206,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_K4TV",
+                        "TextId": "BMU4",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2219,7 +2228,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_43Z9",
+                        "TextId": "BMU3",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2241,7 +2250,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_XJYY",
+                        "TextId": "BMU2",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2263,7 +2272,7 @@
                         "Height": 50,
                         "Pressed": "t1_pressed.png",
                         "Released": "t1_released.png",
-                        "TextId": "__SingleUse_XNF3",
+                        "TextId": "BMU1",
                         "ReleasedColor": {
                           "Red": 255,
                           "Green": 255,
@@ -2835,14 +2844,16 @@
                   {
                     "Type": "TextArea",
                     "Name": "avg_soc",
-                    "X": 26,
+                    "X": 27,
                     "Y": 42,
                     "Width": 233,
                     "Height": 27,
                     "TextId": "__SingleUse_EPD9",
                     "TextRotation": "0",
                     "Wildcard1": {
-                      "TextId": "__SingleUse_X6YL"
+                      "TextId": "__SingleUse_X6YL",
+                      "UseBuffer": true,
+                      "BufferSize": 10
                     }
                   },
                   {
@@ -2871,6 +2882,7 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
+            "Visible": false,
             "Components": [
               {
                 "Type": "Container",
@@ -4491,7 +4503,8 @@
                 "Width": 250,
                 "Height": 47,
                 "Pressed": "ip_set_bk.png",
-                "Released": "ip_set_bk.png"
+                "Released": "ip_set_bk.png",
+                "Moveable": true
               },
               {
                 "Type": "Button",
