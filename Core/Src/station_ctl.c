@@ -30,6 +30,9 @@ Client_Sd_t Client_Sd[cluster_num] __attribute__((section(".ETHSendBuff")));
 //电站整理数据
 Client_Sd_Station_t Client_Sd_Station __attribute__((section(".StationBuff")));
 #endif
+
+error_info_t Client_errors[cluster_num][MAX_ERROR];
+
 //硬件到UI数据
 ModelToViewData modelToViewData;
 
@@ -84,8 +87,7 @@ void StationDataInit(void){
 #endif
 }
 	
-	
-	
+// todo
 void CalStationData(void){
   	uint8_t OnlineNUM = 0;
 
@@ -112,8 +114,3 @@ void CalStationData(void){
 	Client_Sd_Station.frame_tail = FRAME_TAIL;
 }
 	
-	
-	
-	
-
-

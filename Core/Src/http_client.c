@@ -225,17 +225,18 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "socb", socb);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
-                               (uint8_t *)data->BAT_FAULT,
-                               TOTOL_BAT_num * sizeof (uint16_t));
-  if (ret != 0)
-    {
-      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
-    }
-  cJSON *wb = cJSON_CreateString (base64_buffer);
-  if (wb == NULL)
-    goto end;
-  cJSON_AddItemToObject (obj, "wb", wb);
+  //todo: adjust new protocl
+  // ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  //                              (uint8_t *)data->BAT_FAULT,
+  //                              TOTOL_BAT_num * sizeof (uint16_t));
+  // if (ret != 0)
+  //   {
+  //     Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+  //   }
+  // cJSON *wb = cJSON_CreateString (base64_buffer);
+  // if (wb == NULL)
+  //   goto end;
+  // cJSON_AddItemToObject (obj, "wb", wb);
 
   cJSON *token = cJSON_CreateString (SERVER_TOKEN);
   if (token == NULL)

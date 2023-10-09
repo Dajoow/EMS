@@ -24,10 +24,16 @@
 #define  GRP_BAT_num              12												//一组中电池数
 #define  TOTOL_BAT_num            GRP_num*GRP_BAT_num       //总电池数，为了内存对齐这个值为2的倍数
 
+#define  MAX_ERROR                400
+
 #define  FRAME_HEADER             0x01											 //TCP段中帧头(电池簇)
 #define  FRAME_TAIL               0x0A0D0000 							  //TCP段中帧尾  
 
 #define  FRAME_STATION_HEADER     0x02											 //TCP段中帧头(整个电站的帧头)
+
+#define  CLIENT_SD_ERR_OFT        2180
+#define  CLIENT_SD_TAIL_OFT       2184
+#define  CLIENT_SD_TAIL_LEN       8
 
 
 //单簇数据包结构
@@ -45,14 +51,21 @@ typedef struct
   uint16_t insulation_res_p;
   uint16_t insulation_res_n;
   uint8_t  grp_num;
-  uint8_t  grp_bat_num;
-  uint16_t BAT_VOL[TOTOL_BAT_num];
-  uint16_t BAT_TMP[TOTOL_BAT_num];
-  uint16_t BAT_SOC[TOTOL_BAT_num];
-  uint16_t BAT_FAULT[TOTOL_BAT_num];
-	uint32_t checksum;
+  uint8_t  grp_bat_num; // offset: 19
+  uint16_t BAT_VOL[TOTOL_BAT_num]; // offset: 20
+  uint16_t BAT_TMP[TOTOL_BAT_num]; // offset: 740
+  uint16_t BAT_SOC[TOTOL_BAT_num]; // offset: 1460
+  // uint16_t BAT_FAULT[TOTOL_BAT_num];
+  uint32_t error_count; // offset: 2180
+  uint32_t checksum; // offset: 2184
   uint32_t frame_tail;
 }Client_Sd_t;
+
+typedef struct
+{
+  uint16_t error_type;
+  uint16_t error_code;
+} error_info_t;
 
 //电站数据包结构
 //注意内存对齐   现在这个结构体的大小为4的倍数

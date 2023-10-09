@@ -69,7 +69,8 @@ void Model::tick()
         {
             modelToViewData.BAT_VOL[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].BAT_VOL[(viewToModelDataTemp.BMU_SEL-1)*GRP_BAT_num + i];
             modelToViewData.BAT_TMP[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].BAT_TMP[(viewToModelDataTemp.BMU_SEL-1)*GRP_BAT_num + i];
-            modelToViewData.BAT_FAULT[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].BAT_FAULT[(viewToModelDataTemp.BMU_SEL-1)*GRP_BAT_num + i];
+            // todo
+            // modelToViewData.BAT_FAULT[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].BAT_FAULT[(viewToModelDataTemp.BMU_SEL-1)*GRP_BAT_num + i];
             modelToViewData.BAT_SOC[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].BAT_SOC[(viewToModelDataTemp.BMU_SEL-1)*GRP_BAT_num + i];                                                                                
         }
         //将硬件数据传递给VIEW
