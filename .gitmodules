@@ -1,6 +1,3 @@
 [submodule "cJSON"]
 	path = cJSON
-	url = ssh://git@ssh.github.com:443/DaveGamble/cJSON.git
-[submodule "CmBacktrace"]
-	path = CmBacktrace
-	url = https://github.com/armink/CmBacktrace
+	url = https://github.com/DaveGamble/cJSON.git
