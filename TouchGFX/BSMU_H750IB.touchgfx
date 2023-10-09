@@ -117,7 +117,6 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
-            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -128,6 +127,16 @@
                 "Width": 756,
                 "Height": 503,
                 "Components": [
+                  {
+                    "Type": "TextArea",
+                    "Name": "S10_1",
+                    "X": 263,
+                    "Y": 418,
+                    "Width": 22,
+                    "Height": 25,
+                    "TextId": "__SingleUse_RF8D",
+                    "TextRotation": "0"
+                  },
                   {
                     "Type": "Image",
                     "Name": "legend",
@@ -2835,14 +2844,16 @@
                   {
                     "Type": "TextArea",
                     "Name": "avg_soc",
-                    "X": 26,
+                    "X": 27,
                     "Y": 42,
                     "Width": 233,
                     "Height": 27,
                     "TextId": "__SingleUse_EPD9",
                     "TextRotation": "0",
                     "Wildcard1": {
-                      "TextId": "__SingleUse_X6YL"
+                      "TextId": "__SingleUse_X6YL",
+                      "UseBuffer": true,
+                      "BufferSize": 10
                     }
                   },
                   {
@@ -2871,6 +2882,7 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
+            "Visible": false,
             "Components": [
               {
                 "Type": "Container",
@@ -4491,7 +4503,8 @@
                 "Width": 250,
                 "Height": 47,
                 "Pressed": "ip_set_bk.png",
-                "Released": "ip_set_bk.png"
+                "Released": "ip_set_bk.png",
+                "Moveable": true
               },
               {
                 "Type": "Button",

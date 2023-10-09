@@ -42,6 +42,7 @@ enum TEXTS
     T_NUM1,
     T_COUNT,
     T_COUNTX,
+    T___SINGLEUSE_RF8D,
     T___SINGLEUSE_9JAV,
     T___SINGLEUSE_VDPZ,
     T___SINGLEUSE_QAG6,

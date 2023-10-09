@@ -97,6 +97,9 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_RF8D" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
       <Text Id="__SingleUse_9JAV" Alignment="Left" TypographyId="STXihei_24">
         <Translation Language="GB">（3323）电压过高</Translation>
       </Text>
@@ -134,22 +137,22 @@
         <Translation Language="GB">New Text</Translation>
       </Text>
       <Text Id="__SingleUse_BMV2" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB" />
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_X6YL" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB" />
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_I5VS" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB" />
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_FEIO" Alignment="Left" TypographyId="STxihei_20">
-        <Translation Language="GB">平均温度  &lt;value&gt;</Translation>
+        <Translation Language="GB">平均温度    &lt;value&gt;℃</Translation>
       </Text>
       <Text Id="__SingleUse_OHJG" Alignment="Left" TypographyId="STxihei_20">
-        <Translation Language="GB">平均电压&lt;value&gt;</Translation>
+        <Translation Language="GB">平均电压    &lt;value&gt;V</Translation>
       </Text>
       <Text Id="__SingleUse_EPD9" Alignment="Left" TypographyId="STxihei_20">
-        <Translation Language="GB">平均百分比&lt;value&gt;</Translation>
+        <Translation Language="GB">平均百分比 &lt;value&gt;%</Translation>
       </Text>
       <Text Id="__SingleUse_SAF9" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">255.255.255.255</Translation>
@@ -1414,7 +1417,7 @@
     <Typography Id="STXihei_24" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_40" Font="STXIHEI.TTF" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_20" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="STxihei_20" Font="STXIHEI.TTF" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="STxihei_20" Font="STXIHEI.TTF" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="." WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_30" Font="STXIHEI.TTF" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_30" Font="segoeui.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_60" Font="STXIHEI.TTF" Size="60" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />

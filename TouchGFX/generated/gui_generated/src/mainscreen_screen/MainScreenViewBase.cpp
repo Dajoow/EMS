@@ -55,8 +55,13 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
-    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
+    S10_1.setPosition(263, 418, 22, 25);
+    S10_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    S10_1.setLinespacing(0);
+    S10_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RF8D));
+    batterygroup.add(S10_1);
+
     legend.setXY(618, 622);
     legend.setBitmap(touchgfx::Bitmap(BITMAP_LEGEND_2_ID));
     legend.setVisible(false);
@@ -1299,10 +1304,11 @@ MainScreenViewBase::MainScreenViewBase() :
     avg_tem.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FEIO));
     debug_show.add(avg_tem);
 
-    avg_soc.setPosition(26, 42, 233, 27);
+    avg_soc.setPosition(27, 42, 233, 27);
     avg_soc.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     avg_soc.setLinespacing(0);
-    avg_soc.setWildcard(touchgfx::TypedText(T___SINGLEUSE_X6YL).getText());
+    Unicode::snprintf(avg_socBuffer, AVG_SOC_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_X6YL).getText());
+    avg_soc.setWildcard(avg_socBuffer);
     avg_soc.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EPD9));
     debug_show.add(avg_soc);
 
@@ -1319,6 +1325,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
+    shouye.setVisible(false);
     PCS_menu.setPosition(810, 286, 219, 239);
     PCS_menu.setVisible(false);
     PCS_BG.setPosition(14, 2, 190, 218);

@@ -266,6 +266,7 @@ protected:
     touchgfx::ImageButtonStyle< touchgfx::ClickButtonTrigger >  buttonSetting;
     touchgfx::Container batteryshowarea;
     touchgfx::Container batterygroup;
+    touchgfx::TextArea S10_1;
     touchgfx::Image legend;
     touchgfx::Image image3;
     touchgfx::Image image4;
@@ -607,6 +608,8 @@ protected:
     touchgfx::Unicode::UnicodeChar cuBuffer[CU_SIZE];
     static const uint16_t AVG_TEM_SIZE = 10;
     touchgfx::Unicode::UnicodeChar avg_temBuffer[AVG_TEM_SIZE];
+    static const uint16_t AVG_SOC_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar avg_socBuffer[AVG_SOC_SIZE];
     static const uint16_t AVG_V_SIZE = 10;
     touchgfx::Unicode::UnicodeChar avg_vBuffer[AVG_V_SIZE];
     static const uint16_t LOCAL_IP_SIZE = 20;

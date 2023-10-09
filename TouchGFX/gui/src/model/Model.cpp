@@ -75,6 +75,7 @@ void Model::tick()
         //将硬件数据传递给VIEW
         modelListener->NotifyViewMsg(modelToViewData);
     }
+
 #endif
 }
 //接受来自VIEW的数据并处理

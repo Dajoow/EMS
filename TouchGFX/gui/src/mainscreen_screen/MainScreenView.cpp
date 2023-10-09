@@ -96,7 +96,7 @@ void MainScreenView::setupScreen()
     //Unicode::strncpy(buf, a,16);
     //Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", buf);
     //local_ip.invalidate();
-
+    //
     ////Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", a);
     ////cloud_server_ip.invalidate();
 #ifndef SIMULATOR 
@@ -952,42 +952,51 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   Unicode::snprintf(dianchixinxiBuffer2, DIANCHIXINXIBUFFER2_SIZE, "%d", viewToModelData.BMU_SEL);
 	dianchixinxi.invalidate();
   
-	//更新电池电压值
-	Unicode::snprintfFloat(CellText1Buffer, CELLTEXT1_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[0]/10000);
+	//更新所有单体电池电压(原/10000  现在/1000)
+	Unicode::snprintfFloat(CellText1Buffer, CELLTEXT1_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[0]/1000);
 	CellText1.invalidate();
 	
-	Unicode::snprintfFloat(CellText2Buffer, CELLTEXT2_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[1]/10000);
+	Unicode::snprintfFloat(CellText2Buffer, CELLTEXT2_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[1]/1000);
 	CellText2.invalidate();
 	
-	Unicode::snprintfFloat(CellText3Buffer, CELLTEXT3_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[2]/10000);
+	Unicode::snprintfFloat(CellText3Buffer, CELLTEXT3_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[2]/1000);
 	CellText3.invalidate();
 
-	Unicode::snprintfFloat(CellText4Buffer, CELLTEXT4_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[3]/10000);
+	Unicode::snprintfFloat(CellText4Buffer, CELLTEXT4_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[3]/1000);
 	CellText4.invalidate();
 
-	Unicode::snprintfFloat(CellText5Buffer, CELLTEXT5_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[4]/10000);
+	Unicode::snprintfFloat(CellText5Buffer, CELLTEXT5_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[4]/1000);
 	CellText5.invalidate();
 
-	Unicode::snprintfFloat(CellText6Buffer, CELLTEXT6_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[5]/10000);
+	Unicode::snprintfFloat(CellText6Buffer, CELLTEXT6_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[5]/1000);
 	CellText6.invalidate();
 
-	Unicode::snprintfFloat(CellText7Buffer, CELLTEXT7_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[6]/10000);
+	Unicode::snprintfFloat(CellText7Buffer, CELLTEXT7_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[6]/1000);
 	CellText7.invalidate();
 
-	Unicode::snprintfFloat(CellText8Buffer, CELLTEXT8_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[7]/10000);
+	Unicode::snprintfFloat(CellText8Buffer, CELLTEXT8_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[7]/1000);
 	CellText8.invalidate();
 
-	Unicode::snprintfFloat(CellText9Buffer, CELLTEXT9_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[8]/10000);
+	Unicode::snprintfFloat(CellText9Buffer, CELLTEXT9_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[8]/1000);
 	CellText9.invalidate();
 
-	Unicode::snprintfFloat(CellText10Buffer, CELLTEXT10_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[9]/10000);
+	Unicode::snprintfFloat(CellText10Buffer, CELLTEXT10_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[9]/1000);
 	CellText10.invalidate();
 
-	Unicode::snprintfFloat(CellText11Buffer, CELLTEXT11_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[10]/10000);
+	Unicode::snprintfFloat(CellText11Buffer, CELLTEXT11_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[10]/1000);
 	CellText11.invalidate();
 
-	Unicode::snprintfFloat(CellText12Buffer, CELLTEXT12_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[11]/10000);
+	Unicode::snprintfFloat(CellText12Buffer, CELLTEXT12_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[11]/1000);
 	CellText12.invalidate();
+    //显示平均电压（调试用）
+    float sum_v = 0;
+    for (int i = 0;i < 12;i++)
+    {          
+        sum_v += (float)modelToViewData.BAT_VOL[i] / 1000;
+    }
+    float avg_V = sum_v/12;
+    Unicode::snprintfFloat(avg_vBuffer, AVG_V_SIZE, "%.3f", avg_V);
+    avg_v.invalidate();
 
   //更新电站信息
   Unicode::snprintf(zongdianliuBuffer, ZONGDIANLIU_SIZE, "%d", modelToViewData.station_CUR);
@@ -1033,7 +1042,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   SOC11_view.setValue(modelToViewData.BAT_VOL[10]);
   SOC12_view.setValue(modelToViewData.BAT_VOL[11]);
 
-	//更新电池SOC
+	//更新所有单体电池SOC
   Unicode::snprintf(CellSOCText1Buffer, CELLSOCTEXT1_SIZE, "%d", modelToViewData.BAT_SOC[0]/10);
 	CellSOCText1.invalidate();
 
@@ -1069,6 +1078,16 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
   Unicode::snprintf(CellSOCText12Buffer, CELLSOCTEXT12_SIZE, "%d", modelToViewData.BAT_SOC[11]/10);
 	CellSOCText12.invalidate();
+
+    int sum_soc = 0;
+    for (int i = 0;i < 12;i++)
+    {       
+        sum_soc += modelToViewData.BAT_SOC[i]/10;
+    }
+    float avg_S = sum_soc / 12.0;
+    Unicode::snprintfFloat(avg_socBuffer, AVG_SOC_SIZE, "%.3f", avg_S);
+    avg_soc.invalidate();
+
 	//更新电池温度
   Unicode::snprintfFloat(CellTempText1Buffer, CELLTEMPTEXT1_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText1.invalidate();
@@ -1105,6 +1124,15 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
   Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText12.invalidate();
+
+    int sum_tem = 0;
+    for (int i = 0;i < 12;i++)
+    {       
+        sum_tem += modelToViewData.BAT_TMP[i]/100;
+    }
+    float avg_T= sum_tem/12.0;
+    Unicode::snprintfFloat(avg_temBuffer, AVG_TEM_SIZE, "%.3f", avg_T);
+    avg_tem.invalidate();
 
   //更新BCMU框选图标
   if(BCMU_SEL_BOX.isVisible() == false)
