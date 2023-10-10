@@ -123,8 +123,6 @@ extern ModelToViewData modelToViewData;
 
 void StationDataInit(void);
 void CalStationData(void);
+void cal_modbus_data(void);
+
 #endif
-
-
-
-

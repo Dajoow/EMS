@@ -54,7 +54,7 @@ typedef struct EEPROM_ST
 //存储结构体(我们用来测试的)
 typedef struct EEPROM_BSMU_t
 {
-	 uint16_t cu_num;
+	uint16_t cu_num;
 	uint16_t poll_T;      
     uint16_t IP_ADD_1[4];	 //本地服务器
 	uint16_t port; //本地服务器port

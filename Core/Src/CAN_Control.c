@@ -542,6 +542,7 @@ void CAN_Poll(void const *argument) {
       }
     }
     CalStationData();                // 计算整个电站数据
+    cal_modbus_data();
     xSemaphoreGive(ETHSndSemHandle); // 释放信号量（用来发送以太网数据）
     xSemaphoreGive(ViewUpdateSemHandle); // 释放信号量（用来更新LCD显示数据）
     // 等待两个命令周期
