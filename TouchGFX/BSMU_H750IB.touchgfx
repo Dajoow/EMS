@@ -7,9 +7,9 @@
           {
             "Type": "Box",
             "Name": "box2",
-            "Y": 78,
+            "Y": 80,
             "Width": 1024,
-            "Height": 519,
+            "Height": 520,
             "LockPosition": true,
             "Color": {
               "Red": 156,
@@ -21,7 +21,7 @@
             "Type": "Box",
             "Name": "box1",
             "Width": 1024,
-            "Height": 78,
+            "Height": 80,
             "LockPosition": true,
             "Color": {
               "Red": 237,
@@ -1565,6 +1565,7 @@
                 "Type": "SlideMenu",
                 "Name": "BMUMenu",
                 "X": 121,
+                "Y": -2,
                 "Width": 130,
                 "Height": 520,
                 "FileNameBackground": "zubeijing.png",
@@ -1573,12 +1574,12 @@
                 "FileNameButtonReleased": "Vector1.png",
                 "ButtonX": 96,
                 "ButtonY": 15,
-                "State": "Expanded",
+                "State": "Collapsed",
                 "ExpandDirection": "East",
-                "Easing": "Quart",
+                "Easing": "Quad",
                 "EasingOption": "InOut",
                 "AnimationDuration": 300,
-                "VisiblePixelsWhenCollapsed": 34,
+                "VisiblePixelsWhenCollapsed": 37,
                 "Components": [
                   {
                     "Type": "Box",
@@ -1596,9 +1597,10 @@
                   {
                     "Type": "ScrollableContainer",
                     "Name": "BMU_Container",
-                    "Y": 53,
-                    "Width": 88,
-                    "Height": 457,
+                    "X": 3,
+                    "Y": 5,
+                    "Width": 90,
+                    "Height": 517,
                     "VerticalScrollEnabled": true,
                     "ScrollbarsVisible": true,
                     "ScrollbarsVisibleOnPressed": true,
@@ -1610,7 +1612,6 @@
                         "Y": -1,
                         "Width": 90,
                         "Height": 1811,
-                        "Visible": false,
                         "Color": {
                           "Red": 219,
                           "Green": 219,
@@ -2319,6 +2320,8 @@
               {
                 "Type": "ScrollableContainer",
                 "Name": "BCMU_Container",
+                "X": 1,
+                "Y": -23,
                 "Width": 120,
                 "Height": 545,
                 "VerticalScrollEnabled": true,
@@ -2332,7 +2335,7 @@
                     "X": -2,
                     "Y": -5,
                     "Width": 122,
-                    "Height": 1310,
+                    "Height": 1322,
                     "Color": {
                       "Red": 201,
                       "Green": 205,

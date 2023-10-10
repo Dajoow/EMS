@@ -230,7 +230,7 @@
         <Translation Language="GB">返回首页</Translation>
       </Text>
       <Text Id="__SingleUse_B8U1" Alignment="Left" TypographyId="STxihei_30">
-        <Translation Language="GB">组</Translation>
+        <Translation Language="GB">簇</Translation>
       </Text>
       <Text Id="__SingleUse_5HGB" Alignment="Left" TypographyId="STxihei_30">
         <Translation Language="GB">采集周期</Translation>

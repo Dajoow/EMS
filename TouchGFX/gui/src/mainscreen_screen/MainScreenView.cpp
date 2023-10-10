@@ -7,7 +7,8 @@
 #ifndef SIMULATOR
 extern "C" {
 #include "at24cxx.h"
-#include "http_client.h"	
+#include "http_client.h"
+#include "station_ctl.h"
 };
 #endif
 
@@ -1242,13 +1243,42 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   }
 
 
-  for (int i = 0;i < 20;i++)
+  for (uint8_t i = 0;i < 20;i++)
   {
       if (modelToViewData.BCMU_state[i] == offline && BCMU[i]->isTouchable() == true)
-      {
+      {     
+          //不使能
           BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
           BCMU[i]->setTouchable(false);
-          BCMU_BG.invalidate();
+          for (uint8_t j = 0;j < 30;j++)//当前簇不使能，组默认全不使能
+          {
+              BMU[j]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+              BMU[j]->setTouchable(false);
+          } 
+          /*BCMU_BG.invalidate();*/
+          BCMU_Container.invalidate();
+          BMU_Container.invalidate();
+      }
+      else if  (modelToViewData.BCMU_state[i] != offline && BCMU[i]->isTouchable() == false) 
+      {            
+          //使能BCMU按键
+          BCMU[i]->setLabelText(touchgfx::TypedText(20-i));
+          BCMU[i]->setTouchable(true);
+          for (uint8_t j = 0;j < 30;j++)
+          {
+              if (bmu_offline[i][j] == 0) //0表示在线，非0离线
+              {
+                  BMU[j]->setLabelText(touchgfx::TypedText(230+j));
+                  BMU[j]->setTouchable(true);
+              }
+              else
+              {
+                  BMU[j]->setLabelText(touchgfx::TypedText(0));
+                  BMU[j]->setTouchable(false);
+              }
+          }
+          BCMU_Container.invalidate();
+          BMU_Container.invalidate();
       }
   }
 

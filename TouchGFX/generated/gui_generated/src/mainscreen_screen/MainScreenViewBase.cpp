@@ -14,11 +14,11 @@ MainScreenViewBase::MainScreenViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    box2.setPosition(0, 78, 1024, 519);
+    box2.setPosition(0, 80, 1024, 520);
     box2.setColor(touchgfx::Color::getColorFromRGB(156, 189, 255));
     add(box2);
 
-    box1.setPosition(0, 0, 1024, 78);
+    box1.setPosition(0, 0, 1024, 80);
     box1.setColor(touchgfx::Color::getColorFromRGB(237, 237, 237));
     add(box1);
 
@@ -811,16 +811,16 @@ MainScreenViewBase::MainScreenViewBase() :
 
     batteryshowarea.add(batterygroup);
 
-    BMUMenu.setXY(121, 0);
+    BMUMenu.setXY(121, -2);
     BMUMenu.setup(touchgfx::SlideMenu::EAST,
         touchgfx::Bitmap(BITMAP_ZUBEIJING_ID),
         touchgfx::Bitmap(BITMAP_VECTOR1_ID),
         touchgfx::Bitmap(BITMAP_VECTOR2_ID),
         0, 0, 96, 15);
-    BMUMenu.setState(touchgfx::SlideMenu::EXPANDED);
-    BMUMenu.setVisiblePixelsWhenCollapsed(34);
+    BMUMenu.setState(touchgfx::SlideMenu::COLLAPSED);
+    BMUMenu.setVisiblePixelsWhenCollapsed(37);
     BMUMenu.setHiddenPixelsWhenExpanded(0);
-    BMUMenu.setAnimationEasingEquation(touchgfx::EasingEquations::quartEaseInOut);
+    BMUMenu.setAnimationEasingEquation(touchgfx::EasingEquations::quadEaseInOut);
     BMUMenu.setAnimationDuration(18);
     BMUMenu.setExpandedStateTimeout(0);
     BMU_BG_1.setPosition(0, 41, 90, 1812);
@@ -828,14 +828,13 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU_BG_1.setVisible(false);
     BMUMenu.add(BMU_BG_1);
 
-    BMU_Container.setPosition(0, 53, 88, 457);
+    BMU_Container.setPosition(3, 5, 90, 517);
     BMU_Container.enableHorizontalScroll(false);
     BMU_Container.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     BMU_Container.setScrollbarsAlpha(255);
     BMU_Container.setScrollbarsPermanentlyVisible();
     BMU_BG.setPosition(0, -1, 90, 1811);
     BMU_BG.setColor(touchgfx::Color::getColorFromRGB(219, 219, 219));
-    BMU_BG.setVisible(false);
     BMU_Container.add(BMU_BG);
 
     BMU_SEL_BOX.setBitmap(touchgfx::Bitmap(BITMAP_SEL_ZU_ID));
@@ -1103,12 +1102,12 @@ MainScreenViewBase::MainScreenViewBase() :
     zu_text.setVisible(false);
     batteryshowarea.add(zu_text);
 
-    BCMU_Container.setPosition(0, 0, 120, 545);
+    BCMU_Container.setPosition(1, -23, 120, 545);
     BCMU_Container.enableHorizontalScroll(false);
     BCMU_Container.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     BCMU_Container.setScrollbarsAlpha(255);
     BCMU_Container.setScrollbarsPermanentlyVisible();
-    BCMU_BG.setPosition(-2, -5, 122, 1310);
+    BCMU_BG.setPosition(-2, -5, 122, 1322);
     BCMU_BG.setColor(touchgfx::Color::getColorFromRGB(201, 205, 212));
     BCMU_Container.add(BCMU_BG);
 
