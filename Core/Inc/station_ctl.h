@@ -35,6 +35,8 @@
 #define  CLIENT_SD_TAIL_OFT       2188
 #define  CLIENT_SD_TAIL_LEN       8
 
+#define CLU_LOW_VOLT_
+
 
 //单簇数据包结构
 //注意内存对齐   现在这个结构体的大小为4的倍数
