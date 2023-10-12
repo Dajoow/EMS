@@ -26,11 +26,11 @@
 #define HTTPC_ENABLED
 #endif
 
-#define HOST "dzhk.hhkk.club"
+#define HOST "dz.hk.12y.ltd"
 #define HTTPS_PORT "443"
 #define HTTP_PORT "80"
-#define HTTP_HOST "dzhk.hhkk.club"
-#define HTTPS_HOST "dzhk.hhkk.club"
+#define HTTP_HOST HOST
+#define HTTPS_HOST HOST
 #define API_STATISTICS "/api/bmsRequest/sendSum"
 #define API_CLUSTERS "/api/bmsRequest/send"
 
