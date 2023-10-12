@@ -9,7 +9,7 @@ const ip_addr_t sntp_server[SNTP_MAX_SERVERS] = {
   { .addr = IPADDR4_INIT_BYTES (203, 107, 6, 88) },    // ntp.aliyun.com
   { .addr = IPADDR4_INIT_BYTES (223, 113, 103, 191) }, // cn.ntp.org.cn
   { .addr = IPADDR4_INIT_BYTES (114, 118, 7, 163) },   // ntp.ntsc.ac.cn
-  { .addr = IPADDR4_INIT_BYTES (106, 55, 184, 199) },  // ntp1.tencent.com
+  { .addr = IPADDR4_INIT_BYTES (192, 168, 112, 141) }, // ntp.hdu.edu.cn
 };
 
 void
