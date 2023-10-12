@@ -35,7 +35,64 @@
 #define  CLIENT_SD_TAIL_OFT       2188
 #define  CLIENT_SD_TAIL_LEN       8
 
-#define CLU_LOW_VOLT_
+// WARN < ALARM < PROTECT
+#define CLU_HIGH_VOLT_WARN                      (2.45*GRP_num*GRP_BAT_num)       
+#define CLU_HIGH_VOLT_ALARM                     (2.478*GRP_num*GRP_BAT_num)       
+#define CLU_HIGH_VOLT_PROTECT                   0xffff
+#define CLU_LOW_VOLT_WARN                       (1.86*GRP_num*GRP_BAT_num)      
+#define CLU_LOW_VOLT_ALARM                      (1.82*GRP_num*GRP_BAT_num)      
+#define CLU_LOW_VOLT_PROTECT                    0
+#define CLU_HIGH_CHARGE_CUR_WARN                0xffff
+#define CLU_HIGH_CHARGE_CUR_ALARM               0xffff
+#define CLU_HIGH_CHARGE_CUR_PROTECT             0xffff
+#define CLU_HIGH_DISCHARGE_CUR_WARN             0xffff
+#define CLU_HIGH_DISCHARGE_CUR_ALARM            0xffff
+#define CLU_HIGH_DISCHARGE_CUR_PROTECT          0xffff
+#define CELL_HIGH_VOLT_WARN                     2.45
+#define CELL_HIGH_VOLT_ALARM                    2.48
+#define CELL_HIGH_VOLT_PROTECT                  0xffff
+#define CELL_LOW_VOLT_WARN                      1.85
+#define CELL_LOW_VOLT_ALARM                     1.83
+#define CELL_LOW_VOLT_PROTECT                   1.5
+#define CLU_HIGH_CHARGE_TEMP_WARN               43
+#define CLU_HIGH_CHARGE_TEMP_ALARM              46
+#define CLU_HIGH_CHARGE_TEMP_PROTECT            50
+#define CLU_LOW_CHARGE_TEMP_WARN                10
+#define CLU_LOW_CHARGE_TEMP_ALARM               5
+#define CLU_LOW_CHARGE_TEMP_PROTECT             0
+#define CLU_HIGH_DISCHARGE_TEMP_WARN            43
+#define CLU_HIGH_DISCHARGE_TEMP_ALARM           46
+#define CLU_HIGH_DISCHARGE_TEMP_PROTECT         50
+#define CLU_LOW_DISCHARGE_TEMP_WARN             10
+#define CLU_LOW_DISCHARGE_TEMP_ALARM            5
+#define CLU_LOW_DISCHARGE_TEMP_PROTECT          0
+#define CELL_HIGH_TEMP_WARN                     43
+#define CELL_HIGH_TEMP_ALARM                    46
+#define CELL_HIGH_TEMP_PROTECT                  50
+#define CELL_LOW_TEMP_WARN                      10
+#define CELL_LOW_TEMP_ALARM                     5
+#define CELL_LOW_TEMP_PROTECT                   0
+#define ENV_HIGH_TEMP_WARN                      0xffff
+#define ENV_HIGH_TEMP_ALARM                     0xffff
+#define ENV_HIGH_TEMP_PROTECT                   0xffff
+#define ENV_LOW_TEMP_WARN                       0
+#define ENV_LOW_TEMP_ALARM                      0
+#define ENV_LOW_TEMP_PROTECT                    0
+#define PWRLINE_HIGH_TEMP_WARN                  0xffff
+#define PWRLINE_HIGH_TEMP_ALARM                 0xffff
+#define PWRLINE_HIGH_TEMP_PROTECT               0xffff
+#define CLU_HIGH_SOC_WARN                       0xffff
+#define CLU_HIGH_SOC_ALARM                      0xffff
+#define CLU_HIGH_SOC_PROTECT                    0xffff
+#define CLU_LOW_SOC_WARN                        0
+#define CLU_LOW_SOC_ALARM                       0
+#define CLU_LOW_SOC_PROTECT                     0
+#define CLU_INSUL_RES_P_LOW_WARN                0
+#define CLU_INSUL_RES_P_LOW_ALARM               0
+#define CLU_INSUL_RES_P_LOW_PROTECT             0
+#define CLU_INSUL_RES_N_LOW_WARN                0
+#define CLU_INSUL_RES_N_LOW_ALARM               0
+#define CLU_INSUL_RES_N_LOW_PROTECT             0
 
 
 //单簇数据包结构
