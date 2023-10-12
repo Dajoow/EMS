@@ -15,6 +15,7 @@
 #include "string.h"
 #include "task.h"
 #include "usart.h"
+#include "CAN_Control.h"
 
 // #define SERVER_TOKEN
 
@@ -46,6 +47,8 @@
 extern struct netif gnetif;
 extern Client_Sd_t Client_Sd[cluster_num];
 extern Client_Sd_Station_t Client_Sd_Station;
+extern error_info_t Client_errors[cluster_num][MAX_ERROR];
+extern BCMU_Mail_t BCMU[cluster_num];
 
 extern EEPROM_BSMU bsmuSetting;
 
@@ -224,19 +227,23 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
   if (socb == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "socb", socb);
+  
+  cJSON *wb_cnt = cJSON_CreateNumber (data->error_count);
+  if (wb_cnt == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "wb_cnt", wb_cnt);
 
-  //todo: adjust new protocl
-  // ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
-  //                              (uint8_t *)data->BAT_FAULT,
-  //                              TOTOL_BAT_num * sizeof (uint16_t));
-  // if (ret != 0)
-  //   {
-  //     Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
-  //   }
-  // cJSON *wb = cJSON_CreateString (base64_buffer);
-  // if (wb == NULL)
-  //   goto end;
-  // cJSON_AddItemToObject (obj, "wb", wb);
+  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+                               (uint8_t *)Client_errors[data->cluster_No - 1],
+                               data->error_count * sizeof (error_info_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
+  cJSON *wb = cJSON_CreateString (base64_buffer);
+  if (wb == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "wb", wb);
 
   cJSON *token = cJSON_CreateString (SERVER_TOKEN);
   if (token == NULL)
@@ -499,6 +506,8 @@ httpc_recv (httpc_ctx_t *ctx)
     }
   while (1);
 
+  // Debug_printf ("%s\r\n", buffer);
+
   if (ret = strstr (buffer, "HTTP/1.1 "))
     {
       char *mime_ptr = NULL;
@@ -521,7 +530,7 @@ httpc_recv (httpc_ctx_t *ctx)
   if (ret = strstr (buffer, "code"))
     {
       char *mime_ptr = NULL;
-      mime_ptr = strstr (ret, " ");
+      mime_ptr = strstr (ret, ":");
       if (mime_ptr != NULL)
         {
           mime_ptr += 1;
@@ -591,6 +600,9 @@ httpc_send_data_clusters (httpc_ctx_t *ctx)
 
   for (int i = 0; i < ctx->clusters_sum; i++)
     {
+      // skip offline
+      if (BCMU[i].OnlineOrOffline == Offline) continue;
+
       // skip invalid data
       if (ctx->clusters_data[i].cluster_No > 20
           || ctx->clusters_data[i].cluster_No < 1)
