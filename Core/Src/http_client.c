@@ -55,7 +55,7 @@ extern EEPROM_BSMU bsmuSetting;
 extern osSemaphoreId http_snd_sem_handle;
 osThreadId httpc_handle = NULL;
 
-Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E330)));
+Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E3D0)));
 Client_Sd_t httpc_clusters[cluster_num] __attribute__ ((at (0xC0400000)));
 
 httpc_ctx_t http_client;
