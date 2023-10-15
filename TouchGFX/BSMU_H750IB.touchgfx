@@ -32,7 +32,7 @@
           {
             "Type": "TextArea",
             "Name": "FrameRateText",
-            "X": 952,
+            "X": 271,
             "Y": 26,
             "Width": 70,
             "Height": 27,
@@ -117,6 +117,7 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
+            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -2885,7 +2886,6 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
-            "Visible": false,
             "Components": [
               {
                 "Type": "Container",
@@ -2980,7 +2980,6 @@
                     "Height": 32,
                     "TextId": "__SingleUse_NYTC",
                     "TextRotation": "0",
-                    "AutoSize": true,
                     "Wildcard1": {
                       "TextId": "__SingleUse_89JO",
                       "UseBuffer": true,
@@ -3032,7 +3031,6 @@
                     "Height": 32,
                     "TextId": "__SingleUse_YRYK",
                     "TextRotation": "0",
-                    "AutoSize": true,
                     "Wildcard1": {
                       "TextId": "__SingleUse_B2G5",
                       "UseBuffer": true,
@@ -3048,7 +3046,6 @@
                     "Height": 32,
                     "TextId": "__SingleUse_IXPA",
                     "TextRotation": "0",
-                    "AutoSize": true,
                     "Wildcard1": {
                       "TextId": "__SingleUse_RGHW",
                       "UseBuffer": true,
@@ -3094,7 +3091,6 @@
                     "Height": 32,
                     "TextId": "__SingleUse_HUKM",
                     "TextRotation": "0",
-                    "AutoSize": true,
                     "Wildcard1": {
                       "TextId": "__SingleUse_SAF9",
                       "UseBuffer": true,
@@ -3353,6 +3349,7 @@
                     "Y": 290,
                     "Width": 18,
                     "Height": 33,
+                    "Visible": false,
                     "TextId": "__SingleUse_ABHS",
                     "TextRotation": "0"
                   },
@@ -3373,6 +3370,7 @@
                     "Y": 249,
                     "Width": 13,
                     "Height": 33,
+                    "Visible": false,
                     "TextId": "__SingleUse_1K2C",
                     "TextRotation": "0"
                   },
@@ -3708,60 +3706,275 @@
                     "RelativeFilename": "benji_bj.png"
                   },
                   {
-                    "Type": "TextArea",
-                    "Name": "baojing_biaoti",
-                    "X": 51,
+                    "Type": "ScrollableContainer",
+                    "Name": "scrollableContainer1",
+                    "X": 46,
                     "Y": 15,
-                    "Width": 97,
-                    "Height": 35,
-                    "TextId": "__SingleUse_CFYG",
-                    "TextRotation": "0"
-                  }
-                ]
-              },
-              {
-                "Type": "ScrollableContainer",
-                "Name": "scrollableContainer1",
-                "X": 48,
-                "Y": 17,
-                "Width": 931,
-                "Height": 130,
-                "HorizontalScrollEnabled": true,
-                "ScrollbarsVisibleOnPressed": true,
-                "ScrollbarsAlpha": 255,
-                "Components": [
-                  {
-                    "Type": "TextArea",
-                    "Name": "textArea1",
-                    "X": 10,
-                    "Y": 43,
-                    "Width": 153,
-                    "Height": 34,
-                    "TextId": "__SingleUse_QAG6",
-                    "TextRotation": "0",
-                    "AutoSize": true
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "textArea2",
-                    "X": 941,
-                    "Y": 43,
-                    "Width": 184,
-                    "Height": 34,
-                    "TextId": "__SingleUse_VDPZ",
-                    "TextRotation": "0",
-                    "AutoSize": true
-                  },
-                  {
-                    "Type": "TextArea",
-                    "Name": "textArea3",
-                    "X": 1322,
-                    "Y": 43,
-                    "Width": 197,
-                    "Height": 34,
-                    "TextId": "__SingleUse_9JAV",
-                    "TextRotation": "0",
-                    "AutoSize": true
+                    "Width": 931,
+                    "Height": 130,
+                    "VerticalScrollEnabled": true,
+                    "ScrollbarsVisibleOnPressed": true,
+                    "ScrollbarsAlpha": 255,
+                    "Components": [
+                      {
+                        "Type": "Container",
+                        "Name": "err_inf",
+                        "X": 580,
+                        "Width": 351,
+                        "Height": 504,
+                        "Components": [
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_inf4",
+                            "X": 40,
+                            "Y": 162,
+                            "Width": 280,
+                            "Height": 35,
+                            "TextId": "__SingleUse_TOVZ",
+                            "TextRotation": "0"
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_inf3",
+                            "X": 40,
+                            "Y": 125,
+                            "Width": 280,
+                            "Height": 35,
+                            "TextId": "__SingleUse_7GVU",
+                            "TextRotation": "0"
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_inf2",
+                            "X": 40,
+                            "Y": 90,
+                            "Width": 280,
+                            "Height": 35,
+                            "TextId": "__SingleUse_YSP9",
+                            "TextRotation": "0"
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_inf1",
+                            "X": 40,
+                            "Y": 58,
+                            "Width": 280,
+                            "Height": 35,
+                            "TextId": "__SingleUse_VGDS",
+                            "TextRotation": "0"
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_inf0",
+                            "X": 40,
+                            "Y": 25,
+                            "Width": 280,
+                            "Height": 35,
+                            "TextId": "__SingleUse_OJPI",
+                            "TextRotation": "0"
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "textArea2",
+                            "X": 40,
+                            "Y": -5,
+                            "Width": 103,
+                            "Height": 31,
+                            "TextId": "__SingleUse_MCEE",
+                            "TextRotation": "0",
+                            "AutoSize": true
+                          }
+                        ]
+                      },
+                      {
+                        "Type": "Container",
+                        "Name": "err_id",
+                        "X": 289,
+                        "Y": 2,
+                        "Width": 250,
+                        "Height": 502,
+                        "Components": [
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_id4",
+                            "X": 8,
+                            "Y": 166,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_OKYQ",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_id4",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_id3",
+                            "X": 7,
+                            "Y": 131,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_XK40",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_id3",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_id2",
+                            "X": 8,
+                            "Y": 96,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_ND48",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_id2",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_id1",
+                            "X": 8,
+                            "Y": 61,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_GCXE",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_id1",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_id0",
+                            "X": 8,
+                            "Y": 25,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_FB71",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_id0",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "textArea1",
+                            "X": 8,
+                            "Width": 101,
+                            "Height": 31,
+                            "TextId": "__SingleUse_WQNC",
+                            "TextRotation": "0",
+                            "AutoSize": true
+                          }
+                        ]
+                      },
+                      {
+                        "Type": "Container",
+                        "Name": "err_time",
+                        "Width": 239,
+                        "Height": 505,
+                        "Components": [
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_time4",
+                            "X": 6,
+                            "Y": 166,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_OHZR",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_time4",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_time3",
+                            "X": 6,
+                            "Y": 132,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_O1HZ",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_time3",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_time2",
+                            "X": 6,
+                            "Y": 96,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_9JAV",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_time2",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_time1",
+                            "X": 6,
+                            "Y": 58,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_VDPZ",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_time1",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "err_time0",
+                            "X": 1,
+                            "Y": 25,
+                            "Width": 210,
+                            "Height": 35,
+                            "TextId": "__SingleUse_QAG6",
+                            "TextRotation": "0",
+                            "Wildcard1": {
+                              "TextId": "err_time00",
+                              "UseBuffer": true,
+                              "BufferSize": 10
+                            }
+                          },
+                          {
+                            "Type": "TextArea",
+                            "Name": "baojing_biaoti",
+                            "X": 6,
+                            "Y": -5,
+                            "Width": 97,
+                            "Height": 30,
+                            "TextId": "__SingleUse_CFYG",
+                            "TextRotation": "0"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               }

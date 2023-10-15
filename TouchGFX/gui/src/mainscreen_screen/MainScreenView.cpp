@@ -3,12 +3,17 @@
 #include <touchgfx/Callback.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <gui/setting_screen/SettingView.hpp>
+#include <stdio.h>
+#include <string>
+#include <touchgfx/Color.hpp>
 
 #ifndef SIMULATOR
 extern "C" {
 #include "at24cxx.h"
 #include "http_client.h"
 #include "station_ctl.h"
+#include "CAN_Control.h"
+
 };
 #endif
 
@@ -89,17 +94,8 @@ void MainScreenView::setupScreen()
 	//通知model更新数据
 	viewToModelData.reflashFlag = true;
 	presenter->ViewtoModelDat(viewToModelData);
-  /*  Unicode::UnicodeChar **buffer[4];
-    SettingView::get_local_ip(buffer[4], 8);*/
 
-    //char a[] = {"255.133.233.111"};
-    //Unicode::UnicodeChar buf[16];
-    //Unicode::strncpy(buf, a,16);
-    //Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", buf);
-    //local_ip.invalidate();
-    //
-    ////Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", a);
-    ////cloud_server_ip.invalidate();
+
     BCMU[0] = &BCMU1;
     BCMU[1] = &BCMU2;
     BCMU[2] = &BCMU3;
@@ -152,6 +148,68 @@ void MainScreenView::setupScreen()
     BMU[28] = &BMU29;
     BMU[29] = &BMU30;
 
+    time[0] = &err_time0Buffer[0];
+    time[1] = &err_time1Buffer[0];
+    time[2] = &err_time2Buffer[0];
+    time[3] = &err_time3Buffer[0];
+    time[4] = &err_time4Buffer[0];
+
+    id[0] = &err_id0Buffer[0];
+    id[1] = &err_id1Buffer[0];
+    id[2] = &err_id2Buffer[0];
+    id[3] = &err_id3Buffer[0];
+    id[4] = &err_id4Buffer[0];
+
+    inf[0] = &err_inf0;
+    inf[1] = &err_inf1;
+    inf[2] = &err_inf2;
+    inf[3] = &err_inf3;
+    inf[4] = &err_inf4;
+
+    for (int i = 0;i < 5;i++)
+    {
+        Unicode::snprintf(time[i], 10, "%d", i+1);
+        Unicode::snprintf(id[i], 10, "%d", i+1);
+        inf[i]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 +i));
+    }
+
+    scrollableContainer1.invalidate();
+
+    //for (int i = 0;i < 30;i++) //显示最近30条错误，格式：打印时间戳 + 错误板号 + 错误类型
+    //{
+       
+  /*  err_num1.setPosition(20, 30, 280, 30);
+    err_num1.setColor(touchgfx::Color::getColorFromRGB(1, 255, 255));
+    err_num1.setLinespacing(0);
+    err_num1.setWildcard(err_num1Buffer);  
+    err_num1.setTypedText(touchgfx::TypedText(T_BCMU_ERR3));
+    scrollableContainer1.add(err_num1);
+           
+    Unicode::snprintf(err_num1Buffer, ERR_NUM1_SIZE, "%d", 2);
+    err_num1.invalidate();
+    scrollableContainer1.invalidate();*/
+
+
+
+
+  
+ /*       FrameRateText.setPosition(271, 26, 70, 27);
+        FrameRateText.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+        FrameRateText.setLinespacing(0);
+        Unicode::snprintf(FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1G1L).getText());
+        FrameRateText.setWildcard(FrameRateTextBuffer);
+        FrameRateText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HULS));
+        add(FrameRateText);*/
+   /* }*/
+
+
+  /*  this->bufSize = 4096;
+    this->textBuf = (uint8_t*)malloc(this->bufSize);
+    if (textBuf != NULL)
+    {
+        memset(textBuf, 0, this->bufSize);
+    }*/
+
 #ifndef SIMULATOR 
     http_get_wan_ip(local_ip_buff,16);//给local_ip_buff赋值char类型的变量
     Unicode::UnicodeChar wan_ip_buf[16];
@@ -179,10 +237,62 @@ void MainScreenView::setupScreen()
 #endif
 }
 
+void MainScreenView::handleTickEvent()
+{
+
+ 
+    //tickCounter++;
+    //if (tickCounter % 60 == 0)
+    //{
+    //    if (++digitalSeconds >= 60)
+    //    {
+    //        digitalSeconds = 0;
+    //        if (++digitalMinutes >= 60)
+    //        {
+    //            digitalMinutes = 0;
+    //            if (++digitalHours >= 24)
+    //            {
+    //                digitalHours = 0;
+    //            }
+    //        }
+    //    }
+    //}
+
+ /*   tickCounter++;
+    uint8_t str[128];
+    if (tickCounter % 50 == 0)
+    {
+        static uint16_t textCount = 0;
+        sprintf((char*)str, "你好TouchGFX:count %d\n", textCount++);
+        this->TextAreaAddStr(str, sizeof(str));
+    }*/
+ //   char a[] = {"dsads"};
+ //   Unicode::UnicodeChar c[5];
+ ///*   char b[4];
+ //   for (int i = 0;i < 4;i++)
+ //   {
+ //       b[i] = a[i];
+ //   }*/
+ //   Unicode::strncpy(c, a, 5);
+ //   Unicode::snprintf(err1Buffer,16,"%s",a);
+ //  /* err1.setWideTextAction(WIDE_TEXT_CHARWRAP);*/
+ //   err1.invalidate();
+#ifndef SIMULATOR
+   
+#endif
+}
+
+
+
+
+
 void MainScreenView::tearDownScreen()
 {
     MainScreenViewBase::tearDownScreen();
 }
+
+
+
 
 //按键切换显示内容
 void MainScreenView::show_shouye() 
@@ -1262,18 +1372,18 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
       else if  (modelToViewData.BCMU_state[i] != offline && BCMU[i]->isTouchable() == false) 
       {            
           //使能BCMU按键
-          BCMU[i]->setLabelText(touchgfx::TypedText(20-i));
+          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU1 -i));
           BCMU[i]->setTouchable(true);
           for (uint8_t j = 0;j < 30;j++)
           {
               if (bmu_offline[i][j] == 0) //0表示在线，非0离线
               {
-                  BMU[j]->setLabelText(touchgfx::TypedText(230+j));
+                  BMU[j]->setLabelText(touchgfx::TypedText(T_BMU1 +j));
                   BMU[j]->setTouchable(true);
               }
               else
               {
-                  BMU[j]->setLabelText(touchgfx::TypedText(0));
+                  BMU[j]->setLabelText(touchgfx::TypedText(T_BCMU_0));
                   BMU[j]->setTouchable(false);
               }
           }
@@ -1281,6 +1391,18 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
           BMU_Container.invalidate();
       }
   }
+
+  //更新错误信息
+ /* typedef struct
+  {
+      uint8_t error_id_h;
+      uint8_t error_id_l;
+      uint16_t error_code;
+  } error_info_t;*/
+
+
+
+
 
 
 

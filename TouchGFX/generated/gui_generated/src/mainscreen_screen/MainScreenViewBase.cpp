@@ -22,7 +22,7 @@ MainScreenViewBase::MainScreenViewBase() :
     box1.setColor(touchgfx::Color::getColorFromRGB(237, 237, 237));
     add(box1);
 
-    FrameRateText.setPosition(952, 26, 70, 27);
+    FrameRateText.setPosition(271, 26, 70, 27);
     FrameRateText.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     FrameRateText.setLinespacing(0);
     Unicode::snprintf(FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1G1L).getText());
@@ -55,6 +55,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
+    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
     S10_1.setPosition(263, 418, 22, 25);
     S10_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -1324,7 +1325,6 @@ MainScreenViewBase::MainScreenViewBase() :
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
-    shouye.setVisible(false);
     PCS_menu.setPosition(810, 286, 219, 239);
     PCS_menu.setVisible(false);
     PCS_BG.setPosition(14, 2, 190, 218);
@@ -1362,12 +1362,11 @@ MainScreenViewBase::MainScreenViewBase() :
     scalableImage1.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
     benjixinxi.add(scalableImage1);
 
-    local_ip.setXY(18, 66);
+    local_ip.setPosition(18, 66, 171, 32);
     local_ip.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     local_ip.setLinespacing(0);
     Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_89JO).getText());
     local_ip.setWildcard(local_ipBuffer);
-    local_ip.resizeToCurrentText();
     local_ip.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NYTC));
     benjixinxi.add(local_ip);
 
@@ -1392,21 +1391,19 @@ MainScreenViewBase::MainScreenViewBase() :
     local_ip4.setVisible(false);
     benjixinxi.add(local_ip4);
 
-    local_server_ip.setXY(18, 180);
+    local_server_ip.setPosition(18, 180, 44, 32);
     local_server_ip.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     local_server_ip.setLinespacing(0);
     Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_B2G5).getText());
     local_server_ip.setWildcard(local_server_ipBuffer);
-    local_server_ip.resizeToCurrentText();
     local_server_ip.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YRYK));
     benjixinxi.add(local_server_ip);
 
-    local_server_ip2.setXY(62, 180);
+    local_server_ip2.setPosition(62, 180, 44, 32);
     local_server_ip2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     local_server_ip2.setLinespacing(0);
     Unicode::snprintf(local_server_ip2Buffer, LOCAL_SERVER_IP2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_RGHW).getText());
     local_server_ip2.setWildcard(local_server_ip2Buffer);
-    local_server_ip2.resizeToCurrentText();
     local_server_ip2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IXPA));
     benjixinxi.add(local_server_ip2);
 
@@ -1426,12 +1423,11 @@ MainScreenViewBase::MainScreenViewBase() :
     local_server_ip4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S5YA));
     benjixinxi.add(local_server_ip4);
 
-    cloud_server_ip.setXY(18, 298);
+    cloud_server_ip.setPosition(18, 298, 171, 32);
     cloud_server_ip.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     cloud_server_ip.setLinespacing(0);
     Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_SAF9).getText());
     cloud_server_ip.setWildcard(cloud_server_ipBuffer);
-    cloud_server_ip.resizeToCurrentText();
     cloud_server_ip.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HUKM));
     benjixinxi.add(cloud_server_ip);
 
@@ -1570,6 +1566,7 @@ MainScreenViewBase::MainScreenViewBase() :
     Chinese_2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     Chinese_2.setLinespacing(0);
     Chinese_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ABHS));
+    Chinese_2.setVisible(false);
     cu_info.add(Chinese_2);
 
     Chinese_fujueyuan.setPosition(15, 289, 120, 33);
@@ -1582,6 +1579,7 @@ MainScreenViewBase::MainScreenViewBase() :
     Chinese_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     Chinese_1.setLinespacing(0);
     Chinese_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1K2C));
+    Chinese_1.setVisible(false);
     cu_info.add(Chinese_1);
 
     Chinese_zhengjueyuan.setPosition(15, 247, 120, 33);
@@ -1764,37 +1762,150 @@ MainScreenViewBase::MainScreenViewBase() :
     benjixinxi_BG.setBitmap(touchgfx::Bitmap(BITMAP_BENJI_BJ_ID));
     baojingxinxi_container.add(benjixinxi_BG);
 
-    baojing_biaoti.setPosition(51, 15, 97, 35);
+    scrollableContainer1.setPosition(46, 15, 931, 130);
+    scrollableContainer1.enableHorizontalScroll(false);
+    scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    scrollableContainer1.setScrollbarsAlpha(255);
+    err_inf.setPosition(580, 0, 351, 504);
+    err_inf4.setPosition(40, 162, 280, 35);
+    err_inf4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_inf4.setLinespacing(0);
+    err_inf4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TOVZ));
+    err_inf.add(err_inf4);
+
+    err_inf3.setPosition(40, 125, 280, 35);
+    err_inf3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_inf3.setLinespacing(0);
+    err_inf3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_7GVU));
+    err_inf.add(err_inf3);
+
+    err_inf2.setPosition(40, 90, 280, 35);
+    err_inf2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_inf2.setLinespacing(0);
+    err_inf2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YSP9));
+    err_inf.add(err_inf2);
+
+    err_inf1.setPosition(40, 58, 280, 35);
+    err_inf1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_inf1.setLinespacing(0);
+    err_inf1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VGDS));
+    err_inf.add(err_inf1);
+
+    err_inf0.setPosition(40, 25, 280, 35);
+    err_inf0.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_inf0.setLinespacing(0);
+    err_inf0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OJPI));
+    err_inf.add(err_inf0);
+
+    textArea2.setXY(40, -5);
+    textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea2.setLinespacing(0);
+    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MCEE));
+    err_inf.add(textArea2);
+
+    scrollableContainer1.add(err_inf);
+
+    err_id.setPosition(289, 2, 250, 502);
+    err_id4.setPosition(8, 166, 210, 35);
+    err_id4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_id4.setLinespacing(0);
+    Unicode::snprintf(err_id4Buffer, ERR_ID4_SIZE, "%s", touchgfx::TypedText(T_ERR_ID4).getText());
+    err_id4.setWildcard(err_id4Buffer);
+    err_id4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OKYQ));
+    err_id.add(err_id4);
+
+    err_id3.setPosition(7, 131, 210, 35);
+    err_id3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_id3.setLinespacing(0);
+    Unicode::snprintf(err_id3Buffer, ERR_ID3_SIZE, "%s", touchgfx::TypedText(T_ERR_ID3).getText());
+    err_id3.setWildcard(err_id3Buffer);
+    err_id3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XK40));
+    err_id.add(err_id3);
+
+    err_id2.setPosition(8, 96, 210, 35);
+    err_id2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_id2.setLinespacing(0);
+    Unicode::snprintf(err_id2Buffer, ERR_ID2_SIZE, "%s", touchgfx::TypedText(T_ERR_ID2).getText());
+    err_id2.setWildcard(err_id2Buffer);
+    err_id2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ND48));
+    err_id.add(err_id2);
+
+    err_id1.setPosition(8, 61, 210, 35);
+    err_id1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_id1.setLinespacing(0);
+    Unicode::snprintf(err_id1Buffer, ERR_ID1_SIZE, "%s", touchgfx::TypedText(T_ERR_ID1).getText());
+    err_id1.setWildcard(err_id1Buffer);
+    err_id1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_GCXE));
+    err_id.add(err_id1);
+
+    err_id0.setPosition(8, 25, 210, 35);
+    err_id0.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_id0.setLinespacing(0);
+    Unicode::snprintf(err_id0Buffer, ERR_ID0_SIZE, "%s", touchgfx::TypedText(T_ERR_ID0).getText());
+    err_id0.setWildcard(err_id0Buffer);
+    err_id0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FB71));
+    err_id.add(err_id0);
+
+    textArea1.setXY(8, 0);
+    textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WQNC));
+    err_id.add(textArea1);
+
+    scrollableContainer1.add(err_id);
+
+    err_time.setPosition(0, 0, 239, 505);
+    err_time4.setPosition(6, 166, 210, 35);
+    err_time4.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_time4.setLinespacing(0);
+    Unicode::snprintf(err_time4Buffer, ERR_TIME4_SIZE, "%s", touchgfx::TypedText(T_ERR_TIME4).getText());
+    err_time4.setWildcard(err_time4Buffer);
+    err_time4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OHZR));
+    err_time.add(err_time4);
+
+    err_time3.setPosition(6, 132, 210, 35);
+    err_time3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_time3.setLinespacing(0);
+    Unicode::snprintf(err_time3Buffer, ERR_TIME3_SIZE, "%s", touchgfx::TypedText(T_ERR_TIME3).getText());
+    err_time3.setWildcard(err_time3Buffer);
+    err_time3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_O1HZ));
+    err_time.add(err_time3);
+
+    err_time2.setPosition(6, 96, 210, 35);
+    err_time2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_time2.setLinespacing(0);
+    Unicode::snprintf(err_time2Buffer, ERR_TIME2_SIZE, "%s", touchgfx::TypedText(T_ERR_TIME2).getText());
+    err_time2.setWildcard(err_time2Buffer);
+    err_time2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9JAV));
+    err_time.add(err_time2);
+
+    err_time1.setPosition(6, 58, 210, 35);
+    err_time1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_time1.setLinespacing(0);
+    Unicode::snprintf(err_time1Buffer, ERR_TIME1_SIZE, "%s", touchgfx::TypedText(T_ERR_TIME1).getText());
+    err_time1.setWildcard(err_time1Buffer);
+    err_time1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VDPZ));
+    err_time.add(err_time1);
+
+    err_time0.setPosition(1, 25, 210, 35);
+    err_time0.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    err_time0.setLinespacing(0);
+    Unicode::snprintf(err_time0Buffer, ERR_TIME0_SIZE, "%s", touchgfx::TypedText(T_ERR_TIME00).getText());
+    err_time0.setWildcard(err_time0Buffer);
+    err_time0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QAG6));
+    err_time.add(err_time0);
+
+    baojing_biaoti.setPosition(6, -5, 97, 30);
     baojing_biaoti.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     baojing_biaoti.setLinespacing(0);
     baojing_biaoti.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CFYG));
-    baojingxinxi_container.add(baojing_biaoti);
+    err_time.add(baojing_biaoti);
+
+    scrollableContainer1.add(err_time);
+
+    baojingxinxi_container.add(scrollableContainer1);
 
     shouye.add(baojingxinxi_container);
-
-    scrollableContainer1.setPosition(48, 17, 931, 130);
-    scrollableContainer1.enableVerticalScroll(false);
-    scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    scrollableContainer1.setScrollbarsAlpha(255);
-    textArea1.setXY(10, 43);
-    textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QAG6));
-    scrollableContainer1.add(textArea1);
-
-    textArea2.setXY(941, 43);
-    textArea2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea2.setLinespacing(0);
-    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VDPZ));
-    scrollableContainer1.add(textArea2);
-
-    textArea3.setXY(1322, 43);
-    textArea3.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea3.setLinespacing(0);
-    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9JAV));
-    scrollableContainer1.add(textArea3);
-
-    shouye.add(scrollableContainer1);
 
     add(shouye);
 }

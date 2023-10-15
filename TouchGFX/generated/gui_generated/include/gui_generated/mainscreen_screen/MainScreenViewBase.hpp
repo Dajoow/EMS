@@ -515,11 +515,28 @@ protected:
     touchgfx::TextArea dianzhanxinxi;
     touchgfx::Container baojingxinxi_container;
     touchgfx::Image benjixinxi_BG;
-    touchgfx::TextArea baojing_biaoti;
     touchgfx::ScrollableContainer scrollableContainer1;
-    touchgfx::TextArea textArea1;
+    touchgfx::Container err_inf;
+    touchgfx::TextArea err_inf4;
+    touchgfx::TextArea err_inf3;
+    touchgfx::TextArea err_inf2;
+    touchgfx::TextArea err_inf1;
+    touchgfx::TextArea err_inf0;
     touchgfx::TextArea textArea2;
-    touchgfx::TextArea textArea3;
+    touchgfx::Container err_id;
+    touchgfx::TextAreaWithOneWildcard err_id4;
+    touchgfx::TextAreaWithOneWildcard err_id3;
+    touchgfx::TextAreaWithOneWildcard err_id2;
+    touchgfx::TextAreaWithOneWildcard err_id1;
+    touchgfx::TextAreaWithOneWildcard err_id0;
+    touchgfx::TextArea textArea1;
+    touchgfx::Container err_time;
+    touchgfx::TextAreaWithOneWildcard err_time4;
+    touchgfx::TextAreaWithOneWildcard err_time3;
+    touchgfx::TextAreaWithOneWildcard err_time2;
+    touchgfx::TextAreaWithOneWildcard err_time1;
+    touchgfx::TextAreaWithOneWildcard err_time0;
+    touchgfx::TextArea baojing_biaoti;
 
     /*
      * Wildcard Buffers
@@ -648,6 +665,26 @@ protected:
     touchgfx::Unicode::UnicodeChar dianchicushuliangBuffer[DIANCHICUSHULIANG_SIZE];
     static const uint16_t ZHUANGJIRONGLIANG_SIZE = 10;
     touchgfx::Unicode::UnicodeChar zhuangjirongliangBuffer[ZHUANGJIRONGLIANG_SIZE];
+    static const uint16_t ERR_ID4_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id4Buffer[ERR_ID4_SIZE];
+    static const uint16_t ERR_ID3_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id3Buffer[ERR_ID3_SIZE];
+    static const uint16_t ERR_ID2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id2Buffer[ERR_ID2_SIZE];
+    static const uint16_t ERR_ID1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id1Buffer[ERR_ID1_SIZE];
+    static const uint16_t ERR_ID0_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id0Buffer[ERR_ID0_SIZE];
+    static const uint16_t ERR_TIME4_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time4Buffer[ERR_TIME4_SIZE];
+    static const uint16_t ERR_TIME3_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time3Buffer[ERR_TIME3_SIZE];
+    static const uint16_t ERR_TIME2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time2Buffer[ERR_TIME2_SIZE];
+    static const uint16_t ERR_TIME1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time1Buffer[ERR_TIME1_SIZE];
+    static const uint16_t ERR_TIME0_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time0Buffer[ERR_TIME0_SIZE];
 
 private:
 

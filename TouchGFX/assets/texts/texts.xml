@@ -4,6 +4,280 @@
     <Language Id="GB" />
   </Languages>
   <Texts>
+    <TextGroup Id="BMU_between_err">
+      <Text Id="BMU_between_err15" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err14" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err13" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err12" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err11" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err10" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err8" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err7" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err6" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err5" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err4" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err3" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err2" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_between_err1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU控制错误</Translation>
+      </Text>
+      <Text Id="BMU_between_err0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU失联</Translation>
+      </Text>
+    </TextGroup>
+    <TextGroup Id="BMU_battery_err">
+      <Text Id="BMU_battery_err15" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err14" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err13" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err12" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err11" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err10" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err8" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err7" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err6" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err5" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err4" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err3" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err2" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err1" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_battery_err0" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+    </TextGroup>
+    <TextGroup Id="BMU_board_err">
+      <Text Id="BMU_board_err15" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err14" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err13" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err12" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err11" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err10" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err8" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err7" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err6" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err5" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err4" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err3" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err2" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BMU_board_err1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU控制错误</Translation>
+      </Text>
+      <Text Id="BMU_board_err0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU失联</Translation>
+      </Text>
+    </TextGroup>
+    <TextGroup Id="BCMU_err">
+      <Text Id="BCMU_err15" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err14" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err13" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err12" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err11" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err10" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BCMU_err8" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">动力线温度温升过快(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err7" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">负极熔断器断开故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err6" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">正极熔断器断开故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err5" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">预充接触器不闭合故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">总负接触器不闭合故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err3" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">总正接触器不闭合故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">预充接触器粘连故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">总负接触器粘连故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">总正接触器粘连故障(暂无)</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_7" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇SOC下限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_6" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇SOC上限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_5" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">负绝缘电阻下限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">正绝缘电阻下限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_3" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇放电电流上限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇充电电流上限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇端电压下限</Translation>
+      </Text>
+      <Text Id="BCMU_err_2bit_0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇端电压上限</Translation>
+      </Text>
+    </TextGroup>
+    <TextGroup Id="BSMU_err">
+      <Text Id="BSMU_err15" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err14" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err13" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err12" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err11" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err10" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err9" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err8" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err7" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err6" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err5" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err4" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err3" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="BSMU_err2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB" Alignment="Left">以太网 云端通讯故障</Translation>
+      </Text>
+      <Text Id="BSMU_err1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">CAN BSMU与BCMU通讯故障</Translation>
+      </Text>
+      <Text Id="BSMU_err0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">RS485 PCS 通讯故障</Translation>
+      </Text>
+    </TextGroup>
     <TextGroup Id="GPROUP1">
       <Text Id="BCMU_0" Alignment="Left" TypographyId="Default">
         <Translation Language="GB" Alignment="Left">       /</Translation>
@@ -97,28 +371,100 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_MCEE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[错误类型]</Translation>
+      </Text>
+      <Text Id="__SingleUse_WQNC" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[错误id号]</Translation>
+      </Text>
+      <Text Id="__SingleUse_OJPI" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_VGDS" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_YSP9" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_7GVU" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_TOVZ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="err_id4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_id3" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_id2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_id1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_id0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_time4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_time3" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_time2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_time1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="err_time00" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_OKYQ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_XK40" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_ND48" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GCXE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_FB71" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OHZR" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_O1HZ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_RF8D" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">℃</Translation>
       </Text>
-      <Text Id="__SingleUse_9JAV" Alignment="Left" TypographyId="STXihei_24">
-        <Translation Language="GB">（3323）电压过高</Translation>
+      <Text Id="__SingleUse_9JAV" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_VDPZ" Alignment="Left" TypographyId="STXihei_24">
-        <Translation Language="GB">（233）电压过低</Translation>
+      <Text Id="__SingleUse_VDPZ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_QAG6" Alignment="Left" TypographyId="STXihei_24">
-        <Translation Language="GB">(123)温度过高</Translation>
+      <Text Id="__SingleUse_QAG6" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_XGKH" Alignment="Left" TypographyId="SegoeUI_24">
-        <Translation Language="GB">255</Translation>
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_UZT2" Alignment="Left" TypographyId="SegoeUI_24">
-        <Translation Language="GB">1</Translation>
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_RGHW" Alignment="Left" TypographyId="STXihei_24">
-        <Translation Language="GB">255</Translation>
+        <Translation Language="GB">0</Translation>
       </Text>
-      <Text Id="__SingleUse_S5YA" Alignment="Left" TypographyId="SegoeUI_24">
+      <Text Id="__SingleUse_S5YA" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_W9CS" Alignment="Center" TypographyId="SegoeUI_24">
@@ -155,13 +501,13 @@
         <Translation Language="GB">平均百分比 &lt;value&gt;%</Translation>
       </Text>
       <Text Id="__SingleUse_SAF9" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">255.255.255.255</Translation>
+        <Translation Language="GB">-</Translation>
       </Text>
       <Text Id="__SingleUse_B2G5" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">255</Translation>
+        <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_89JO" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">255.255.255.255</Translation>
+        <Translation Language="GB">-</Translation>
       </Text>
       <Text Id="__SingleUse_HUKM" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
@@ -896,13 +1242,13 @@
         <Translation Language="GB">簇电压</Translation>
       </Text>
       <Text Id="__SingleUse_R9NS" Alignment="Center" TypographyId="STXihei_24">
-        <Translation Language="GB">绝缘电阻</Translation>
+        <Translation Language="GB">正绝缘电阻</Translation>
       </Text>
       <Text Id="__SingleUse_1K2C" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">P</Translation>
       </Text>
       <Text Id="__SingleUse_SZPO" Alignment="Center" TypographyId="STXihei_24">
-        <Translation Language="GB">绝缘电阻</Translation>
+        <Translation Language="GB">负绝缘电阻</Translation>
       </Text>
       <Text Id="__SingleUse_ABHS" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">N</Translation>
@@ -961,8 +1307,8 @@
       <Text Id="__SingleUse_RGR6" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">kΩ</Translation>
       </Text>
-      <Text Id="__SingleUse_CFYG" Alignment="Left" TypographyId="STXihei_24">
-        <Translation Language="GB">报警信息</Translation>
+      <Text Id="__SingleUse_CFYG" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[时间戳]</Translation>
       </Text>
       <Text Id="__SingleUse_B1X3" Alignment="Center" TypographyId="SegoeUI_30">
         <Translation Language="GB">PCS</Translation>
@@ -1425,5 +1771,6 @@
     <Typography Id="uibold20" Font="seguisb.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_22" Font="segoeui.ttf" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_32" Font="STXIHEI.TTF" Size="32" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Chinese" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="!”&quot;#*%&amp;()'$+-@_, .:;?/~±×÷•º`´{}©£€^®¥_=[]¡¢|\¿&gt;&lt;【】；‘’，。、｛｝：“”《》？|·~！@#￥%……&amp;*（）——+" WildcardCharacterRanges="0x20-0x1BF,0X4e00-0X9f5a" />
   </Typographies>
 </TextDatabase>

@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
-
   <SchemaVersion>2.1</SchemaVersion>
-
   <Header>### uVision Project, (C) Keil Software</Header>
-
   <Targets>
     <Target>
       <TargetName>BSMU_H750IB</TargetName>
@@ -1771,9 +1768,64 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_10.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_10.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_11.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_11.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_12.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_13.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_13.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_14.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_14.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_15.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_15.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_16.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_17.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_17.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_18.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_18.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_19.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_19.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_22_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_9.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_9.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_0.cpp</FileName>
@@ -1811,6 +1863,11 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_15.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_16.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_17.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_17.cpp</FilePath>
@@ -1829,6 +1886,16 @@
               <FileName>Font_STXIHEI_TTF_24_4bpp_31.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_31.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_6.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_9.cpp</FileName>
@@ -10646,20 +10713,18 @@
       </Groups>
     </Target>
   </Targets>
-
   <RTE>
-    <apis/>
+    <apis></apis>
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
+        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"></package>
         <targetInfos>
-          <targetInfo name="BSMU_H750IB"/>
+          <targetInfo name="BSMU_H750IB"></targetInfo>
         </targetInfos>
       </component>
     </components>
-    <files/>
+    <files></files>
   </RTE>
-
   <LayerInfo>
     <Layers>
       <Layer>
@@ -10668,5 +10733,4 @@
       </Layer>
     </Layers>
   </LayerInfo>
-
 </Project>
