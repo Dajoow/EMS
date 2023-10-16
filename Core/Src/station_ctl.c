@@ -157,9 +157,12 @@ cell_info_t cell_max_temp[20];
 cell_info_t cell_min_temp[20];
 cell_info_t cell_max_soc[20];
 cell_info_t cell_min_soc[20];
+cell_info_t cell_max_soh[20];
+cell_info_t cell_min_soh[20];
 uint32_t cell_avg_vol[20];
 uint32_t cell_avg_temp[20];
 uint32_t cell_avg_soc[20];
+uint32_t cell_avg_soh[20];
 
 extern cluster_info_u16_u cluster_info_u16[20];
 extern cluster_info_f32_u cluster_info_f32[20];
@@ -167,6 +170,7 @@ extern cluster_info_f32_u cluster_info_f32[20];
 extern modbus_float_u cell_vol[20][360];
 extern modbus_float_u cell_temp[20][360];
 extern modbus_float_u cell_soc[20][360];
+extern modbus_float_u cell_soh[20][360];
 
 extern uint8_t cell_charge_balance_status[20][360];
 extern uint8_t cell_discharge_balance_status[20][360];
@@ -196,6 +200,7 @@ void cal_modbus_cluster_data (void){
         cell_vol[i][index].f32 = Client_Sd[i].BAT_VOL[index] * 0.001;
         cell_temp[i][index].f32 = Client_Sd[i].BAT_TMP[index] * 0.01;
         cell_soc[i][index].f32 = Client_Sd[i].BAT_SOC[index] * 0.1;
+        cell_soh[i][index].f32 = Client_Sd[i].BAT_SOH[index] * 0.1;
 
         if (Client_Sd[i].BAT_VOL[index] > cell_max_vol->val){
             cell_max_vol[i].cluster_id = i + 1;
@@ -211,6 +216,11 @@ void cal_modbus_cluster_data (void){
             cell_max_soc[i].cluster_id = i + 1;
             cell_max_soc[i].cell_id = index + 1;
             cell_max_soc[i].val = Client_Sd[i].BAT_SOC[index];
+        }
+        if (Client_Sd[i].BAT_SOH[index] > cell_max_soh->val){
+            cell_max_soh[i].cluster_id = i + 1;
+            cell_max_soh[i].cell_id = index + 1;
+            cell_max_soh[i].val = Client_Sd[i].BAT_SOH[index];
         }
 
         if (Client_Sd[i].BAT_VOL[index] < cell_min_vol->val){
@@ -228,10 +238,16 @@ void cal_modbus_cluster_data (void){
             cell_min_soc[i].cell_id = index + 1;
             cell_min_soc[i].val = Client_Sd[i].BAT_SOC[index];
         }
+        if (Client_Sd[i].BAT_SOH[index] < cell_min_soh->val){
+            cell_min_soh[i].cluster_id = i + 1;
+            cell_min_soh[i].cell_id = index + 1;
+            cell_min_soh[i].val = Client_Sd[i].BAT_SOH[index];
+        }
 
         cell_avg_vol[i] += Client_Sd[i].BAT_VOL[index];
         cell_avg_temp[i] += Client_Sd[i].BAT_TMP[index];
         cell_avg_soc[i] += Client_Sd[i].BAT_SOC[index];
+        cell_avg_soh[i] += Client_Sd[i].BAT_SOH[index];
         cell_cnt++;
       }
 
@@ -249,6 +265,7 @@ void cal_modbus_cluster_data (void){
     cell_avg_vol[i] /= cell_cnt;
     cell_avg_temp[i] /= cell_cnt;
     cell_avg_soc[i] /= cell_cnt;
+    cell_avg_soh[i] /= cell_cnt;
 
     cluster_info_u16[i].data.max_vol_cell = cell_max_vol[i].cell_id;
     cluster_info_u16[i].data.min_vol_cell = cell_min_vol[i].cell_id;
@@ -256,6 +273,8 @@ void cal_modbus_cluster_data (void){
     cluster_info_u16[i].data.min_temp_cell = cell_min_temp[i].cell_id;
     cluster_info_u16[i].data.max_soc_cell = cell_max_soc[i].cell_id;
     cluster_info_u16[i].data.min_soc_cell = cell_min_soc[i].cell_id;
+    cluster_info_u16[i].data.max_soh_cell = cell_max_soh[i].cell_id;
+    cluster_info_u16[i].data.min_soh_cell = cell_min_soh[i].cell_id;
 
     cluster_info_f32[i].data.voltage_delta_max = (cell_max_vol[i].val - cell_min_vol[i].val) * 0.001;
     cluster_info_f32[i].data.avg_cell_voltage = cell_avg_vol[i] * 0.001;
@@ -271,6 +290,10 @@ void cal_modbus_cluster_data (void){
     cluster_info_f32[i].data.avg_cell_soc = cell_avg_soc[i] * 0.1;
     cluster_info_f32[i].data.max_cell_soc = cell_max_soc[i].val * 0.1;
     cluster_info_f32[i].data.min_cell_soc = cell_min_soc[i].val * 0.1;
+
+    cluster_info_f32[i].data.avg_cell_soh = cell_avg_soh[i] * 0.1;
+    cluster_info_f32[i].data.max_cell_soh = cell_max_soh[i].val * 0.1;
+    cluster_info_f32[i].data.min_cell_soh = cell_min_soh[i].val * 0.1;
 
     cluster_info_f32[i].data.cluster_voltage = Client_Sd[i].cluster_VOL * 0.1;
     cluster_info_f32[i].data.cluster_current = Client_Sd[i].cluster_CUR * 0.2;

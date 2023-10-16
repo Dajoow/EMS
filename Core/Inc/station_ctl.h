@@ -22,7 +22,9 @@
 #define  cluster_num              20                        //电池簇个数
 #define  GRP_num                  30												//一簇中电池组数
 #define  GRP_BAT_num              12												//一组中电池数
-#define  TOTOL_BAT_num            GRP_num*GRP_BAT_num       //总电池数，为了内存对齐这个值为2的倍数
+#define  TOTOL_BAT_num            (GRP_num*GRP_BAT_num)     //总电池数，为了内存对齐这个值为2的倍数
+#define  CELL_CAP_AH              500
+#define  CLU_CAP_KWH              (CELL_CAP_AH * TOTOL_BAT_num * 2 * 3600 / 1000)                        // 每簇容量 kWh
 
 #define  MAX_ERROR                400
 
