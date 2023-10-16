@@ -25,8 +25,11 @@
 #define  TOTOL_BAT_num            (GRP_num*GRP_BAT_num)     //总电池数，为了内存对齐这个值为2的倍数
 #define  CELL_CAP_AH              500
 #define  CLU_CAP_KWH              (CELL_CAP_AH * TOTOL_BAT_num * 2 * 3600 / 1000)                        // 每簇容量 kWh
+<<<<<<< HEAD
 
 #define  MAX_ERROR                400
+=======
+>>>>>>> e1a5ace (facan feat: add cell SOH)
 
 #define  MAX_ERROR                400
 
