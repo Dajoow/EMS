@@ -52,6 +52,7 @@ extern BCMU_Mail_t BCMU[cluster_num];
 
 extern EEPROM_BSMU bsmuSetting;
 
+extern osSemaphoreId http_snd_sem_handle;
 osThreadId httpc_handle = NULL;
 
 Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E330)));
@@ -660,17 +661,17 @@ httpc_task (void const *args)
 
   while (1)
     {
-      int ret = 0;
-      
-      httpc_connect (&http_client, HOST, HTTPS_PORT);
+		  if(xSemaphoreTake(http_snd_sem_handle, portMAX_DELAY) == pdTRUE)//等待获取信号量(等待FDCAN轮询完大概1s)
+      {
+        httpc_connect (&http_client, HOST, HTTPS_PORT);
 
-      httpc_send_data_statistics (&http_client);
+        httpc_send_data_statistics (&http_client);
 
-      httpc_send_data_clusters (&http_client);
+        httpc_send_data_clusters (&http_client);
 
-      httpc_disconnect (&http_client);
-
-      osDelay (1000);
+        httpc_disconnect (&http_client);
+      }
+      osDelay (1);
     }
 
 end:
