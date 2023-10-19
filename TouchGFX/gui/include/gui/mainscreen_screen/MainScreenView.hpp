@@ -105,6 +105,8 @@ public:
     virtual void handleTickEvent();
 
 
+    virtual uint8_t get_one_bit_value(uint16_t src, uint8_t bit_num);
+    virtual uint8_t get_two_bit_value(uint16_t src, uint8_t bit_num);
     //uint8_t bufSize;
     //uint8_t * textBuf;
 
@@ -128,7 +130,7 @@ protected:
     ButtonWithLabel* BCMU[20];
     ButtonWithLabel* BMU[30];
 
-    touchgfx::Unicode::UnicodeChar* time[30];
+    touchgfx::Unicode::UnicodeChar* tim[30];
     touchgfx::Unicode::UnicodeChar* id[30];
     touchgfx::TextArea* inf[30];
 

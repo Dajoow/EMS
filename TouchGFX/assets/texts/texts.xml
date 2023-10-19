@@ -1771,6 +1771,5 @@
     <Typography Id="uibold20" Font="seguisb.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_22" Font="segoeui.ttf" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_32" Font="STXIHEI.TTF" Size="32" Bpp="4" Direction="LTR" FallbackCharacter="?" />
-    <Typography Id="Chinese" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="!”&quot;#*%&amp;()'$+-@_, .:;?/~±×÷•º`´{}©£€^®¥_=[]¡¢|\¿&gt;&lt;【】；‘’，。、｛｝：“”《》？|·~！@#￥%……&amp;*（）——+" WildcardCharacterRanges="0x20-0x1BF,0X4e00-0X9f5a" />
   </Typographies>
 </TextDatabase>

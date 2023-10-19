@@ -27,7 +27,6 @@ struct Typography
     static const touchgfx::FontId UIBOLD20 = 11;
     static const touchgfx::FontId SEGOEUI_22 = 12;
     static const touchgfx::FontId STXIHEI_32 = 13;
-    static const touchgfx::FontId CHINESE = 14;
 };
 
 struct TypographyFontIndex
@@ -46,7 +45,6 @@ struct TypographyFontIndex
     static const touchgfx::FontId UIBOLD20 = 10;   // seguisb_20_4bpp
     static const touchgfx::FontId SEGOEUI_22 = 11; // segoeui_22_4bpp
     static const touchgfx::FontId STXIHEI_32 = 12; // STXIHEI_TTF_32_4bpp
-    static const touchgfx::FontId CHINESE = 3;    // STXIHEI_TTF_24_4bpp
     static const uint16_t NUMBER_OF_FONTS = 13;
 };
 

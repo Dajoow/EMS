@@ -51,9 +51,6 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId typography)
     case Typography::STXIHEI_32:
         // STXIHEI_TTF_32_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[12]);
-    case Typography::CHINESE:
-        // STXIHEI_TTF_24_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[3]);
     default:
         return 0;
     }
