@@ -544,6 +544,26 @@ void Debug_printf(char *format, ...)
 	va_end(args);
 }
 
+void cmb_printf(char *format, ...)
+{
+	uint16_t length = 0;
+	va_list args;
+
+	va_start(args, format);
+	memset(uart4_buff.send_buf, 0x00, BUFFERSIZE);
+	length = vsnprintf((char*)uart4_buff.send_buf, sizeof(uart4_buff.send_buf), (char*)format, args);
+	length = length>=BUFFERSIZE?BUFFERSIZE:length;
+	
+	{
+		for(int i = 0; i < length; i++)
+		{
+      HAL_UART_Transmit(&huart4, (uint8_t*)&uart4_buff.send_buf[i], 1, 0xff);
+		}
+	}
+	
+	va_end(args);
+}
+
 // 重写printf函数，后续发送时间确定后加适当延时可以换成DMA发送
 void Module4G_printf(char *format, ...)
 {

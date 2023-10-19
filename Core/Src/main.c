@@ -163,6 +163,8 @@ int main(void)
 	Init_printf();                //初始化打印信息
 	GT911_init();                 //在此处初始化GT911
 	HAL_TIM_Base_Start_IT(&htim6);    //用于FREERTOS任务使用率计数
+
+  cm_backtrace_init("BSMU_H750IB", "1.0", "1.0");
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
