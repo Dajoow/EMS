@@ -163,6 +163,8 @@ uint32_t cell_avg_vol[20];
 uint32_t cell_avg_temp[20];
 uint32_t cell_avg_soc[20];
 uint32_t cell_avg_soh[20];
+float clu_charge_cap[20]; // kwh
+float clu_discharge_cap[20]; // kwh
 
 extern cluster_info_u16_u cluster_info_u16[20];
 extern cluster_info_f32_u cluster_info_f32[20];
@@ -187,6 +189,9 @@ void cal_modbus_cluster_data (void){
     cell_avg_vol[i] = 0;
     cell_avg_temp[i] = 0;
     cell_avg_soc[i] = 0;
+
+    clu_charge_cap[i] = 0; // kwh
+    clu_discharge_cap[i] = 0; // kwh
 
     int cell_cnt = 0;
 
@@ -267,6 +272,13 @@ void cal_modbus_cluster_data (void){
     cell_avg_soc[i] /= cell_cnt;
     cell_avg_soh[i] /= cell_cnt;
 
+    clu_charge_cap[i] = (CLU_CAP_FULL_SOC - Client_Sd[i].cluster_SOC / 10.0)
+                        * CLU_CAP_KWH / 100;
+    if (clu_charge_cap[i] < 0) clu_charge_cap[i] = 0;
+    clu_discharge_cap[i] = (Client_Sd[i].cluster_SOC / 10.0 - CLU_CAP_EMPTY_SOC)
+                        * CLU_CAP_KWH / 100;
+    if (clu_discharge_cap[i] < 0) clu_discharge_cap[i] = 0;
+
     cluster_info_u16[i].data.max_vol_cell = cell_max_vol[i].cell_id;
     cluster_info_u16[i].data.min_vol_cell = cell_min_vol[i].cell_id;
     cluster_info_u16[i].data.max_temp_cell = cell_max_temp[i].cell_id;
@@ -305,6 +317,9 @@ void cal_modbus_cluster_data (void){
     cluster_info_f32[i].data.neg_insulation_res
         = Client_Sd[i].insulation_res_n / 1000; // Mohm
 
+    cluster_info_f32[i].data.chargeable_capacity = clu_charge_cap[i];
+    cluster_info_f32[i].data.dischargeable_capacity = clu_discharge_cap[i];
+
     cluster_info_u16[i].data.pack_count = Client_Sd[i].grp_num;
     cluster_info_u16[i].data.temp_count = Client_Sd[i].grp_bat_num;
     cluster_info_u16[i].data.battery_count = Client_Sd[i].grp_bat_num;
@@ -319,6 +334,9 @@ void cal_modbus_sta_data (void){
   int cluster_max_soc_idx = 0;
   int cluster_min_vol_idx = 0;
   int cluster_max_vol_idx = 0;
+
+  float sta_charge_cap = 0;
+  float sta_discharge_cap = 0;
 
   cell_info_t cluster_cell_max_vol = {0, 0, 0}; // max in cluster
   cell_info_t cluster_cell_min_vol = {0, 0, 0xffff}; // min in cluster
@@ -353,6 +371,9 @@ void cal_modbus_sta_data (void){
     if(cell_min_temp[i].val < cluster_cell_min_temp.val){
       memcpy (&cluster_cell_min_temp, &cell_min_temp[i], sizeof (cell_info_t));
     }
+
+    sta_charge_cap += clu_charge_cap[i];
+    sta_discharge_cap += clu_discharge_cap[i];
   }
 
   station_info_u16.data.min_soc_cluster = cluster_min_soc_idx + 1;
@@ -399,9 +420,12 @@ void cal_modbus_sta_data (void){
   station_info_f32.data.station_soc = Client_Sd_Station.station_SOC * 0.1;
   station_info_f32.data.station_soh = Client_Sd_Station.station_SOH * 0.1;
 
+  station_info_f32.data.station_charge_capacity = sta_charge_cap;
+  station_info_f32.data.station_discharge_capacity = sta_discharge_cap;
+
   uint32_t cluster_online = 0;
   int cluster_online_cnt = 0;
-  for (uint8_t i = cluster_num - 1; i >= 0; i--){
+  for (int i = cluster_num - 1; i >= 0; i--){
     uint32_t mask = 1 << i;
     if (BCMU[i].OnlineOrOffline == Online){
       cluster_online |= mask;

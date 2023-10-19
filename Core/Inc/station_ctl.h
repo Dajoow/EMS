@@ -31,6 +31,9 @@
 =======
 >>>>>>> e1a5ace (facan feat: add cell SOH)
 
+#define  CLU_CAP_FULL_SOC         90
+#define  CLU_CAP_EMPTY_SOC        10
+
 #define  MAX_ERROR                400
 
 #define  FRAME_HEADER             0x01											 //TCP段中帧头(电池簇)
@@ -88,12 +91,12 @@
 #define PWRLINE_HIGH_TEMP_WARN                  0xffff
 #define PWRLINE_HIGH_TEMP_ALARM                 0xffff
 #define PWRLINE_HIGH_TEMP_PROTECT               0xffff
-#define CLU_HIGH_SOC_WARN                       0xffff
-#define CLU_HIGH_SOC_ALARM                      0xffff
-#define CLU_HIGH_SOC_PROTECT                    0xffff
-#define CLU_LOW_SOC_WARN                        0
-#define CLU_LOW_SOC_ALARM                       0
-#define CLU_LOW_SOC_PROTECT                     0
+#define CLU_HIGH_SOC_WARN                       93
+#define CLU_HIGH_SOC_ALARM                      96
+#define CLU_HIGH_SOC_PROTECT                    99
+#define CLU_LOW_SOC_WARN                        7
+#define CLU_LOW_SOC_ALARM                       4
+#define CLU_LOW_SOC_PROTECT                     1
 #define CLU_INSUL_RES_P_LOW_WARN                0
 #define CLU_INSUL_RES_P_LOW_ALARM               0
 #define CLU_INSUL_RES_P_LOW_PROTECT             0
