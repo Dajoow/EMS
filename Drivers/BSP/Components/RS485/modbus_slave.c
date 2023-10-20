@@ -444,9 +444,9 @@ int bsmu_modbus_slave_callback(agile_modbus_t *ctx, struct agile_modbus_slave_in
     } break;
     }
 
-    if (slave_util->done) {
-        slave_util->done(ctx, slave_info, ret);
-    }
+//    if (slave_util->done) {
+//        slave_util->done(ctx, slave_info, ret);
+//    }
 
     return ret;
 }

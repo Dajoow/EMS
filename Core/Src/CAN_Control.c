@@ -31,6 +31,7 @@ osTimerId CANTimer01Handle;
 osThreadId CAN_Rev_TaskHandle;
 osThreadId CAN_Poll_TaskHandle;
 osSemaphoreId ETHSndSemHandle;
+osSemaphoreId http_snd_sem_handle;
 osSemaphoreId ViewUpdateSemHandle;
 
 extern Client_Sd_t Client_Sd[cluster_num];
@@ -542,7 +543,9 @@ void CAN_Poll(void const *argument) {
       }
     }
     CalStationData();                // 计算整个电站数据
+    cal_modbus_data();
     xSemaphoreGive(ETHSndSemHandle); // 释放信号量（用来发送以太网数据）
+    xSemaphoreGive(http_snd_sem_handle); // 释放信号量（用来发送云端数据）
     xSemaphoreGive(ViewUpdateSemHandle); // 释放信号量（用来更新LCD显示数据）
     // 等待两个命令周期
     vTaskDelay(bsmuSetting.poll_T * 10 * 2);
@@ -639,6 +642,8 @@ void BSMU_CANInit() {
   // 创建一个二值信号量
   osSemaphoreDef(ETHSndSem);
   ETHSndSemHandle = osSemaphoreCreate(osSemaphore(ETHSndSem), 1);
+  osSemaphoreDef(HTTPSndSem);
+  http_snd_sem_handle = osSemaphoreCreate(osSemaphore(HTTPSndSem), 1);
   // 创建一个二值信号量
   osSemaphoreDef(ViewUpdateSem);
   ViewUpdateSemHandle = osSemaphoreCreate(osSemaphore(ViewUpdateSem), 1);

@@ -37,6 +37,7 @@
 #include "station_ctl.h"
 #include "stdint.h"
 #include "usart.h"
+#include "at24cxx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -205,14 +206,19 @@ void Startup(void const * argument)
   sntp_client_init ();
   // 开启CAN接收线程
   BSMU_CANInit ();
-  // 开启客户端线程
-  // ClientInit ();
   // 开启4G模块线程
   Module4G_Init ();
 
   modbus_init ();
 
-  http_client_init ();
+  if (bsmuSetting.local_flag){
+  // 开启客户端线程
+    ClientInit ();
+  }
+
+  if (bsmuSetting.yunduan_flag){
+    http_client_init ();
+  }
 
   // 开启CPU_Task线程
   osThreadDef (CPU_Task_Thread, CPU_Task, osPriorityIdle, 0, 256);
