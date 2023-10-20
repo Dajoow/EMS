@@ -102,10 +102,20 @@ public:
     virtual void show_batteryshowarea_on();
     virtual void show_batteryshowarea_off();
 
+    virtual void handleTickEvent();
+
+
+    virtual uint8_t get_one_bit_value(uint16_t src, uint8_t bit_num);
+    virtual uint8_t get_two_bit_value(uint16_t src, uint8_t bit_num);
+    //uint8_t bufSize;
+    //uint8_t * textBuf;
+
 #ifndef SIMULATOR
 //model更改
     void NotifyViewMsg(ModelToViewData modelToViewData);
 #endif
+
+
 
 protected:
     ViewToModelData viewToModelData;
@@ -116,9 +126,36 @@ protected:
     char local_ip_buff[17];
     char local_server_ip_buff[16];
     char cloud_server_ip_buff[16];
+    
+    ButtonWithLabel* BCMU[20];
+    ButtonWithLabel* BMU[30];
+
+    touchgfx::Unicode::UnicodeChar* tim[30];
+    touchgfx::Unicode::UnicodeChar* id[30];
+    touchgfx::TextArea* inf[30];
 
     //Unicode::UnicodeChar chinese_buf[10];
  /*   SettingView& dskjsk;*/
+    //int tickCounter;
+    //int digitalHours;
+    //int digitalMinutes;
+    //int digitalSeconds;
+
+    //TextAreaWithOneWildcard time[30];
+
+    //touchgfx::TextAreaWithOneWildcard err_num1;
+    //static const uint16_t ERR_NUM1_SIZE = 10;
+    //touchgfx::Unicode::UnicodeChar err_num1Buffer[ERR_NUM1_SIZE];
+ 
+    
+
+
+ /*   TextAreaWithOneWildcard err_type[30];*/
+   
+
+    //touchgfx::Unicode::UnicodeChar timeBuffer[ERR_SIZE];
+ 
+    //touchgfx::Unicode::UnicodeChar err_typeBuffer[ERR_SIZE];
 };
 
 #endif // MAINSCREENVIEW_HPP

@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
+
   <SchemaVersion>2.1</SchemaVersion>
+
   <Header>### uVision Project, (C) Keil Software</Header>
+
   <Targets>
     <Target>
       <TargetName>BSMU_H750IB</TargetName>
@@ -13,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H750IBTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.3.1.1</PackID>
+          <PackID>Keil.STM32H7xx_DFP.2.4.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x24000000-0x2407FFFF) IROM(0x8000000-0x801FFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -334,7 +337,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>--locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx,NDEBUG,MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;</Define>
               <Undefine></Undefine>
               <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../Drivers/BSP/Components/my_iic;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../agile_modbus/inc;../wolfSSL;../Middlewares/Third_Party/wolfSSL_wolfSSL_wolfSSL/wolfssl/;../cJSON/;../MBEDTLS/App;../Middlewares/Third_Party/mbedTLS/include;../Middlewares/Third_Party/mbedTLS/include/mbedtls;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include</IncludePath>
@@ -1768,9 +1771,64 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_0.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_10.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_10.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_11.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_11.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_12.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_13.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_13.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_14.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_14.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_15.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_15.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_16.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_17.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_17.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_18.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_18.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_19.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_19.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_22_4bpp_4.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_4.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_22_4bpp_9.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_22_4bpp_9.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_0.cpp</FileName>
@@ -1816,16 +1874,6 @@
               <FileName>Font_STXIHEI_TTF_24_4bpp_18.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_18.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_STXIHEI_TTF_24_4bpp_19.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_19.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_STXIHEI_TTF_24_4bpp_31.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_31.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_9.cpp</FileName>
@@ -10643,18 +10691,20 @@
       </Groups>
     </Target>
   </Targets>
+
   <RTE>
-    <apis></apis>
+    <apis/>
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"></package>
+        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
         <targetInfos>
-          <targetInfo name="BSMU_H750IB"></targetInfo>
+          <targetInfo name="BSMU_H750IB"/>
         </targetInfos>
       </component>
     </components>
-    <files></files>
+    <files/>
   </RTE>
+
   <LayerInfo>
     <Layers>
       <Layer>
@@ -10663,4 +10713,5 @@
       </Layer>
     </Layers>
   </LayerInfo>
+
 </Project>

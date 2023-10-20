@@ -3,13 +3,52 @@
 #include <touchgfx/Callback.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
 #include <gui/setting_screen/SettingView.hpp>
+#include <string>
+#include <touchgfx/Color.hpp>
+#include <stdio.h>
+
 
 #ifndef SIMULATOR
 extern "C" {
+#include "time.h"
 #include "at24cxx.h"
-#include "http_client.h"	
+#include "http_client.h"
+#include "station_ctl.h"
+#include "CAN_Control.h"
+#include "sntp_client.h" 
+//    extern error_info_t a[5] = { {0x00,0x00,0x0001},
+//{0x00,0x00,0x0001},
+//{0x00,0x01,0x0001},
+//{0x00,0x02,0x0004},
+//{0x00,0x00,0x0001}
+
+//};
+		
 };
+
 #endif
+
+ struct err_info
+  {
+      uint8_t error_id_h;
+      uint8_t error_id_l;
+      uint16_t error_code;
+  };
+	
+	
+
+//struct tm_touchgfx {
+//    int tm_sec;         /* 秒，范围从 0 到 59        */
+//    int tm_min;         /* 分，范围从 0 到 59        */
+//    int tm_hour;        /* 小时，范围从 0 到 23        */
+//    int tm_mday;        /* 一月中的第几天，范围从 1 到 31    */
+//    int tm_mon;         /* 月，范围从 0 到 11        */
+//    int tm_year;        /* 自 1900 年起的年数        */
+//    int tm_wday;        /* 一周中的第几天，范围从 0 到 6    */
+//    int tm_yday;        /* 一年中的第几天，范围从 0 到 365    */
+//    int tm_isdst;       /* 夏令时                */
+//};
+
 
 MainScreenView::MainScreenView()
 :BMUMenuCallback(*this)
@@ -88,17 +127,262 @@ void MainScreenView::setupScreen()
 	//通知model更新数据
 	viewToModelData.reflashFlag = true;
 	presenter->ViewtoModelDat(viewToModelData);
-  /*  Unicode::UnicodeChar **buffer[4];
-    SettingView::get_local_ip(buffer[4], 8);*/
 
-    //char a[] = {"255.133.233.111"};
-    //Unicode::UnicodeChar buf[16];
-    //Unicode::strncpy(buf, a,16);
-    //Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", buf);
-    //local_ip.invalidate();
-    //
-    ////Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", a);
-    ////cloud_server_ip.invalidate();
+
+    BCMU[0] = &BCMU1;
+    BCMU[1] = &BCMU2;
+    BCMU[2] = &BCMU3;
+    BCMU[3] = &BCMU4;
+    BCMU[4] = &BCMU5;
+    BCMU[5] = &BCMU6;
+    BCMU[6] = &BCMU7;
+    BCMU[7] = &BCMU8;
+    BCMU[8] = &BCMU9;
+    BCMU[9] = &BCMU10;
+    BCMU[10] = &BCMU11;
+    BCMU[11] = &BCMU12;
+    BCMU[12] = &BCMU13;
+    BCMU[13] = &BCMU14;
+    BCMU[14] = &BCMU15;
+    BCMU[15] = &BCMU16;
+    BCMU[16] = &BCMU17;
+    BCMU[17] = &BCMU18;
+    BCMU[18] = &BCMU19;
+    BCMU[19] = &BCMU20;
+
+    BMU[0] = &BMU1;
+    BMU[1] = &BMU2;
+    BMU[2] = &BMU3;
+    BMU[3] = &BMU4;
+    BMU[4] = &BMU5;
+    BMU[5] = &BMU6;
+    BMU[6] = &BMU7;
+    BMU[7] = &BMU8;
+    BMU[8] = &BMU9;
+    BMU[9] = &BMU10;
+    BMU[10] = &BMU11;
+    BMU[11] = &BMU12;
+    BMU[12] = &BMU13;
+    BMU[13] = &BMU14;
+    BMU[14] = &BMU15;
+    BMU[15] = &BMU16;
+    BMU[16] = &BMU17;
+    BMU[17] = &BMU18;
+    BMU[18] = &BMU19;
+    BMU[19] = &BMU20;
+    BMU[20] = &BMU21;
+    BMU[21] = &BMU22;
+    BMU[22] = &BMU23;
+    BMU[23] = &BMU24;
+    BMU[24] = &BMU25;
+    BMU[25] = &BMU26;
+    BMU[26] = &BMU27;
+    BMU[27] = &BMU28;
+    BMU[28] = &BMU29;
+    BMU[29] = &BMU30;
+
+    tim[0] = &err_time0Buffer[0];
+    tim[1] = &err_time1Buffer[0];
+    tim[2] = &err_time2Buffer[0];
+    tim[3] = &err_time3Buffer[0];
+    tim[4] = &err_time4Buffer[0];
+
+    id[0] = &err_id0Buffer[0];
+    id[1] = &err_id1Buffer[0];
+    id[2] = &err_id2Buffer[0];
+    id[3] = &err_id3Buffer[0];
+    id[4] = &err_id4Buffer[0];
+
+    inf[0] = &err_inf0;
+    inf[1] = &err_inf1;
+    inf[2] = &err_inf2;
+    inf[3] = &err_inf3;
+    inf[4] = &err_inf4;
+
+		err_info  a[]={
+		{0x00,0x01,0b1100000000000000},
+		{0x00,0x00,0x01},
+		{0x00,0x01,0x01},
+		{0x00,0x02,0x01},
+		{0x00,0x01,0x03}
+		};
+		
+    //uint8_t str[120]= "BMU错误";
+    //Unicode::fromUTF8(str, id[0],10);
+    ////Unicode::snprintf(id[0], 20, "%s", "BMU错误");  //id
+    //inf[0]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 ));
+    //scrollableContainer1.invalidate();
+		int max = 5;
+		int err_counter=0;
+//		int BSMU_counter = 0;
+//		tm *tm_inf;
+//		time_t rawtime;
+
+
+
+  for (int i = 0;i <= max;i++) //遍历所有数组（数组中已存放错误信息，直接按条打印）
+  {
+//			rawtime= time (NULL);
+//      tm_inf = gmtime(&rawtime);
+      //Unicode::snprintf(tim[i], 20, "%d", i);
+      if (a[i].error_id_h == 0x00) //判断id高8位
+      {
+          if (a[i].error_id_l == 0x00)//判断id低8位
+          {
+            
+          /*    Unicode::UnicodeChar wan_ip_buf[16];
+              Unicode::strncpy(wan_ip_buf, local_ip_buff, 16);
+              Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);*/
+
+//              Unicode::UnicodeChar id_buf[16];
+//              Unicode::strncpy(id_buf, "BSMU错误!", 16);
+//              Unicode::snprintf(id[i], 20, "%s", id_buf);  //id
+
+              // uint16_t error_code get_one_bit_value
+              for (int j = 0;j < 16;j++) //逐位判断错误信息，并输出
+              {
+                  if (get_one_bit_value(a[i].error_code, j + 1) == 1)
+                  {
+                     
+                      inf[err_counter]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 - j)); 
+											err_counter++;
+                  }
+              }
+
+          }
+          else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
+          {
+              Unicode::snprintf(id[i], 20, "%s", "BCMU error\0");  //id
+              if (a[i].error_id_l == 0x01) //错误位宽为2
+              {
+                  for (int j = 0;j < 8;j++)
+                  { 
+                      if (get_two_bit_value(a[i].error_code, j  + 1) == 0b00) //无故障
+                      {
+
+                      }
+                      else if (get_two_bit_value(a[i].error_code, j  + 1) == 0b01)//有故障
+                      {
+
+                      }
+                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b10)//预警
+                      {
+
+                      }
+                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b11)//预警过，故障发生
+                      {
+                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
+						  err_counter++;
+                      }
+
+                  }
+              }
+              if (a[i].error_id_l == 0x02)//错误位宽为1
+              {
+                  for (int j = 0;j < 16;j++)
+                  {
+                      if (get_one_bit_value(a[i].error_code, j + 1) == 0) //无故障
+                      {
+
+                      }
+                      else if (get_one_bit_value(a[i].error_code, j + 1) == 1) //无故障
+                      {
+                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
+													err_counter++;
+                      }
+                  }
+              }
+          }
+      }
+			else if(a[i].error_id_h >= 0x01 && a[i].error_id_h <= 0x1F) //判断id高8位
+			{
+				if(a[i].error_id_l ==0x00) 
+				{
+					Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");
+					for(int j=0;j<16;j++)
+					{
+							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
+							 {
+									inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
+								  err_counter++;
+							 }
+					}
+				}
+				else if(a[i].error_id_l >=0x01 && a[i].error_id_l <=0x0C)
+				{
+					for(int j=0;j<16;j++)
+					{
+							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
+								 {
+										inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
+									  err_counter++;
+								 }
+					 }
+				}
+			}
+			else if(a[i].error_id_h == 0x20) //判断id高8位
+			{
+					if(a[i].error_id_l ==0)
+					{
+						Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");
+						for(int j=0;j<16;j++)
+					{
+							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
+							 {
+									inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
+								 err_counter++;
+							 }
+					}
+					}
+			}
+       } scrollableContainer1.invalidate();
+       err_inf.invalidate();
+	
+    //for (int i = 0;i < 5;i++)
+    //{
+    //    Unicode::snprintf(tim[i], 10, "%d", i+1);
+    //    Unicode::snprintf(id[i], 10, "%d", i+1);
+    //    inf[i]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 +i));
+    //}
+
+    //scrollableContainer1.invalidate();
+
+
+    //for (int i = 0;i < 30;i++) //显示最近30条错误，格式：打印时间戳 + 错误板号 + 错误类型
+    //{
+       
+  /*  err_num1.setPosition(20, 30, 280, 30);
+    err_num1.setColor(touchgfx::Color::getColorFromRGB(1, 255, 255));
+    err_num1.setLinespacing(0);
+    err_num1.setWildcard(err_num1Buffer);  
+    err_num1.setTypedText(touchgfx::TypedText(T_BCMU_ERR3));
+    scrollableContainer1.add(err_num1);
+           
+    Unicode::snprintf(err_num1Buffer, ERR_NUM1_SIZE, "%d", 2);
+    err_num1.invalidate();
+    scrollableContainer1.invalidate();*/
+
+
+
+
+  
+ /*       FrameRateText.setPosition(271, 26, 70, 27);
+        FrameRateText.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+        FrameRateText.setLinespacing(0);
+        Unicode::snprintf(FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1G1L).getText());
+        FrameRateText.setWildcard(FrameRateTextBuffer);
+        FrameRateText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HULS));
+        add(FrameRateText);*/
+   /* }*/
+
+
+  /*  this->bufSize = 4096;
+    this->textBuf = (uint8_t*)malloc(this->bufSize);
+    if (textBuf != NULL)
+    {
+        memset(textBuf, 0, this->bufSize);
+    }*/
+
 #ifndef SIMULATOR 
     http_get_wan_ip(local_ip_buff,16);//给local_ip_buff赋值char类型的变量
     Unicode::UnicodeChar wan_ip_buf[16];
@@ -126,10 +410,62 @@ void MainScreenView::setupScreen()
 #endif
 }
 
+void MainScreenView::handleTickEvent()
+{
+
+ 
+    //tickCounter++;
+    //if (tickCounter % 60 == 0)
+    //{
+    //    if (++digitalSeconds >= 60)
+    //    {
+    //        digitalSeconds = 0;
+    //        if (++digitalMinutes >= 60)
+    //        {
+    //            digitalMinutes = 0;
+    //            if (++digitalHours >= 24)
+    //            {
+    //                digitalHours = 0;
+    //            }
+    //        }
+    //    }
+    //}
+
+ /*   tickCounter++;
+    uint8_t str[128];
+    if (tickCounter % 50 == 0)
+    {
+        static uint16_t textCount = 0;
+        sprintf((char*)str, "你好TouchGFX:count %d\n", textCount++);
+        this->TextAreaAddStr(str, sizeof(str));
+    }*/
+ //   char a[] = {"dsads"};
+ //   Unicode::UnicodeChar c[5];
+ ///*   char b[4];
+ //   for (int i = 0;i < 4;i++)
+ //   {
+ //       b[i] = a[i];
+ //   }*/
+ //   Unicode::strncpy(c, a, 5);
+ //   Unicode::snprintf(err1Buffer,16,"%s",a);
+ //  /* err1.setWideTextAction(WIDE_TEXT_CHARWRAP);*/
+ //   err1.invalidate();
+#ifndef SIMULATOR
+   
+#endif
+}
+
+
+
+
+
 void MainScreenView::tearDownScreen()
 {
     MainScreenViewBase::tearDownScreen();
 }
+
+
+
 
 //按键切换显示内容
 void MainScreenView::show_shouye() 
@@ -939,6 +1275,17 @@ void MainScreenView::BMU30_clicked()
   presenter->ViewtoModelDat(viewToModelData);
 }
 
+ uint8_t MainScreenView::get_one_bit_value(uint16_t src, uint8_t bit_num) //bit_num 1~16
+{
+    return (uint8_t)((src >> (bit_num - 1)) & 1);
+}
+
+ uint8_t MainScreenView::get_two_bit_value(uint16_t src, uint8_t bit_num)//bit num 1~8
+ {
+
+     return (uint8_t)((src >> (bit_num*2 - 2)) & 3);
+ }
+
 #ifndef SIMULATOR
 //model更改通知UI
 void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
@@ -1189,265 +1536,355 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
     }
   }
 
-  if(modelToViewData.BCMU_state[0] == offline && BCMU1.isTouchable()==true){
-    //BCMU离线的情况，不使能BCMU按键
-    BCMU1.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU1.setTouchable(false);
-    BCMU_BG.invalidate();
-  }
-  else if(modelToViewData.BCMU_state[0] != offline && BCMU1.isTouchable()==false){
-    //使能BCMU按键
-    BCMU1.setLabelText(touchgfx::TypedText(T_BCMU1));
-    BCMU1.setTouchable(true);
-    BCMU_BG.invalidate();	
+
+  for (uint8_t i = 0;i < 20;i++)
+  {
+      if (modelToViewData.BCMU_state[i] == offline && BCMU[i]->isTouchable() == true)
+      {     
+          //不使能
+          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BCMU[i]->setTouchable(false);
+          for (uint8_t j = 0;j < 30;j++)//当前簇不使能，组默认全不使能
+          {
+              BMU[j]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+              BMU[j]->setTouchable(false);
+          } 
+          /*BCMU_BG.invalidate();*/
+          BCMU_Container.invalidate();
+          BMU_Container.invalidate();
+      }
+      else if  (modelToViewData.BCMU_state[i] != offline && BCMU[i]->isTouchable() == false) 
+      {            
+          //使能BCMU按键
+          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU1 -i));
+          BCMU[i]->setTouchable(true);
+          for (uint8_t j = 0;j < 30;j++)
+          {
+              if (bmu_offline[i][j] == 0) //0表示在线，非0离线
+              {
+                  BMU[j]->setLabelText(touchgfx::TypedText(T_BMU1 +j));
+                  BMU[j]->setTouchable(true);
+              }
+              else
+              {
+                  BMU[j]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+                  BMU[j]->setTouchable(false);
+              }
+          }
+          BCMU_Container.invalidate();
+          BMU_Container.invalidate();
+      }
   }
 
-  if(modelToViewData.BCMU_state[1] == offline && BCMU2.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU2.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU2.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[1] != offline && BCMU2.isTouchable()==false){
-    //使能BCMU按键
-    BCMU2.setLabelText(touchgfx::TypedText(T_BCMU2));
-    BCMU2.setTouchable(true);
-    BCMU_BG.invalidate();	
+  //更新ip信息
+
+  http_get_wan_ip(local_ip_buff, 16);//给local_ip_buff赋值char类型的变量
+  Unicode::UnicodeChar wan_ip_buf[16];
+  Unicode::strncpy(wan_ip_buf, local_ip_buff, 16);
+  Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);
+  local_ip.invalidate();
+
+  http_get_cloud_ip(cloud_server_ip_buff, 16);//云端服务器IP
+  Unicode::UnicodeChar cloud_ip_buf[16];
+  Unicode::strncpy(cloud_ip_buf, cloud_server_ipBuffer, 16);
+  Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", cloud_ip_buf);
+  cloud_server_ip.invalidate();
+
+  Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", bsmuSetting.IP_ADD_1[0]);//本地服务器IP
+  Unicode::snprintf(local_server_ip2Buffer, LOCAL_SERVER_IP2_SIZE, "%d", bsmuSetting.IP_ADD_1[1]);
+  Unicode::snprintf(local_server_ip3Buffer, LOCAL_SERVER_IP3_SIZE, "%d", bsmuSetting.IP_ADD_1[2]);
+  Unicode::snprintf(local_server_ip4Buffer, LOCAL_SERVER_IP4_SIZE, "%d", bsmuSetting.IP_ADD_1[3]);
+  local_server_ip.invalidate();
+  local_server_ip2.invalidate();
+  local_server_ip3.invalidate();
+  local_server_ip4.invalidate();
+
+
+
+  //更新错误信息
+ /* typedef struct
+  {
+      uint8_t error_id_h;
+      uint8_t error_id_l;
+      uint16_t error_code;
+  } error_info_t;  
+
+  error_info_t Client_errors[cluster_num][MAX_ERROR];*/
+
+ /* for (int i = 0;i < 5;i++)
+  {
+      Unicode::snprintf(tim[i], 10, "%d", i + 1);
+      Unicode::snprintf(id[i], 10, "%d", i + 1);
+      inf[i]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 + i));
   }
 
-  if(modelToViewData.BCMU_state[2] == offline && BCMU3.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU3.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU3.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[2] != offline && BCMU3.isTouchable()==false){
-    //使能BCMU按键
-    BCMU3.setLabelText(touchgfx::TypedText(T_BCMU3));
-    BCMU3.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  scrollableContainer1.invalidate();*/
+  //遍历错误数组
+  
 
-  if(modelToViewData.BCMU_state[3] == offline && BCMU4.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU4.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU4.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[3] != offline && BCMU4.isTouchable()==false){
-    //使能BCMU按键
-    BCMU4.setLabelText(touchgfx::TypedText(T_BCMU4));
-    BCMU4.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
 
-  if(modelToViewData.BCMU_state[4] == offline && BCMU5.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU5.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU5.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[4] != offline && BCMU5.isTouchable()==false){
-    //使能BCMU按键
-    BCMU5.setLabelText(touchgfx::TypedText(T_BCMU5));
-    BCMU5.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
 
-  if(modelToViewData.BCMU_state[5] == offline && BCMU6.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU6.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU6.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[5] != offline && BCMU6.isTouchable()==false){
-    //使能BCMU按键
-    BCMU6.setLabelText(touchgfx::TypedText(T_BCMU6));
-    BCMU6.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
 
-  if(modelToViewData.BCMU_state[6] == offline && BCMU7.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU7.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU7.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[6] != offline && BCMU7.isTouchable()==false){
-    //使能BCMU按键
-    BCMU7.setLabelText(touchgfx::TypedText(T_BCMU7));
-    BCMU7.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
 
-  if(modelToViewData.BCMU_state[7] == offline && BCMU8.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU8.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU8.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[7] != offline && BCMU8.isTouchable()==false){
-    //使能BCMU按键
-    BCMU8.setLabelText(touchgfx::TypedText(T_BCMU8));
-    BCMU8.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[0] == offline && BCMU1.isTouchable()==true){
+  //  //BCMU离线的情况，不使能BCMU按键
+  //  BCMU1.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU1.setTouchable(false);
+  //  BCMU_BG.invalidate();
+  //}
+  //else if(modelToViewData.BCMU_state[0] != offline && BCMU1.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU1.setLabelText(touchgfx::TypedText(T_BCMU1));
+  //  BCMU1.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[8] == offline && BCMU9.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU9.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU9.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[8] != offline && BCMU9.isTouchable()==false){
-    //使能BCMU按键
-    BCMU9.setLabelText(touchgfx::TypedText(T_BCMU9));
-    BCMU9.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[1] == offline && BCMU2.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU2.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU2.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[1] != offline && BCMU2.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU2.setLabelText(touchgfx::TypedText(T_BCMU2));
+  //  BCMU2.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[9] == offline && BCMU10.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU10.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU10.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[9] != offline && BCMU10.isTouchable()==false){
-    //使能BCMU按键
-    BCMU10.setLabelText(touchgfx::TypedText(T_BCMU10));
-    BCMU10.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[2] == offline && BCMU3.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU3.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU3.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[2] != offline && BCMU3.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU3.setLabelText(touchgfx::TypedText(T_BCMU3));
+  //  BCMU3.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[10] == offline && BCMU11.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU11.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU11.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[10] != offline && BCMU11.isTouchable()==false){
-    //使能BCMU按键
-    BCMU11.setLabelText(touchgfx::TypedText(T_BCMU11));
-    BCMU11.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[3] == offline && BCMU4.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU4.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU4.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[3] != offline && BCMU4.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU4.setLabelText(touchgfx::TypedText(T_BCMU4));
+  //  BCMU4.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[11] == offline && BCMU12.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU12.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU12.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[11] != offline && BCMU12.isTouchable()==false){
-    //使能BCMU按键
-    BCMU12.setLabelText(touchgfx::TypedText(T_BCMU12));
-    BCMU12.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[4] == offline && BCMU5.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU5.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU5.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[4] != offline && BCMU5.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU5.setLabelText(touchgfx::TypedText(T_BCMU5));
+  //  BCMU5.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[12] == offline && BCMU13.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU13.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU13.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[12] != offline && BCMU13.isTouchable()==false){
-    //使能BCMU按键
-    BCMU13.setLabelText(touchgfx::TypedText(T_BCMU13));
-    BCMU13.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[5] == offline && BCMU6.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU6.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU6.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[5] != offline && BCMU6.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU6.setLabelText(touchgfx::TypedText(T_BCMU6));
+  //  BCMU6.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[13] == offline && BCMU14.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU14.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU14.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[13] != offline && BCMU14.isTouchable()==false){
-    //使能BCMU按键
-    BCMU14.setLabelText(touchgfx::TypedText(T_BCMU14));
-    BCMU14.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[6] == offline && BCMU7.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU7.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU7.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[6] != offline && BCMU7.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU7.setLabelText(touchgfx::TypedText(T_BCMU7));
+  //  BCMU7.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[14] == offline && BCMU15.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU15.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU15.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[14] != offline && BCMU15.isTouchable()==false){
-    //使能BCMU按键
-    BCMU15.setLabelText(touchgfx::TypedText(T_BCMU15));
-    BCMU15.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[7] == offline && BCMU8.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU8.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU8.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[7] != offline && BCMU8.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU8.setLabelText(touchgfx::TypedText(T_BCMU8));
+  //  BCMU8.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[15] == offline && BCMU16.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU16.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU16.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[15] != offline && BCMU16.isTouchable()==false){
-    //使能BCMU按键
-    BCMU16.setLabelText(touchgfx::TypedText(T_BCMU16));
-    BCMU16.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[8] == offline && BCMU9.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU9.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU9.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[8] != offline && BCMU9.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU9.setLabelText(touchgfx::TypedText(T_BCMU9));
+  //  BCMU9.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[16] == offline && BCMU17.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU17.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU17.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[16] != offline && BCMU17.isTouchable()==false){
-    //使能BCMU按键
-    BCMU17.setLabelText(touchgfx::TypedText(T_BCMU17));
-    BCMU17.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[9] == offline && BCMU10.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU10.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU10.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[9] != offline && BCMU10.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU10.setLabelText(touchgfx::TypedText(T_BCMU10));
+  //  BCMU10.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[17] == offline && BCMU18.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU18.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU18.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[17] != offline && BCMU18.isTouchable()==false){
-    //使能BCMU按键
-    BCMU18.setLabelText(touchgfx::TypedText(T_BCMU18));
-    BCMU18.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[10] == offline && BCMU11.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU11.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU11.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[10] != offline && BCMU11.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU11.setLabelText(touchgfx::TypedText(T_BCMU11));
+  //  BCMU11.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[18] == offline && BCMU19.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU19.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU19.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[18] != offline && BCMU19.isTouchable()==false){
-    //使能BCMU按键
-    BCMU19.setLabelText(touchgfx::TypedText(T_BCMU19));
-    BCMU19.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[11] == offline && BCMU12.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU12.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU12.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[11] != offline && BCMU12.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU12.setLabelText(touchgfx::TypedText(T_BCMU12));
+  //  BCMU12.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
-  if(modelToViewData.BCMU_state[19] == offline && BCMU20.isTouchable()==true){
-    //不使能BCMU按键
-    BCMU20.setLabelText(touchgfx::TypedText(T_BCMU_0));
-    BCMU20.setTouchable(false);
-    BCMU_BG.invalidate();	
-  }
-  else if(modelToViewData.BCMU_state[19] != offline && BCMU20.isTouchable()==false){
-    //使能BCMU按键
-    BCMU20.setLabelText(touchgfx::TypedText(T_BCMU20));
-    BCMU20.setTouchable(true);
-    BCMU_BG.invalidate();	
-  }
+  //if(modelToViewData.BCMU_state[12] == offline && BCMU13.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU13.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU13.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[12] != offline && BCMU13.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU13.setLabelText(touchgfx::TypedText(T_BCMU13));
+  //  BCMU13.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[13] == offline && BCMU14.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU14.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU14.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[13] != offline && BCMU14.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU14.setLabelText(touchgfx::TypedText(T_BCMU14));
+  //  BCMU14.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[14] == offline && BCMU15.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU15.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU15.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[14] != offline && BCMU15.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU15.setLabelText(touchgfx::TypedText(T_BCMU15));
+  //  BCMU15.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[15] == offline && BCMU16.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU16.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU16.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[15] != offline && BCMU16.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU16.setLabelText(touchgfx::TypedText(T_BCMU16));
+  //  BCMU16.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[16] == offline && BCMU17.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU17.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU17.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[16] != offline && BCMU17.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU17.setLabelText(touchgfx::TypedText(T_BCMU17));
+  //  BCMU17.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[17] == offline && BCMU18.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU18.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU18.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[17] != offline && BCMU18.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU18.setLabelText(touchgfx::TypedText(T_BCMU18));
+  //  BCMU18.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[18] == offline && BCMU19.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU19.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU19.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[18] != offline && BCMU19.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU19.setLabelText(touchgfx::TypedText(T_BCMU19));
+  //  BCMU19.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
+
+  //if(modelToViewData.BCMU_state[19] == offline && BCMU20.isTouchable()==true){
+  //  //不使能BCMU按键
+  //  BCMU20.setLabelText(touchgfx::TypedText(T_BCMU_0));
+  //  BCMU20.setTouchable(false);
+  //  BCMU_BG.invalidate();	
+  //}
+  //else if(modelToViewData.BCMU_state[19] != offline && BCMU20.isTouchable()==false){
+  //  //使能BCMU按键
+  //  BCMU20.setLabelText(touchgfx::TypedText(T_BCMU20));
+  //  BCMU20.setTouchable(true);
+  //  BCMU_BG.invalidate();	
+  //}
 
   
 
