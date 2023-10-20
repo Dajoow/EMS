@@ -117,7 +117,6 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
-            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -585,9 +584,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -606,9 +604,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -627,9 +624,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -648,9 +644,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -669,9 +664,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -690,9 +684,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -711,9 +704,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -732,9 +724,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -753,9 +744,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -774,9 +764,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -795,9 +784,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "BoxProgress",
@@ -816,9 +804,8 @@
                     "IndicatorPositionY": 9,
                     "IndicatorPositionWidth": 32,
                     "IndicatorPositionHeight": 68,
-                    "ProgressRangeMin": 200,
-                    "ProgressRangeMax": 300,
-                    "ProgressInitialValue": 300
+                    "ProgressRangeMax": 100,
+                    "ProgressInitialValue": 100
                   },
                   {
                     "Type": "TextArea",
@@ -2886,6 +2873,7 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
+            "Visible": false,
             "Components": [
               {
                 "Type": "Container",
