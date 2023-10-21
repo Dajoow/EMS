@@ -45,6 +45,8 @@
 #define  CLIENT_SD_TAIL_OFT       2908
 #define  CLIENT_SD_TAIL_LEN       8
 
+#define CLU_CUR_UNIT              0.01 // 10mA
+
 #define CLU_CHARGE_STAGE_SW_VOL       2.45   // <= 2.45
 #define CLU_CHARGE_STAGE1_CUR         175   // <= 2.45
 #define CLU_CHARGE_STAGE2_CUR         5     // > 2.45

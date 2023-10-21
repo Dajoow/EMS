@@ -127,12 +127,12 @@ CalStationData (void)
     if (BCMU[i].OnlineOrOffline == Online)
       {
       if(Client_Sd[i].cluster_CUR < 0){
-        float cur_tmp = -Client_Sd[i].cluster_CUR * 0.2; // 200mA -> 1A
+        float cur_tmp = -Client_Sd[i].cluster_CUR * CLU_CUR_UNIT; // 10mA -> 1A
         float vol_tmp = Client_Sd[i].cluster_VOL * 0.1; // 0.1V -> 1V
 
         Client_Sd_Station.discharge_power += cur_tmp * vol_tmp;
       }else{
-        float cur_tmp = Client_Sd[i].cluster_CUR * 0.2; // 200mA -> 1A
+        float cur_tmp = Client_Sd[i].cluster_CUR * CLU_CUR_UNIT; // 10mA -> 1A
         float vol_tmp = Client_Sd[i].cluster_VOL * 0.1; // 0.1V -> 1V
 
         Client_Sd_Station.charge_power += cur_tmp * vol_tmp;
@@ -308,7 +308,7 @@ void cal_modbus_cluster_data (void){
     cluster_info_f32[i].data.min_cell_soh = cell_min_soh[i].val * 0.1;
 
     cluster_info_f32[i].data.cluster_voltage = Client_Sd[i].cluster_VOL * 0.1;
-    cluster_info_f32[i].data.cluster_current = Client_Sd[i].cluster_CUR * 0.2;
+    cluster_info_f32[i].data.cluster_current = Client_Sd[i].cluster_CUR * CLU_CUR_UNIT;
     cluster_info_f32[i].data.cluster_soc = Client_Sd[i].cluster_SOC * 0.1;
     cluster_info_f32[i].data.cluster_soh = Client_Sd[i].cluster_SOH * 0.1;
 
@@ -440,12 +440,17 @@ void cal_modbus_sta_data (void){
       = Client_Sd[cluster_min_vol_idx].cluster_VOL * 0.1;
 
   station_info_f32.data.station_vol = Client_Sd_Station.station_VOL * 0.1;
-  station_info_f32.data.station_current = Client_Sd_Station.station_CUR * 0.2;
+  station_info_f32.data.station_current = Client_Sd_Station.station_CUR * CLU_CUR_UNIT;
   station_info_f32.data.station_soc = Client_Sd_Station.station_SOC * 0.1;
   station_info_f32.data.station_soh = Client_Sd_Station.station_SOH * 0.1;
 
   station_info_f32.data.station_charge_capacity = sta_charge_cap;
   station_info_f32.data.station_discharge_capacity = sta_discharge_cap;
+
+  station_info_f32.data.station_max_charging_current = sta_max_charge_current;
+  station_info_f32.data.station_max_charging_power = sta_max_charge_power;
+  station_info_f32.data.station_max_discharging_current = sta_max_discharge_current;
+  station_info_f32.data.station_max_discharging_power = sta_max_discharge_power;
 
   uint32_t cluster_online = 0;
   int cluster_online_cnt = 0;
@@ -533,7 +538,7 @@ void cal_modbus_warning_data(void){
     float cluster_current;
     // charging
     if (Client_Sd[i].cluster_CUR >= 0){
-      cluster_current = Client_Sd[i].cluster_CUR * 0.2;
+      cluster_current = Client_Sd[i].cluster_CUR * CLU_CUR_UNIT;
 
       cluster_warning[i].data.clus_chg_curr_high_warn
           = (cluster_current > CLU_HIGH_CHARGE_CUR_WARN);
@@ -556,7 +561,7 @@ void cal_modbus_warning_data(void){
       cluster_warning[i].data.clus_chg_temp_low_protect
           = (cell_min_temp[i].val * 0.01 < CLU_LOW_CHARGE_TEMP_PROTECT);
     }else{ // discharging
-      cluster_current = Client_Sd[i].cluster_CUR * -0.2;
+      cluster_current = Client_Sd[i].cluster_CUR * -CLU_CUR_UNIT;
 
       cluster_warning[i].data.clus_disch_curr_high_warn
           = (cluster_current > CLU_HIGH_DISCHARGE_CUR_WARN);
