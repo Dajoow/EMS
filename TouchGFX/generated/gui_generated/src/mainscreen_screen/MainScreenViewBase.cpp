@@ -55,7 +55,6 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
-    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
     S10_1.setPosition(263, 418, 22, 25);
     S10_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -286,110 +285,110 @@ MainScreenViewBase::MainScreenViewBase() :
 
     SOC1_view.setXY(128, 121);
     SOC1_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC1_view.setRange(200, 300);
+    SOC1_view.setRange(0, 100);
     SOC1_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC1_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC1_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC1_view.setValue(300);
+    SOC1_view.setValue(100);
     batterygroup.add(SOC1_view);
 
     SOC2_view.setXY(303, 121);
     SOC2_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC2_view.setRange(200, 300);
+    SOC2_view.setRange(0, 100);
     SOC2_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC2_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC2_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC2_view.setValue(300);
+    SOC2_view.setValue(100);
     batterygroup.add(SOC2_view);
 
     SOC3_view.setXY(646, 121);
     SOC3_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC3_view.setRange(200, 300);
+    SOC3_view.setRange(0, 100);
     SOC3_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC3_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC3_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC3_view.setValue(300);
+    SOC3_view.setValue(100);
     batterygroup.add(SOC3_view);
 
     SOC4_view.setXY(477, 122);
     SOC4_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC4_view.setRange(200, 300);
+    SOC4_view.setRange(0, 100);
     SOC4_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC4_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC4_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC4_view.setValue(300);
+    SOC4_view.setValue(100);
     batterygroup.add(SOC4_view);
 
     SOC5_view.setXY(128, 245);
     SOC5_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC5_view.setRange(200, 300);
+    SOC5_view.setRange(0, 100);
     SOC5_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC5_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC5_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC5_view.setValue(300);
+    SOC5_view.setValue(100);
     batterygroup.add(SOC5_view);
 
     SOC6_view.setXY(306, 246);
     SOC6_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC6_view.setRange(200, 300);
+    SOC6_view.setRange(0, 100);
     SOC6_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC6_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC6_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC6_view.setValue(300);
+    SOC6_view.setValue(100);
     batterygroup.add(SOC6_view);
 
     SOC7_view.setXY(477, 246);
     SOC7_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC7_view.setRange(200, 300);
+    SOC7_view.setRange(0, 100);
     SOC7_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC7_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC7_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC7_view.setValue(300);
+    SOC7_view.setValue(100);
     batterygroup.add(SOC7_view);
 
     SOC8_view.setXY(646, 245);
     SOC8_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC8_view.setRange(200, 300);
+    SOC8_view.setRange(0, 100);
     SOC8_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC8_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC8_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC8_view.setValue(300);
+    SOC8_view.setValue(100);
     batterygroup.add(SOC8_view);
 
     SOC9_view.setXY(128, 362);
     SOC9_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC9_view.setRange(200, 300);
+    SOC9_view.setRange(0, 100);
     SOC9_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC9_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC9_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC9_view.setValue(300);
+    SOC9_view.setValue(100);
     batterygroup.add(SOC9_view);
 
     SOC10_view.setXY(303, 367);
     SOC10_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC10_view.setRange(200, 300);
+    SOC10_view.setRange(0, 100);
     SOC10_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC10_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC10_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC10_view.setValue(300);
+    SOC10_view.setValue(100);
     batterygroup.add(SOC10_view);
 
     SOC11_view.setXY(477, 367);
     SOC11_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC11_view.setRange(200, 300);
+    SOC11_view.setRange(0, 100);
     SOC11_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC11_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC11_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC11_view.setValue(300);
+    SOC11_view.setValue(100);
     batterygroup.add(SOC11_view);
 
     SOC12_view.setXY(646, 367);
     SOC12_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC12_view.setRange(200, 300);
+    SOC12_view.setRange(0, 100);
     SOC12_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
     SOC12_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
     SOC12_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC12_view.setValue(300);
+    SOC12_view.setValue(100);
     batterygroup.add(SOC12_view);
 
     CellSOCText1.setPosition(23, 150, 80, 25);
@@ -1325,6 +1324,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
+    shouye.setVisible(false);
     PCS_menu.setPosition(810, 286, 219, 239);
     PCS_menu.setVisible(false);
     PCS_BG.setPosition(14, 2, 190, 218);
