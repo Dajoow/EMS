@@ -152,6 +152,22 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
+          <LineNumber>103</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>-1878724248</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\103</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
           <LineNumber>420</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>-1878792472</Address>
@@ -166,7 +182,7 @@
           <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\420</Expression>
         </Bp>
         <Bp>
-          <Number>1</Number>
+          <Number>2</Number>
           <Type>0</Type>
           <LineNumber>123</LineNumber>
           <EnabledFlag>1</EnabledFlag>
@@ -180,22 +196,6 @@
           <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\123</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>85</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>-1878724322</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\85</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

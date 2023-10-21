@@ -323,6 +323,19 @@ void cal_modbus_cluster_data (void){
     cluster_info_u16[i].data.pack_count = Client_Sd[i].grp_num;
     cluster_info_u16[i].data.temp_count = Client_Sd[i].grp_bat_num;
     cluster_info_u16[i].data.battery_count = Client_Sd[i].grp_bat_num;
+
+    if (cell_max_vol[i].val * 0.001 <= CLU_CHARGE_STAGE_SW_VOL){
+      cluster_info_f32[i].data.max_charge_current = CLU_CHARGE_STAGE1_CUR;
+      cluster_info_f32[i].data.max_charge_power
+          = CLU_CHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
+    }else{
+      cluster_info_f32[i].data.max_charge_current = CLU_CHARGE_STAGE2_CUR;
+      cluster_info_f32[i].data.max_charge_power
+          = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
+    }
+    cluster_info_f32[i].data.max_discharge_current = CLU_DISCHARGE_STAGE1_CUR;
+    cluster_info_f32[i].data.max_discharge_power
+        = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
   }
 }
 
@@ -337,6 +350,10 @@ void cal_modbus_sta_data (void){
 
   float sta_charge_cap = 0;
   float sta_discharge_cap = 0;
+  float sta_max_charge_current = 0;
+  float sta_max_charge_power = 0;
+  float sta_max_discharge_current = 0;
+  float sta_max_discharge_power = 0;
 
   cell_info_t cluster_cell_max_vol = {0, 0, 0}; // max in cluster
   cell_info_t cluster_cell_min_vol = {0, 0, 0xffff}; // min in cluster
@@ -344,6 +361,8 @@ void cal_modbus_sta_data (void){
   cell_info_t cluster_cell_min_temp = {0, 0, 0xffff}; // min in cluster
 
   for (int i = 0; i < cluster_num; i++){
+    if (BCMU[i].OnlineOrOffline == Offline) continue;
+
     if(Client_Sd[i].cluster_SOC < Client_Sd[cluster_min_soc_idx].cluster_SOC){
       cluster_min_soc_idx = i;
     }
@@ -374,6 +393,11 @@ void cal_modbus_sta_data (void){
 
     sta_charge_cap += clu_charge_cap[i];
     sta_discharge_cap += clu_discharge_cap[i];
+
+    sta_max_charge_current += cluster_info_f32[i].data.max_charge_current;
+    sta_max_charge_power += cluster_info_f32[i].data.max_charge_power;
+    sta_max_discharge_current += cluster_info_f32[i].data.max_discharge_current;
+    sta_max_discharge_power += cluster_info_f32[i].data.max_discharge_power;
   }
 
   station_info_u16.data.min_soc_cluster = cluster_min_soc_idx + 1;

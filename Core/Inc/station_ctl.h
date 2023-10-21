@@ -45,6 +45,11 @@
 #define  CLIENT_SD_TAIL_OFT       2908
 #define  CLIENT_SD_TAIL_LEN       8
 
+#define CLU_CHARGE_STAGE_SW_VOL       2.45   // <= 2.45
+#define CLU_CHARGE_STAGE1_CUR         175   // <= 2.45
+#define CLU_CHARGE_STAGE2_CUR         5     // > 2.45
+#define CLU_DISCHARGE_STAGE1_CUR      165
+
 // WARN < ALARM < PROTECT
 #define CLU_HIGH_VOLT_WARN                      (2.45*GRP_num*GRP_BAT_num)       
 #define CLU_HIGH_VOLT_ALARM                     (2.478*GRP_num*GRP_BAT_num)       
