@@ -198,145 +198,146 @@ void MainScreenView::setupScreen()
     inf[2] = &err_inf2;
     inf[3] = &err_inf3;
     inf[4] = &err_inf4;
-
-		err_info  a[]={
-		{0x00,0x01,0b1100000000000000},
-		{0x00,0x00,0x01},
-		{0x00,0x01,0x01},
-		{0x00,0x02,0x01},
-		{0x00,0x01,0x03}
-		};
+ 
+//		err_info  a[]={
+//		{0x00,0x01,0b1100000000000000},
+//		{0x00,0x00,0x01},
+//		{0x00,0x01,0x01},
+//		{0x00,0x02,0x01},
+//		{0x00,0x01,0x03}
+//		};
 		
     //uint8_t str[120]= "BMU错误";
     //Unicode::fromUTF8(str, id[0],10);
     ////Unicode::snprintf(id[0], 20, "%s", "BMU错误");  //id
     //inf[0]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 ));
     //scrollableContainer1.invalidate();
-		int max = 5;
-		int err_counter=0;
-//		int BSMU_counter = 0;
-//		tm *tm_inf;
-//		time_t rawtime;
+//		int max = 5;
+//		int err_counter=0;
+////		int BSMU_counter = 0;
+////		tm *tm_inf;
+////		time_t rawtime;
 
 
 
-  for (int i = 0;i <= max;i++) //遍历所有数组（数组中已存放错误信息，直接按条打印）
-  {
-//			rawtime= time (NULL);
-//      tm_inf = gmtime(&rawtime);
-      //Unicode::snprintf(tim[i], 20, "%d", i);
-      if (a[i].error_id_h == 0x00) //判断id高8位
-      {
-          if (a[i].error_id_l == 0x00)//判断id低8位
-          {
-            
-          /*    Unicode::UnicodeChar wan_ip_buf[16];
-              Unicode::strncpy(wan_ip_buf, local_ip_buff, 16);
-              Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);*/
+//  for (int i = 0;i <= max;i++) //遍历所有数组（数组中已存放错误信息，直接按条打印）
+//  {
+////			rawtime= time (NULL);
+////      tm_inf = gmtime(&rawtime);
+//      //Unicode::snprintf(tim[i], 20, "%d", i);
+//      if (a[i].error_id_h == 0x00) //判断id高8位
+//      {
+//          if (a[i].error_id_l == 0x00)//判断id低8位
+//          {
+//            
+//          /*    Unicode::UnicodeChar wan_ip_buf[16];
+//              Unicode::strncpy(wan_ip_buf, local_ip_buff, 16);
+//              Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);*/
 
-//              Unicode::UnicodeChar id_buf[16];
-//              Unicode::strncpy(id_buf, "BSMU错误!", 16);
-//              Unicode::snprintf(id[i], 20, "%s", id_buf);  //id
+////              Unicode::UnicodeChar id_buf[16];
+////              Unicode::strncpy(id_buf, "BSMU错误!", 16);
+////              Unicode::snprintf(id[i], 20, "%s", id_buf);  //id
 
-              // uint16_t error_code get_one_bit_value
-              for (int j = 0;j < 16;j++) //逐位判断错误信息，并输出
-              {
-                  if (get_one_bit_value(a[i].error_code, j + 1) == 1)
-                  {
-                     
-                      inf[err_counter]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 - j)); 
-											err_counter++;
-                  }
-              }
+//              // uint16_t error_code get_one_bit_value
+//              for (int j = 0;j < 16;j++) //逐位判断错误信息，并输出
+//              {
+//                  if (get_one_bit_value(a[i].error_code, j + 1) == 1)
+//                  {
+//                     
+//                      inf[err_counter]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 - j)); 
+//											err_counter++;
+//                  }
+//              }
 
-          }
-          else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
-          {
-              Unicode::snprintf(id[i], 20, "%s", "BCMU error\0");  //id
-              if (a[i].error_id_l == 0x01) //错误位宽为2
-              {
-                  for (int j = 0;j < 8;j++)
-                  { 
-                      if (get_two_bit_value(a[i].error_code, j  + 1) == 0b00) //无故障
-                      {
+//          }
+//          else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
+//          {
+//              Unicode::snprintf(id[i], 20, "%s", "BCMU error\0");  //id
+//              if (a[i].error_id_l == 0x01) //错误位宽为2
+//              {
+//                  for (int j = 0;j < 8;j++)
+//                  { 
+//                      if (get_two_bit_value(a[i].error_code, j  + 1) == 0b00) //无故障
+//                      {
 
-                      }
-                      else if (get_two_bit_value(a[i].error_code, j  + 1) == 0b01)//有故障
-                      {
+//                      }
+//                      else if (get_two_bit_value(a[i].error_code, j  + 1) == 0b01)//有故障
+//                      {
 
-                      }
-                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b10)//预警
-                      {
+//                      }
+//                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b10)//预警
+//                      {
 
-                      }
-                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b11)//预警过，故障发生
-                      {
-                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
-						  err_counter++;
-                      }
+//                      }
+//                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b11)//预警过，故障发生
+//                      {
+//                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
+//						  err_counter++;
+//                      }
 
-                  }
-              }
-              if (a[i].error_id_l == 0x02)//错误位宽为1
-              {
-                  for (int j = 0;j < 16;j++)
-                  {
-                      if (get_one_bit_value(a[i].error_code, j + 1) == 0) //无故障
-                      {
+//                  }
+//              }
+//              if (a[i].error_id_l == 0x02)//错误位宽为1
+//              {
+//                  for (int j = 0;j < 16;j++)
+//                  {
+//                      if (get_one_bit_value(a[i].error_code, j + 1) == 0) //无故障
+//                      {
 
-                      }
-                      else if (get_one_bit_value(a[i].error_code, j + 1) == 1) //无故障
-                      {
-                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
-													err_counter++;
-                      }
-                  }
-              }
-          }
-      }
-			else if(a[i].error_id_h >= 0x01 && a[i].error_id_h <= 0x1F) //判断id高8位
-			{
-				if(a[i].error_id_l ==0x00) 
-				{
-					Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");
-					for(int j=0;j<16;j++)
-					{
-							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
-							 {
-									inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
-								  err_counter++;
-							 }
-					}
-				}
-				else if(a[i].error_id_l >=0x01 && a[i].error_id_l <=0x0C)
-				{
-					for(int j=0;j<16;j++)
-					{
-							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
-								 {
-										inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
-									  err_counter++;
-								 }
-					 }
-				}
-			}
-			else if(a[i].error_id_h == 0x20) //判断id高8位
-			{
-					if(a[i].error_id_l ==0)
-					{
-						Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");
-						for(int j=0;j<16;j++)
-					{
-							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
-							 {
-									inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
-								 err_counter++;
-							 }
-					}
-					}
-			}
-       } scrollableContainer1.invalidate();
-       err_inf.invalidate();
+//                      }
+//                      else if (get_one_bit_value(a[i].error_code, j + 1) == 1) //无故障
+//                      {
+//                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
+//													err_counter++;
+//                      }
+//                  }
+//              }
+//          }
+//      }
+//			else if(a[i].error_id_h >= 0x01 && a[i].error_id_h <= 0x1F) //判断id高8位
+//			{
+//				if(a[i].error_id_l ==0x00) 
+//				{
+//					Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");
+//					for(int j=0;j<16;j++)
+//					{
+//							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
+//							 {
+//									inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
+//								  err_counter++;
+//							 }
+//					}
+//				}
+//				else if(a[i].error_id_l >=0x01 && a[i].error_id_l <=0x0C)
+//				{
+//					for(int j=0;j<16;j++)
+//					{
+//							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
+//								 {
+//										inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
+//									  err_counter++;
+//								 }
+//					 }
+//				}
+//			}
+//			else if(a[i].error_id_h == 0x20) //判断id高8位
+//			{
+//					if(a[i].error_id_l ==0)
+//					{
+//						Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");
+//						for(int j=0;j<16;j++)
+//					{
+//							 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
+//							 {
+//									inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
+//								 err_counter++;
+//							 }
+//					}
+//					}
+//			}
+//       } 
+//       scrollableContainer1.invalidate();
+//       err_inf.invalidate();
 	
     //for (int i = 0;i < 5;i++)
     //{
@@ -383,31 +384,7 @@ void MainScreenView::setupScreen()
         memset(textBuf, 0, this->bufSize);
     }*/
 
-#ifndef SIMULATOR 
-    http_get_wan_ip(local_ip_buff,16);//给local_ip_buff赋值char类型的变量
-    Unicode::UnicodeChar wan_ip_buf[16];
-    Unicode::strncpy(wan_ip_buf, local_ip_buff, 16);
-    Unicode::snprintf(local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);
-    local_ip.invalidate();
 
-    http_get_cloud_ip(cloud_server_ip_buff, 16);//云端服务器IP
-    Unicode::UnicodeChar cloud_ip_buf[16];
-    Unicode::strncpy(cloud_ip_buf, cloud_server_ipBuffer, 16);
-    Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", cloud_ip_buf);
- /*   Unicode::snprintf(cloud_server_ipBuffer, CLOUD_SERVER_IP_SIZE, "%s", cloud_server_ip_buff);*/
-
-    cloud_server_ip.invalidate();
-
-    Unicode::snprintf(local_server_ipBuffer, LOCAL_SERVER_IP_SIZE, "%d", bsmuSetting.IP_ADD_1[0]);//本地服务器IP
-    Unicode::snprintf(local_server_ip2Buffer, LOCAL_SERVER_IP2_SIZE, "%d", bsmuSetting.IP_ADD_1[1]);
-    Unicode::snprintf(local_server_ip3Buffer, LOCAL_SERVER_IP3_SIZE, "%d", bsmuSetting.IP_ADD_1[2]);
-    Unicode::snprintf(local_server_ip4Buffer, LOCAL_SERVER_IP4_SIZE, "%d", bsmuSetting.IP_ADD_1[3]);
-    local_server_ip.invalidate();
-    local_server_ip2.invalidate();
-    local_server_ip3.invalidate();
-    local_server_ip4.invalidate();
-
-#endif
 }
 
 void MainScreenView::handleTickEvent()
@@ -1362,10 +1339,10 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   Unicode::snprintf(cubianhaoBuffer, CUBIANHAO_SIZE, "%d", viewToModelData.BCMU_SEL);
   cubianhao.invalidate();
 
-  Unicode::snprintf(cudianyaBuffer, CUDIANYA_SIZE, "%d", modelToViewData.cluster_VOL);
+  Unicode::snprintfFloat(cudianyaBuffer, CUDIANYA_SIZE, "%.1f", (float)modelToViewData.cluster_VOL*0.1);
   cudianya.invalidate();
 
-  Unicode::snprintf(cudianliuBuffer, CUDIANLIU_SIZE, "%d",  modelToViewData.cluster_CUR);
+  Unicode::snprintfFloat(cudianliuBuffer, CUDIANLIU_SIZE, "%.1f", (float)modelToViewData.cluster_CUR*0.01);
   cudianliu.invalidate();
 
   Unicode::snprintf(zhengjueyuanBuffer, ZHENGJUEYUAN_SIZE, "%d",  modelToViewData.insulation_res_n);
@@ -1376,109 +1353,109 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
 
 	//更新电池指示图
-  SOC1_view.setValue(modelToViewData.BAT_VOL[0]);
-  SOC2_view.setValue(modelToViewData.BAT_VOL[1]);
-  SOC3_view.setValue(modelToViewData.BAT_VOL[2]);
-  SOC4_view.setValue(modelToViewData.BAT_VOL[3]);
-  SOC5_view.setValue(modelToViewData.BAT_VOL[4]);
-  SOC6_view.setValue(modelToViewData.BAT_VOL[5]);
-  SOC7_view.setValue(modelToViewData.BAT_VOL[6]);
-  SOC8_view.setValue(modelToViewData.BAT_VOL[7]);
-  SOC9_view.setValue(modelToViewData.BAT_VOL[8]);
-  SOC10_view.setValue(modelToViewData.BAT_VOL[9]);
-  SOC11_view.setValue(modelToViewData.BAT_VOL[10]);
-  SOC12_view.setValue(modelToViewData.BAT_VOL[11]);
+  SOC1_view.setValue((float)modelToViewData.BAT_SOC[0] / 10);
+  SOC2_view.setValue((float)modelToViewData.BAT_SOC[1] / 10);
+  SOC3_view.setValue((float)modelToViewData.BAT_SOC[2] / 10);
+  SOC4_view.setValue((float)modelToViewData.BAT_SOC[3] / 10);
+  SOC5_view.setValue((float)modelToViewData.BAT_SOC[4] / 10);
+  SOC6_view.setValue((float)modelToViewData.BAT_SOC[5] / 10);
+  SOC7_view.setValue((float)modelToViewData.BAT_SOC[6] / 10);
+  SOC8_view.setValue((float)modelToViewData.BAT_SOC[7] / 10);
+  SOC9_view.setValue((float)modelToViewData.BAT_SOC[8] / 10);
+  SOC10_view.setValue((float)modelToViewData.BAT_SOC[9] / 10);
+  SOC11_view.setValue((float)modelToViewData.BAT_SOC[10] / 10);
+  SOC12_view.setValue((float)modelToViewData.BAT_SOC[11] / 10);
 
 	//更新所有单体电池SOC
-  Unicode::snprintf(CellSOCText1Buffer, CELLSOCTEXT1_SIZE, "%d", modelToViewData.BAT_SOC[0]/10);
+  Unicode::snprintfFloat(CellSOCText1Buffer, CELLSOCTEXT1_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[0]/10);
 	CellSOCText1.invalidate();
 
-  Unicode::snprintf(CellSOCText2Buffer, CELLSOCTEXT2_SIZE, "%d", modelToViewData.BAT_SOC[1]/10);
+  Unicode::snprintfFloat(CellSOCText2Buffer, CELLSOCTEXT2_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[1]/10);
 	CellSOCText2.invalidate();
 
-  Unicode::snprintf(CellSOCText3Buffer, CELLSOCTEXT3_SIZE, "%d", modelToViewData.BAT_SOC[2]/10);
+  Unicode::snprintfFloat(CellSOCText3Buffer, CELLSOCTEXT3_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[2]/10);
 	CellSOCText3.invalidate();
 
-  Unicode::snprintf(CellSOCText4Buffer, CELLSOCTEXT4_SIZE, "%d", modelToViewData.BAT_SOC[3]/10);
+  Unicode::snprintfFloat(CellSOCText4Buffer, CELLSOCTEXT4_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[3]/10);
 	CellSOCText4.invalidate();
 
-  Unicode::snprintf(CellSOCText5Buffer, CELLSOCTEXT5_SIZE, "%d", modelToViewData.BAT_SOC[4]/10);
+  Unicode::snprintfFloat(CellSOCText5Buffer, CELLSOCTEXT5_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[4]/10);
 	CellSOCText5.invalidate();
 
-  Unicode::snprintf(CellSOCText6Buffer, CELLSOCTEXT6_SIZE, "%d", modelToViewData.BAT_SOC[5]/10);
+  Unicode::snprintfFloat(CellSOCText6Buffer, CELLSOCTEXT6_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[5]/10);
 	CellSOCText6.invalidate();
 
-  Unicode::snprintf(CellSOCText7Buffer, CELLSOCTEXT7_SIZE, "%d", modelToViewData.BAT_SOC[6]/10);
+  Unicode::snprintfFloat(CellSOCText7Buffer, CELLSOCTEXT7_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[6]/10);
 	CellSOCText7.invalidate();
 
-  Unicode::snprintf(CellSOCText8Buffer, CELLSOCTEXT8_SIZE, "%d", modelToViewData.BAT_SOC[7]/10);
+  Unicode::snprintfFloat(CellSOCText8Buffer, CELLSOCTEXT8_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[7]/10);
 	CellSOCText8.invalidate();
 
-  Unicode::snprintf(CellSOCText9Buffer, CELLSOCTEXT9_SIZE, "%d", modelToViewData.BAT_SOC[8]/10);
+  Unicode::snprintfFloat(CellSOCText9Buffer, CELLSOCTEXT9_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[8]/10);
 	CellSOCText9.invalidate();
 
-  Unicode::snprintf(CellSOCText10Buffer, CELLSOCTEXT10_SIZE, "%d", modelToViewData.BAT_SOC[9]/10);
+  Unicode::snprintfFloat(CellSOCText10Buffer, CELLSOCTEXT10_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[9]/10);
 	CellSOCText10.invalidate();
 
-  Unicode::snprintf(CellSOCText11Buffer, CELLSOCTEXT11_SIZE, "%d", modelToViewData.BAT_SOC[10]/10);
+  Unicode::snprintfFloat(CellSOCText11Buffer, CELLSOCTEXT11_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[10]/10);
 	CellSOCText11.invalidate();
 
-  Unicode::snprintf(CellSOCText12Buffer, CELLSOCTEXT12_SIZE, "%d", modelToViewData.BAT_SOC[11]/10);
+  Unicode::snprintfFloat(CellSOCText12Buffer, CELLSOCTEXT12_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[11]/10);
 	CellSOCText12.invalidate();
 
-    int sum_soc = 0;
+    float sum_soc = 0;
     for (int i = 0;i < 12;i++)
     {       
         sum_soc += modelToViewData.BAT_SOC[i]/10;
     }
     float avg_S = sum_soc / 12.0;
-    Unicode::snprintfFloat(avg_socBuffer, AVG_SOC_SIZE, "%.3f", avg_S);
+    Unicode::snprintfFloat(avg_socBuffer, AVG_SOC_SIZE, "%.1f", avg_S);
     avg_soc.invalidate();
 
 	//更新电池温度
-  Unicode::snprintfFloat(CellTempText1Buffer, CELLTEMPTEXT1_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText1Buffer, CELLTEMPTEXT1_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
 	CellTempText1.invalidate();
 
-  Unicode::snprintfFloat(CellTempText2Buffer, CELLTEMPTEXT2_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[1]/100);
+  Unicode::snprintfFloat(CellTempText2Buffer, CELLTEMPTEXT2_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[1]/100);
 	CellTempText2.invalidate();
 
-  Unicode::snprintfFloat(CellTempText3Buffer, CELLTEMPTEXT3_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[2]/100);
+  Unicode::snprintfFloat(CellTempText3Buffer, CELLTEMPTEXT3_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[2]/100);
 	CellTempText3.invalidate();
 
-  Unicode::snprintfFloat(CellTempText4Buffer, CELLTEMPTEXT4_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[3]/100);
+  Unicode::snprintfFloat(CellTempText4Buffer, CELLTEMPTEXT4_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[3]/100);
 	CellTempText4.invalidate();
 
-  Unicode::snprintfFloat(CellTempText5Buffer, CELLTEMPTEXT5_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText5Buffer, CELLTEMPTEXT5_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[4]/100);
 	CellTempText5.invalidate();
 
-  Unicode::snprintfFloat(CellTempText6Buffer, CELLTEMPTEXT6_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText6Buffer, CELLTEMPTEXT6_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[5]/100);
 	CellTempText6.invalidate();
 
-  Unicode::snprintfFloat(CellTempText7Buffer, CELLTEMPTEXT7_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText7Buffer, CELLTEMPTEXT7_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[6]/100);
 	CellTempText7.invalidate();
 
-  Unicode::snprintfFloat(CellTempText8Buffer, CELLTEMPTEXT8_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText8Buffer, CELLTEMPTEXT8_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[7]/100);
 	CellTempText8.invalidate();
 
-  Unicode::snprintfFloat(CellTempText9Buffer, CELLTEMPTEXT9_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText9Buffer, CELLTEMPTEXT9_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[8]/100);
 	CellTempText9.invalidate();
 
-  Unicode::snprintfFloat(CellTempText10Buffer, CELLTEMPTEXT10_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText10Buffer, CELLTEMPTEXT10_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[9]/100);
 	CellTempText10.invalidate();
 
-  Unicode::snprintfFloat(CellTempText11Buffer, CELLTEMPTEXT11_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText11Buffer, CELLTEMPTEXT11_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[10]/100);
 	CellTempText11.invalidate();
 
-  Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.1f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[11]/100);
 	CellTempText12.invalidate();
 
-    int sum_tem = 0;
+    float sum_tem = 0;
     for (int i = 0;i < 12;i++)
     {       
         sum_tem += modelToViewData.BAT_TMP[i]/100;
     }
     float avg_T= sum_tem/12.0;
-    Unicode::snprintfFloat(avg_temBuffer, AVG_TEM_SIZE, "%.3f", avg_T);
+    Unicode::snprintfFloat(avg_temBuffer, AVG_TEM_SIZE, "%.2f", avg_T);
     avg_tem.invalidate();
 
   //更新BCMU框选图标
