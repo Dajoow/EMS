@@ -1425,28 +1425,28 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   Unicode::snprintfFloat(CellTempText4Buffer, CELLTEMPTEXT4_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[3]/100);
 	CellTempText4.invalidate();
 
-  Unicode::snprintfFloat(CellTempText5Buffer, CELLTEMPTEXT5_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText5Buffer, CELLTEMPTEXT5_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[4]/100);
 	CellTempText5.invalidate();
 
-  Unicode::snprintfFloat(CellTempText6Buffer, CELLTEMPTEXT6_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText6Buffer, CELLTEMPTEXT6_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[5]/100);
 	CellTempText6.invalidate();
 
-  Unicode::snprintfFloat(CellTempText7Buffer, CELLTEMPTEXT7_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText7Buffer, CELLTEMPTEXT7_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[6]/100);
 	CellTempText7.invalidate();
 
-  Unicode::snprintfFloat(CellTempText8Buffer, CELLTEMPTEXT8_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText8Buffer, CELLTEMPTEXT8_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[7]/100);
 	CellTempText8.invalidate();
 
-  Unicode::snprintfFloat(CellTempText9Buffer, CELLTEMPTEXT9_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText9Buffer, CELLTEMPTEXT9_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[8]/100);
 	CellTempText9.invalidate();
 
-  Unicode::snprintfFloat(CellTempText10Buffer, CELLTEMPTEXT10_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText10Buffer, CELLTEMPTEXT10_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[9]/100);
 	CellTempText10.invalidate();
 
-  Unicode::snprintfFloat(CellTempText11Buffer, CELLTEMPTEXT11_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText11Buffer, CELLTEMPTEXT11_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[10]/100);
 	CellTempText11.invalidate();
 
-  Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[0]/100);
+  Unicode::snprintfFloat(CellTempText12Buffer, CELLTEMPTEXT12_SIZE, "%.2f", (float)modelToViewData.BAT_TMP[11]/100);
 	CellTempText12.invalidate();
 
     float sum_tem = 0;
