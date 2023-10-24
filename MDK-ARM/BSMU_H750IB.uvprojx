@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H750IBTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.2.4.0</PackID>
+          <PackID>Keil.STM32H7xx_DFP.3.1.1</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x24000000-0x2407FFFF) IROM(0x8000000-0x801FFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -190,7 +190,7 @@
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>1</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -340,7 +340,7 @@
               <MiscControls>--locale=english</MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx,NDEBUG,MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../Drivers/BSP/Components/my_iic;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../agile_modbus/inc;../wolfSSL;../Middlewares/Third_Party/wolfSSL_wolfSSL_wolfSSL/wolfssl/;../cJSON/;../MBEDTLS/App;../Middlewares/Third_Party/mbedTLS/include;../Middlewares/Third_Party/mbedTLS/include/mbedtls;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include;..\CmBacktrace\cm_backtrace</IncludePath>
+              <IncludePath>../Core/Inc;../LWIP/App;../LWIP/Target;../Middlewares/Third_Party/LwIP/src/include;../Middlewares/Third_Party/LwIP/system;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/BSP/Components/lan8742;../Middlewares/Third_Party/LwIP/src/include/netif/ppp;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Middlewares/Third_Party/LwIP/src/include/lwip;../Middlewares/Third_Party/LwIP/src/include/lwip/apps;../Middlewares/Third_Party/LwIP/src/include/lwip/priv;../Middlewares/Third_Party/LwIP/src/include/lwip/prot;../Middlewares/Third_Party/LwIP/src/include/netif;../Middlewares/Third_Party/LwIP/src/include/compat/posix;../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa;../Middlewares/Third_Party/LwIP/src/include/compat/posix/net;../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys;../Middlewares/Third_Party/LwIP/src/include/compat/stdc;../Middlewares/Third_Party/LwIP/system/arch;../Drivers/CMSIS/Include;../Drivers/BSP/Components/GT911;../Drivers/BSP/Components/LCD;../Drivers/BSP/Components/w9825G6kh;../Drivers/BSP/Components/my_iic;../TouchGFX/App;../TouchGFX/target/generated;../TouchGFX/target;../TouchGFX/gui/include/gui/common;../Drivers/BSP/Components/my_delay;../Drivers/BSP/Components/AT_module_4g;../Drivers/BSP/Components/AT24CXX;../Drivers/BSP/Components/RS485;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../agile_modbus/inc;../wolfSSL;../Middlewares/Third_Party/wolfSSL_wolfSSL_wolfSSL/wolfssl/;../cJSON/;../MBEDTLS/App;../Middlewares/Third_Party/mbedTLS/include;../Middlewares/Third_Party/mbedTLS/include/mbedtls;../middlewares/st/touchgfx/framework/include;../touchgfx/generated/fonts/include;../touchgfx/generated/gui_generated/include;../touchgfx/generated/images/include;../touchgfx/generated/texts/include;../touchgfx/generated/videos/include;../touchgfx/gui/include;..\CmBacktrace\cm_backtrace;..\flash_storage\port;..\flash_storage\EasyFlash\easyflash\inc;..\flash_storage\SFUD\sfud\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -10697,6 +10697,76 @@
               <FileName>cmb_fault.S</FileName>
               <FileType>2</FileType>
               <FilePath>..\CmBacktrace\cm_backtrace\fault_handler\keil\cmb_fault.S</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>flash_storage/SFUD</GroupName>
+          <Files>
+            <File>
+              <FileName>sfud.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\SFUD\sfud\src\sfud.c</FilePath>
+            </File>
+            <File>
+              <FileName>sfud_sfdp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\SFUD\sfud\src\sfud_sfdp.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>flash_storage/EasyFlash</GroupName>
+          <Files>
+            <File>
+              <FileName>easyflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\easyflash.c</FilePath>
+            </File>
+            <File>
+              <FileName>ef_env.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\ef_env.c</FilePath>
+            </File>
+            <File>
+              <FileName>ef_env_legacy.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\ef_env_legacy.c</FilePath>
+            </File>
+            <File>
+              <FileName>ef_env_legacy_wl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\ef_env_legacy_wl.c</FilePath>
+            </File>
+            <File>
+              <FileName>ef_iap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\ef_iap.c</FilePath>
+            </File>
+            <File>
+              <FileName>ef_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\ef_log.c</FilePath>
+            </File>
+            <File>
+              <FileName>ef_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\EasyFlash\easyflash\src\ef_utils.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>flash_storage/port</GroupName>
+          <Files>
+            <File>
+              <FileName>ef_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\port\ef_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>sfud_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\flash_storage\port\sfud_port.c</FilePath>
             </File>
           </Files>
         </Group>

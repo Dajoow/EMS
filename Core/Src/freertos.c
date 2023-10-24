@@ -38,6 +38,7 @@
 #include "stdint.h"
 #include "usart.h"
 #include "at24cxx.h"
+#include "easyflash.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -202,6 +203,7 @@ void MX_FREERTOS_Init(void) {
 void Startup(void const * argument)
 {
   /* USER CODE BEGIN Startup */
+  easyflash_init();
   mbedtls_net_init (NULL);
   sntp_client_init ();
   // 开启CAN接收线程

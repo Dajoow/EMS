@@ -42,6 +42,7 @@
 #include "lcd.h"
 #include "at24cxx.h"
 #include "string.h"
+#include "cm_backtrace.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,6 +97,7 @@ PUTCHAR_PROTOTYPE
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
 	SCB->VTOR = APPLICATION_ADDRESS;
 	__enable_irq();
   /* USER CODE END 1 */
@@ -122,6 +124,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  cm_backtrace_init("BSMU_H750IB", "1.0", "1.0");
   AT24Cxx_Init();					//初始化AT24C02
   //读取AT24C02并更新参数
 	AT24Cxx_SeqRead(0x00, CAPACITY_SIZE, eerom_data.ReadBuff);
@@ -164,7 +167,6 @@ int main(void)
 	GT911_init();                 //在此处初始化GT911
 	HAL_TIM_Base_Start_IT(&htim6);    //用于FREERTOS任务使用率计数
 
-  cm_backtrace_init("BSMU_H750IB", "1.0", "1.0");
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
