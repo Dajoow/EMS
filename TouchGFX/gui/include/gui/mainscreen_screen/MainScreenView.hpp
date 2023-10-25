@@ -103,10 +103,12 @@ public:
     virtual void show_batteryshowarea_off();
 
     virtual void handleTickEvent();
-
+  
 
     virtual uint8_t get_one_bit_value(uint16_t src, uint8_t bit_num);
     virtual uint8_t get_two_bit_value(uint16_t src, uint8_t bit_num);
+
+    virtual void inf_play(TextArea* a,int b);
     //uint8_t bufSize;
     //uint8_t * textBuf;
 
@@ -133,14 +135,27 @@ protected:
     touchgfx::Unicode::UnicodeChar* tim[30];
     touchgfx::Unicode::UnicodeChar* id[30];
     touchgfx::TextArea* inf[30];
+    touchgfx::TextAreaWithOneWildcard* id_wild[30];
+
+
+    //touchgfx::TextArea* id[30];
+    //touchgfx::TextArea* [30];
 
     //Unicode::UnicodeChar chinese_buf[10];
  /*   SettingView& dskjsk;*/
-    //int tickCounter;
-    //int digitalHours;
-    //int digitalMinutes;
-    //int digitalSeconds;
+    int tickCounter;
+    int digitalHours;
+    int digitalMinutes;
+    int digitalSeconds;
+    char testtime[128];
+    char testid[128];
+    
+    Unicode::UnicodeChar u_time[128];
+    uint8_t u_id[128];
 
+    uint16_t movecounter[20];
+    uint16_t move;
+    int direction ;
     //TextAreaWithOneWildcard time[30];
 
     //touchgfx::TextAreaWithOneWildcard err_num1;

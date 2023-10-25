@@ -104,6 +104,7 @@ void SettingView::setupScreen()
     memcpy(&SettingBuff_temp, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
 #endif
 
+    
     //以下为拷贝了EEPROM中的值后，setting界面数据信息显示
     
     //初始化轮询周期数据
@@ -872,7 +873,10 @@ void SettingView::setRS485baudrate_115200()
 //轮询周期设置
 void SettingView::poll_t_set()//点击zhuangji_numButton
 {
+    SettingBuff_temp.poll_T = SettingBuff.poll_T;
     t_set.setVisible(true);//打开设置弹窗
+    Unicode::snprintf(t_Buffer[0], 10, "%d", SettingBuff_temp.poll_T);
+    t_setbutton.setWildcardTextBuffer(t_Buffer[0]);
     t_set.invalidate();
 
     keyboard1.initialize();
@@ -884,7 +888,10 @@ void SettingView::poll_t_set()//点击zhuangji_numButton
 //当簇装机数被点击后，打开设置界面的弹窗
 void SettingView::zhuangji_set()
 {
+    SettingBuff_temp.cu_num = SettingBuff.cu_num;
     zu_set.setVisible(true); //打开设置弹窗
+    Unicode::snprintf(zu_Buffer[0], 10, "%02d", SettingBuff_temp.cu_num);
+    zu_setbutton.setWildcardTextBuffer(zu_Buffer[0]);
     zu_set.invalidate();
 
     keyboard1.initialize();

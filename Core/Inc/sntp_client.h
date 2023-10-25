@@ -9,5 +9,4 @@ void sntp_set_rtc(uint32_t timestamp);
 uint32_t rtc_get_timestamp(void);
 void get_system_time(uint32_t* sec, uint32_t* us);
 time_t mbedtls_get_time(time_t *timer);
-
 #endif

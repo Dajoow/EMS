@@ -11,14 +11,12 @@
 #include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
-#include <touchgfx/EasingEquations.hpp>
-#include <touchgfx/mixins/MoveAnimator.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
-#include <touchgfx/mixins/ClickListener.hpp>
 #include <touchgfx/widgets/Image.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
 #include <touchgfx/containers/ModalWindow.hpp>
 #include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
@@ -321,7 +319,7 @@ protected:
     touchgfx::Container fwq_4g_ipsetting;
     touchgfx::Box box1;
     touchgfx::Button local_port_button;
-    touchgfx::MoveAnimator< touchgfx::Button > local_ip_button;
+    touchgfx::Button local_ip_button;
     touchgfx::Button ip_4g_button;
     touchgfx::Button port_4g_button;
     touchgfx::ButtonWithLabel IPsetting_1;
@@ -333,8 +331,8 @@ protected:
     touchgfx::TextArea IP_ADD3;
     touchgfx::TextArea PORT2;
     touchgfx::TextArea _4G;
-    touchgfx::ClickListener< touchgfx::TextAreaWithTwoWildcards > ip_text2_1;
-    touchgfx::ClickListener< touchgfx::TextAreaWithTwoWildcards > ip_text1_1;
+    touchgfx::TextAreaWithTwoWildcards ip_text2_1;
+    touchgfx::TextAreaWithTwoWildcards ip_text1_1;
     touchgfx::TextAreaWithOneWildcard port_text;
     touchgfx::TextAreaWithTwoWildcards ip_1_text2_1;
     touchgfx::TextAreaWithTwoWildcards ip_1_text1_1;

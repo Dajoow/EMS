@@ -4,6 +4,23 @@
     <Language Id="GB" />
   </Languages>
   <Texts>
+    <TextGroup Id="Err_type">
+      <Text Id="Err_type4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU(组间错误)</Translation>
+      </Text>
+      <Text Id="Err_type3" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU(组内)电池错误</Translation>
+      </Text>
+      <Text Id="Err_type2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BMU(组内)板错误</Translation>
+      </Text>
+      <Text Id="Err_type1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BCMU错误</Translation>
+      </Text>
+      <Text Id="Err_type0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">BSMU错误</Translation>
+      </Text>
+    </TextGroup>
     <TextGroup Id="BMU_between_err">
       <Text Id="BMU_between_err15" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">\</Translation>
@@ -371,28 +388,904 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_IUK1" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_FTB7" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_3VMC" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_BFR0" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_66UM" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LA3L" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_SRAE" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LSKX" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_X2WE" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_4GUV" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_L6F8" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_JR6T" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_NICD" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_TKYM" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_D2G8" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_IZFX" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_UEI1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_VVI7" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_7R9M" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_89NE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_4QGJ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z6T4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TDDF" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BKJ1" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_DWW4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2TSA" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_5CET" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_9G86" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_8ICB" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_QDEL" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_JRYL" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZMAY" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_DD0X" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_92VD" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_QX3P" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_LW28" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_T11I" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_YP0Q" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_CJHA" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_3J21" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZLDU" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_6ZX6" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_EGTV" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_VRQK" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_8CI0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">\</Translation>
+      </Text>
+      <Text Id="__SingleUse_8373" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[时间戳]</Translation>
+      </Text>
+      <Text Id="__SingleUse_30AP" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_WSNS" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_P678" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_KUNO" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_KQU0" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_1Y4Y" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[错误id号]</Translation>
+      </Text>
+      <Text Id="__SingleUse_JP1B" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_R1IO" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_RCZT" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BRP8" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_9953" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GNSH" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[错误类型]</Translation>
+      </Text>
+      <Text Id="__SingleUse_UGQS" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_SXMP" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_9JYR" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_7SLP" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_17E7" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_61DT" Alignment="Left" TypographyId="STxihei_32">
+        <Translation Language="GB">电站信息</Translation>
+      </Text>
+      <Text Id="__SingleUse_MX5F" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">总装机容量</Translation>
+      </Text>
+      <Text Id="__SingleUse_KQGM" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">电池簇数量</Translation>
+      </Text>
+      <Text Id="__SingleUse_6V41" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">总电流</Translation>
+      </Text>
+      <Text Id="__SingleUse_QVYG" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">总电压</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZUWQ" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">充电功率</Translation>
+      </Text>
+      <Text Id="__SingleUse_Q7WM" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">放电功率</Translation>
+      </Text>
+      <Text Id="__SingleUse_XGMI" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_EAE2" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_AIMN" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">20</Translation>
+      </Text>
+      <Text Id="__SingleUse_CEE3" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_MVVO" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_DK02" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_U5Z1" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_NJEI" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_RRR6" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_M55J" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_QXOH" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_MGN1" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_V43H" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">kwh</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z73A" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">簇</Translation>
+      </Text>
+      <Text Id="__SingleUse_XSP3" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">A</Translation>
+      </Text>
+      <Text Id="__SingleUse_ATIQ" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_ANA2" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">W</Translation>
+      </Text>
+      <Text Id="__SingleUse_J5MQ" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">W</Translation>
+      </Text>
+      <Text Id="__SingleUse_0GVG" Alignment="Left" TypographyId="STxihei_32">
+        <Translation Language="GB">单簇实时数据</Translation>
+      </Text>
+      <Text Id="__SingleUse_JSDQ" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">簇编号</Translation>
+      </Text>
+      <Text Id="__SingleUse_13MN" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">电池组数量</Translation>
+      </Text>
+      <Text Id="__SingleUse_JOBF" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">簇电流</Translation>
+      </Text>
+      <Text Id="__SingleUse_F47R" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">簇电压</Translation>
+      </Text>
+      <Text Id="__SingleUse_N8CE" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">正绝缘电阻</Translation>
+      </Text>
+      <Text Id="__SingleUse_JUDE" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">P</Translation>
+      </Text>
+      <Text Id="__SingleUse_AYUW" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">负绝缘电阻</Translation>
+      </Text>
+      <Text Id="__SingleUse_OXAU" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">N</Translation>
+      </Text>
+      <Text Id="__SingleUse_XXPD" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_P0XU" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_MEYW" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">30</Translation>
+      </Text>
+      <Text Id="__SingleUse_FUAK" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_3KQN" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_DFKA" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_D7C1" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_JPP1" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_CKYO" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">9999</Translation>
+      </Text>
+      <Text Id="__SingleUse_PVHD" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_KY86" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">9999</Translation>
+      </Text>
+      <Text Id="__SingleUse_UMLG" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt; </Translation>
+      </Text>
+      <Text Id="__SingleUse_AQQY" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">号</Translation>
+      </Text>
+      <Text Id="__SingleUse_OCCK" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">组</Translation>
+      </Text>
+      <Text Id="__SingleUse_G50R" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">A</Translation>
+      </Text>
+      <Text Id="__SingleUse_KOWC" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_XYK8" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">kΩ</Translation>
+      </Text>
+      <Text Id="__SingleUse_3VJU" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">kΩ</Translation>
+      </Text>
+      <Text Id="__SingleUse_C6UQ" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">本地</Translation>
+      </Text>
+      <Text Id="__SingleUse_X4XY" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">IP</Translation>
+      </Text>
+      <Text Id="__SingleUse_F09J" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">本地服务器</Translation>
+      </Text>
+      <Text Id="__SingleUse_DUNZ" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">IP</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZL5L" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">云端服务器</Translation>
+      </Text>
+      <Text Id="__SingleUse_2ACA" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">IP</Translation>
+      </Text>
+      <Text Id="__SingleUse_A7MB" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">-</Translation>
+      </Text>
+      <Text Id="__SingleUse_OTW9" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_5OFW" Alignment="Left" TypographyId="SegoeUI_24">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_3JNF" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_CI6P" Alignment="Left" TypographyId="SegoeUI_24">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_5WPO" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;.</Translation>
+      </Text>
+      <Text Id="__SingleUse_EJXL" Alignment="Left" TypographyId="STXihei_24">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_48IX" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;.</Translation>
+      </Text>
+      <Text Id="__SingleUse_8QBQ" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_RTJQ" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;.</Translation>
+      </Text>
+      <Text Id="__SingleUse_MVEC" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_U16J" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_979A" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_R3Q7" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">-</Translation>
+      </Text>
+      <Text Id="__SingleUse_SKOL" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_HTWD" Alignment="Center" TypographyId="SegoeUI_30">
+        <Translation Language="GB">PCS</Translation>
+      </Text>
+      <Text Id="__SingleUse_72XR" Alignment="Center" TypographyId="STxihei_30">
+        <Translation Language="GB">通信</Translation>
+      </Text>
+      <Text Id="__SingleUse_N3J8" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_ISG5" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">平均电压    &lt;value&gt;V</Translation>
+      </Text>
+      <Text Id="__SingleUse_WJ87" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_H0MG" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">平均百分比 &lt;value&gt;%</Translation>
+      </Text>
+      <Text Id="__SingleUse_ISQQ" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_JIO9" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">平均温度    &lt;value&gt;℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_VXPX" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_TKTM" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;val&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_078T" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">簇 </Translation>
+      </Text>
+      <Text Id="__SingleUse_QQNG" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">组</Translation>
+      </Text>
+      <Text Id="__SingleUse_U63Y" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_178X" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;val&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_216H" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_55LH" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_L1AA" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_4BHW" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_EV7S" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_HD8E" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_5U0I" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_OJJK" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_O2K1" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_ER3N" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_KYCC" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_JGZU" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">V</Translation>
+      </Text>
+      <Text Id="__SingleUse_73GY" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_ACZM" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZVEK" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z78Q" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_3BLK" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_LAZQ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_G375" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_4LN8" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_H3AP" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_20U9" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_OEJD" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_6CNE" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">%</Translation>
+      </Text>
+      <Text Id="__SingleUse_6XXI" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_RKWT" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_CR2O" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_PKGR" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_SC0S" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_8NG4" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_0PUH" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_NEPH" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_IMLA" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_RU33" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_MOXT" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_TN8S" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_J3MA" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_VHC0" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_EZR5" Alignment="Left" TypographyId="STXihei_24">
+        <Translation Language="GB">第 &lt;value&gt; 簇 第 &lt;value&gt; 组内电池信息</Translation>
+      </Text>
+      <Text Id="__SingleUse_2F3E" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_4AAE" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_L1LZ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_BV29" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_7PI2" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_NUUZ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BNJI" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_UTCF" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_FKUF" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_7VGZ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_VDC5" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_ESBZ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_PYNE" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_OZ4B" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z959" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_3767" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_SNQ6" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_QP07" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_O2RY" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_HIT9" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_C8L9" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_SBQ5" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_E5ID" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">25.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_YOJX" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_7FCQ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_CPSJ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_D5UQ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_4X3N" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_M9WA" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_C6NV" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_NBWO" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_TB52" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_WHFU" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_84IO" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2QTX" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_EEPS" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YAYV" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y492" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_DFUY" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_7WDQ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_STOM" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_ATI7" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_PL1K" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_TWUC" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OQSZ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_D7N2" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_84FX" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_90EI" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_FNT8" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL12</Translation>
+      </Text>
+      <Text Id="__SingleUse_BX49" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL11</Translation>
+      </Text>
+      <Text Id="__SingleUse_0B2D" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL10</Translation>
+      </Text>
+      <Text Id="__SingleUse_T3SD" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL9</Translation>
+      </Text>
+      <Text Id="__SingleUse_HIOS" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL8</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZQUC" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL7</Translation>
+      </Text>
+      <Text Id="__SingleUse_VMST" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL6</Translation>
+      </Text>
+      <Text Id="__SingleUse_M2WK" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL5</Translation>
+      </Text>
+      <Text Id="__SingleUse_67PS" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL4</Translation>
+      </Text>
+      <Text Id="__SingleUse_78FE" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL3</Translation>
+      </Text>
+      <Text Id="__SingleUse_I9SZ" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL2</Translation>
+      </Text>
+      <Text Id="__SingleUse_AWRC" Alignment="Left" TypographyId="SegoeUI_18">
+        <Translation Language="GB">CELL1</Translation>
+      </Text>
+      <Text Id="__SingleUse_BUE0" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_6OIR" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_7LRP" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_DUM1" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_0IEB" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_DYUS" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_RPZP" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_5G5R" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_47EQ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_0R4Z" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2QPF" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_EXNJ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_JER9" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_XEDN" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_95K9" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_6MU8" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_PLVK" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_GUUQ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_W3VO" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_LOXI" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_3BNZ" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_2QR2" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_JOOT" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">2.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_9L6A" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YPZC" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">℃</Translation>
+      </Text>
+      <Text Id="__SingleUse_ARMY" Alignment="Left" TypographyId="STXihei_40">
+        <Translation Language="GB">储能电站</Translation>
+      </Text>
+      <Text Id="__SingleUse_317K" Alignment="Left" TypographyId="STxihei_20">
+        <Translation Language="GB">60</Translation>
+      </Text>
+      <Text Id="__SingleUse_NBY5" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB">&lt;value&gt;FPS</Translation>
+      </Text>
+      <Text Id="__SingleUse_J55U" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZVOT" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_82AJ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_FD4V" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_KLZO" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_UG9A" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OIUX" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_L2ZG" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_DE9M" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_NY0C" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_5XQ9" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TVE7" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YS7L" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZNOA" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_I979" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_MCEE" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">[错误类型]</Translation>
       </Text>
       <Text Id="__SingleUse_WQNC" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">[错误id号]</Translation>
       </Text>
-      <Text Id="__SingleUse_OJPI" Alignment="Left" TypographyId="STXihei_22">
+      <Text Id="__SingleUse_OJPI" Alignment="Center" TypographyId="STXihei_22">
         <Translation Language="GB">New Text</Translation>
       </Text>
-      <Text Id="__SingleUse_VGDS" Alignment="Left" TypographyId="STXihei_22">
+      <Text Id="__SingleUse_VGDS" Alignment="Center" TypographyId="STXihei_22">
         <Translation Language="GB">New Text</Translation>
       </Text>
-      <Text Id="__SingleUse_YSP9" Alignment="Left" TypographyId="STXihei_22">
+      <Text Id="__SingleUse_YSP9" Alignment="Center" TypographyId="STXihei_22">
         <Translation Language="GB">New Text</Translation>
       </Text>
-      <Text Id="__SingleUse_7GVU" Alignment="Left" TypographyId="STXihei_22">
+      <Text Id="__SingleUse_7GVU" Alignment="Center" TypographyId="STXihei_22">
         <Translation Language="GB">New Text</Translation>
       </Text>
-      <Text Id="__SingleUse_TOVZ" Alignment="Left" TypographyId="STXihei_22">
+      <Text Id="__SingleUse_TOVZ" Alignment="Center" TypographyId="STXihei_22">
         <Translation Language="GB">New Text</Translation>
       </Text>
-      <Text Id="err_id4" Alignment="Left" TypographyId="STXihei_22">
+      <Text Id="err_id19" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">\</Translation>
       </Text>
       <Text Id="err_id3" Alignment="Left" TypographyId="STXihei_22">
@@ -540,7 +1433,7 @@
         <Translation Language="GB">取消</Translation>
       </Text>
       <Text Id="__SingleUse_V95R" Alignment="Left" TypographyId="SegoeUI_30">
-        <Translation Language="GB">50</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_ANX9" Alignment="Center" TypographyId="SegoeUI_30">
         <Translation Language="GB">&lt;value&gt; ms</Translation>
@@ -561,7 +1454,7 @@
         <Translation Language="GB">取消</Translation>
       </Text>
       <Text Id="__SingleUse_XREB" Alignment="Left" TypographyId="STxihei_30">
-        <Translation Language="GB">20</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_UQUX" Alignment="Center" TypographyId="SegoeUI_30">
         <Translation Language="GB">&lt;value&gt;</Translation>
@@ -1719,13 +2612,13 @@
         <Translation Language="GB">0</Translation>
       </Text>
       <Text Id="__SingleUse_D7W3" Alignment="Left" TypographyId="SegoeUI_20">
-        <Translation Language="GB">0</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_5GU0" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_XRK5" Alignment="Left" TypographyId="SegoeUI_20">
-        <Translation Language="GB">0</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_JJH4" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">&lt;value&gt;</Translation>
@@ -1759,7 +2652,7 @@
   <Typographies>
     <Typography Id="Default" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_24" Font="segoeui.ttf" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="!" WildcardCharacters="0123456789.-" WildcardCharacterRanges="0-9" />
-    <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,!" WildcardCharacterRanges="0-9,0x9519,0x8BEF,a-z" />
     <Typography Id="STXihei_24" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_40" Font="STXIHEI.TTF" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_20" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />

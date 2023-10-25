@@ -20,6 +20,9 @@
 #include <touchgfx/widgets/ScalableImage.hpp>
 #include <touchgfx/widgets/ButtonWithLabel.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
+#include <touchgfx/EasingEquations.hpp>
+#include <touchgfx/mixins/MoveAnimator.hpp>
+#include <touchgfx/mixins/Draggable.hpp>
 
 class MainScreenViewBase : public touchgfx::View<MainScreenPresenter>
 {
@@ -517,13 +520,43 @@ protected:
     touchgfx::Image benjixinxi_BG;
     touchgfx::ScrollableContainer scrollableContainer1;
     touchgfx::Container err_inf;
-    touchgfx::TextArea err_inf4;
-    touchgfx::TextArea err_inf3;
-    touchgfx::TextArea err_inf2;
-    touchgfx::TextArea err_inf1;
-    touchgfx::TextArea err_inf0;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf19;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf18;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf17;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf16;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf15;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf14;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf13;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf12;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf11;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf10;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf9;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf8;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf7;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf6;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf5;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf4;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf3;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf2;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf1;
+    touchgfx::MoveAnimator< touchgfx::TextArea > err_inf0;
     touchgfx::TextArea textArea2;
     touchgfx::Container err_id;
+    touchgfx::TextAreaWithOneWildcard err_id19;
+    touchgfx::TextAreaWithOneWildcard err_id18;
+    touchgfx::TextAreaWithOneWildcard err_id17;
+    touchgfx::TextAreaWithOneWildcard err_id16;
+    touchgfx::TextAreaWithOneWildcard err_id15;
+    touchgfx::TextAreaWithOneWildcard err_id14;
+    touchgfx::TextAreaWithOneWildcard err_id13;
+    touchgfx::TextAreaWithOneWildcard err_id12;
+    touchgfx::TextAreaWithOneWildcard err_id11;
+    touchgfx::TextAreaWithOneWildcard err_id10;
+    touchgfx::TextAreaWithOneWildcard err_id9;
+    touchgfx::TextAreaWithOneWildcard err_id8;
+    touchgfx::TextAreaWithOneWildcard err_id7;
+    touchgfx::TextAreaWithOneWildcard err_id6;
+    touchgfx::TextAreaWithOneWildcard err_id5;
     touchgfx::TextAreaWithOneWildcard err_id4;
     touchgfx::TextAreaWithOneWildcard err_id3;
     touchgfx::TextAreaWithOneWildcard err_id2;
@@ -531,12 +564,28 @@ protected:
     touchgfx::TextAreaWithOneWildcard err_id0;
     touchgfx::TextArea textArea1;
     touchgfx::Container err_time;
+    touchgfx::TextAreaWithOneWildcard err_time19;
+    touchgfx::TextAreaWithOneWildcard err_time18;
+    touchgfx::TextAreaWithOneWildcard err_time17;
+    touchgfx::TextAreaWithOneWildcard err_time16;
+    touchgfx::TextAreaWithOneWildcard err_time15;
+    touchgfx::TextAreaWithOneWildcard err_time14;
+    touchgfx::TextAreaWithOneWildcard err_time13;
+    touchgfx::TextAreaWithOneWildcard err_time12;
+    touchgfx::TextAreaWithOneWildcard err_time11;
+    touchgfx::TextAreaWithOneWildcard err_time10;
+    touchgfx::TextAreaWithOneWildcard err_time9;
+    touchgfx::TextAreaWithOneWildcard err_time8;
+    touchgfx::TextAreaWithOneWildcard err_time7;
+    touchgfx::TextAreaWithOneWildcard err_time6;
+    touchgfx::TextAreaWithOneWildcard err_time5;
     touchgfx::TextAreaWithOneWildcard err_time4;
     touchgfx::TextAreaWithOneWildcard err_time3;
     touchgfx::TextAreaWithOneWildcard err_time2;
     touchgfx::TextAreaWithOneWildcard err_time1;
     touchgfx::TextAreaWithOneWildcard err_time0;
     touchgfx::TextArea baojing_biaoti;
+    touchgfx::Draggable< touchgfx::MoveAnimator< touchgfx::Box > > box3;
 
     /*
      * Wildcard Buffers
@@ -665,6 +714,36 @@ protected:
     touchgfx::Unicode::UnicodeChar dianchicushuliangBuffer[DIANCHICUSHULIANG_SIZE];
     static const uint16_t ZHUANGJIRONGLIANG_SIZE = 10;
     touchgfx::Unicode::UnicodeChar zhuangjirongliangBuffer[ZHUANGJIRONGLIANG_SIZE];
+    static const uint16_t ERR_ID19_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id19Buffer[ERR_ID19_SIZE];
+    static const uint16_t ERR_ID18_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id18Buffer[ERR_ID18_SIZE];
+    static const uint16_t ERR_ID17_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id17Buffer[ERR_ID17_SIZE];
+    static const uint16_t ERR_ID16_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id16Buffer[ERR_ID16_SIZE];
+    static const uint16_t ERR_ID15_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id15Buffer[ERR_ID15_SIZE];
+    static const uint16_t ERR_ID14_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id14Buffer[ERR_ID14_SIZE];
+    static const uint16_t ERR_ID13_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id13Buffer[ERR_ID13_SIZE];
+    static const uint16_t ERR_ID12_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id12Buffer[ERR_ID12_SIZE];
+    static const uint16_t ERR_ID11_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id11Buffer[ERR_ID11_SIZE];
+    static const uint16_t ERR_ID10_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id10Buffer[ERR_ID10_SIZE];
+    static const uint16_t ERR_ID9_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id9Buffer[ERR_ID9_SIZE];
+    static const uint16_t ERR_ID8_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id8Buffer[ERR_ID8_SIZE];
+    static const uint16_t ERR_ID7_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id7Buffer[ERR_ID7_SIZE];
+    static const uint16_t ERR_ID6_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id6Buffer[ERR_ID6_SIZE];
+    static const uint16_t ERR_ID5_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_id5Buffer[ERR_ID5_SIZE];
     static const uint16_t ERR_ID4_SIZE = 10;
     touchgfx::Unicode::UnicodeChar err_id4Buffer[ERR_ID4_SIZE];
     static const uint16_t ERR_ID3_SIZE = 10;
@@ -675,6 +754,36 @@ protected:
     touchgfx::Unicode::UnicodeChar err_id1Buffer[ERR_ID1_SIZE];
     static const uint16_t ERR_ID0_SIZE = 10;
     touchgfx::Unicode::UnicodeChar err_id0Buffer[ERR_ID0_SIZE];
+    static const uint16_t ERR_TIME19_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time19Buffer[ERR_TIME19_SIZE];
+    static const uint16_t ERR_TIME18_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time18Buffer[ERR_TIME18_SIZE];
+    static const uint16_t ERR_TIME17_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time17Buffer[ERR_TIME17_SIZE];
+    static const uint16_t ERR_TIME16_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time16Buffer[ERR_TIME16_SIZE];
+    static const uint16_t ERR_TIME15_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time15Buffer[ERR_TIME15_SIZE];
+    static const uint16_t ERR_TIME14_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time14Buffer[ERR_TIME14_SIZE];
+    static const uint16_t ERR_TIME13_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time13Buffer[ERR_TIME13_SIZE];
+    static const uint16_t ERR_TIME12_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time12Buffer[ERR_TIME12_SIZE];
+    static const uint16_t ERR_TIME11_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time11Buffer[ERR_TIME11_SIZE];
+    static const uint16_t ERR_TIME10_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time10Buffer[ERR_TIME10_SIZE];
+    static const uint16_t ERR_TIME9_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time9Buffer[ERR_TIME9_SIZE];
+    static const uint16_t ERR_TIME8_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time8Buffer[ERR_TIME8_SIZE];
+    static const uint16_t ERR_TIME7_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time7Buffer[ERR_TIME7_SIZE];
+    static const uint16_t ERR_TIME6_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time6Buffer[ERR_TIME6_SIZE];
+    static const uint16_t ERR_TIME5_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar err_time5Buffer[ERR_TIME5_SIZE];
     static const uint16_t ERR_TIME4_SIZE = 10;
     touchgfx::Unicode::UnicodeChar err_time4Buffer[ERR_TIME4_SIZE];
     static const uint16_t ERR_TIME3_SIZE = 10;
