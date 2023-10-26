@@ -316,6 +316,7 @@ protected:
     touchgfx::Container daohanglan;
     touchgfx::ButtonWithLabel save_all;
     touchgfx::ButtonWithLabel start;
+    touchgfx::ButtonWithLabel cancel;
     touchgfx::Container fwq_4g_ipsetting;
     touchgfx::Box box1;
     touchgfx::Button local_port_button;
@@ -475,7 +476,6 @@ protected:
     touchgfx::TextAreaWithTwoWildcards ip_text2;
     touchgfx::TextAreaWithTwoWildcards ip_text1;
     keyboard keyboard1;
-    touchgfx::TextArea textArea25;
     touchgfx::Button backButton;
 
     /*

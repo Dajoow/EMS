@@ -388,50 +388,53 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_IGM4" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">取消设置</Translation>
+      </Text>
       <Text Id="__SingleUse_IUK1" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_FTB7" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_3VMC" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_BFR0" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_66UM" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_LA3L" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_SRAE" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_LSKX" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_X2WE" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_4GUV" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
-      <Text Id="__SingleUse_L6F8" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+      <Text Id="__SingleUse_L6F8" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB" />
       </Text>
-      <Text Id="__SingleUse_JR6T" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+      <Text Id="__SingleUse_JR6T" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB" />
       </Text>
-      <Text Id="__SingleUse_NICD" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+      <Text Id="__SingleUse_NICD" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB" />
       </Text>
-      <Text Id="__SingleUse_TKYM" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+      <Text Id="__SingleUse_TKYM" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB" />
       </Text>
-      <Text Id="__SingleUse_D2G8" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+      <Text Id="__SingleUse_D2G8" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_IZFX" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">&lt;value&gt;</Translation>
@@ -479,49 +482,49 @@
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_JRYL" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_ZMAY" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_DD0X" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_92VD" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_QX3P" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_LW28" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_T11I" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_YP0Q" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_CJHA" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_3J21" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_ZLDU" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_6ZX6" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_EGTV" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_VRQK" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_8CI0" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_8373" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">[时间戳]</Translation>
@@ -1271,49 +1274,49 @@
         <Translation Language="GB">[错误id号]</Translation>
       </Text>
       <Text Id="__SingleUse_OJPI" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_VGDS" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_YSP9" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_7GVU" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_TOVZ" Alignment="Center" TypographyId="STXihei_22">
-        <Translation Language="GB">New Text</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_id19" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_id3" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_id2" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_id1" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_id0" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_time4" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_time3" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_time2" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_time1" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="err_time00" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="__SingleUse_OKYQ" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">&lt;value&gt;</Translation>
@@ -1464,9 +1467,6 @@
       </Text>
       <Text Id="__SingleUse_NZWP" Alignment="Left" TypographyId="SegoeUI_30">
         <Translation Language="GB">ms</Translation>
-      </Text>
-      <Text Id="__SingleUse_18O7" Alignment="Left" TypographyId="STxihei_20">
-        <Translation Language="GB">返回首页</Translation>
       </Text>
       <Text Id="__SingleUse_B8U1" Alignment="Left" TypographyId="STxihei_30">
         <Translation Language="GB">簇</Translation>
@@ -2260,8 +2260,8 @@
       <Text Id="__SingleUse_HXXB" Alignment="Center" TypographyId="STxihei_30">
         <Translation Language="GB">开始</Translation>
       </Text>
-      <Text Id="__SingleUse_OIA8" Alignment="Center" TypographyId="STxihei_30">
-        <Translation Language="GB">保存</Translation>
+      <Text Id="__SingleUse_OIA8" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">保存重启</Translation>
       </Text>
       <Text Id="__SingleUse_08UG" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">115200</Translation>

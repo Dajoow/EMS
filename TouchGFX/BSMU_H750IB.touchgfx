@@ -36,6 +36,7 @@
             "Y": 26,
             "Width": 70,
             "Height": 27,
+            "Visible": false,
             "TextId": "__SingleUse_HULS",
             "TextRotation": "0",
             "Wildcard1": {
@@ -4767,21 +4768,6 @@
                 ]
               }
             ]
-          },
-          {
-            "Type": "Box",
-            "Name": "box3",
-            "X": 6,
-            "Y": 16,
-            "Width": 50,
-            "Height": 50,
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "Draggable": true,
-            "Moveable": true
           }
         ],
         "Interactions": [
@@ -5452,8 +5438,8 @@
               {
                 "Type": "ButtonWithLabel",
                 "Name": "save_all",
-                "X": 536,
-                "Y": 31,
+                "X": 561,
+                "Y": 32,
                 "Width": 124,
                 "Height": 74,
                 "Pressed": "ipset_bj_pressed.png",
@@ -5472,6 +5458,7 @@
                 "Y": 31,
                 "Width": 124,
                 "Height": 74,
+                "Visible": false,
                 "Pressed": "ipset_bj_pressed.png",
                 "Released": "ipset_bj_released.png",
                 "TextId": "__SingleUse_HXXB",
@@ -5479,6 +5466,18 @@
                   "Green": 119,
                   "Blue": 255
                 },
+                "TextRotation": "0"
+              },
+              {
+                "Type": "ButtonWithLabel",
+                "Name": "cancel",
+                "X": 799,
+                "Y": 32,
+                "Width": 124,
+                "Height": 74,
+                "Pressed": "ipset_bj_pressed.png",
+                "Released": "ipset_bj_released.png",
+                "TextId": "__SingleUse_IGM4",
                 "TextRotation": "0"
               }
             ]
@@ -8570,23 +8569,13 @@
             "CustomContainerDefinitionName": "keyboard"
           },
           {
-            "Type": "TextArea",
-            "Name": "textArea25",
-            "X": 941,
-            "Y": 49,
-            "Width": 80,
-            "Height": 28,
-            "TextId": "__SingleUse_18O7",
-            "TextRotation": "0",
-            "AutoSize": true
-          },
-          {
             "Type": "Button",
             "Name": "backButton",
-            "X": 957,
-            "Y": 1,
+            "X": 959,
+            "Y": 42,
             "Width": 48,
             "Height": 48,
+            "Visible": false,
             "Pressed": "home_FILL0_wght400_GRAD0_opsz48.png",
             "Released": "home_FILL0_wght400_GRAD0_opsz48.png"
           }
@@ -9307,6 +9296,18 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "port_4g_fun"
+            }
+          },
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "cancel"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MainScreen"
             }
           }
         ]

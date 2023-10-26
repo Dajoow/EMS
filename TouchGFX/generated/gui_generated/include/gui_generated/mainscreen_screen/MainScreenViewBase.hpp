@@ -22,7 +22,6 @@
 #include <touchgfx/widgets/BoxWithBorder.hpp>
 #include <touchgfx/EasingEquations.hpp>
 #include <touchgfx/mixins/MoveAnimator.hpp>
-#include <touchgfx/mixins/Draggable.hpp>
 
 class MainScreenViewBase : public touchgfx::View<MainScreenPresenter>
 {
@@ -585,7 +584,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard err_time1;
     touchgfx::TextAreaWithOneWildcard err_time0;
     touchgfx::TextArea baojing_biaoti;
-    touchgfx::Draggable< touchgfx::MoveAnimator< touchgfx::Box > > box3;
 
     /*
      * Wildcard Buffers

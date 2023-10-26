@@ -28,6 +28,7 @@ MainScreenViewBase::MainScreenViewBase() :
     Unicode::snprintf(FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1G1L).getText());
     FrameRateText.setWildcard(FrameRateTextBuffer);
     FrameRateText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HULS));
+    FrameRateText.setVisible(false);
     add(FrameRateText);
 
     chunengdianzhan.setXY(54, 11);
@@ -2238,10 +2239,6 @@ MainScreenViewBase::MainScreenViewBase() :
     shouye.add(baojingxinxi_container);
 
     add(shouye);
-
-    box3.setPosition(6, 16, 50, 50);
-    box3.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    add(box3);
 }
 
 MainScreenViewBase::~MainScreenViewBase()

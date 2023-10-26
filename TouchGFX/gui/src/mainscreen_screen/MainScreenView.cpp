@@ -16,38 +16,11 @@ extern "C" {
 #include "station_ctl.h"
 #include "CAN_Control.h"
 #include "sntp_client.h" 
-//    extern error_info_t a[5] = { {0x00,0x00,0x0001},
-//{0x00,0x00,0x0001},
-//{0x00,0x01,0x0001},
-//{0x00,0x02,0x0004},
-//{0x00,0x00,0x0001}
-
-//};
-		
+    extern error_info_t Client_errors[cluster_num][MAX_ERROR];		
+    extern Client_Sd_t Client_Sd[cluster_num];
 };
 
 #endif
-
- struct err_infor
-  {
-      uint8_t error_id_h;
-      uint8_t error_id_l;
-      uint16_t error_code;
-  };
-	
-	
-
-//struct tm_touchgfx {
-//    int tm_sec;         /* 秒，范围从 0 到 59        */
-//    int tm_min;         /* 分，范围从 0 到 59        */
-//    int tm_hour;        /* 小时，范围从 0 到 23        */
-//    int tm_mday;        /* 一月中的第几天，范围从 1 到 31    */
-//    int tm_mon;         /* 月，范围从 0 到 11        */
-//    int tm_year;        /* 自 1900 年起的年数        */
-//    int tm_wday;        /* 一周中的第几天，范围从 0 到 6    */
-//    int tm_yday;        /* 一年中的第几天，范围从 0 到 365    */
-//    int tm_isdst;       /* 夏令时                */
-//};
 
 
 MainScreenView::MainScreenView()
@@ -268,7 +241,6 @@ void MainScreenView::setupScreen()
     inf[17] = &err_inf17;
     inf[18] = &err_inf18;
     inf[19] = &err_inf19;
-
 
 
 		/*err_info  a[]={
@@ -513,8 +485,6 @@ void MainScreenView::setupScreen()
     {
         memset(textBuf, 0, this->bufSize);
     }*/
-
-
 }
 
 void MainScreenView::inf_play(TextArea* a,int b)
@@ -1726,38 +1696,24 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   local_server_ip3.invalidate();
   local_server_ip4.invalidate();
 
-
-  int max = 27;
   static int err_counter = 0;
-  err_infor  a[] = {
-      {0x00,0x01,0},
-      {0x00,0x00,3},
-      {0x00,0x01,1},
-      {0x00,0x02,1},
-      {0x00,0x01,1},
-      {0x00,0x01,3},
-      {0x00,0x01,5},
-      {0x00,0x01,7},
-      {0x00,0x01,5},
-      {0x00,0x01,6},
-      {0x00,0x01,5},
-      {0x00,0x01,6},
-      {0x00,0x01,7},
-      {0x00,0x00,7}
-  };
 
-      for (int i = 0;i <= max;i++) //遍历所有数组（数组中已存放错误信息，直接按条打印）
-      {       
+  //Client_Sd[cluster_num].error_count
+  //Client_errors[cluster_num][MAX_ERROR]
+  for(int k=0;k< cluster_num;k++) //cluster_num
+  {
+      for (int i = 0;i < Client_Sd[k].error_count;i++) //MAX_ERROR
+      {
           sprintf(testtime, "%02d:%02d:%02d", digitalHours, digitalMinutes, digitalSeconds); //打印时间
           Unicode::strncpy(u_time, testtime, 128);
           /*  Unicode::snprintf(tim[i], 20, "%s", u_time);*/
-          if (a[i].error_id_h == 0x00) //判断id高8位
+          if (Client_errors[k][i].error_id_h == 0x00) //判断id高8位
           {
-              if (a[i].error_id_l == 0x00)//判断id低8位
+              if (Client_errors[k][i].error_id_l == 0x00)//判断id低8位
               {
                   for (int j = 0;j < 16;j++) //逐位判断错误信息，并输出
                   {
-                      if (get_one_bit_value(a[i].error_code, j + 1) == 1)
+                      if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                       {
                           if (err_counter >= 20) err_counter = err_counter % 20;
                           Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
@@ -1768,25 +1724,25 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                   }
 
               }
-              else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
+              else if (Client_errors[k][i].error_id_l == 0x01 || Client_errors[k][i].error_id_l == 0x02)//判断id低8位
               {
-                  if (a[i].error_id_l == 0x01) //错误位宽为2
+                  if (Client_errors[k][i].error_id_l == 0x01) //错误位宽为2
                   {
                       for (int j = 0;j < 8;j++)
                       {
-                          if (get_two_bit_value(a[i].error_code, j + 1) == 0) //无故障
+                          if (get_two_bit_value(Client_errors[k][i].error_code, j + 1) == 0) //无故障
                           {
 
                           }
-                          else if (get_two_bit_value(a[i].error_code, j + 1) == 1)//有故障
+                          else if (get_two_bit_value(Client_errors[k][i].error_code, j + 1) == 1)//有故障
                           {
 
                           }
-                          else if (get_two_bit_value(a[i].error_code, j + 1) == 2)//预警
+                          else if (get_two_bit_value(Client_errors[k][i].error_code, j + 1) == 2)//预警
                           {
 
                           }
-                          else if (get_two_bit_value(a[i].error_code, j + 1) == 3)//预警过，故障发生
+                          else if (get_two_bit_value(Client_errors[k][i].error_code, j + 1) == 3)//预警过，故障发生
                           {
                               if (err_counter >= 20) err_counter = err_counter % 20;
                               Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
@@ -1797,15 +1753,15 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
                       }
                   }
-                  if (a[i].error_id_l == 0x02)//错误位宽为1
+                  if (Client_errors[k][i].error_id_l == 0x02)//错误位宽为1
                   {
                       for (int j = 0;j < 16;j++)
                       {
-                          if (get_one_bit_value(a[i].error_code, j + 1) == 0) //无故障
+                          if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 0) //无故障
                           {
 
                           }
-                          else if (get_one_bit_value(a[i].error_code, j + 1) == 1) //无故障
+                          else if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1) //无故障
                           {
                               if (err_counter >= 20) err_counter = err_counter % 20;
                               Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
@@ -1817,15 +1773,15 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                   }
               }
           }
-          else if (a[i].error_id_h >= 0x01 && a[i].error_id_h <= 0x1F) //判断id高8位
+          else if (Client_errors[k][i].error_id_h >= 0x01 && Client_errors[k][i].error_id_h <= 0x1F) //判断id高8位
           {
-              if (a[i].error_id_l == 0x00)
+              if (Client_errors[k][i].error_id_l == 0x00)
               {
 
                   /*Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");*/
                   for (int j = 0;j < 16;j++)
                   {
-                      if (get_one_bit_value(a[i].error_code, j + 1) == 1)
+                      if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                       {
                           if (err_counter >= 20) err_counter = err_counter % 20;
                           Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
@@ -1835,11 +1791,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                       }
                   }
               }
-              else if (a[i].error_id_l >= 0x01 && a[i].error_id_l <= 0x0C)
+              else if (Client_errors[k][i].error_id_l >= 0x01 && Client_errors[k][i].error_id_l <= 0x0C)
               {
                   for (int j = 0;j < 16;j++)
                   {
-                      if (get_one_bit_value(a[i].error_code, j + 1) == 1)
+                      if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                       {
                           if (err_counter >= 20) err_counter = err_counter % 20;
                           Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
@@ -1850,15 +1806,15 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                   }
               }
           }
-          else if (a[i].error_id_h == 0x20) //判断id高8位
+          else if (Client_errors[k][i].error_id_h == 0x20) //判断id高8位
           {
-              if (a[i].error_id_l == 0)
+              if (Client_errors[k][i].error_id_l == 0)
               {
                   /*Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");*/
 
                   for (int j = 0;j < 16;j++)
                   {
-                      if (get_one_bit_value(a[i].error_code, j + 1) == 1)
+                      if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                       {
                           if (err_counter >= 20) err_counter = err_counter % 20;
                           Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
@@ -1872,6 +1828,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
       }
       scrollableContainer1.invalidate();
       err_inf.invalidate();
+  }
 
 
 

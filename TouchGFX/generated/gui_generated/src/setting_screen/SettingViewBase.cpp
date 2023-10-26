@@ -26,7 +26,7 @@ SettingViewBase::SettingViewBase() :
     add(background);
 
     daohanglan.setPosition(-2, -2, 1023, 207);
-    save_all.setXY(536, 31);
+    save_all.setXY(561, 32);
     save_all.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     save_all.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OIA8));
     save_all.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -39,7 +39,16 @@ SettingViewBase::SettingViewBase() :
     start.setLabelText(touchgfx::TypedText(T___SINGLEUSE_HXXB));
     start.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     start.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 119, 255));
+    start.setVisible(false);
     daohanglan.add(start);
+
+    cancel.setXY(799, 32);
+    cancel.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    cancel.setLabelText(touchgfx::TypedText(T___SINGLEUSE_IGM4));
+    cancel.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cancel.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cancel.setAction(buttonCallback);
+    daohanglan.add(cancel);
 
     add(daohanglan);
 
@@ -1201,14 +1210,9 @@ SettingViewBase::SettingViewBase() :
     keyboard1.setVisible(false);
     add(keyboard1);
 
-    textArea25.setXY(941, 49);
-    textArea25.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    textArea25.setLinespacing(0);
-    textArea25.setTypedText(touchgfx::TypedText(T___SINGLEUSE_18O7));
-    add(textArea25);
-
-    backButton.setXY(957, 1);
+    backButton.setXY(959, 42);
     backButton.setBitmaps(touchgfx::Bitmap(BITMAP_HOME_FILL0_WGHT400_GRAD0_OPSZ48_ID), touchgfx::Bitmap(BITMAP_HOME_FILL0_WGHT400_GRAD0_OPSZ48_ID));
+    backButton.setVisible(false);
     backButton.setAction(buttonCallback);
     add(backButton);
 }
@@ -1486,6 +1490,13 @@ void SettingViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When port_4g_button clicked call virtual function
         //Call port_4g_fun
         port_4g_fun();
+    }
+    if (&src == &cancel)
+    {
+        //Interaction1
+        //When cancel clicked change screen to MainScreen
+        //Go to MainScreen with no screen transition
+        application().gotoMainScreenScreenNoTransition();
     }
 }
 
