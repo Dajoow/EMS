@@ -184,7 +184,7 @@ void MX_FREERTOS_Init(void) {
   startup_ThreadHandle = osThreadCreate(osThread(startup_Thread), NULL);
 
   /* definition and creation of TouchGFX */
-  osThreadDef(TouchGFX, TouchGFX_Task, osPriorityBelowNormal, 0, 2048);
+  osThreadDef(TouchGFX, TouchGFX_Task, osPriorityBelowNormal, 0, 3072);
   TouchGFXHandle = osThreadCreate(osThread(TouchGFX), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
