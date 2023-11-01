@@ -203,6 +203,7 @@ void MX_FREERTOS_Init(void) {
 void Startup(void const * argument)
 {
   /* USER CODE BEGIN Startup */
+  StationDataInit();
   flash_save_init();
   mbedtls_net_init (NULL);
   sntp_client_init ();
