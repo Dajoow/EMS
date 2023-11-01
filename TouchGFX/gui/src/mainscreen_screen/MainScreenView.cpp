@@ -200,7 +200,7 @@ void MainScreenView::setupScreen()
     inf[4] = &err_inf4;
  
 		err_info  a[]={
-		{0x00,0x01,0b1100000000000000},
+		{0x00,0x01,0xC000},
 		{0x00,0x00,0x01},
 		{0x00,0x01,0x01},
 		{0x00,0x02,0x01},
@@ -258,19 +258,19 @@ void MainScreenView::setupScreen()
               {
                   for (int j = 0;j < 8;j++)
                   { 
-                      if (get_two_bit_value(a[i].error_code, j  + 1) == 0b00) //无故障
+                      if (get_two_bit_value(a[i].error_code, j  + 1) == 0x00) //无故障
                       {
 
                       }
-                      else if (get_two_bit_value(a[i].error_code, j  + 1) == 0b01)//有故障
+                      else if (get_two_bit_value(a[i].error_code, j  + 1) == 0x01)//有故障
                       {
 
                       }
-                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b10)//预警
+                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0x02)//预警
                       {
 
                       }
-                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0b11)//预警过，故障发生
+                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0x03)//预警过，故障发生
                       {
                           inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
 						  err_counter++;
