@@ -18,6 +18,7 @@
 #include "string.h"
 #include "modbus_data.h"
 #include "at24cxx.h"
+#include "data_persistence.h"
 
 extern BCMU_Mail_t BCMU[cluster_num];
 
@@ -36,6 +37,7 @@ Client_Sd_Station_t Client_Sd_Station
 
 uint8_t bmu_offline[cluster_num][GRP_num];
 error_info_t Client_errors[cluster_num][MAX_ERROR];
+extern cluster_flash_t cluster_flash[cluster_num];
 
 // 硬件到UI数据
 ModelToViewData modelToViewData;
@@ -177,6 +179,8 @@ extern modbus_float_u cell_soh[20][360];
 extern uint8_t cell_charge_balance_status[20][360];
 extern uint8_t cell_discharge_balance_status[20][360];
 
+extern cluster_flash_t cluster_flash[cluster_num];
+
 void cal_modbus_cluster_data (void){
 
   for (int i = 0; i < cluster_num; i++){
@@ -272,12 +276,46 @@ void cal_modbus_cluster_data (void){
     cell_avg_soc[i] /= cell_cnt;
     cell_avg_soh[i] /= cell_cnt;
 
+    switch (Client_Sd[i].work_state)
+    {
+      case CLU_STATE_CHARGE:
+      cluster_info_u16[i].data.charge_discharge_status =
+          MODBUS_CLU_STATUS_CHARGE;
+      break;
+      case CLU_STATE_DISCHARGE:
+      cluster_info_u16[i].data.charge_discharge_status =
+          MODBUS_CLU_STATUS_DISCHARGE;
+        break;
+      case CLU_STATE_IDLE:
+      cluster_info_u16[i].data.charge_discharge_status =
+          MODBUS_CLU_STATUS_IDLE;
+        break;
+      case CLU_STATE_OPEN_CUR:
+      cluster_info_u16[i].data.charge_discharge_status =
+          MODBUS_CLU_STATUS_OPEN;
+        break;
+      
+      default:
+      cluster_info_u16[i].data.charge_discharge_status =
+          MODBUS_CLU_STATUS_IDLE;
+        break;
+    }
+
     clu_charge_cap[i] = (CLU_CAP_FULL_SOC - Client_Sd[i].cluster_SOC / 10.0)
                         * CLU_CAP_KWH / 100;
     if (clu_charge_cap[i] < 0) clu_charge_cap[i] = 0;
     clu_discharge_cap[i] = (Client_Sd[i].cluster_SOC / 10.0 - CLU_CAP_EMPTY_SOC)
                         * CLU_CAP_KWH / 100;
     if (clu_discharge_cap[i] < 0) clu_discharge_cap[i] = 0;
+
+    if (cluster_flash[i].charging_sum > 0){
+      cluster_info_u16[i].data.charge_count =
+          cluster_flash[i].charging_sum / (CLU_CAP_KWH / 2);
+    }
+    if (cluster_flash[i].discharging_sum > 0){
+      cluster_info_u16[i].data.discharge_count =
+          cluster_flash[i].discharging_sum / (CLU_CAP_KWH / 2);
+    }
 
     cluster_info_u16[i].data.max_vol_cell = cell_max_vol[i].cell_id;
     cluster_info_u16[i].data.min_vol_cell = cell_min_vol[i].cell_id;
@@ -336,6 +374,11 @@ void cal_modbus_cluster_data (void){
     cluster_info_f32[i].data.max_discharge_current = CLU_DISCHARGE_STAGE1_CUR;
     cluster_info_f32[i].data.max_discharge_power
         = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
+
+    cluster_info_f32[i].data.accumulated_charge_capacity =
+        cluster_flash[i].charging_sum;
+    cluster_info_f32[i].data.accumulated_discharge_capacity =
+        cluster_flash[i].discharging_sum;
   }
 }
 
@@ -354,11 +397,20 @@ void cal_modbus_sta_data (void){
   float sta_max_charge_power = 0;
   float sta_max_discharge_current = 0;
   float sta_max_discharge_power = 0;
+  float sta_single_charge = 0;
+  float sta_single_discharge = 0;
+  float sta_charge_sum = 0;
+  float sta_discharge_sum = 0;
 
   cell_info_t cluster_cell_max_vol = {0, 0, 0}; // max in cluster
   cell_info_t cluster_cell_min_vol = {0, 0, 0xffff}; // min in cluster
   cell_info_t cluster_cell_max_temp = {0, 0, 0}; // max in cluster
   cell_info_t cluster_cell_min_temp = {0, 0, 0xffff}; // min in cluster
+
+  sta_single_charge = 0;
+  sta_single_discharge = 0;
+  sta_charge_sum = 0;
+  sta_discharge_sum = 0;
 
   for (int i = 0; i < cluster_num; i++){
     if (BCMU[i].OnlineOrOffline == Offline) continue;
@@ -398,6 +450,11 @@ void cal_modbus_sta_data (void){
     sta_max_charge_power += cluster_info_f32[i].data.max_charge_power;
     sta_max_discharge_current += cluster_info_f32[i].data.max_discharge_current;
     sta_max_discharge_power += cluster_info_f32[i].data.max_discharge_power;
+
+    sta_single_charge += cluster_info_f32[i].data.single_charge_capacity;
+    sta_single_discharge += cluster_info_f32[i].data.single_discharge_capacity;
+    sta_charge_sum += cluster_info_f32[i].data.accumulated_charge_capacity;
+    sta_discharge_sum += cluster_info_f32[i].data.accumulated_discharge_capacity;
   }
 
   station_info_u16.data.min_soc_cluster = cluster_min_soc_idx + 1;
@@ -451,6 +508,11 @@ void cal_modbus_sta_data (void){
   station_info_f32.data.station_max_charging_power = sta_max_charge_power;
   station_info_f32.data.station_max_discharging_current = sta_max_discharge_current;
   station_info_f32.data.station_max_discharging_power = sta_max_discharge_power;
+
+  station_info_f32.data.station_single_charge_capacity = sta_single_charge;
+  station_info_f32.data.station_single_discharge_capacity = sta_single_discharge;
+  station_info_f32.data.station_cumulative_charge = sta_charge_sum;
+  station_info_f32.data.station_cumulative_discharge = sta_discharge_sum;
 
   uint32_t cluster_online = 0;
   int cluster_online_cnt = 0;
@@ -587,8 +649,100 @@ void cal_modbus_warning_data(void){
   }
 }
 
+#define STATE_CHARGE 2
+#define STATE_DISCHARGE 1
+#define STATE_OTHER 0
+
+uint8_t clu_status[cluster_num] = {0};
+float clu_charge_soc_start[cluster_num];
+float clu_discharge_soc_start[cluster_num];
+
+void update_modbus_state(void){
+  station_info_u16.data.station_operating_status = MODBUS_STA_STATUS_NORMAL;
+  for (int i = 0; i < cluster_num; i++)
+  {
+    if (BCMU[i].OnlineOrOffline == Offline) {
+      clu_status[i] = STATE_OTHER;
+      continue;
+    }
+
+    switch (clu_status[i])
+    {
+      case STATE_OTHER:
+        if (Client_Sd[i].work_state == CLU_STATE_CHARGE){
+          clu_charge_soc_start[i] = Client_Sd[i].cluster_SOC * 0.1;
+          clu_status[i] = STATE_CHARGE;
+        } else if(Client_Sd[i].work_state == CLU_STATE_DISCHARGE){
+          clu_discharge_soc_start[i] = Client_Sd[i].cluster_SOC * 0.1;
+          clu_status[i] = STATE_DISCHARGE;
+        }
+        break;
+      case STATE_DISCHARGE:
+        if (Client_Sd[i].work_state != CLU_STATE_DISCHARGE){
+          cluster_info_f32[i].data.single_discharge_capacity =
+              (clu_discharge_soc_start[i] - Client_Sd[i].cluster_SOC * 0.1) / 100 *
+              CLU_CAP_KWH;
+          cluster_flash[i].discharging_sum +=
+              cluster_info_f32[i].data.single_discharge_capacity;
+
+          if (Client_Sd[i].work_state == CLU_STATE_CHARGE){
+            clu_charge_soc_start[i] = Client_Sd[i].cluster_SOC * 0.1;
+            clu_status[i] = STATE_CHARGE;
+          }else{
+            clu_status[i] = STATE_OTHER;
+          }
+        }
+        break;
+      case STATE_CHARGE:
+        if (Client_Sd[i].work_state != CLU_STATE_CHARGE){
+          cluster_info_f32[i].data.single_charge_capacity =
+              (Client_Sd[i].cluster_SOC * 0.1 - clu_charge_soc_start[i]) / 100 *
+              CLU_CAP_KWH;
+          cluster_flash[i].charging_sum +=
+              cluster_info_f32[i].data.single_charge_capacity;
+          
+          if (Client_Sd[i].work_state == CLU_STATE_DISCHARGE){
+            clu_discharge_soc_start[i] = Client_Sd[i].cluster_SOC * 0.1;
+            clu_status[i] = STATE_DISCHARGE;
+          }else{
+            clu_status[i] = STATE_OTHER;
+          }
+        }
+        break;
+      
+      default:
+        clu_status[i] = STATE_OTHER;
+        break;
+    }
+
+    cluster_info_u16[i].data.cluster_status = MODBUS_STA_STATUS_NORMAL;
+    for (int j = 0; j < 19; j++) {
+      if (cluster_warning[i].reg[j]){
+          cluster_info_u16[i].data.cluster_status = MODBUS_STA_STATUS_WARN;
+          station_info_u16.data.station_operating_status = MODBUS_STA_STATUS_WARN;
+          break;
+      }
+    }
+    for (int j = 19; j < 36; j++) {
+      if (cluster_warning[i].reg[j]){
+          cluster_info_u16[i].data.cluster_status = MODBUS_STA_STATUS_ALARM;
+          station_info_u16.data.station_operating_status = MODBUS_STA_STATUS_ALARM;
+          break;
+      }
+    }
+    for (int j = 36; j < 65; j++) {
+      if (cluster_warning[i].reg[j]){
+          cluster_info_u16[i].data.cluster_status = MODBUS_STA_STATUS_BREAK;
+          station_info_u16.data.station_operating_status = MODBUS_STA_STATUS_BREAK;
+          break;
+      }
+    }
+  }
+}
+
 void cal_modbus_data(void){
   cal_modbus_cluster_data ();
   cal_modbus_sta_data ();
   cal_modbus_warning_data ();
+  update_modbus_state();
 }

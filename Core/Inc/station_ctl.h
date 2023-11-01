@@ -42,12 +42,30 @@
 #define  CLIENT_SD_TAIL_OFT       2908
 #define  CLIENT_SD_TAIL_LEN       8
 
-#define CLU_CUR_UNIT              0.01 // 10mA
+#define  MODBUS_STA_STATUS_PROHIBIT_CHARGE      0x1111
+#define  MODBUS_STA_STATUS_PROHIBIT_DISCHARGE   0x2222
+#define  MODBUS_STA_STATUS_ALARM                0x5555
+#define  MODBUS_STA_STATUS_BREAK                0xAAAA
+#define  MODBUS_STA_STATUS_NORMAL               0xBBBB
+#define  MODBUS_STA_STATUS_WARN                 0xCCCC
 
-#define CLU_CHARGE_STAGE_SW_VOL       2.45   // <= 2.45
-#define CLU_CHARGE_STAGE1_CUR         175   // <= 2.45
-#define CLU_CHARGE_STAGE2_CUR         5     // > 2.45
-#define CLU_DISCHARGE_STAGE1_CUR      165
+#define  MODBUS_CLU_STATUS_OPEN                 1        
+#define  MODBUS_CLU_STATUS_IDLE                 2        
+#define  MODBUS_CLU_STATUS_CHARGE               3        
+#define  MODBUS_CLU_STATUS_DISCHARGE            4        
+
+#define  CLU_STATE_CHARGE                       1
+#define  CLU_STATE_DISCHARGE                    2
+#define  CLU_STATE_IDLE                         3
+#define  CLU_STATE_BALANCE                      4
+#define  CLU_STATE_OPEN_CUR                     5
+
+#define CLU_CUR_UNIT                            0.01  // 10mA
+
+#define CLU_CHARGE_STAGE_SW_VOL                 2.45  // <= 2.45
+#define CLU_CHARGE_STAGE1_CUR                   175   // <= 2.45
+#define CLU_CHARGE_STAGE2_CUR                   5     // > 2.45
+#define CLU_DISCHARGE_STAGE1_CUR                165
 
 // WARN < ALARM < PROTECT
 #define CLU_HIGH_VOLT_WARN                      (2.45*GRP_num*GRP_BAT_num)       

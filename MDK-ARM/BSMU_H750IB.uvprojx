@@ -1034,6 +1034,11 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32h7xx_hal_timebase_tim.c</FilePath>
             </File>
+            <File>
+              <FileName>data_persistence.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\data_persistence.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
