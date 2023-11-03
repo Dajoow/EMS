@@ -11,6 +11,14 @@ osThreadId flash_save_task_handle;
 cluster_flash_t cluster_flash[cluster_num];
 
 void flash_save(void const * args){
+    while(1){
+        osDelay(30 * 60 * 1000); // 30min
+
+        ef_set_env_blob("cluster_falsh", cluster_flash, sizeof(cluster_flash));
+    }
+}
+
+void flash_save_init (void){
     size_t len;
     
     easyflash_init();
@@ -20,14 +28,6 @@ void flash_save(void const * args){
         ef_set_env_blob("cluster_falsh", cluster_flash, sizeof(cluster_flash));
     }
 
-    while(1){
-        osDelay(30 * 60 * 1000); // 30min
-
-        ef_set_env_blob("cluster_falsh", cluster_flash, sizeof(cluster_flash));
-    }
-}
-
-void flash_save_init (void){
     osThreadDef(flash_save_task,flash_save , osPriorityNormal, 0, 256);
     flash_save_task_handle = osThreadCreate(osThread(flash_save_task), NULL);
 }
