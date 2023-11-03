@@ -33,7 +33,7 @@
 #define HTTP_HOST HOST
 #define HTTPS_HOST HOST
 #define API_STATISTICS "/api/bmsRequest/sendSum"
-#define API_CLUSTERS "/api/bmsRequest/send"
+#define API_CLUSTERS "/api/bmsRequest/clusterData"
 
 #define HTTP_HEADER(api)                                                      \
   "POST "##api " HTTP/1.1\r\n"                                                \
@@ -193,6 +193,11 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "bn", bn);
 
+  cJSON *bal_state = cJSON_CreateNumber (data->bal_state);
+  if (bal_state == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "bal_state", bal_state);
+
   ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_VOL,
                                TOTOL_BAT_num * sizeof (uint16_t));
@@ -229,6 +234,18 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "socb", socb);
   
+  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+                               (uint8_t *)data->BAT_SOH,
+                               TOTOL_BAT_num * sizeof (uint16_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
+  cJSON *sohb = cJSON_CreateString (base64_buffer);
+  if (sohb == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "sohb", sohb);
+
   cJSON *wb_cnt = cJSON_CreateNumber (data->error_count);
   if (wb_cnt == NULL)
     goto end;
