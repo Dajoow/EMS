@@ -136,7 +136,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
   int ret = -1;
   int len = -1;
   Client_Sd_t *data = &ctx->clusters_data[index];
-  char base64_buffer[1024];
+  unsigned char base64_buffer[1024];
   int base64_buffer_len = sizeof (base64_buffer);
 
   cJSON *obj = cJSON_CreateObject ();
@@ -198,7 +198,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "bal_state", bal_state);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_VOL,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -210,7 +210,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "vb", vb);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_TMP,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -222,7 +222,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "tb", tb);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_SOC,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -234,7 +234,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "socb", socb);
   
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_SOH,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -251,7 +251,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "wb_cnt", wb_cnt);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)Client_errors[data->cluster_No - 1],
                                data->error_count * sizeof (error_info_t));
   if (ret != 0)

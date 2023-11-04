@@ -20,13 +20,10 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "crc.h"
-#include "cryp.h"
 #include "dma.h"
 #include "dma2d.h"
 #include "fdcan.h"
-#include "hash.h"
 #include "ltdc.h"
-#include "mbedtls.h"
 #include "rng.h"
 #include "rtc.h"
 #include "spi.h"
@@ -35,6 +32,7 @@
 #include "gpio.h"
 #include "fmc.h"
 #include "app_touchgfx.h"
+#include "mbedtls.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -144,11 +142,8 @@ int main(void)
   MX_UART5_Init();
   MX_USART2_UART_Init();
   MX_UART4_Init();
-  MX_CRYP_Init();
   MX_RNG_Init();
-  MX_HASH_Init();
   MX_RTC_Init();
-  MX_MBEDTLS_Init();
   /* Call PreOsInit function */
   MX_MBEDTLS_Init();
   MX_TouchGFX_PreOSInit();
