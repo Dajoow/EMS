@@ -9940,10 +9940,12 @@
     "DisplayOrientation": "Landscape",
     "Family": "STM32H7",
     "SubFamily": "STM32H750 Value line",
+    "Toolchain": "MDK-ARM V5.32",
     "Platform": "m7",
     "ProjectFile": "../BSMU_H750IB.ioc",
     "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
-    "OptionalComponents": []
+    "OptionalComponents": [],
+    "AdditionalFeatures": []
   },
   "Version": "4.21.4"
 }

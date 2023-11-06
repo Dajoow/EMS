@@ -226,7 +226,6 @@ void MainScreenView::setupScreen()
     inf[2] = &err_inf2;
     inf[3] = &err_inf3;
     inf[4] = &err_inf4;
-<<<<<<< HEAD
     inf[5] = &err_inf5;
     inf[6] = &err_inf6;
     inf[7] = &err_inf7;
@@ -247,12 +246,12 @@ void MainScreenView::setupScreen()
 		/*err_info  a[]={
 		{0x00,0x01,0b1100000000000000},
 		{0x00,0x00,0x03},
-=======
+
  
 		err_info  a[]={
 		{0x00,0x01,0xC000},
 		{0x00,0x00,0x01},
->>>>>>> d179edea7990e9161bc8324cd625b10d5d69d1f7
+
 		{0x00,0x01,0x01},
 		{0x00,0x02,0x01},
         {0x00,0x01,0b1100000000000000},
@@ -539,7 +538,7 @@ void MainScreenView::setupScreen()
   //                    if (get_two_bit_value(a[i].error_code, j  + 1) == 0b00) //无故障
   //                    {
 
-<<<<<<< HEAD
+
   //                    }
   //                    else if (get_two_bit_value(a[i].error_code, j  + 1) == 0b01)//有故障
   //                    {
@@ -566,33 +565,33 @@ void MainScreenView::setupScreen()
   //                {
   //                    if (get_one_bit_value(a[i].error_code, j + 1) == 0) //无故障
   //                    {
-=======
-          }
-          else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
-          {
-              Unicode::snprintf(id[i], 20, "%s", "BCMU error\0");  //id
-              if (a[i].error_id_l == 0x01) //错误位宽为2
-              {
-                  for (int j = 0;j < 8;j++)
-                  { 
-                      if (get_two_bit_value(a[i].error_code, j  + 1) == 0x00) //无故障
-                      {
 
-                      }
-                      else if (get_two_bit_value(a[i].error_code, j  + 1) == 0x01)//有故障
-                      {
+        //  }
+        //  else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
+        //  {
+        //      Unicode::snprintf(id[i], 20, "%s", "BCMU error\0");  //id
+        //      if (a[i].error_id_l == 0x01) //错误位宽为2
+        //      {
+        //          for (int j = 0;j < 8;j++)
+        //          { 
+        //              if (get_two_bit_value(a[i].error_code, j  + 1) == 0x00) //无故障
+        //              {
 
-                      }
-                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0x02)//预警
-                      {
+        //              }
+        //              else if (get_two_bit_value(a[i].error_code, j  + 1) == 0x01)//有故障
+        //              {
 
-                      }
-                      else if (get_two_bit_value(a[i].error_code, j + 1) == 0x03)//预警过，故障发生
-                      {
-                          inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
-						  err_counter++;
-                      }
->>>>>>> d179edea7990e9161bc8324cd625b10d5d69d1f7
+        //              }
+        //              else if (get_two_bit_value(a[i].error_code, j + 1) == 0x02)//预警
+        //              {
+
+        //              }
+        //              else if (get_two_bit_value(a[i].error_code, j + 1) == 0x03)//预警过，故障发生
+        //              {
+        //                  inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
+						  //err_counter++;
+        //              }
+
 
   //                    }
   //                    else if (get_one_bit_value(a[i].error_code, j + 1) == 1) //无故障
