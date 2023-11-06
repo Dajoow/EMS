@@ -115,7 +115,7 @@ CalStationData (void)
         {
           OnlineNUM++;
           Client_Sd_Station.station_VOL += Client_Sd[i].cluster_VOL / 10;
-          Client_Sd_Station.station_CUR += Client_Sd[i].cluster_CUR / 10;
+          Client_Sd_Station.station_CUR += Client_Sd[i].cluster_CUR * CLU_CUR_UNIT;
 
           Client_Sd_Station.station_SOC += Client_Sd[i].cluster_SOC / 10;
           Client_Sd_Station.station_SOH += Client_Sd[i].cluster_SOH / 10;

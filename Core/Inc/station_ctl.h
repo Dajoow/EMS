@@ -136,7 +136,7 @@ typedef struct
   uint16_t cluster_No;
   uint16_t work_state;
   uint16_t cluster_VOL; // 0.1V
-  int16_t  cluster_CUR; // 200mA
+  int16_t  cluster_CUR; // 10mA
   uint16_t cluster_SOC; // 0.1%
   uint16_t cluster_SOH; // 0.1%
   uint16_t insulation_res_p; // 1k
