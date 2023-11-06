@@ -997,6 +997,7 @@ void SettingView::local_ip_set()
 {
     IP_setting_1.setVisible(true);
     IP_setting_1.invalidate();
+    SetButState(IP_setting_1_butAry, 5, false); //先令其他的按键失效
     keyboard1.initialize();
     keyboard1.setVisible(true);
     keyboard1.invalidate();
@@ -1006,7 +1007,7 @@ void SettingView::local_port_set()
 {
     IP_setting_1.setVisible(true);
     IP_setting_1.invalidate();
-
+    SetButState(IP_setting_1_butAry, 5, false); //先令其他的按键失效
     keyboard1.initialize();
     keyboard1.setVisible(true);
     keyboard1.invalidate();
@@ -1017,7 +1018,7 @@ void SettingView::ip_4g_set()
 {
     IP_setting_2.setVisible(true);
     IP_setting_2.invalidate();
-
+    SetButState(IP_setting_2_butAry, 5, false); //先令其他的按键失效
     keyboard1.initialize();
     keyboard1.setVisible(true);
     keyboard1.invalidate();
@@ -1027,7 +1028,7 @@ void SettingView::port_4g_set()
 {
     IP_setting_2.setVisible(true);
     IP_setting_2.invalidate();
-
+    SetButState(IP_setting_2_butAry, 5, false); //先令其他的按键失效
     keyboard1.initialize();
     keyboard1.setVisible(true);
     keyboard1.invalidate();

@@ -5674,7 +5674,7 @@
               {
                 "Type": "TextArea",
                 "Name": "ip_text1_1",
-                "X": 552,
+                "X": 553,
                 "Y": 103,
                 "Width": 109,
                 "Height": 32,
@@ -5798,7 +5798,7 @@
               {
                 "Type": "TextArea",
                 "Name": "cu_num",
-                "X": 321,
+                "X": 322,
                 "Y": 36,
                 "Width": 59,
                 "Height": 41,
@@ -7437,8 +7437,8 @@
                   {
                     "Type": "FlexButton",
                     "Name": "IP_ADD_2_1",
-                    "X": 190,
-                    "Y": 20,
+                    "X": 191,
+                    "Y": 18,
                     "Width": 120,
                     "Height": 60,
                     "ButtonTrigger": {
@@ -7828,7 +7828,7 @@
                     "Type": "FlexButton",
                     "Name": "IP_ADD_1_3",
                     "X": 530,
-                    "Y": 20,
+                    "Y": 18,
                     "Width": 120,
                     "Height": 60,
                     "ButtonTrigger": {

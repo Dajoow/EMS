@@ -161,9 +161,8 @@ protected:
     //touchgfx::TextAreaWithOneWildcard err_num1;
     //static const uint16_t ERR_NUM1_SIZE = 10;
     //touchgfx::Unicode::UnicodeChar err_num1Buffer[ERR_NUM1_SIZE];
- 
-    
 
+  
 
  /*   TextAreaWithOneWildcard err_type[30];*/
    
