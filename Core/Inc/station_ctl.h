@@ -22,7 +22,14 @@
 #define  cluster_num              20                        //电池簇个数
 #define  GRP_num                  30												//一簇中电池组数
 #define  GRP_BAT_num              12												//一组中电池数
-#define  TOTOL_BAT_num            GRP_num*GRP_BAT_num       //总电池数，为了内存对齐这个值为2的倍数
+#define  TOTOL_BAT_num            (GRP_num*GRP_BAT_num)     //总电池数，为了内存对齐这个值为2的倍数
+#define  CELL_CAP_AH              500
+#define  CLU_CAP_KWH              (CELL_CAP_AH * TOTOL_BAT_num * 2 * 3600 / 1000)                        // 每簇容量 kWh
+
+#define  MAX_ERROR                400
+
+#define  CLU_CAP_FULL_SOC         90
+#define  CLU_CAP_EMPTY_SOC        10
 
 #define  MAX_ERROR                400
 
@@ -31,9 +38,93 @@
 
 #define  FRAME_STATION_HEADER     0x02											 //TCP段中帧头(整个电站的帧头)
 
-#define  CLIENT_SD_ERR_OFT        2184
-#define  CLIENT_SD_TAIL_OFT       2188
+#define  CLIENT_SD_ERR_OFT        2904
+#define  CLIENT_SD_TAIL_OFT       2908
 #define  CLIENT_SD_TAIL_LEN       8
+
+#define  MODBUS_STA_STATUS_PROHIBIT_CHARGE      0x1111
+#define  MODBUS_STA_STATUS_PROHIBIT_DISCHARGE   0x2222
+#define  MODBUS_STA_STATUS_ALARM                0x5555
+#define  MODBUS_STA_STATUS_BREAK                0xAAAA
+#define  MODBUS_STA_STATUS_NORMAL               0xBBBB
+#define  MODBUS_STA_STATUS_WARN                 0xCCCC
+
+#define  MODBUS_CLU_STATUS_OPEN                 1        
+#define  MODBUS_CLU_STATUS_IDLE                 2        
+#define  MODBUS_CLU_STATUS_CHARGE               3        
+#define  MODBUS_CLU_STATUS_DISCHARGE            4        
+
+#define  CLU_STATE_CHARGE                       1
+#define  CLU_STATE_DISCHARGE                    2
+#define  CLU_STATE_IDLE                         3
+#define  CLU_STATE_BALANCE                      4
+#define  CLU_STATE_OPEN_CUR                     5
+
+#define CLU_CUR_UNIT                            0.01  // 10mA
+
+#define CLU_CHARGE_STAGE_SW_VOL                 2.45  // <= 2.45
+#define CLU_CHARGE_STAGE1_CUR                   175   // <= 2.45
+#define CLU_CHARGE_STAGE2_CUR                   5     // > 2.45
+#define CLU_DISCHARGE_STAGE1_CUR                165
+
+// WARN < ALARM < PROTECT
+#define CLU_HIGH_VOLT_WARN                      (2.45*GRP_num*GRP_BAT_num)       
+#define CLU_HIGH_VOLT_ALARM                     (2.478*GRP_num*GRP_BAT_num)       
+#define CLU_HIGH_VOLT_PROTECT                   0xffff
+#define CLU_LOW_VOLT_WARN                       (1.86*GRP_num*GRP_BAT_num)      
+#define CLU_LOW_VOLT_ALARM                      (1.82*GRP_num*GRP_BAT_num)      
+#define CLU_LOW_VOLT_PROTECT                    0
+#define CLU_HIGH_CHARGE_CUR_WARN                0xffff
+#define CLU_HIGH_CHARGE_CUR_ALARM               0xffff
+#define CLU_HIGH_CHARGE_CUR_PROTECT             0xffff
+#define CLU_HIGH_DISCHARGE_CUR_WARN             0xffff
+#define CLU_HIGH_DISCHARGE_CUR_ALARM            0xffff
+#define CLU_HIGH_DISCHARGE_CUR_PROTECT          0xffff
+#define CELL_HIGH_VOLT_WARN                     2.45
+#define CELL_HIGH_VOLT_ALARM                    2.48
+#define CELL_HIGH_VOLT_PROTECT                  0xffff
+#define CELL_LOW_VOLT_WARN                      1.85
+#define CELL_LOW_VOLT_ALARM                     1.83
+#define CELL_LOW_VOLT_PROTECT                   1.5
+#define CLU_HIGH_CHARGE_TEMP_WARN               43
+#define CLU_HIGH_CHARGE_TEMP_ALARM              46
+#define CLU_HIGH_CHARGE_TEMP_PROTECT            50
+#define CLU_LOW_CHARGE_TEMP_WARN                10
+#define CLU_LOW_CHARGE_TEMP_ALARM               5
+#define CLU_LOW_CHARGE_TEMP_PROTECT             0
+#define CLU_HIGH_DISCHARGE_TEMP_WARN            43
+#define CLU_HIGH_DISCHARGE_TEMP_ALARM           46
+#define CLU_HIGH_DISCHARGE_TEMP_PROTECT         50
+#define CLU_LOW_DISCHARGE_TEMP_WARN             10
+#define CLU_LOW_DISCHARGE_TEMP_ALARM            5
+#define CLU_LOW_DISCHARGE_TEMP_PROTECT          0
+#define CELL_HIGH_TEMP_WARN                     43
+#define CELL_HIGH_TEMP_ALARM                    46
+#define CELL_HIGH_TEMP_PROTECT                  50
+#define CELL_LOW_TEMP_WARN                      10
+#define CELL_LOW_TEMP_ALARM                     5
+#define CELL_LOW_TEMP_PROTECT                   0
+#define ENV_HIGH_TEMP_WARN                      0xffff
+#define ENV_HIGH_TEMP_ALARM                     0xffff
+#define ENV_HIGH_TEMP_PROTECT                   0xffff
+#define ENV_LOW_TEMP_WARN                       0
+#define ENV_LOW_TEMP_ALARM                      0
+#define ENV_LOW_TEMP_PROTECT                    0
+#define PWRLINE_HIGH_TEMP_WARN                  0xffff
+#define PWRLINE_HIGH_TEMP_ALARM                 0xffff
+#define PWRLINE_HIGH_TEMP_PROTECT               0xffff
+#define CLU_HIGH_SOC_WARN                       93
+#define CLU_HIGH_SOC_ALARM                      96
+#define CLU_HIGH_SOC_PROTECT                    99
+#define CLU_LOW_SOC_WARN                        7
+#define CLU_LOW_SOC_ALARM                       4
+#define CLU_LOW_SOC_PROTECT                     1
+#define CLU_INSUL_RES_P_LOW_WARN                0
+#define CLU_INSUL_RES_P_LOW_ALARM               0
+#define CLU_INSUL_RES_P_LOW_PROTECT             0
+#define CLU_INSUL_RES_N_LOW_WARN                0
+#define CLU_INSUL_RES_N_LOW_ALARM               0
+#define CLU_INSUL_RES_N_LOW_PROTECT             0
 
 
 //单簇数据包结构
@@ -56,16 +147,17 @@ typedef struct
   uint16_t BAT_VOL[TOTOL_BAT_num]; // 0.1mV offset: 24
   uint16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C offset: 744
   uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1% offset: 1464
+  uint16_t BAT_SOH[TOTOL_BAT_num]; // 0.1% offset: 2184
   // uint16_t BAT_FAULT[TOTOL_BAT_num];
-  uint32_t error_count; // offset: 2184
-  uint32_t checksum; // offset: 2188
+  uint32_t error_count; // offset: 2904
+  uint32_t checksum; // offset: 2908
   uint32_t frame_tail;
 }Client_Sd_t;
 
 typedef struct
 {
-  uint8_t error_id_h;
   uint8_t error_id_l;
+  uint8_t error_id_h;
   uint16_t error_code;
 } error_info_t;
 
@@ -123,8 +215,6 @@ extern ModelToViewData modelToViewData;
 
 void StationDataInit(void);
 void CalStationData(void);
+void cal_modbus_data(void);
+
 #endif
-
-
-
-

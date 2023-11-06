@@ -20,13 +20,10 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "crc.h"
-#include "cryp.h"
 #include "dma.h"
 #include "dma2d.h"
 #include "fdcan.h"
-#include "hash.h"
 #include "ltdc.h"
-#include "mbedtls.h"
 #include "rng.h"
 #include "rtc.h"
 #include "spi.h"
@@ -35,6 +32,7 @@
 #include "gpio.h"
 #include "fmc.h"
 #include "app_touchgfx.h"
+#include "mbedtls.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -42,6 +40,7 @@
 #include "lcd.h"
 #include "at24cxx.h"
 #include "string.h"
+#include "cm_backtrace.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,6 +95,7 @@ PUTCHAR_PROTOTYPE
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
 	SCB->VTOR = APPLICATION_ADDRESS;
 	__enable_irq();
   /* USER CODE END 1 */
@@ -122,6 +122,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  cm_backtrace_init("BSMU_H750IB", "1.0", "1.0");
   AT24Cxx_Init();					//初始化AT24C02
   //读取AT24C02并更新参数
 	AT24Cxx_SeqRead(0x00, CAPACITY_SIZE, eerom_data.ReadBuff);
@@ -141,11 +142,8 @@ int main(void)
   MX_UART5_Init();
   MX_USART2_UART_Init();
   MX_UART4_Init();
-  MX_CRYP_Init();
   MX_RNG_Init();
-  MX_HASH_Init();
   MX_RTC_Init();
-  MX_MBEDTLS_Init();
   /* Call PreOsInit function */
   MX_MBEDTLS_Init();
   MX_TouchGFX_PreOSInit();
@@ -163,6 +161,7 @@ int main(void)
 	Init_printf();                //初始化打印信息
 	GT911_init();                 //在此处初始化GT911
 	HAL_TIM_Base_Start_IT(&htim6);    //用于FREERTOS任务使用率计数
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

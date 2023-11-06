@@ -15,6 +15,7 @@
 #include "string.h"
 #include "task.h"
 #include "usart.h"
+#include "CAN_Control.h"
 
 // #define SERVER_TOKEN
 
@@ -26,13 +27,13 @@
 #define HTTPC_ENABLED
 #endif
 
-#define HOST "dzhk.hhkk.club"
+#define HOST "dz.hk.12y.ltd"
 #define HTTPS_PORT "443"
 #define HTTP_PORT "80"
-#define HTTP_HOST "dzhk.hhkk.club"
-#define HTTPS_HOST "dzhk.hhkk.club"
+#define HTTP_HOST HOST
+#define HTTPS_HOST HOST
 #define API_STATISTICS "/api/bmsRequest/sendSum"
-#define API_CLUSTERS "/api/bmsRequest/send"
+#define API_CLUSTERS "/api/bmsRequest/clusterData"
 
 #define HTTP_HEADER(api)                                                      \
   "POST "##api " HTTP/1.1\r\n"                                                \
@@ -46,12 +47,15 @@
 extern struct netif gnetif;
 extern Client_Sd_t Client_Sd[cluster_num];
 extern Client_Sd_Station_t Client_Sd_Station;
+extern error_info_t Client_errors[cluster_num][MAX_ERROR];
+extern BCMU_Mail_t BCMU[cluster_num];
 
 extern EEPROM_BSMU bsmuSetting;
 
+extern osSemaphoreId http_snd_sem_handle;
 osThreadId httpc_handle = NULL;
 
-Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E330)));
+Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E3D0)));
 Client_Sd_t httpc_clusters[cluster_num] __attribute__ ((at (0xC0400000)));
 
 httpc_ctx_t http_client;
@@ -132,7 +136,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
   int ret = -1;
   int len = -1;
   Client_Sd_t *data = &ctx->clusters_data[index];
-  char base64_buffer[1024];
+  unsigned char base64_buffer[1024];
   int base64_buffer_len = sizeof (base64_buffer);
 
   cJSON *obj = cJSON_CreateObject ();
@@ -189,7 +193,12 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "bn", bn);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  cJSON *bal_state = cJSON_CreateNumber (data->bal_state);
+  if (bal_state == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "bal_state", bal_state);
+
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_VOL,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -201,7 +210,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "vb", vb);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_TMP,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -213,7 +222,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "tb", tb);
 
-  ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
                                (uint8_t *)data->BAT_SOC,
                                TOTOL_BAT_num * sizeof (uint16_t));
   if (ret != 0)
@@ -224,19 +233,35 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
   if (socb == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "socb", socb);
+  
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
+                               (uint8_t *)data->BAT_SOH,
+                               TOTOL_BAT_num * sizeof (uint16_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
+  cJSON *sohb = cJSON_CreateString (base64_buffer);
+  if (sohb == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "sohb", sohb);
 
-  //todo: adjust new protocl
-  // ret = mbedtls_base64_encode (base64_buffer, &base64_buffer_len, NULL,
-  //                              (uint8_t *)data->BAT_FAULT,
-  //                              TOTOL_BAT_num * sizeof (uint16_t));
-  // if (ret != 0)
-  //   {
-  //     Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
-  //   }
-  // cJSON *wb = cJSON_CreateString (base64_buffer);
-  // if (wb == NULL)
-  //   goto end;
-  // cJSON_AddItemToObject (obj, "wb", wb);
+  cJSON *wb_cnt = cJSON_CreateNumber (data->error_count);
+  if (wb_cnt == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "wb_cnt", wb_cnt);
+
+  ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL,
+                               (uint8_t *)Client_errors[data->cluster_No - 1],
+                               data->error_count * sizeof (error_info_t));
+  if (ret != 0)
+    {
+      Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n");
+    }
+  cJSON *wb = cJSON_CreateString (base64_buffer);
+  if (wb == NULL)
+    goto end;
+  cJSON_AddItemToObject (obj, "wb", wb);
 
   cJSON *token = cJSON_CreateString (SERVER_TOKEN);
   if (token == NULL)
@@ -499,6 +524,8 @@ httpc_recv (httpc_ctx_t *ctx)
     }
   while (1);
 
+  // Debug_printf ("%s\r\n", buffer);
+
   if (ret = strstr (buffer, "HTTP/1.1 "))
     {
       char *mime_ptr = NULL;
@@ -521,7 +548,7 @@ httpc_recv (httpc_ctx_t *ctx)
   if (ret = strstr (buffer, "code"))
     {
       char *mime_ptr = NULL;
-      mime_ptr = strstr (ret, " ");
+      mime_ptr = strstr (ret, ":");
       if (mime_ptr != NULL)
         {
           mime_ptr += 1;
@@ -591,6 +618,9 @@ httpc_send_data_clusters (httpc_ctx_t *ctx)
 
   for (int i = 0; i < ctx->clusters_sum; i++)
     {
+      // skip offline
+      if (BCMU[i].OnlineOrOffline == Offline) continue;
+
       // skip invalid data
       if (ctx->clusters_data[i].cluster_No > 20
           || ctx->clusters_data[i].cluster_No < 1)
@@ -648,17 +678,17 @@ httpc_task (void const *args)
 
   while (1)
     {
-      int ret = 0;
-      
-      httpc_connect (&http_client, HOST, HTTPS_PORT);
+		  if(xSemaphoreTake(http_snd_sem_handle, portMAX_DELAY) == pdTRUE)//等待获取信号量(等待FDCAN轮询完大概1s)
+      {
+        httpc_connect (&http_client, HOST, HTTPS_PORT);
 
-      httpc_send_data_statistics (&http_client);
+        httpc_send_data_statistics (&http_client);
 
-      httpc_send_data_clusters (&http_client);
+        httpc_send_data_clusters (&http_client);
 
-      httpc_disconnect (&http_client);
-
-      osDelay (1000);
+        httpc_disconnect (&http_client);
+      }
+      osDelay (1);
     }
 
 end:

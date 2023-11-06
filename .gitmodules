@@ -1,3 +1,9 @@
 [submodule "cJSON"]
 	path = cJSON
 	url = https://github.com/DaveGamble/cJSON.git
+[submodule "flash_storage/EasyFlash"]
+	path = flash_storage/EasyFlash
+	url = https://github.com/armink/EasyFlash.git
+[submodule "flash_storage/SFUD"]
+	path = flash_storage/SFUD
+	url = https://github.com/armink/SFUD.git

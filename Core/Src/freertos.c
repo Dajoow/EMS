@@ -37,6 +37,8 @@
 #include "station_ctl.h"
 #include "stdint.h"
 #include "usart.h"
+#include "at24cxx.h"
+#include "data_persistence.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -182,7 +184,7 @@ void MX_FREERTOS_Init(void) {
   startup_ThreadHandle = osThreadCreate(osThread(startup_Thread), NULL);
 
   /* definition and creation of TouchGFX */
-  osThreadDef(TouchGFX, TouchGFX_Task, osPriorityBelowNormal, 0, 2048);
+  osThreadDef(TouchGFX, TouchGFX_Task, osPriorityBelowNormal, 0, 3072);
   TouchGFXHandle = osThreadCreate(osThread(TouchGFX), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -201,18 +203,25 @@ void MX_FREERTOS_Init(void) {
 void Startup(void const * argument)
 {
   /* USER CODE BEGIN Startup */
+  StationDataInit();
+  flash_save_init();
   mbedtls_net_init (NULL);
   sntp_client_init ();
   // 开启CAN接收线程
   BSMU_CANInit ();
-  // 开启客户端线程
-  // ClientInit ();
   // 开启4G模块线程
   Module4G_Init ();
 
   modbus_init ();
 
-  http_client_init ();
+  if (bsmuSetting.local_flag){
+  // 开启客户端线程
+    ClientInit ();
+  }
+
+  if (bsmuSetting.yunduan_flag){
+    http_client_init ();
+  }
 
   // 开启CPU_Task线程
   osThreadDef (CPU_Task_Thread, CPU_Task, osPriorityIdle, 0, 256);
