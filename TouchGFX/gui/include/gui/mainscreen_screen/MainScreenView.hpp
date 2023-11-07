@@ -136,7 +136,7 @@ protected:
     touchgfx::Unicode::UnicodeChar* id[30];
     touchgfx::TextArea* inf[30];
     touchgfx::TextAreaWithOneWildcard* id_wild[30];
-
+    touchgfx::BoxProgress* SOC_view[12];
 
     //touchgfx::TextArea* id[30];
     //touchgfx::TextArea* [30];

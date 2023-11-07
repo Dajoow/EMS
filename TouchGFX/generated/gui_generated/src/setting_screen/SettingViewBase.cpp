@@ -148,7 +148,7 @@ SettingViewBase::SettingViewBase() :
     ip_text2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3I4H));
     fwq_4g_ipsetting.add(ip_text2_1);
 
-    ip_text1_1.setXY(553, 103);
+    ip_text1_1.setXY(552, 103);
     ip_text1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     ip_text1_1.setLinespacing(0);
     touchgfx::Unicode::snprintf(ip_text1_1Buffer1, IP_TEXT1_1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_Z3FK).getText());
@@ -213,7 +213,7 @@ SettingViewBase::SettingViewBase() :
     zhuangji_numButton.setAction(buttonCallback);
     fwq_4g_ipsetting.add(zhuangji_numButton);
 
-    cu_num.setPosition(322, 36, 59, 41);
+    cu_num.setPosition(321, 36, 59, 41);
     cu_num.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     cu_num.setLinespacing(0);
     Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XRK5).getText());
@@ -821,7 +821,7 @@ SettingViewBase::SettingViewBase() :
     IP_ADD_2_1.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_2_1.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
     IP_ADD_2_1.setAction(flexButtonCallback);
-    IP_ADD_2_1.setPosition(191, 18, 120, 60);
+    IP_ADD_2_1.setPosition(190, 20, 120, 60);
     IP_setting_2.add(IP_ADD_2_1);
 
     IP_ADD_2_2.setBoxWithBorderPosition(0, 0, 120, 60);
@@ -921,7 +921,7 @@ SettingViewBase::SettingViewBase() :
     IP_ADD_1_3.setWildcardTextPosition(0, 10, 120, 60);
     IP_ADD_1_3.setWildcardTextColors(touchgfx::Color::getColorFromRGB(10, 10, 10), touchgfx::Color::getColorFromRGB(10, 10, 10));
     IP_ADD_1_3.setAction(flexButtonCallback);
-    IP_ADD_1_3.setPosition(530, 18, 120, 60);
+    IP_ADD_1_3.setPosition(530, 20, 120, 60);
     IP_setting_1.add(IP_ADD_1_3);
 
     IP_ADD_1_4.setBoxWithBorderPosition(0, 0, 120, 60);

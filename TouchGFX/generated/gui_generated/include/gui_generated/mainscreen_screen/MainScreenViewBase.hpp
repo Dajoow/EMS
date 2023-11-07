@@ -380,8 +380,8 @@ protected:
     touchgfx::TextArea V2;
     touchgfx::TextArea v1;
     touchgfx::SlideMenu BMUMenu;
-    touchgfx::Box BMU_BG_1;
     touchgfx::ScrollableContainer BMU_Container;
+    touchgfx::Box BMU_BG_1;
     touchgfx::Box BMU_BG;
     touchgfx::ScalableImage BMU_SEL_BOX;
     touchgfx::ButtonWithLabel BMU30;

@@ -825,16 +825,16 @@ MainScreenViewBase::MainScreenViewBase() :
     BMUMenu.setAnimationEasingEquation(touchgfx::EasingEquations::quadEaseInOut);
     BMUMenu.setAnimationDuration(18);
     BMUMenu.setExpandedStateTimeout(0);
-    BMU_BG_1.setPosition(0, 41, 90, 1812);
-    BMU_BG_1.setColor(touchgfx::Color::getColorFromRGB(235, 235, 235));
-    BMU_BG_1.setVisible(false);
-    BMUMenu.add(BMU_BG_1);
-
     BMU_Container.setPosition(3, 5, 90, 517);
     BMU_Container.enableHorizontalScroll(false);
     BMU_Container.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     BMU_Container.setScrollbarsAlpha(255);
     BMU_Container.setScrollbarsPermanentlyVisible();
+    BMU_BG_1.setPosition(-3, 36, 90, 1812);
+    BMU_BG_1.setColor(touchgfx::Color::getColorFromRGB(235, 235, 235));
+    BMU_BG_1.setVisible(false);
+    BMU_Container.add(BMU_BG_1);
+
     BMU_BG.setPosition(0, -1, 90, 1811);
     BMU_BG.setColor(touchgfx::Color::getColorFromRGB(219, 219, 219));
     BMU_Container.add(BMU_BG);

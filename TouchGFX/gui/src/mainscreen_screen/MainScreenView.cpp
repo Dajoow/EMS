@@ -38,6 +38,8 @@ MainScreenView::MainScreenView()
   BMU_SEL_BOX.setVisible(false);
   /*setStateChangedCallback() 函数注册回调函数*/
   BMUMenu.setStateChangedCallback(BMUMenuCallback);
+
+
   
 }
 
@@ -102,7 +104,8 @@ void MainScreenView::setupScreen()
 	viewToModelData.reflashFlag = true;
 	presenter->ViewtoModelDat(viewToModelData);
 
- 
+
+    
     BCMU[0] = &BCMU1;
     BCMU[1] = &BCMU2;
     BCMU[2] = &BCMU3;
@@ -154,6 +157,19 @@ void MainScreenView::setupScreen()
     BMU[27] = &BMU28;
     BMU[28] = &BMU29;
     BMU[29] = &BMU30;
+
+    SOC_view[0] = &SOC1_view;
+    SOC_view[1] = &SOC2_view;
+    SOC_view[2] = &SOC3_view;
+    SOC_view[3] = &SOC4_view;
+    SOC_view[4] = &SOC5_view;
+    SOC_view[5] = &SOC6_view;
+    SOC_view[6] = &SOC7_view;
+    SOC_view[7] = &SOC8_view;
+    SOC_view[8] = &SOC9_view;
+    SOC_view[9] = &SOC10_view;
+    SOC_view[10] = &SOC11_view;
+    SOC_view[11] = &SOC12_view;
 
     tim[0] = &err_time0Buffer[0];
     tim[1] = &err_time1Buffer[0];
@@ -279,6 +295,12 @@ void MainScreenView::setupScreen()
         {0x00,0x01,0b1100000000000000},
 		};*/
 		
+    for (int i = 0;i < 30;i++)
+    {
+        BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+        BMU[i]->setTouchable(false);
+    }
+    BMU_Container.invalidate();
 
 
 
@@ -663,6 +685,26 @@ void MainScreenView::BCMU1_clicked()
   /*滑出BMU菜单*/
   //CellStateShow();
 
+  //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[0][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
+
+#endif 
+
   //通知model更新数据
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
@@ -680,7 +722,26 @@ void MainScreenView::BCMU2_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
-  
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[1][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
+
+#endif 
+
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -697,7 +758,25 @@ void MainScreenView::BCMU3_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[2][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -714,7 +793,25 @@ void MainScreenView::BCMU4_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[3][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -731,7 +828,25 @@ void MainScreenView::BCMU5_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[4][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -748,7 +863,25 @@ void MainScreenView::BCMU6_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[5][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -765,7 +898,25 @@ void MainScreenView::BCMU7_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[6][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -782,7 +933,25 @@ void MainScreenView::BCMU8_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[7][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -799,7 +968,25 @@ void MainScreenView::BCMU9_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[8][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -816,7 +1003,25 @@ void MainScreenView::BCMU10_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[9][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -833,7 +1038,25 @@ void MainScreenView::BCMU11_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[10][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -850,7 +1073,25 @@ void MainScreenView::BCMU12_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[11][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -867,7 +1108,25 @@ void MainScreenView::BCMU13_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[12][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -884,7 +1143,25 @@ void MainScreenView::BCMU14_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[13][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -901,7 +1178,25 @@ void MainScreenView::BCMU15_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[14][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -918,7 +1213,25 @@ void MainScreenView::BCMU16_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[15][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -935,7 +1248,25 @@ void MainScreenView::BCMU17_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[16][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -952,7 +1283,25 @@ void MainScreenView::BCMU18_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[17][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -969,7 +1318,25 @@ void MainScreenView::BCMU19_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[18][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -986,7 +1353,25 @@ void MainScreenView::BCMU20_clicked()
   cu.invalidate();
   /*滑出BMU菜单*/
   //CellStateShow();
+    //更新BMU按键使能
+#ifndef SIMULATOR
+  for (int i = 0;i < 30;i++)
+  {
+      if (bmu_offline[19][i] == 0)//0表示在线，非0离线
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+          BMU[i]->setTouchable(true);
+      }
+      else
+      {
+          BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BMU[i]->setTouchable(false);
+      }
+  }
+  BCMU_Container.invalidate();
+  BMU_Container.invalidate();
 
+#endif 
   viewToModelData.reflashFlag = true;
   presenter->ViewtoModelDat(viewToModelData);
 }
@@ -1542,19 +1927,32 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   fujueyuan.invalidate();
 
 
-	//更新电池指示图
-  SOC1_view.setValue((float)modelToViewData.BAT_SOC[0] / 10);
-  SOC2_view.setValue((float)modelToViewData.BAT_SOC[1] / 10);
-  SOC3_view.setValue((float)modelToViewData.BAT_SOC[2] / 10);
-  SOC4_view.setValue((float)modelToViewData.BAT_SOC[3] / 10);
-  SOC5_view.setValue((float)modelToViewData.BAT_SOC[4] / 10);
-  SOC6_view.setValue((float)modelToViewData.BAT_SOC[5] / 10);
-  SOC7_view.setValue((float)modelToViewData.BAT_SOC[6] / 10);
-  SOC8_view.setValue((float)modelToViewData.BAT_SOC[7] / 10);
-  SOC9_view.setValue((float)modelToViewData.BAT_SOC[8] / 10);
-  SOC10_view.setValue((float)modelToViewData.BAT_SOC[9] / 10);
-  SOC11_view.setValue((float)modelToViewData.BAT_SOC[10] / 10);
-  SOC12_view.setValue((float)modelToViewData.BAT_SOC[11] / 10);
+	//更新电池指示图，增加变色功能：0~20显示红色 20~60黄色 60~100绿色
+  //SOC1_view.setValue((float)modelToViewData.BAT_SOC[0] / 10);
+  //SOC2_view.setValue((float)modelToViewData.BAT_SOC[1] / 10);
+  //SOC3_view.setValue((float)modelToViewData.BAT_SOC[2] / 10);
+  //SOC4_view.setValue((float)modelToViewData.BAT_SOC[3] / 10);
+  //SOC5_view.setValue((float)modelToViewData.BAT_SOC[4] / 10);
+  //SOC6_view.setValue((float)modelToViewData.BAT_SOC[5] / 10);
+  //SOC7_view.setValue((float)modelToViewData.BAT_SOC[6] / 10);
+  //SOC8_view.setValue((float)modelToViewData.BAT_SOC[7] / 10);
+  //SOC9_view.setValue((float)modelToViewData.BAT_SOC[8] / 10);
+  //SOC10_view.setValue((float)modelToViewData.BAT_SOC[9] / 10);
+  //SOC11_view.setValue((float)modelToViewData.BAT_SOC[10] / 10);
+  //SOC12_view.setValue((float)modelToViewData.BAT_SOC[11] / 10);
+  for (int i = 0;i < 12;i++)
+  {
+      SOC_view[i]->setValue((float)modelToViewData.BAT_SOC[i] / 10);
+      if (((float)modelToViewData.BAT_SOC[i] / 10) >= 0 && ((float)modelToViewData.BAT_SOC[i] / 10) <= 20)
+          SOC_view[i]->setColor(0xff0000);//red
+
+      else if(((float)modelToViewData.BAT_SOC[i] / 10)>20 && ((float)modelToViewData.BAT_SOC[i] / 10) <=60)
+          SOC_view[i]->setColor(0xffff00);//yellow
+
+      else if(((float)modelToViewData.BAT_SOC[i] / 10)>60 && ((float)modelToViewData.BAT_SOC[i] / 10) <=100)
+          SOC_view[i]->setColor(0x00ff00);//green
+  }
+
 
 	//更新所有单体电池SOC
   Unicode::snprintfFloat(CellSOCText1Buffer, CELLSOCTEXT1_SIZE, "%.1f", (float)modelToViewData.BAT_SOC[0]/10);
@@ -1703,45 +2101,25 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
     }
   }
 
-
-  for (uint8_t i = 0;i < 20;i++)
-  {
-      if (modelToViewData.BCMU_state[i] == offline )
-      {     
-          //不使能
+  for (int i = 0;i < 20;i++) {
+      if (modelToViewData.BCMU_state[i] == offline)//不使能
+      {
           BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
           BCMU[i]->setTouchable(false);
-          for (uint8_t j = 0;j < 30;j++)//当前簇不使能，组默认全不使能
-          {
-              BMU[j]->setLabelText(touchgfx::TypedText(T_BCMU_0));
-              BMU[j]->setTouchable(false);
-          } 
-          /*BCMU_BG.invalidate();*/
           BCMU_Container.invalidate();
-          BMU_Container.invalidate();
       }
-      else if  (modelToViewData.BCMU_state[i] != offline ) 
-      {            
-          //使能BCMU按键
-          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU1 -i));
+      else  if (modelToViewData.BCMU_state[i] == online)//使能
+      {
+          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU1-i));
           BCMU[i]->setTouchable(true);
-          for (uint8_t j = 0;j < 30;j++)
-          {
-              if (bmu_offline[i][j] == 0) //0表示在线，非0离线
-              {
-                  BMU[j]->setLabelText(touchgfx::TypedText(T_BMU1 +j));
-                  BMU[j]->setTouchable(true);
-              }
-              else
-              {
-                  BMU[j]->setLabelText(touchgfx::TypedText(T_BCMU_0));
-                  BMU[j]->setTouchable(false);
-              }
-          }
           BCMU_Container.invalidate();
-          BMU_Container.invalidate();
       }
+  
   }
+
+
+
+  
 
   //更新ip信息
 

@@ -1572,19 +1572,6 @@
                 "VisiblePixelsWhenCollapsed": 37,
                 "Components": [
                   {
-                    "Type": "Box",
-                    "Name": "BMU_BG_1",
-                    "Y": 41,
-                    "Width": 90,
-                    "Height": 1812,
-                    "Visible": false,
-                    "Color": {
-                      "Red": 235,
-                      "Green": 235,
-                      "Blue": 235
-                    }
-                  },
-                  {
                     "Type": "ScrollableContainer",
                     "Name": "BMU_Container",
                     "X": 3,
@@ -1596,6 +1583,20 @@
                     "ScrollbarsVisibleOnPressed": true,
                     "ScrollbarsAlpha": 255,
                     "Components": [
+                      {
+                        "Type": "Box",
+                        "Name": "BMU_BG_1",
+                        "X": -3,
+                        "Y": 36,
+                        "Width": 90,
+                        "Height": 1812,
+                        "Visible": false,
+                        "Color": {
+                          "Red": 235,
+                          "Green": 235,
+                          "Blue": 235
+                        }
+                      },
                       {
                         "Type": "Box",
                         "Name": "BMU_BG",
@@ -3112,7 +3113,7 @@
                     "Name": "IP2",
                     "X": 152,
                     "Y": 134,
-                    "Width": 19,
+                    "Width": 20,
                     "Height": 34,
                     "TextId": "__SingleUse_MN9S",
                     "TextRotation": "0",
@@ -5674,7 +5675,7 @@
               {
                 "Type": "TextArea",
                 "Name": "ip_text1_1",
-                "X": 553,
+                "X": 552,
                 "Y": 103,
                 "Width": 109,
                 "Height": 32,
@@ -5798,7 +5799,7 @@
               {
                 "Type": "TextArea",
                 "Name": "cu_num",
-                "X": 322,
+                "X": 321,
                 "Y": 36,
                 "Width": 59,
                 "Height": 41,
@@ -7437,8 +7438,8 @@
                   {
                     "Type": "FlexButton",
                     "Name": "IP_ADD_2_1",
-                    "X": 191,
-                    "Y": 18,
+                    "X": 190,
+                    "Y": 20,
                     "Width": 120,
                     "Height": 60,
                     "ButtonTrigger": {
@@ -7828,7 +7829,7 @@
                     "Type": "FlexButton",
                     "Name": "IP_ADD_1_3",
                     "X": 530,
-                    "Y": 18,
+                    "Y": 20,
                     "Width": 120,
                     "Height": 60,
                     "ButtonTrigger": {
