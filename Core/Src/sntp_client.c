@@ -85,6 +85,11 @@ time_t mbedtls_get_time(time_t *timer){
   return rtc_get_timestamp ();
 }
 
+struct tm * rtc_get_localtime(void){
+  uint32_t timestamp = rtc_get_timestamp();
+  return localtime (&timestamp);
+}
+
 void
 sntp_client_init (void)
 {
