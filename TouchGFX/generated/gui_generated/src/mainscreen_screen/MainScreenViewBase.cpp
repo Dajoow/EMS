@@ -35,6 +35,7 @@ MainScreenViewBase::MainScreenViewBase() :
     chunengdianzhan.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     chunengdianzhan.setLinespacing(0);
     chunengdianzhan.setTypedText(touchgfx::TypedText(T___SINGLEUSE_N2DW));
+    chunengdianzhan.setVisible(false);
     add(chunengdianzhan);
 
     buttonMain.setBitmaps(Bitmap(BITMAP_BUTTON_SHOUYE_PRESSED_ID), Bitmap(BITMAP_BUTTON_SHOUYE_RELEASED_ID));
@@ -2239,6 +2240,17 @@ MainScreenViewBase::MainScreenViewBase() :
     shouye.add(baojingxinxi_container);
 
     add(shouye);
+
+    test.setXY(0, 0);
+    test.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    test.setLinespacing(0);
+    touchgfx::Unicode::snprintf(testBuffer1, TESTBUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_BK4Z).getText());
+    test.setWildcard1(testBuffer1);
+    touchgfx::Unicode::snprintf(testBuffer2, TESTBUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_X9DH).getText());
+    test.setWildcard2(testBuffer2);
+    test.resizeToCurrentText();
+    test.setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
+    add(test);
 }
 
 MainScreenViewBase::~MainScreenViewBase()

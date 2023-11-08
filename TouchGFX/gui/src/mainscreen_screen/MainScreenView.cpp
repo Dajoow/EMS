@@ -39,7 +39,28 @@ MainScreenView::MainScreenView()
   /*setStateChangedCallback() 函数注册回调函数*/
   BMUMenu.setStateChangedCallback(BMUMenuCallback);
 
+  test2.setXY(0, 20);
+  test2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+  test2.setLinespacing(0);
 
+  //uint8_t str[120]= "BMU错误";
+  //Unicode::fromUTF8(str, id[0],10);
+  ////Unicode::snprintf(id[0], 20, "%s", "BMU错误");  //id
+  //inf[0]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 ));
+  //scrollableContainer1.invalidate();
+
+  const uint8_t* str = (const uint8_t*)"你好";
+  Unicode::fromUTF8(str, test2Buffer1, TEST2BUFFER1_SIZE);
+  //sprintf(testtime, "%s", "汉"); //打印时间
+  //Unicode::strncpy(u_time, testtime, 128);
+  //touchgfx::Unicode::snprintf(test2Buffer1, TEST2BUFFER1_SIZE, "%s", u_time);
+  //touchgfx::Unicode::strncpy(test2Buffer1, "汉", TEST2BUFFER1_SIZE);
+  test2.setWildcard1(test2Buffer1);
+  test2.resizeToCurrentText();  
+
+  test2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
+  
+  add(test2);
   
 }
 
@@ -257,8 +278,6 @@ void MainScreenView::setupScreen()
     inf[17] = &err_inf17;
     inf[18] = &err_inf18;
     inf[19] = &err_inf19;
-
-
 		/*err_info  a[]={
 		{0x00,0x01,0b1100000000000000},
 		{0x00,0x00,0x03},
@@ -301,282 +320,6 @@ void MainScreenView::setupScreen()
         BMU[i]->setTouchable(false);
     }
     BMU_Container.invalidate();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //uint8_t str[120]= "BMU错误";
-    //Unicode::fromUTF8(str, id[0],10);
-    ////Unicode::snprintf(id[0], 20, "%s", "BMU错误");  //id
-    //inf[0]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 ));
-    //scrollableContainer1.invalidate();
-	
-//		int BSMU_counter = 0;
-//		tm *tm_inf;
-//		time_t rawtime;
-
-
-        //time[0]->setPosition(5, 35 * i + 25, 210, 35); //设置文本框位置、长宽
-        //time[0]->setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));//设置字体颜色
-        //time[0]->setLinespacing(0);//设置行距
-        ////uint8_t rx_data_copy[100];
-        ////std::string dataString(reinterpret_cast<char*>(rx_data_copy));
-        //Unicode::snprintf(err_num1Buffer, 10, u_time);
-        //time[0]->setWildcard(err_num1Buffer);
-        //time[0]->resizeToCurrentText();
-        //time[0]->invalidate();	
-  //      int max = 27;
-		//static int err_counter=0;
-  //for (int i = 0;i <= max;i++) //遍历所有数组（数组中已存放错误信息，直接按条打印）
-  //{
-  //    tickCounter= tickCounter+30;
-  //    digitalSeconds = tickCounter;
-  //    if (tickCounter % 60 == 0)
-  //    {
-  //        if (++digitalSeconds >= 60)
-  //        {
-  //            digitalSeconds = 0;
-  //            if (++digitalMinutes >= 60)
-  //            {
-  //                digitalMinutes = 0;
-  //                if (++digitalHours >= 24)
-  //                {
-  //                    digitalHours = 0;
-  //                }
-  //            }
-  //        }
-  //    }
-
-
-  //    sprintf(testtime,"%d:%d:%d", digitalHours, digitalMinutes,digitalSeconds); //打印时间
-     // Unicode::strncpy(u_time, testtime,128);
-  //  /*  Unicode::snprintf(tim[i], 20, "%s", u_time);*/
-  //    if (a[i].error_id_h == 0x00) //判断id高8位
-  //    {        
-  //        if (a[i].error_id_l == 0x00)//判断id低8位
-  //        {                  
-  //            for (int j = 0;j < 16;j++) //逐位判断错误信息，并输出
-  //            {
-  //                if (get_one_bit_value(a[i].error_code, j + 1) == 1)
-  //                {       
-  //                    if (err_counter >= 20) err_counter = err_counter % 20;
-  //                    Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-  //                    id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE0)); //错误板             
-  //                    inf[err_counter]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 - j)); //错误类型
-		//			  err_counter++;
-  //                }
-  //            }
-
-  //        }
-  //        else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
-  //        {
-  //            if (a[i].error_id_l == 0x01) //错误位宽为2
-  //            {
-  //                for (int j = 0;j < 8;j++)
-  //                { 
-  //                    if (get_two_bit_value(a[i].error_code, j  + 1) == 0b00) //无故障
-  //                    {
-
-
-  //                    }
-  //                    else if (get_two_bit_value(a[i].error_code, j  + 1) == 0b01)//有故障
-  //                    {
-
-  //                    }
-  //                    else if (get_two_bit_value(a[i].error_code, j + 1) == 0b10)//预警
-  //                    {
-
-  //                    }
-  //                    else if (get_two_bit_value(a[i].error_code, j + 1) == 0b11)//预警过，故障发生
-  //                    {
-  //                        if (err_counter >= 20) err_counter = err_counter % 20;
-  //                        Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-  //                        id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
-  //                        inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
-		//											err_counter++;
-  //                    }
-
-  //                }
-  //            }
-  //            if (a[i].error_id_l == 0x02)//错误位宽为1
-  //            {
-  //                for (int j = 0;j < 16;j++)
-  //                {
-  //                    if (get_one_bit_value(a[i].error_code, j + 1) == 0) //无故障
-  //                    {
-
-        //  }
-        //  else if (a[i].error_id_l == 0x01 || a[i].error_id_l == 0x02)//判断id低8位
-        //  {
-        //      Unicode::snprintf(id[i], 20, "%s", "BCMU error\0");  //id
-        //      if (a[i].error_id_l == 0x01) //错误位宽为2
-        //      {
-        //          for (int j = 0;j < 8;j++)
-        //          { 
-        //              if (get_two_bit_value(a[i].error_code, j  + 1) == 0x00) //无故障
-        //              {
-
-        //              }
-        //              else if (get_two_bit_value(a[i].error_code, j  + 1) == 0x01)//有故障
-        //              {
-
-        //              }
-        //              else if (get_two_bit_value(a[i].error_code, j + 1) == 0x02)//预警
-        //              {
-
-        //              }
-        //              else if (get_two_bit_value(a[i].error_code, j + 1) == 0x03)//预警过，故障发生
-        //              {
-        //                  inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
-						  //err_counter++;
-        //              }
-
-
-  //                    }
-  //                    else if (get_one_bit_value(a[i].error_code, j + 1) == 1) //无故障
-  //                    {
-  //                        if (err_counter >= 20) err_counter = err_counter % 20;
-  //                        Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-  //                        id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
-  //                        inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
-		//				  err_counter++;
-  //                    }
-  //                }
-  //            }
-  //        }
-  //    }
-		//	else if(a[i].error_id_h >= 0x01 && a[i].error_id_h <= 0x1F) //判断id高8位
-		//	{
-		//		if(a[i].error_id_l ==0x00) 
-		//		{
-  //                  
-		//			/*Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");*/
-		//			for(int j=0;j<16;j++)
-		//			{
-		//					 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
-		//					 {
-  //                               if (err_counter >= 20) err_counter = err_counter % 20;
-  //                               Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-  //                               id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE2)); //错误板   
-		//						 inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
-		//						 err_counter++;
-		//					 }
-		//			}
-		//		}
-		//		else if(a[i].error_id_l >=0x01 && a[i].error_id_l <=0x0C)
-		//		{
-		//			for(int j=0;j<16;j++)
-		//			{
-		//					 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
-		//					 {
-  //                               if (err_counter >= 20) err_counter = err_counter % 20;
-  //                               Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-  //                               id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板   
-		//						 inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
-		//					     err_counter++;
-		//					 }
-		//			 }
-		//		}
-		//	}
-		//	else if(a[i].error_id_h == 0x20) //判断id高8位
-		//	{
-		//			if(a[i].error_id_l ==0)
-		//			{
-		//				/*Unicode::snprintf(id[i], 20, "%s", "BMU(组内)板错误!\0");*/
-  //                      
-		//				for(int j=0;j<16;j++)
-		//			{
-		//					 if (get_one_bit_value(a[i].error_code, j + 1) == 1) 
-		//					 {
-  //                               if (err_counter >= 20) err_counter = err_counter % 20;
-  //                               Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-  //                               id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE4)); //错误板   
-		//						 inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
-		//						 err_counter++;
-		//					 }
-		//			}
-		//			}
-		//	}
-  //     } 
-  //     scrollableContainer1.invalidate();
-  //     err_inf.invalidate();
-	
-    //for (int i = 0;i < 5;i++)
-    //{
-    //    Unicode::snprintf(tim[i], 10, "%d", i+1);
-    //    Unicode::snprintf(id[i], 10, "%d", i+1);
-    //    inf[i]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 +i));
-    //}
-
-    //scrollableContainer1.invalidate();
-
-
-    //for (int i = 0;i < 30;i++) //显示最近30条错误，格式：打印时间戳 + 错误板号 + 错误类型
-    //{
-       
-  /*  err_num1.setPosition(20, 30, 280, 30);
-    err_num1.setColor(touchgfx::Color::getColorFromRGB(1, 255, 255));
-    err_num1.setLinespacing(0);
-    err_num1.setWildcard(err_num1Buffer);  
-    err_num1.setTypedText(touchgfx::TypedText(T_BCMU_ERR3));
-    scrollableContainer1.add(err_num1);
-           
-    Unicode::snprintf(err_num1Buffer, ERR_NUM1_SIZE, "%d", 2);
-    err_num1.invalidate();
-    scrollableContainer1.invalidate();*/
-
-
-
-
-  
- /*       FrameRateText.setPosition(271, 26, 70, 27);
-        FrameRateText.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-        FrameRateText.setLinespacing(0);
-        Unicode::snprintf(FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1G1L).getText());
-        FrameRateText.setWildcard(FrameRateTextBuffer);
-        FrameRateText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HULS));
-        add(FrameRateText);*/
-   /* }*/
-
-
-  /*  this->bufSize = 4096;
-    this->textBuf = (uint8_t*)malloc(this->bufSize);
-    if (textBuf != NULL)
-    {
-        memset(textBuf, 0, this->bufSize);
-    }*/
 }
 
 void MainScreenView::inf_play(TextArea* a,int b)
@@ -616,44 +359,12 @@ void MainScreenView::handleTickEvent()
             for (int j = 0;j < 20;j++)
             inf_play(inf[j], j);   
         }
-   
-      
-    
-
-				
- /*   tickCounter++;
-    uint8_t str[128];
-    if (tickCounter % 50 == 0)
-    {
-        static uint16_t textCount = 0;
-        sprintf((char*)str, "你好TouchGFX:count %d\n", textCount++);
-        this->TextAreaAddStr(str, sizeof(str));
-    }*/
- //   char a[] = {"dsads"};
- //   Unicode::UnicodeChar c[5];
- ///*   char b[4];
- //   for (int i = 0;i < 4;i++)
- //   {
- //       b[i] = a[i];
- //   }*/
- //   Unicode::strncpy(c, a, 5);
- //   Unicode::snprintf(err1Buffer,16,"%s",a);
- //  /* err1.setWideTextAction(WIDE_TEXT_CHARWRAP);*/
- //   err1.invalidate();
-
 }
-
-
-
-
 
 void MainScreenView::tearDownScreen()
 {
     MainScreenViewBase::tearDownScreen();
 }
-
-
-
 
 //按键切换显示内容
 void MainScreenView::show_shouye() 
@@ -2149,6 +1860,8 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   int err_sum = 0;
   //Client_Sd[cluster_num].error_count
   //Client_errors[cluster_num][MAX_ERROR]
+
+
 
   //计算总错误数量并决定是否输出
   for (int m = 0;m < cluster_num;m++)

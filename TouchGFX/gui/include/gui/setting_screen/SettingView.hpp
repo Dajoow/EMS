@@ -108,12 +108,7 @@ public:
     virtual void local_port_set();
     virtual void ip_4g_set();
     virtual void port_4g_set();
-
-  /*  void get_local_ip(Unicode::UnicodeChar *buffer[4], int len);*/
-
-
-
-   
+ 
 protected:
     EEPROM_BSMU_tem SettingBuff;//最终存入EEPROM的结构体数组
     EEPROM_BSMU_tem SettingBuff_temp;//该临时结构体用于临时保存数据，根据保存或取消指令来判断是否对数据进行保存

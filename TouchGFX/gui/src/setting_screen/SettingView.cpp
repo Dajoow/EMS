@@ -103,6 +103,16 @@ void SettingView::setupScreen()
     memcpy(&SettingBuff, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
     memcpy(&SettingBuff_temp, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
 #endif
+    for (int i = 0;i < 4;i++) //
+    {
+        if (SettingBuff.IP_ADD_1[i] > 255) 
+            SettingBuff.IP_ADD_1[i] = 0;
+        SettingBuff_temp.IP_ADD_1[i] = SettingBuff.IP_ADD_1[i];
+
+        if (SettingBuff.IP_ADD_2[i] > 255)
+            SettingBuff.IP_ADD_2[i] = 0;
+        SettingBuff_temp.IP_ADD_2[i] = SettingBuff.IP_ADD_2[i];
+    }
 
     
     //以下为拷贝了EEPROM中的值后，setting界面数据信息显示
