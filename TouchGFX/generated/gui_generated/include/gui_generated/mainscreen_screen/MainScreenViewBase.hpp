@@ -539,7 +539,6 @@ protected:
     touchgfx::MoveAnimator< touchgfx::TextArea > err_inf2;
     touchgfx::MoveAnimator< touchgfx::TextArea > err_inf1;
     touchgfx::MoveAnimator< touchgfx::TextArea > err_inf0;
-    touchgfx::TextArea textArea2;
     touchgfx::Container err_id;
     touchgfx::TextAreaWithOneWildcard err_id19;
     touchgfx::TextAreaWithOneWildcard err_id18;
@@ -561,7 +560,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard err_id2;
     touchgfx::TextAreaWithOneWildcard err_id1;
     touchgfx::TextAreaWithOneWildcard err_id0;
-    touchgfx::TextArea textArea1;
     touchgfx::Container err_time;
     touchgfx::TextAreaWithOneWildcard err_time19;
     touchgfx::TextAreaWithOneWildcard err_time18;
@@ -584,6 +582,8 @@ protected:
     touchgfx::TextAreaWithOneWildcard err_time1;
     touchgfx::TextAreaWithOneWildcard err_time0;
     touchgfx::TextArea baojing_biaoti;
+    touchgfx::TextArea textArea1;
+    touchgfx::TextArea textArea2;
     touchgfx::TextAreaWithTwoWildcards test;
 
     /*

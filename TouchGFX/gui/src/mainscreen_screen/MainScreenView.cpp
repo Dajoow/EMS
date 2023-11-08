@@ -38,96 +38,10 @@ MainScreenView::MainScreenView()
   BMU_SEL_BOX.setVisible(false);
   /*setStateChangedCallback() 函数注册回调函数*/
   BMUMenu.setStateChangedCallback(BMUMenuCallback);
-
-  test2.setXY(0, 20);
-  test2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-  test2.setLinespacing(0);
-
-  //uint8_t str[120]= "BMU错误";
-  //Unicode::fromUTF8(str, id[0],10);
-  ////Unicode::snprintf(id[0], 20, "%s", "BMU错误");  //id
-  //inf[0]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 ));
-  //scrollableContainer1.invalidate();
-
-  const uint8_t* str = (const uint8_t*)"你好";
-  Unicode::fromUTF8(str, test2Buffer1, TEST2BUFFER1_SIZE);
-  //sprintf(testtime, "%s", "汉"); //打印时间
-  //Unicode::strncpy(u_time, testtime, 128);
-  //touchgfx::Unicode::snprintf(test2Buffer1, TEST2BUFFER1_SIZE, "%s", u_time);
-  //touchgfx::Unicode::strncpy(test2Buffer1, "汉", TEST2BUFFER1_SIZE);
-  test2.setWildcard1(test2Buffer1);
-  test2.resizeToCurrentText();  
-
-  test2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
-  
-  add(test2);
-  
-}
-
-void BMUMenuCallback_t::execute(const SlideMenu& menu)
-{
-  touchgfx_printf("BMUMenuCallback\n");
-  if(view_.show_batteryshowarea_State())
-    view_.show_batteryshowarea_on();
-  else
-    view_.show_batteryshowarea_off();
-}
-
-bool MainScreenView::show_batteryshowarea_State()//电池界面是否显示
-{
-    if (batteryshowarea.isVisible())
-        return true;
-    else
-        return false;
-}
-
-/**
- * @description: 展开BMU菜单
- * @return {*}
- */
-void MainScreenView::show_batteryshowarea_on() //电池界面显示
-{
-    BMU_SEL_BOX.setVisible(true);
-    BMU_SEL_BOX.invalidate();
-
-    BCMU_SEL_BOX.setVisible(true);
-    BCMU_SEL_BOX.invalidate();
-}
-
-/**
- * @description: 收回BMU菜单
- * @return {*}
- */
-void MainScreenView::show_batteryshowarea_off() //电池界面不显示
-{
-    BCMU_SEL_BOX.setVisible(false);
-    BCMU_SEL_BOX.invalidate();
-    BMU_SEL_BOX.setVisible(false);
-    BMU_SEL_BOX.invalidate();
-
-    viewToModelData.BCMU_SEL = 1;   //1-20
-    viewToModelData.BMU_SEL = 1;    //1-30
-    
- /*   BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2, BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
-    BMU_BG.invalidate();*/
-    //更新选定组编号
-    Unicode::snprintf(zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
-    zu.invalidate();
-
-    presenter->ViewtoModelDat(viewToModelData);
-}
-
-
-void MainScreenView::setupScreen()
-{
-    MainScreenViewBase::setupScreen();
-	//通知model更新数据
-	viewToModelData.reflashFlag = true;
-	presenter->ViewtoModelDat(viewToModelData);
-
-
-    
-    BCMU[0] = &BCMU1;
+  err_time.setHeight(errcount*25);
+  err_id.setHeight(errcount*25);
+  err_inf.setHeight(errcount * 25);
+	BCMU[0] = &BCMU1;
     BCMU[1] = &BCMU2;
     BCMU[2] = &BCMU3;
     BCMU[3] = &BCMU4;
@@ -278,6 +192,122 @@ void MainScreenView::setupScreen()
     inf[17] = &err_inf17;
     inf[18] = &err_inf18;
     inf[19] = &err_inf19;
+	
+	
+    for (int i = 0;i < errcount;i++)
+    {
+        t_gen[i].setXY(30, 25*(i+1));
+        t_gen[i].setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
+        t_gen[i].setLinespacing(0);
+        t_gen[i].setWildcard(t_gen_Buffer[i]);
+        t_gen[i].resizeToCurrentText();
+        t_gen[i].setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
+        err_time.add(t_gen[i]);
+
+        id_gen[i].setXY(0, 25 * (i + 1));
+        id_gen[i].setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
+        id_gen[i].setLinespacing(0);
+        id_gen[i].setWildcard(id_gen_Buffer[i]);
+        id_gen[i].resizeToCurrentText();
+        id_gen[i].setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
+        err_id.add(id_gen[i]);
+
+        e_gen[i].setXY(0, 25 * (i + 1));
+        e_gen[i].setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
+        e_gen[i].setLinespacing(0);
+        e_gen[i].setWildcard(e_gen_Buffer[i]);
+        e_gen[i].resizeToCurrentText();
+        e_gen[i].setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
+        err_inf.add(e_gen[i]);
+
+        e_temp[i] = &e_gen[i];
+    }        
+  
+
+
+    
+  //test2.setXY(0, 20);
+  //test2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+  //test2.setLinespacing(0);
+  //const uint8_t* str = (const uint8_t*)"你好";
+  //Unicode::fromUTF8(str, test2Buffer1, TEST2BUFFER1_SIZE);
+  ////sprintf(testtime, "%s", "汉"); //打印时间
+  ////Unicode::strncpy(u_time, testtime, 128);
+  ////touchgfx::Unicode::snprintf(test2Buffer1, TEST2BUFFER1_SIZE, "%s", u_time);
+  ////touchgfx::Unicode::strncpy(test2Buffer1, "汉", TEST2BUFFER1_SIZE);
+  //test2.setWildcard1(test2Buffer1);
+  //test2.resizeToCurrentText();  
+
+  //test2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_R4DJ));
+  //
+  //add(test2);
+  
+}
+
+void BMUMenuCallback_t::execute(const SlideMenu& menu)
+{
+  touchgfx_printf("BMUMenuCallback\n");
+  if(view_.show_batteryshowarea_State())
+    view_.show_batteryshowarea_on();
+  else
+    view_.show_batteryshowarea_off();
+}
+
+bool MainScreenView::show_batteryshowarea_State()//电池界面是否显示
+{
+    if (batteryshowarea.isVisible())
+        return true;
+    else
+        return false;
+}
+
+/**
+ * @description: 展开BMU菜单
+ * @return {*}
+ */
+void MainScreenView::show_batteryshowarea_on() //电池界面显示
+{
+    BMU_SEL_BOX.setVisible(true);
+    BMU_SEL_BOX.invalidate();
+
+    BCMU_SEL_BOX.setVisible(true);
+    BCMU_SEL_BOX.invalidate();
+}
+
+/**
+ * @description: 收回BMU菜单
+ * @return {*}
+ */
+void MainScreenView::show_batteryshowarea_off() //电池界面不显示
+{
+    BCMU_SEL_BOX.setVisible(false);
+    BCMU_SEL_BOX.invalidate();
+    BMU_SEL_BOX.setVisible(false);
+    BMU_SEL_BOX.invalidate();
+
+    viewToModelData.BCMU_SEL = 1;   //1-20
+    viewToModelData.BMU_SEL = 1;    //1-30
+    
+ /*   BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2, BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
+    BMU_BG.invalidate();*/
+    //更新选定组编号
+    Unicode::snprintf(zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
+    zu.invalidate();
+
+    presenter->ViewtoModelDat(viewToModelData);
+}
+
+
+void MainScreenView::setupScreen()
+{
+    MainScreenViewBase::setupScreen();
+	//通知model更新数据
+	viewToModelData.reflashFlag = true;
+	presenter->ViewtoModelDat(viewToModelData);
+
+
+    
+    
 		/*err_info  a[]={
 		{0x00,0x01,0b1100000000000000},
 		{0x00,0x00,0x03},
@@ -322,7 +352,7 @@ void MainScreenView::setupScreen()
     BMU_Container.invalidate();
 }
 
-void MainScreenView::inf_play(TextArea* a,int b)
+void MainScreenView::inf_play(TextAreaWithOneWildcard* a,int b)
 {
     if (direction==1) //向右移动
     {
@@ -356,8 +386,8 @@ void MainScreenView::handleTickEvent()
         }
         if(digitalSeconds%2==0)
         {     
-            for (int j = 0;j < 20;j++)
-            inf_play(inf[j], j);   
+            for (int j = 0;j < errcount;j++)
+            inf_play(e_temp[j], j);   
         }
 }
 
@@ -1549,6 +1579,27 @@ void MainScreenView::BMU30_clicked()
  }
 
 
+ void MainScreenView::gettime()
+ {
+#ifndef SIMULATOR
+     struct tm* current_time = rtc_get_localtime();
+     current_time->tm_hour = current_time->tm_hour + 8;
+     if (current_time->tm_hour > 23) current_time->tm_hour -= 24;
+     if (current_time != NULL) {
+         sprintf(testtime, "%02d:%02d:%02d", current_time->tm_hour, current_time->tm_min, current_time->tm_sec); //打印时间
+         //printf("Current local time: %02d:%02d:%02d %02d/%02d/%04d\n",
+         //    current_time->tm_hour, current_time->tm_min, current_time->tm_sec,
+         //    current_time->tm_mon + 1, current_time->tm_mday, current_time->tm_year + 1900);
+     }
+     else {
+         sprintf(testtime, "%s", "NO Internet\0");
+     }
+     Unicode::strncpy(u_time, testtime, 128);
+#endif // !SIMULATOR
+
+ }
+
+
 #ifndef SIMULATOR
 //model更改通知UI
 void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
@@ -1858,23 +1909,23 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
   int err_counter = 0;
   int err_sum = 0;
-  struct tm* current_time = rtc_get_localtime();
-
-  if (current_time != NULL) {
-      sprintf(testtime, "%02d:%02d:%02d", current_time->tm_hour, current_time->tm_min, current_time->tm_sec); //打印时间
-      //printf("Current local time: %02d:%02d:%02d %02d/%02d/%04d\n",
-      //    current_time->tm_hour, current_time->tm_min, current_time->tm_sec,
-      //    current_time->tm_mon + 1, current_time->tm_mday, current_time->tm_year + 1900);
-  }
-  else {
-      sprintf(testtime,"%s","NO Internet\0");
-  }
+  
   //Client_Sd[cluster_num].error_count
   //Client_errors[cluster_num][MAX_ERROR]
- Unicode::strncpy(u_time, testtime, 128);
-
+ //gettime();
+ //for (int i = 0;i < errcount;i++)
+ //{
+ //    /*touchgfx::Unicode::snprintf(e_gen_Buffer[i], 10, "%d", 12);*/
+ //    e_gen[i].setTypedText(touchgfx::TypedText(T_BSMU_ERR1));
+ //    id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板    
+ //    Unicode::snprintf(t_gen_Buffer[i], 10, "%s", u_time);
+ //    t_gen[i].resizeToCurrentText();
+ //    id_gen[i].resizeToCurrentText();
+ //    e_gen[i].resizeToCurrentText();
+ //}
 
   //计算总错误数量并决定是否输出
+
   for (int m = 0;m < cluster_num;m++)
   {
       err_sum += Client_Sd[cluster_num].error_count;
@@ -1897,10 +1948,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                       {
                           if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                           {
-                              if (err_counter >= 20) err_counter = err_counter % 20;
-                              Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-                              id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE0)); //错误板             
-                              inf[err_counter]->setTypedText(touchgfx::TypedText(T_BSMU_ERR0 - j)); //错误类型
+                              if (err_counter >= errcount) err_counter = err_counter % errcount;
+                              gettime();
+                              Unicode::snprintf(t_gen_Buffer[err_counter], 10, "%s", u_time);//打印错误时间
+                              id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE0)); //错误板             
+                              e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BSMU_ERR0 - j)); //错误类型
                               err_counter++;
                           }
                       }
@@ -1926,10 +1978,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                               }
                               else if (get_two_bit_value(Client_errors[k][i].error_code, j + 1) == 3)//预警过，故障发生
                               {
-                                  if (err_counter >= 20) err_counter = err_counter % 20;
-                                  Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-                                  id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
-                                  inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
+                                  if (err_counter >= errcount) err_counter = err_counter % errcount;
+                                  gettime();
+                                  Unicode::snprintf(t_gen_Buffer[err_counter], 10, "%s", u_time);//打印错误时间
+                                  id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
+                                  e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
                                   err_counter++;
                               }
 
@@ -1945,10 +1998,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                               }
                               else if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1) //无故障
                               {
-                                  if (err_counter >= 20) err_counter = err_counter % 20;
-                                  Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-                                  id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
-                                  inf[err_counter]->setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
+                                  if (err_counter >= errcount) err_counter = err_counter % errcount;
+                                  gettime();
+                                  Unicode::snprintf(t_gen_Buffer[err_counter], 10, "%s", u_time);//打印错误时间
+                                  id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
+                                  e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
                                   err_counter++;
                               }
                           }
@@ -1965,10 +2019,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                       {
                           if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                           {
-                              if (err_counter >= 20) err_counter = err_counter % 20;
-                              Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-                              id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE2)); //错误板   
-                              inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
+                              if (err_counter >= errcount) err_counter = err_counter % errcount;
+                              gettime();
+                              Unicode::snprintf(t_gen_Buffer[err_counter], 10, "%s", u_time);//打印错误时间
+                              id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE2)); //错误板   
+                              e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
                               err_counter++;
                           }
                       }
@@ -1979,10 +2034,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                       {
                           if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                           {
-                              if (err_counter >= 20) err_counter = err_counter % 20;
-                              Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-                              id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板   
-                              inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
+                              if (err_counter >= errcount) err_counter = err_counter % errcount;
+                              gettime();
+                              Unicode::snprintf(t_gen_Buffer[err_counter], 10, "%s", u_time);//打印错误时间
+                              id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板   
+                              e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
                               err_counter++;
                           }
                       }
@@ -1998,10 +2054,11 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                       {
                           if (get_one_bit_value(Client_errors[k][i].error_code, j + 1) == 1)
                           {
-                              if (err_counter >= 20) err_counter = err_counter % 20;
-                              Unicode::snprintf(tim[err_counter], 20, "%s", u_time);//打印错误时间
-                              id_wild[err_counter]->setTypedText(touchgfx::TypedText(T_ERR_TYPE4)); //错误板   
-                              inf[err_counter]->setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
+                              if (err_counter >= errcount) err_counter = err_counter % errcount;
+                              gettime();
+                              Unicode::snprintf(t_gen_Buffer[err_counter], 10, "%s", u_time);//打印错误时间
+                              id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE4)); //错误板   
+                              e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
                               err_counter++;
                           }
                       }
@@ -2013,6 +2070,12 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   }
   else if (err_sum == 0)
   {
+      for (int i = 0;i < errcount;i++)
+      {
+          Unicode::snprintf(t_gen_Buffer[1], 10, "%c", ' ');
+          Unicode::snprintf(id_gen_Buffer[1], 10, "%c", ' ');
+          Unicode::snprintf(e_gen_Buffer[1], 10, "%c", ' ');
+      }
       scrollableContainer1.setVisible(false);
       scrollableContainer1.invalidate();
   }

@@ -11,6 +11,9 @@
 #define online 1
 #define offline 0
 
+//显示的错误信息数量
+#define errcount 50
+
 class BMUMenuCallback_t : public GenericCallback<const SlideMenu&>
 {
 public:
@@ -108,7 +111,8 @@ public:
     virtual uint8_t get_one_bit_value(uint16_t src, uint8_t bit_num);
     virtual uint8_t get_two_bit_value(uint16_t src, uint8_t bit_num);
 
-    virtual void inf_play(TextArea* a,int b);
+    virtual void inf_play(TextAreaWithOneWildcard* a,int b);
+    virtual void gettime(void);
     //uint8_t bufSize;
     //uint8_t * textBuf;
 
@@ -153,7 +157,7 @@ protected:
     Unicode::UnicodeChar u_time[128];
     uint8_t u_id[128];
 
-    uint16_t movecounter[20];
+    uint16_t movecounter[errcount];
     uint16_t move;
     int direction ;
     //TextAreaWithOneWildcard time[30];
@@ -171,11 +175,21 @@ protected:
  
     //touchgfx::Unicode::UnicodeChar err_typeBuffer[ERR_SIZE];
 
-    touchgfx::TextAreaWithTwoWildcards test2;
-    static const uint16_t TEST2BUFFER1_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar test2Buffer1[TEST2BUFFER1_SIZE];
-    static const uint16_t TEST2BUFFER2_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar test2Buffer2[TEST2BUFFER2_SIZE];
+
+
+
+    touchgfx::TextAreaWithOneWildcard t_gen[errcount];
+    touchgfx::TextAreaWithOneWildcard id_gen[errcount];
+    touchgfx::TextAreaWithOneWildcard e_gen[errcount];
+    touchgfx::TextAreaWithOneWildcard* e_temp[errcount];
+    static const uint16_t t_gen_size = 10;
+    touchgfx::Unicode::UnicodeChar t_gen_Buffer[errcount][t_gen_size];
+
+    static const uint16_t id_gen_size = 10;
+    touchgfx::Unicode::UnicodeChar id_gen_Buffer[errcount][id_gen_size];
+
+    static const uint16_t e_gen_size = 10;
+    touchgfx::Unicode::UnicodeChar e_gen_Buffer[errcount][e_gen_size];
 };
 
 #endif // MAINSCREENVIEW_HPP

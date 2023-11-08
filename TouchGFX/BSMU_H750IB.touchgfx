@@ -7,9 +7,9 @@
           {
             "Type": "Box",
             "Name": "box2",
-            "Y": 80,
+            "Y": 65,
             "Width": 1024,
-            "Height": 520,
+            "Height": 533,
             "LockPosition": true,
             "Color": {
               "Red": 156,
@@ -21,7 +21,7 @@
             "Type": "Box",
             "Name": "box1",
             "Width": 1024,
-            "Height": 80,
+            "Height": 78,
             "LockPosition": true,
             "Color": {
               "Red": 237,
@@ -52,7 +52,6 @@
             "Y": 11,
             "Width": 160,
             "Height": 56,
-            "Visible": false,
             "TextId": "__SingleUse_N2DW",
             "TextRotation": "0",
             "AutoSize": true
@@ -3711,9 +3710,9 @@
                         "Type": "Container",
                         "Name": "err_inf",
                         "X": 539,
-                        "Y": 2,
+                        "Y": 3,
                         "Width": 392,
-                        "Height": 649,
+                        "Height": 500,
                         "Components": [
                           {
                             "Type": "TextArea",
@@ -3722,6 +3721,7 @@
                             "Y": 595,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_D2G8",
                             "TextRotation": "0",
                             "Color": {
@@ -3736,6 +3736,7 @@
                             "Y": 565,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_TKYM",
                             "TextRotation": "0",
                             "Color": {
@@ -3750,6 +3751,7 @@
                             "Y": 535,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_NICD",
                             "TextRotation": "0",
                             "Color": {
@@ -3764,6 +3766,7 @@
                             "Y": 505,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_JR6T",
                             "TextRotation": "0",
                             "Color": {
@@ -3778,6 +3781,7 @@
                             "Y": 475,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_L6F8",
                             "TextRotation": "0",
                             "Color": {
@@ -3792,6 +3796,7 @@
                             "Y": 445,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_4GUV",
                             "TextRotation": "0",
                             "Color": {
@@ -3806,6 +3811,7 @@
                             "Y": 415,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_X2WE",
                             "TextRotation": "0",
                             "Color": {
@@ -3820,6 +3826,7 @@
                             "Y": 385,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_LSKX",
                             "TextRotation": "0",
                             "Color": {
@@ -3834,6 +3841,7 @@
                             "Y": 355,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_SRAE",
                             "TextRotation": "0",
                             "Color": {
@@ -3848,6 +3856,7 @@
                             "Y": 325,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_LA3L",
                             "TextRotation": "0",
                             "Color": {
@@ -3862,6 +3871,7 @@
                             "Y": 295,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_66UM",
                             "TextRotation": "0",
                             "Color": {
@@ -3876,6 +3886,7 @@
                             "Y": 265,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_BFR0",
                             "TextRotation": "0",
                             "Color": {
@@ -3890,6 +3901,7 @@
                             "Y": 235,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_3VMC",
                             "TextRotation": "0",
                             "Color": {
@@ -3904,6 +3916,7 @@
                             "Y": 205,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_FTB7",
                             "TextRotation": "0",
                             "Color": {
@@ -3918,6 +3931,7 @@
                             "Y": 175,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_IUK1",
                             "TextRotation": "0",
                             "Color": {
@@ -3932,6 +3946,7 @@
                             "Y": 145,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_TOVZ",
                             "TextRotation": "0",
                             "Color": {
@@ -3946,6 +3961,7 @@
                             "Y": 115,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_7GVU",
                             "TextRotation": "0",
                             "Color": {
@@ -3960,6 +3976,7 @@
                             "Y": 85,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_YSP9",
                             "TextRotation": "0",
                             "Color": {
@@ -3974,6 +3991,7 @@
                             "Y": 55,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_VGDS",
                             "TextRotation": "0",
                             "Color": {
@@ -3988,23 +4006,13 @@
                             "Y": 25,
                             "Width": 320,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_OJPI",
                             "TextRotation": "0",
                             "Color": {
                               "Red": 255
                             },
                             "Moveable": true
-                          },
-                          {
-                            "Type": "TextArea",
-                            "Name": "textArea2",
-                            "X": 149,
-                            "Y": -3,
-                            "Width": 103,
-                            "Height": 31,
-                            "TextId": "__SingleUse_MCEE",
-                            "TextRotation": "0",
-                            "AutoSize": true
                           }
                         ]
                       },
@@ -4014,7 +4022,7 @@
                         "X": 289,
                         "Y": 2,
                         "Width": 250,
-                        "Height": 649,
+                        "Height": 500,
                         "Components": [
                           {
                             "Type": "TextArea",
@@ -4023,6 +4031,7 @@
                             "Y": 595,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_8ICB",
                             "TextRotation": "0",
                             "Color": {
@@ -4041,6 +4050,7 @@
                             "Y": 565,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_IZFX",
                             "TextRotation": "0",
                             "Color": {
@@ -4059,6 +4069,7 @@
                             "Y": 535,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_9G86",
                             "TextRotation": "0",
                             "Color": {
@@ -4077,6 +4088,7 @@
                             "Y": 505,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_5CET",
                             "TextRotation": "0",
                             "Color": {
@@ -4095,6 +4107,7 @@
                             "Y": 475,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_2TSA",
                             "TextRotation": "0",
                             "Color": {
@@ -4113,6 +4126,7 @@
                             "Y": 445,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_DWW4",
                             "TextRotation": "0",
                             "Color": {
@@ -4131,6 +4145,7 @@
                             "Y": 415,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_BKJ1",
                             "TextRotation": "0",
                             "Color": {
@@ -4149,6 +4164,7 @@
                             "Y": 385,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_TDDF",
                             "TextRotation": "0",
                             "Color": {
@@ -4167,6 +4183,7 @@
                             "Y": 355,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_Z6T4",
                             "TextRotation": "0",
                             "Color": {
@@ -4185,6 +4202,7 @@
                             "Y": 325,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_4QGJ",
                             "TextRotation": "0",
                             "Color": {
@@ -4203,6 +4221,7 @@
                             "Y": 295,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_89NE",
                             "TextRotation": "0",
                             "Color": {
@@ -4221,6 +4240,7 @@
                             "Y": 265,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_7R9M",
                             "TextRotation": "0",
                             "Color": {
@@ -4239,6 +4259,7 @@
                             "Y": 235,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_VVI7",
                             "TextRotation": "0",
                             "Color": {
@@ -4257,6 +4278,7 @@
                             "Y": 205,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_UEI1",
                             "TextRotation": "0",
                             "Color": {
@@ -4275,6 +4297,7 @@
                             "Y": 175,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_QDEL",
                             "TextRotation": "0",
                             "Color": {
@@ -4293,6 +4316,7 @@
                             "Y": 145,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_OKYQ",
                             "TextRotation": "0",
                             "Color": {
@@ -4311,6 +4335,7 @@
                             "Y": 115,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_XK40",
                             "TextRotation": "0",
                             "Color": {
@@ -4329,6 +4354,7 @@
                             "Y": 85,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_ND48",
                             "TextRotation": "0",
                             "Color": {
@@ -4347,6 +4373,7 @@
                             "Y": 55,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_GCXE",
                             "TextRotation": "0",
                             "Color": {
@@ -4365,6 +4392,7 @@
                             "Y": 25,
                             "Width": 210,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_FB71",
                             "TextRotation": "0",
                             "Color": {
@@ -4375,24 +4403,15 @@
                               "UseBuffer": true,
                               "BufferSize": 10
                             }
-                          },
-                          {
-                            "Type": "TextArea",
-                            "Name": "textArea1",
-                            "X": 8,
-                            "Width": 101,
-                            "Height": 31,
-                            "TextId": "__SingleUse_WQNC",
-                            "TextRotation": "0",
-                            "AutoSize": true
                           }
                         ]
                       },
                       {
                         "Type": "Container",
                         "Name": "err_time",
+                        "Y": -1,
                         "Width": 239,
-                        "Height": 651,
+                        "Height": 500,
                         "Components": [
                           {
                             "Type": "TextArea",
@@ -4401,6 +4420,7 @@
                             "Y": 595,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_I979",
                             "TextRotation": "0",
                             "Color": {
@@ -4419,6 +4439,7 @@
                             "Y": 565,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_ZNOA",
                             "TextRotation": "0",
                             "Color": {
@@ -4437,6 +4458,7 @@
                             "Y": 535,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_YS7L",
                             "TextRotation": "0",
                             "Color": {
@@ -4455,6 +4477,7 @@
                             "Y": 505,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_TVE7",
                             "TextRotation": "0",
                             "Color": {
@@ -4473,6 +4496,7 @@
                             "Y": 475,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_5XQ9",
                             "TextRotation": "0",
                             "Color": {
@@ -4491,6 +4515,7 @@
                             "Y": 445,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_NY0C",
                             "TextRotation": "0",
                             "Color": {
@@ -4509,6 +4534,7 @@
                             "Y": 415,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_DE9M",
                             "TextRotation": "0",
                             "Color": {
@@ -4527,6 +4553,7 @@
                             "Y": 385,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_L2ZG",
                             "TextRotation": "0",
                             "Color": {
@@ -4545,6 +4572,7 @@
                             "Y": 355,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_OIUX",
                             "TextRotation": "0",
                             "Color": {
@@ -4563,6 +4591,7 @@
                             "Y": 325,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_UG9A",
                             "TextRotation": "0",
                             "Color": {
@@ -4581,6 +4610,7 @@
                             "Y": 295,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_KLZO",
                             "TextRotation": "0",
                             "Color": {
@@ -4599,6 +4629,7 @@
                             "Y": 265,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_FD4V",
                             "TextRotation": "0",
                             "Color": {
@@ -4617,6 +4648,7 @@
                             "Y": 235,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_82AJ",
                             "TextRotation": "0",
                             "Color": {
@@ -4635,6 +4667,7 @@
                             "Y": 205,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_ZVOT",
                             "TextRotation": "0",
                             "Color": {
@@ -4653,6 +4686,7 @@
                             "Y": 175,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_J55U",
                             "TextRotation": "0",
                             "Color": {
@@ -4671,6 +4705,7 @@
                             "Y": 145,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_OHZR",
                             "TextRotation": "0",
                             "Color": {
@@ -4689,6 +4724,7 @@
                             "Y": 115,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_O1HZ",
                             "TextRotation": "0",
                             "Color": {
@@ -4707,6 +4743,7 @@
                             "Y": 85,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_9JAV",
                             "TextRotation": "0",
                             "Color": {
@@ -4725,6 +4762,7 @@
                             "Y": 55,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_VDPZ",
                             "TextRotation": "0",
                             "Color": {
@@ -4743,6 +4781,7 @@
                             "Y": 25,
                             "Width": 160,
                             "Height": 30,
+                            "Visible": false,
                             "TextId": "__SingleUse_QAG6",
                             "TextRotation": "0",
                             "Color": {
@@ -4753,17 +4792,37 @@
                               "UseBuffer": true,
                               "BufferSize": 10
                             }
-                          },
-                          {
-                            "Type": "TextArea",
-                            "Name": "baojing_biaoti",
-                            "X": 20,
-                            "Width": 97,
-                            "Height": 30,
-                            "TextId": "__SingleUse_CFYG",
-                            "TextRotation": "0"
                           }
                         ]
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "baojing_biaoti",
+                        "X": 20,
+                        "Width": 97,
+                        "Height": 30,
+                        "TextId": "__SingleUse_CFYG",
+                        "TextRotation": "0"
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "textArea1",
+                        "X": 298,
+                        "Width": 101,
+                        "Height": 31,
+                        "TextId": "__SingleUse_WQNC",
+                        "TextRotation": "0",
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "textArea2",
+                        "X": 693,
+                        "Width": 103,
+                        "Height": 31,
+                        "TextId": "__SingleUse_MCEE",
+                        "TextRotation": "0",
+                        "AutoSize": true
                       }
                     ]
                   }
@@ -4776,6 +4835,7 @@
             "Name": "test",
             "Width": 57,
             "Height": 31,
+            "Visible": false,
             "TextId": "__SingleUse_R4DJ",
             "TextRotation": "0",
             "AutoSize": true,
