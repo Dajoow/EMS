@@ -52,6 +52,7 @@
             "Y": 11,
             "Width": 160,
             "Height": 56,
+            "Visible": false,
             "TextId": "__SingleUse_N2DW",
             "TextRotation": "0",
             "AutoSize": true
@@ -4769,6 +4770,25 @@
                 ]
               }
             ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "test",
+            "Width": 57,
+            "Height": 31,
+            "TextId": "__SingleUse_R4DJ",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_BK4Z",
+              "UseBuffer": true,
+              "BufferSize": 10
+            },
+            "Wildcard2": {
+              "TextId": "__SingleUse_X9DH",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
           }
         ],
         "Interactions": [

@@ -170,6 +170,12 @@ protected:
     //touchgfx::Unicode::UnicodeChar timeBuffer[ERR_SIZE];
  
     //touchgfx::Unicode::UnicodeChar err_typeBuffer[ERR_SIZE];
+
+    touchgfx::TextAreaWithTwoWildcards test2;
+    static const uint16_t TEST2BUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar test2Buffer1[TEST2BUFFER1_SIZE];
+    static const uint16_t TEST2BUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar test2Buffer2[TEST2BUFFER2_SIZE];
 };
 
 #endif // MAINSCREENVIEW_HPP

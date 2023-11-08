@@ -584,6 +584,7 @@ protected:
     touchgfx::TextAreaWithOneWildcard err_time1;
     touchgfx::TextAreaWithOneWildcard err_time0;
     touchgfx::TextArea baojing_biaoti;
+    touchgfx::TextAreaWithTwoWildcards test;
 
     /*
      * Wildcard Buffers
@@ -792,6 +793,10 @@ protected:
     touchgfx::Unicode::UnicodeChar err_time1Buffer[ERR_TIME1_SIZE];
     static const uint16_t ERR_TIME0_SIZE = 10;
     touchgfx::Unicode::UnicodeChar err_time0Buffer[ERR_TIME0_SIZE];
+    static const uint16_t TESTBUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar testBuffer1[TESTBUFFER1_SIZE];
+    static const uint16_t TESTBUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar testBuffer2[TESTBUFFER2_SIZE];
 
 private:
 
