@@ -142,11 +142,7 @@ protected:
     touchgfx::TextAreaWithOneWildcard* id_wild[30];
     touchgfx::BoxProgress* SOC_view[12];
 
-    //touchgfx::TextArea* id[30];
-    //touchgfx::TextArea* [30];
 
-    //Unicode::UnicodeChar chinese_buf[10];
- /*   SettingView& dskjsk;*/
     int tickCounter;
     int digitalHours;
     int digitalMinutes;
@@ -160,36 +156,24 @@ protected:
     uint16_t movecounter[errcount];
     uint16_t move;
     int direction ;
-    //TextAreaWithOneWildcard time[30];
-
-    //touchgfx::TextAreaWithOneWildcard err_num1;
-    //static const uint16_t ERR_NUM1_SIZE = 10;
-    //touchgfx::Unicode::UnicodeChar err_num1Buffer[ERR_NUM1_SIZE];
-
-  
-
- /*   TextAreaWithOneWildcard err_type[30];*/
-   
-
-    //touchgfx::Unicode::UnicodeChar timeBuffer[ERR_SIZE];
- 
-    //touchgfx::Unicode::UnicodeChar err_typeBuffer[ERR_SIZE];
-
-
-
 
     touchgfx::TextAreaWithOneWildcard t_gen[errcount];
     touchgfx::TextAreaWithOneWildcard id_gen[errcount];
     touchgfx::TextAreaWithOneWildcard e_gen[errcount];
     touchgfx::TextAreaWithOneWildcard* e_temp[errcount];
-    static const uint16_t t_gen_size = 10;
+    static const uint16_t t_gen_size = 20;
     touchgfx::Unicode::UnicodeChar t_gen_Buffer[errcount][t_gen_size];
 
-    static const uint16_t id_gen_size = 10;
+    static const uint16_t id_gen_size = 20;
     touchgfx::Unicode::UnicodeChar id_gen_Buffer[errcount][id_gen_size];
 
-    static const uint16_t e_gen_size = 10;
+    static const uint16_t e_gen_size = 20;
     touchgfx::Unicode::UnicodeChar e_gen_Buffer[errcount][e_gen_size];
+
+    uint8_t* type[errcount];
+    char id_temp[128];
+    Unicode::UnicodeChar id_uni[128];
+    Unicode::UnicodeChar u_di[10];
 };
 
 #endif // MAINSCREENVIEW_HPP

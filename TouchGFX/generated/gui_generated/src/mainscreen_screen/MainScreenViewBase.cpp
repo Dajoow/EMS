@@ -1767,7 +1767,7 @@ MainScreenViewBase::MainScreenViewBase() :
     scrollableContainer1.enableHorizontalScroll(false);
     scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     scrollableContainer1.setScrollbarsAlpha(255);
-    err_inf.setPosition(539, 3, 392, 500);
+    err_inf.setPosition(539, 0, 392, 500);
     err_inf19.setPosition(40, 595, 320, 30);
     err_inf19.setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
     err_inf19.setLinespacing(0);
@@ -1910,7 +1910,7 @@ MainScreenViewBase::MainScreenViewBase() :
 
     scrollableContainer1.add(err_inf);
 
-    err_id.setPosition(289, 2, 250, 500);
+    err_id.setPosition(190, 0, 349, 500);
     err_id19.setPosition(9, 595, 210, 30);
     err_id19.setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
     err_id19.setLinespacing(0);
@@ -2093,7 +2093,7 @@ MainScreenViewBase::MainScreenViewBase() :
 
     scrollableContainer1.add(err_id);
 
-    err_time.setPosition(0, -1, 239, 500);
+    err_time.setPosition(0, 0, 190, 503);
     err_time19.setPosition(30, 595, 160, 30);
     err_time19.setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
     err_time19.setLinespacing(0);
@@ -2282,7 +2282,7 @@ MainScreenViewBase::MainScreenViewBase() :
     baojing_biaoti.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CFYG));
     scrollableContainer1.add(baojing_biaoti);
 
-    textArea1.setXY(298, 0);
+    textArea1.setXY(246, -1);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WQNC));

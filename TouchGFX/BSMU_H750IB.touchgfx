@@ -3113,7 +3113,7 @@
                     "Name": "IP2",
                     "X": 152,
                     "Y": 134,
-                    "Width": 20,
+                    "Width": 19,
                     "Height": 34,
                     "TextId": "__SingleUse_MN9S",
                     "TextRotation": "0",
@@ -3710,7 +3710,6 @@
                         "Type": "Container",
                         "Name": "err_inf",
                         "X": 539,
-                        "Y": 3,
                         "Width": 392,
                         "Height": 500,
                         "Components": [
@@ -4019,9 +4018,8 @@
                       {
                         "Type": "Container",
                         "Name": "err_id",
-                        "X": 289,
-                        "Y": 2,
-                        "Width": 250,
+                        "X": 190,
+                        "Width": 349,
                         "Height": 500,
                         "Components": [
                           {
@@ -4409,9 +4407,8 @@
                       {
                         "Type": "Container",
                         "Name": "err_time",
-                        "Y": -1,
-                        "Width": 239,
-                        "Height": 500,
+                        "Width": 190,
+                        "Height": 503,
                         "Components": [
                           {
                             "Type": "TextArea",
@@ -4807,7 +4804,8 @@
                       {
                         "Type": "TextArea",
                         "Name": "textArea1",
-                        "X": 298,
+                        "X": 246,
+                        "Y": -1,
                         "Width": 101,
                         "Height": 31,
                         "TextId": "__SingleUse_WQNC",
