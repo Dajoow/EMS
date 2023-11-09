@@ -2000,7 +2000,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                                   if (err_counter >= errcount) err_counter = err_counter % errcount;
                                   gettime();
                                   Unicode::snprintf(t_gen_Buffer[err_counter], 20, "%s", u_time);//打印错误时间                                 
-                                  sprintf(id_temp, "第%d簇BCMU错误(预警)", k); //char 类型
+                                  sprintf(id_temp, "第%d簇BCMU错误(预警)", k+1); //char 类型
                                   Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[err_counter], 20);//touchgfx仅支持显示unicode类型
                                   //id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
                                   e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
@@ -2014,7 +2014,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                                   if (err_counter >= errcount) err_counter = err_counter % errcount;
                                   gettime();
                                   Unicode::snprintf(t_gen_Buffer[err_counter], 20, "%s", u_time);//打印错误时间                                 
-                                  sprintf(id_temp, "第%d簇BCMU错误(故障)", k); //char 类型
+                                  sprintf(id_temp, "第%d簇BCMU错误(故障)", k+1); //char 类型
                                   Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[err_counter], 20);//touchgfx仅支持显示unicode类型
                                   //id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
                                   e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BCMU_ERR_2BIT_0 - j));
@@ -2039,7 +2039,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                                   if (err_counter >= errcount) err_counter = err_counter % errcount;
                                   gettime();
                                   Unicode::snprintf(t_gen_Buffer[err_counter], 20, "%s", u_time);//打印错误时间
-                                  sprintf(id_temp, "第%d簇BCMU错误", k); //char 类型
+                                  sprintf(id_temp, "第%d簇BCMU错误", k+1); //char 类型
                                   Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[err_counter], 20);//touchgfx仅支持显示unicode类型
                                   //id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1)); //错误板    
                                   e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BCMU_ERR0 - j));
@@ -2065,7 +2065,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                               gettime();
                               Unicode::snprintf(t_gen_Buffer[err_counter], 20, "%s", u_time);//打印错误时间
                               //id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE2)); //错误板   
-                              sprintf(id_temp, "第%d簇BMU(组内)板错误", k);//char 类型
+                              sprintf(id_temp, "第%d簇%d组BMU(组内)板错误", k+1, Client_errors[k][i].error_id_h);//char 类型
                               Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[err_counter], 20);//touchgfx仅支持显示unicode类型
                               e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BMU_BOARD_ERR0 - j));
                              
@@ -2086,7 +2086,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                               gettime();
                               Unicode::snprintf(t_gen_Buffer[err_counter], 20, "%s", u_time);//打印错误时间
                               //id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板   
-                              sprintf(id_temp, "第%d簇%d组BMU(组内)%d号电池错误",k, Client_errors[k][i].error_id_h, Client_errors[k][i].error_id_l);//char 类型
+                              sprintf(id_temp, "第%d簇%d组BMU(组内)%d号电池错误",k+1, Client_errors[k][i].error_id_h, Client_errors[k][i].error_id_l);//char 类型
                               Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[err_counter], 20);//touchgfx仅支持显示unicode类型
                               e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BMU_BATTERY_ERR0 - j));
 
@@ -2110,7 +2110,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                               gettime();
                               Unicode::snprintf(t_gen_Buffer[err_counter], 20, "%s", u_time);//打印错误时间
                               //id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE4)); //错误板 
-                              sprintf(id_temp, "第%d簇BMU(组间错误)", k);//char 类型
+                              sprintf(id_temp, "第%d簇BMU(组间错误)", k+1);//char 类型
                               Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[err_counter], 20);//touchgfx仅支持显示unicode类型
                               e_gen[err_counter].setTypedText(touchgfx::TypedText(T_BMU_BETWEEN_ERR0 - j));
                               t_gen[err_counter].resizeToCurrentText(); //调整文本大小以正常显示
