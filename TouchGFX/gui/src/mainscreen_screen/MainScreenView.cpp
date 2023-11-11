@@ -1955,7 +1955,13 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   {
       scrollableContainer1.setVisible(true); //错误显示区域使能
       scrollableContainer1.invalidate();
-
+      for (int i = 0;i < errcount;i++)
+      {
+          Unicode::snprintf(t_gen_Buffer[1], 10, "%c", ' ');
+          Unicode::snprintf(id_gen_Buffer[1], 10, "%c", ' ');
+          Unicode::snprintf(e_gen_Buffer[1], 10, "%c", ' ');
+      }
+      scrollableContainer1.invalidate();
       /*共五种错误信息格式：
       1、BSMU错误
       2、第X簇BCMU错误，其中位宽为2的信息 00 无故障   01和11均有故障  10预警
