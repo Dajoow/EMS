@@ -142,7 +142,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard* id_wild[30];
     touchgfx::BoxProgress* SOC_view[12];
 
-
     int tickCounter;
     int digitalHours;
     int digitalMinutes;

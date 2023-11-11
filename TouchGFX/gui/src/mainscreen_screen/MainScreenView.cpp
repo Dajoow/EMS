@@ -28,7 +28,6 @@ MainScreenView::MainScreenView()
 {
   counter = 0;
   counter2 = 1;
-
   /*这里还要判断没有接入电池簇和第一簇是哪个*/
   viewToModelData.BCMU_SEL = 1;   //1-20
   viewToModelData.BMU_SEL = 1;    //1-30
@@ -1887,8 +1886,35 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
           BCMU[i]->setTouchable(true);
           BCMU_Container.invalidate();
       }
-  
   }
+
+ 
+      if (modelToViewData.BCMU_state[viewToModelData.BCMU_SEL - 1] == online)//当前选中的BCMU使能，刷新其BMU的状态
+      {
+          for (int i = 0;i < 30;i++)
+          {
+              if (bmu_offline[viewToModelData.BCMU_SEL - 1][i] == 0)//0表示在线，非0离线)
+              {
+                  BMU[i]->setLabelText(touchgfx::TypedText(T_BMU1 + i));
+                  BMU[i]->setTouchable(true);
+              }
+              else
+              {
+                  BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+                  BMU[i]->setTouchable(false);
+              }
+          }
+      }  
+      else if (modelToViewData.BCMU_state[viewToModelData.BCMU_SEL - 1] == offline)
+      {
+          for (int i = 0;i < 30;i++)
+          {
+                  BMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+                  BMU[i]->setTouchable(false);             
+          }
+      }
+  
+  
 
 
 
