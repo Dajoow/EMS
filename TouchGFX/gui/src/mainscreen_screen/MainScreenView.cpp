@@ -2161,9 +2161,9 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   {
       for (int i = 0;i < errcount;i++)
       {
-          Unicode::snprintf(t_gen_Buffer[1], 10, "%c", ' ');
-          Unicode::snprintf(id_gen_Buffer[1], 10, "%c", ' ');
-          Unicode::snprintf(e_gen_Buffer[1], 10, "%c", ' ');
+          Unicode::snprintf(t_gen_Buffer[i], 10, "%c", ' ');
+          Unicode::snprintf(id_gen_Buffer[i], 10, "%c", ' ');
+          Unicode::snprintf(e_gen_Buffer[i], 10, "%c", ' ');
       }
       scrollableContainer1.setVisible(false);
       scrollableContainer1.invalidate();

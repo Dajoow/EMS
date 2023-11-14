@@ -26,7 +26,7 @@ SettingViewBase::SettingViewBase() :
     add(background);
 
     daohanglan.setPosition(-2, -2, 1023, 207);
-    save_all.setXY(561, 32);
+    save_all.setXY(108, 53);
     save_all.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     save_all.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OIA8));
     save_all.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -42,7 +42,7 @@ SettingViewBase::SettingViewBase() :
     start.setVisible(false);
     daohanglan.add(start);
 
-    cancel.setXY(799, 32);
+    cancel.setXY(369, 53);
     cancel.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     cancel.setLabelText(touchgfx::TypedText(T___SINGLEUSE_IGM4));
     cancel.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -521,17 +521,18 @@ SettingViewBase::SettingViewBase() :
 
     add(rs485);
 
-    yunduan.setXY(276, 84);
+    yunduan.setXY(727, 63);
     yunduan.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_OFF_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_ON_DARK_ID));
     yunduan.setAction(buttonCallback);
     add(yunduan);
 
     local.setXY(81, 84);
     local.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_OFF_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_TOGGLEBUTTON_MEDIUM_ROUND_TEXT_ON_DARK_ID));
+    local.setVisible(false);
     local.setAction(buttonCallback);
     add(local);
 
-    textArea20.setXY(282, 25);
+    textArea20.setXY(578, 67);
     textArea20.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea20.setLinespacing(0);
     textArea20.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0VYU));
@@ -541,6 +542,7 @@ SettingViewBase::SettingViewBase() :
     textArea12.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea12.setLinespacing(0);
     textArea12.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BDOF));
+    textArea12.setVisible(false);
     add(textArea12);
 
     container1.setPosition(1, -2, 1023, 600);

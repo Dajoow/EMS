@@ -5517,8 +5517,8 @@
               {
                 "Type": "ButtonWithLabel",
                 "Name": "save_all",
-                "X": 561,
-                "Y": 32,
+                "X": 108,
+                "Y": 53,
                 "Width": 124,
                 "Height": 74,
                 "Pressed": "ipset_bj_pressed.png",
@@ -5550,8 +5550,8 @@
               {
                 "Type": "ButtonWithLabel",
                 "Name": "cancel",
-                "X": 799,
-                "Y": 32,
+                "X": 369,
+                "Y": 53,
                 "Width": 124,
                 "Height": 74,
                 "Pressed": "ipset_bj_pressed.png",
@@ -6482,8 +6482,8 @@
           {
             "Type": "ToggleButton",
             "Name": "yunduan",
-            "X": 276,
-            "Y": 84,
+            "X": 727,
+            "Y": 63,
             "Width": 138,
             "Height": 50,
             "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_on_dark.png",
@@ -6496,6 +6496,7 @@
             "Y": 84,
             "Width": 138,
             "Height": 50,
+            "Visible": false,
             "Pressed": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_on_dark.png",
             "Released": "__generated\\alternate_theme_images_widgets_togglebutton_medium_round_text_off_normal.png",
             "Clickable": true
@@ -6503,8 +6504,8 @@
           {
             "Type": "TextArea",
             "Name": "textArea20",
-            "X": 282,
-            "Y": 25,
+            "X": 578,
+            "Y": 67,
             "Width": 120,
             "Height": 42,
             "TextId": "__SingleUse_0VYU",
@@ -6518,6 +6519,7 @@
             "Y": 25,
             "Width": 120,
             "Height": 42,
+            "Visible": false,
             "TextId": "__SingleUse_BDOF",
             "TextRotation": "0",
             "AutoSize": true
