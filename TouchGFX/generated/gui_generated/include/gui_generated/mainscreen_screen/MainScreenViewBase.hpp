@@ -308,8 +308,8 @@ protected:
     touchgfx::TextArea CELL12_Name;
     touchgfx::BoxProgress SOC1_view;
     touchgfx::BoxProgress SOC2_view;
-    touchgfx::BoxProgress SOC3_view;
     touchgfx::BoxProgress SOC4_view;
+    touchgfx::BoxProgress SOC3_view;
     touchgfx::BoxProgress SOC5_view;
     touchgfx::BoxProgress SOC6_view;
     touchgfx::BoxProgress SOC7_view;

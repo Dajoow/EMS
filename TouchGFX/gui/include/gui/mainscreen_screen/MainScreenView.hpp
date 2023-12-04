@@ -129,9 +129,10 @@ protected:
     int counter2;
     BMUMenuCallback_t BMUMenuCallback;
 
-    char local_ip_buff[17];
-    char local_server_ip_buff[16];
-    char cloud_server_ip_buff[16];
+//显示ip信息
+    char local_ip_buff[17]; //本地ip
+    char local_server_ip_buff[16];//本地服务器
+    char cloud_server_ip_buff[16];//云端
     
     ButtonWithLabel* BCMU[20];
     ButtonWithLabel* BMU[30];
@@ -140,7 +141,7 @@ protected:
     touchgfx::Unicode::UnicodeChar* id[30];
     touchgfx::TextArea* inf[30];
     touchgfx::TextAreaWithOneWildcard* id_wild[30];
-    touchgfx::BoxProgress* SOC_view[12];
+    touchgfx::BoxProgress* SOC_view[12]; //soc进度条
 
     int tickCounter;
     int digitalHours;
@@ -156,7 +157,7 @@ protected:
     uint16_t move;
     int direction ;
 
-    touchgfx::TextAreaWithOneWildcard t_gen[errcount];
+    touchgfx::TextAreaWithOneWildcard t_gen[errcount];//动态显示错误信息
     touchgfx::TextAreaWithOneWildcard id_gen[errcount];
     touchgfx::TextAreaWithOneWildcard e_gen[errcount];
     touchgfx::TextAreaWithOneWildcard* e_temp[errcount];

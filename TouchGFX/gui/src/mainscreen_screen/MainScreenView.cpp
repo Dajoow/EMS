@@ -37,11 +37,12 @@ MainScreenView::MainScreenView()
   BMU_SEL_BOX.setVisible(false);
   /*setStateChangedCallback() 函数注册回调函数*/
   BMUMenu.setStateChangedCallback(BMUMenuCallback);
-  err_time.setHeight(errcount*25+25);
+  err_time.setHeight(errcount*25+25); //设置错误信息打印的显示区域
   err_id.setHeight(errcount*25+25);
   err_inf.setHeight(errcount * 25+25);
-	BCMU[0] = &BCMU1;
-    BCMU[1] = &BCMU2;
+
+	BCMU[0] = &BCMU1; //用指针数组指向组件，可以在代码中使用循环进行遍历操作
+    BCMU[1] = &BCMU2;//BCMU按键
     BCMU[2] = &BCMU3;
     BCMU[3] = &BCMU4;
     BCMU[4] = &BCMU5;
@@ -61,7 +62,7 @@ MainScreenView::MainScreenView()
     BCMU[18] = &BCMU19;
     BCMU[19] = &BCMU20;
 
-    BMU[0] = &BMU1;
+    BMU[0] = &BMU1;//BMU按键
     BMU[1] = &BMU2;
     BMU[2] = &BMU3;
     BMU[3] = &BMU4;
@@ -92,7 +93,7 @@ MainScreenView::MainScreenView()
     BMU[28] = &BMU29;
     BMU[29] = &BMU30;
 
-    SOC_view[0] = &SOC1_view;
+    SOC_view[0] = &SOC1_view;//SOC进度条
     SOC_view[1] = &SOC2_view;
     SOC_view[2] = &SOC3_view;
     SOC_view[3] = &SOC4_view;
@@ -105,7 +106,7 @@ MainScreenView::MainScreenView()
     SOC_view[10] = &SOC11_view;
     SOC_view[11] = &SOC12_view;
 
-    tim[0] = &err_time0Buffer[0];
+    tim[0] = &err_time0Buffer[0];//错误信息时间戳，在第一列
     tim[1] = &err_time1Buffer[0];
     tim[2] = &err_time2Buffer[0];
     tim[3] = &err_time3Buffer[0];
@@ -127,7 +128,7 @@ MainScreenView::MainScreenView()
     tim[19] = &err_time19Buffer[0];
 
 
-    id[0] = &err_id0Buffer[0];
+    id[0] = &err_id0Buffer[0];//错误信息id，之前测试用，现在没用到
     id[1] = &err_id1Buffer[0];
     id[2] = &err_id2Buffer[0];
     id[3] = &err_id3Buffer[0];
@@ -148,7 +149,7 @@ MainScreenView::MainScreenView()
     id[18] = &err_id18Buffer[0];
     id[19] = &err_id19Buffer[0];
 
-    id_wild[0] = &err_id0;
+    id_wild[0] = &err_id0;//错误信息id，现在使用wild动态通配符显示自定义类型，在第二列
     id_wild[1] = &err_id1;
     id_wild[2] = &err_id2;
     id_wild[3] = &err_id3;
@@ -171,7 +172,7 @@ MainScreenView::MainScreenView()
 
 
 
-    inf[0] = &err_inf0;
+    inf[0] = &err_inf0;//错误信息类型，在第三列
     inf[1] = &err_inf1;
     inf[2] = &err_inf2;
     inf[3] = &err_inf3;
@@ -193,7 +194,7 @@ MainScreenView::MainScreenView()
     inf[19] = &err_inf19;
 	
 	
-    for (int i = 0;i < errcount;i++)
+    for (int i = 0;i < errcount;i++) //初始化错误信息
     {
         t_gen[i].setXY(30, 25*(i+1));
         t_gen[i].setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
@@ -312,45 +313,6 @@ void MainScreenView::setupScreen()
 	//通知model更新数据
 	viewToModelData.reflashFlag = true;
 	presenter->ViewtoModelDat(viewToModelData);
-
-
-    
-    
-		/*err_info  a[]={
-		{0x00,0x01,0b1100000000000000},
-		{0x00,0x00,0x03},
-
- 
-		err_info  a[]={
-		{0x00,0x01,0xC000},
-		{0x00,0x00,0x01},
-
-		{0x00,0x01,0x01},
-		{0x00,0x02,0x01},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-        {0x00,0x01,0b1100000000000000},
-		};*/
 		
     for (int i = 0;i < 30;i++)
     {

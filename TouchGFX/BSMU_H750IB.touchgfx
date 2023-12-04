@@ -118,7 +118,6 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
-            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -611,7 +610,7 @@
                   },
                   {
                     "Type": "BoxProgress",
-                    "Name": "SOC3_view",
+                    "Name": "SOC4_view",
                     "X": 646,
                     "Y": 121,
                     "Width": 40,
@@ -631,7 +630,7 @@
                   },
                   {
                     "Type": "BoxProgress",
-                    "Name": "SOC4_view",
+                    "Name": "SOC3_view",
                     "X": 477,
                     "Y": 122,
                     "Width": 40,
@@ -2876,6 +2875,7 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
+            "Visible": false,
             "Components": [
               {
                 "Type": "Container",

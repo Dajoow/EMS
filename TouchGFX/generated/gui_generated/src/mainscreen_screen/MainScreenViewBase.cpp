@@ -56,7 +56,6 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
-    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
     S10_1.setPosition(263, 418, 22, 25);
     S10_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -303,16 +302,7 @@ MainScreenViewBase::MainScreenViewBase() :
     SOC2_view.setValue(100);
     batterygroup.add(SOC2_view);
 
-    SOC3_view.setXY(646, 121);
-    SOC3_view.setProgressIndicatorPosition(4, 9, 32, 68);
-    SOC3_view.setRange(0, 100);
-    SOC3_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
-    SOC3_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
-    SOC3_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
-    SOC3_view.setValue(100);
-    batterygroup.add(SOC3_view);
-
-    SOC4_view.setXY(477, 122);
+    SOC4_view.setXY(646, 121);
     SOC4_view.setProgressIndicatorPosition(4, 9, 32, 68);
     SOC4_view.setRange(0, 100);
     SOC4_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
@@ -320,6 +310,15 @@ MainScreenViewBase::MainScreenViewBase() :
     SOC4_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
     SOC4_view.setValue(100);
     batterygroup.add(SOC4_view);
+
+    SOC3_view.setXY(477, 122);
+    SOC3_view.setProgressIndicatorPosition(4, 9, 32, 68);
+    SOC3_view.setRange(0, 100);
+    SOC3_view.setDirection(touchgfx::AbstractDirectionProgress::UP);
+    SOC3_view.setBackground(touchgfx::Bitmap(BITMAP_BATTERY6_ID));
+    SOC3_view.setColor(touchgfx::Color::getColorFromRGB(63, 163, 0));
+    SOC3_view.setValue(100);
+    batterygroup.add(SOC3_view);
 
     SOC5_view.setXY(128, 245);
     SOC5_view.setProgressIndicatorPosition(4, 9, 32, 68);
@@ -1326,6 +1325,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
+    shouye.setVisible(false);
     PCS_menu.setPosition(810, 286, 219, 239);
     PCS_menu.setVisible(false);
     PCS_BG.setPosition(14, 2, 190, 218);
