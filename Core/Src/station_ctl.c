@@ -104,7 +104,6 @@ CalStationData (void)
   uint8_t OnlineNUM = 0;
 
   Client_Sd_Station.frame_header = FRAME_STATION_HEADER;
-  Client_Sd_Station.station_state = 20;
 
   // cal station voltage, current, SOC, SOH
   Client_Sd_Station.station_VOL = 0;
@@ -114,11 +113,11 @@ CalStationData (void)
       if (BCMU[i].OnlineOrOffline == Online)
         {
           OnlineNUM++;
-          Client_Sd_Station.station_VOL += Client_Sd[i].cluster_VOL / 10;
-          Client_Sd_Station.station_CUR += Client_Sd[i].cluster_CUR * CLU_CUR_UNIT;
+          Client_Sd_Station.station_VOL += Client_Sd[i].cluster_VOL;
+          Client_Sd_Station.station_CUR += Client_Sd[i].cluster_CUR;
 
-          Client_Sd_Station.station_SOC += Client_Sd[i].cluster_SOC / 10;
-          Client_Sd_Station.station_SOH += Client_Sd[i].cluster_SOH / 10;
+          Client_Sd_Station.station_SOC += Client_Sd[i].cluster_SOC;
+          Client_Sd_Station.station_SOH += Client_Sd[i].cluster_SOH;
         }
     }
 
@@ -141,6 +140,14 @@ CalStationData (void)
       }
 		}
 	}
+
+  if (Client_Sd_Station.charge_power > 0){
+    Client_Sd_Station.station_state = CLU_STATE_CHARGE;
+  } else if (Client_Sd_Station.discharge_power > 0){
+    Client_Sd_Station.station_state = CLU_STATE_DISCHARGE;
+  } else {
+    Client_Sd_Station.station_state = CLU_STATE_IDLE;
+  }
 
   Client_Sd_Station.checksum = TX_CheckSum (
       (uint32_t *)&Client_Sd_Station, sizeof (Client_Sd_Station_t) / 4 - 2);
