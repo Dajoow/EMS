@@ -535,7 +535,7 @@ void CAN_Poll(void const *argument) {
             continue;
           }
         }
-        vTaskDelay(bsmuSetting.poll_T * 10);
+        vTaskDelay(bsmuSetting.poll_T);
       } else {
         BCMU[Queue_NUM_POLL].OnlineOrOffline = Offline;
         Client_Sd[Queue_NUM_POLL].work_state = Offline;
@@ -548,7 +548,7 @@ void CAN_Poll(void const *argument) {
     xSemaphoreGive(http_snd_sem_handle); // 释放信号量（用来发送云端数据）
     xSemaphoreGive(ViewUpdateSemHandle); // 释放信号量（用来更新LCD显示数据）
     // 等待两个命令周期
-    vTaskDelay(bsmuSetting.poll_T * 10 * 2);
+    vTaskDelay(bsmuSetting.poll_T * 2);
 
     osDelay(1);
   }
