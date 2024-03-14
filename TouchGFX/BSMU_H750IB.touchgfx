@@ -118,6 +118,7 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
+            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -551,7 +552,7 @@
                     "Name": "CELL11_Name",
                     "X": 379,
                     "Y": 344,
-                    "Width": 49,
+                    "Width": 50,
                     "Height": 23,
                     "TextId": "__SingleUse_JY20",
                     "TextRotation": "0",
@@ -2875,7 +2876,6 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
-            "Visible": false,
             "Components": [
               {
                 "Type": "Container",
@@ -3049,6 +3049,7 @@
                     "Y": 180,
                     "Width": 44,
                     "Height": 32,
+                    "LockPosition": true,
                     "TextId": "__SingleUse_W9CS",
                     "TextRotation": "0",
                     "Wildcard1": {
@@ -3113,7 +3114,7 @@
                     "Name": "IP2",
                     "X": 152,
                     "Y": 134,
-                    "Width": 19,
+                    "Width": 20,
                     "Height": 34,
                     "TextId": "__SingleUse_MN9S",
                     "TextRotation": "0",

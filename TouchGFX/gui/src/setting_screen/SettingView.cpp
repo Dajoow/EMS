@@ -100,6 +100,8 @@ void SettingView::setupScreen()
 
     //不在模拟器中,在实际中要将EEPROM中的数据拷贝过来
 #ifndef SIMULATOR
+    if (bsmuSetting.cu_num == 0xffff)
+        bsmuSetting.cu_num = 0;
     memcpy(&SettingBuff, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
     memcpy(&SettingBuff_temp, &bsmuSetting, sizeof(EEPROM_BSMU_tem));
 #endif

@@ -56,6 +56,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
+    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
     S10_1.setPosition(263, 418, 22, 25);
     S10_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -1325,7 +1326,6 @@ MainScreenViewBase::MainScreenViewBase() :
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
-    shouye.setVisible(false);
     PCS_menu.setPosition(810, 286, 219, 239);
     PCS_menu.setVisible(false);
     PCS_BG.setPosition(14, 2, 190, 218);
