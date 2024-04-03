@@ -42,7 +42,7 @@ SettingViewBase::SettingViewBase() :
     start.setVisible(false);
     daohanglan.add(start);
 
-    cancel.setXY(369, 53);
+    cancel.setXY(356, 53);
     cancel.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     cancel.setLabelText(touchgfx::TypedText(T___SINGLEUSE_IGM4));
     cancel.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));

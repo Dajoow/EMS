@@ -208,6 +208,18 @@
     <Filter Include="Header Files\generated\gui_generated\containers">
       <UniqueIdentifier>B40E736C-20E8-7CB9-C439-0D345E0AEE0F</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\debug_screen">
+      <UniqueIdentifier>7458F864-48EE-E825-1A7B-0443C1C97F7F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\debug_screen">
+      <UniqueIdentifier>6D3D8D67-15F1-B0B6-DF59-F0978349A61A</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\debug_screen">
+      <UniqueIdentifier>94B28CD9-7E1E-D140-EB57-A07CC811CA5F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\debug_screen">
+      <UniqueIdentifier>66638D3F-6E85-6DE1-8356-04A7FDBEE1B2</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -287,6 +299,18 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\CustomContainer2Base.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\debug_screen\DebugPresenter.cpp">
+      <Filter>Source Files\gui\debug_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\debug_screen\DebugView.cpp">
+      <Filter>Source Files\gui\debug_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\debug_screen\DebugViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\debug_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\simulator\src\mainBase.sync-conflict-20240325-123112-QNIL4DQ.cpp">
+      <Filter>Source Files\generated\simulator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -780,6 +804,24 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CustomContainer2Base.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\debug_screen\DebugPresenter.hpp">
+      <Filter>Header Files\gui\debug_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\debug_screen\DebugView.hpp">
+      <Filter>Header Files\gui\debug_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\debug_screen\DebugViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\debug_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\simulator\include\simulator\mainBase.sync-conflict-20240325-123221-QNIL4DQ.hpp">
+      <Filter>Header Files\generated\simulator\include\simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\simulator\include\simulator\video\MJPEGDecoder.sync-conflict-20240325-122934-QNIL4DQ.hpp">
+      <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.sync-conflict-20240325-122942-QNIL4DQ.hpp">
+      <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

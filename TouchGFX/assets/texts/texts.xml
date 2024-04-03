@@ -388,6 +388,33 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_347K" Alignment="Left" TypographyId="STxihei_30">
+        <Translation Language="GB">10</Translation>
+      </Text>
+      <Text Id="__SingleUse_7UTI" Alignment="Center" TypographyId="STxihei_30">
+        <Translation Language="GB">退出(&lt;exit_count&gt;)</Translation>
+      </Text>
+      <Text Id="__SingleUse_9FBM" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">闭合接触器</Translation>
+      </Text>
+      <Text Id="__SingleUse_WHK6" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">断开接触器</Translation>
+      </Text>
+      <Text Id="__SingleUse_SM57" Alignment="Center" TypographyId="STxihei_30">
+        <Translation Language="GB">同意</Translation>
+      </Text>
+      <Text Id="__SingleUse_2IKH" Alignment="Center" TypographyId="STxihei_20">
+        <Translation Language="GB">!!!Warning: Attention required!&#10;The debug page is intended for development and testing purposes only.&#10;Please note that all actions you take on this page will have an impact on the system.&#10;Proceed with caution and take your own risk.</Translation>
+      </Text>
+      <Text Id="__SingleUse_8NKY" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">!!!警告：请注意！&#10;调试页面仅供开发和测试使用。&#10;请注意，您在此页面上的所有操作将对系统产生影响。&#10;请谨慎操作，并自行承担由此产生的责任和后果。</Translation>
+      </Text>
+      <Text Id="__SingleUse_XAUB" Alignment="Center" TypographyId="STXihei_40">
+        <Translation Language="GB">Back</Translation>
+      </Text>
+      <Text Id="__SingleUse_YNAT" Alignment="Center" TypographyId="STXihei_40">
+        <Translation Language="GB" />
+      </Text>
       <Text Id="__SingleUse_X9DH" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">6</Translation>
       </Text>

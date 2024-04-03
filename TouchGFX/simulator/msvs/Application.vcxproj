@@ -37,6 +37,10 @@
     <ClCompile Include="..\..\generated\gui_generated\src\containers\CustomContainer1Base.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\CustomContainer2.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\CustomContainer2Base.cpp"/>
+    <ClCompile Include="..\..\gui\src\debug_screen\DebugPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\debug_screen\DebugView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\debug_screen\DebugViewBase.cpp"/>
+    <ClCompile Include="..\..\generated\simulator\src\mainBase.sync-conflict-20240325-123112-QNIL4DQ.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -204,6 +208,12 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CustomContainer4Base.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CustomContainer1Base.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\CustomContainer2Base.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\debug_screen\DebugPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\debug_screen\DebugView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\debug_screen\DebugViewBase.hpp"/>
+    <ClInclude Include="..\..\generated\simulator\include\simulator\mainBase.sync-conflict-20240325-123221-QNIL4DQ.hpp"/>
+    <ClInclude Include="..\..\generated\simulator\include\simulator\video\MJPEGDecoder.sync-conflict-20240325-122934-QNIL4DQ.hpp"/>
+    <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.sync-conflict-20240325-122942-QNIL4DQ.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

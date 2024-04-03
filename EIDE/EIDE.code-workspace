@@ -9,7 +9,7 @@
     ],
     "settings": {
         "files.associations": {
-            "platform.h": "c"
+            "can_control.h": "c"
         }
     },
     "extensions": {}

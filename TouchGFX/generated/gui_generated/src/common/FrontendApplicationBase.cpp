@@ -13,6 +13,8 @@
 #include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/setting_screen/SettingView.hpp>
 #include <gui/setting_screen/SettingPresenter.hpp>
+#include <gui/debug_screen/DebugView.hpp>
+#include <gui/debug_screen/DebugPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -55,4 +57,17 @@ void FrontendApplicationBase::gotoSettingScreenNoTransition()
 void FrontendApplicationBase::gotoSettingScreenNoTransitionImpl()
 {
     touchgfx::makeTransition<SettingView, SettingPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Debug
+
+void FrontendApplicationBase::gotoDebugScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDebugScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDebugScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<DebugView, DebugPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

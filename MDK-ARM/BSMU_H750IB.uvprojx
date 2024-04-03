@@ -1636,6 +1636,16 @@
               <FilePath>../touchgfx/gui/src/containers/customcontainer4.cpp</FilePath>
             </File>
             <File>
+              <FileName>DebugPresenter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/gui/src/debug_screen/debugpresenter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DebugView.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/gui/src/debug_screen/debugview.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FrontendApplication.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/gui/src/common/frontendapplication.cpp</FilePath>
@@ -1778,6 +1788,11 @@
               <FileName>CustomContainer4Base.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/gui_generated/src/containers/customcontainer4base.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DebugViewBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/gui_generated/src/debug_screen/debugviewbase.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_segoeui_20_4bpp_0.cpp</FileName>
@@ -1960,6 +1975,11 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_15.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_16.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_16.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_17.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_17.cpp</FilePath>
@@ -1968,6 +1988,21 @@
               <FileName>Font_STXIHEI_TTF_24_4bpp_18.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_18.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_19.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_19.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_31.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_31.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_24_4bpp_6.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_24_4bpp_6.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_24_4bpp_9.cpp</FileName>

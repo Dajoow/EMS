@@ -5334,3 +5334,13 @@ char * vTaskName()
     return pxCurrentTCB->pcTaskName;
 }
 /*-----------------------------------------------------------*/
+
+void TaskTcbPrintf(void)
+{
+        Debug_printf("\"pcbcount\",    %d,\r\n", configMAX_PRIORITIES);
+        Debug_printf("\"tskTCB_pxTopOfStack_off\", %d,\r\n",          (int)&((((struct tskTaskControlBlock*)0)->pxTopOfStack)));       
+        Debug_printf("\"tskTCB_uxPriority_off\",   %d,\r\n",          (int)&((((struct tskTaskControlBlock*)0)->uxPriority)));
+        Debug_printf("\"tskTCB_pxStack_off\",      %d,\r\n",          (int)&((((struct tskTaskControlBlock*)0)->pxStack)));
+        Debug_printf("\"tskTCB_pcTaskName_off\",      %d,\r\n",       (int)&((((struct tskTaskControlBlock*)0)->pcTaskName)));
+        Debug_printf("\"tskTCB_ulRunTimeCounter_off\",       %d,\r\n",(int)&((((struct tskTaskControlBlock*)0)->ulRunTimeCounter)));         
+}

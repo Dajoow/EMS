@@ -52,7 +52,7 @@ MainScreenViewBase::MainScreenViewBase() :
     buttonSetting.setBitmaps(Bitmap(BITMAP_SETTING_RELEASED_ID), Bitmap(BITMAP_SETTING_PRESSED_ID));
     buttonSetting.setBitmapXY(0, 0);
     buttonSetting.setAction(flexButtonCallback);
-    buttonSetting.setPosition(797, 17, 102, 50);
+    buttonSetting.setPosition(796, 16, 102, 50);
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);

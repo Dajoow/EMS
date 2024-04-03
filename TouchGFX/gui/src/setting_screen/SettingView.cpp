@@ -464,6 +464,12 @@ void SettingView::Save_1_Fun(void) //点击保存按键
 //CloseSetting_2
 void SettingView::CloseSetting_2_fun()//CloseSetting_2按键按下
 {
+    int flag = 0;
+
+    if (SettingBuff_temp.port_1 == 62333) {
+      flag = 1;
+    }
+
     SettingBuff_temp.IP_ADD_2[0] = SettingBuff.IP_ADD_2[0];
     SettingBuff_temp.IP_ADD_2[1] = SettingBuff.IP_ADD_2[1];
     SettingBuff_temp.IP_ADD_2[2] = SettingBuff.IP_ADD_2[2];
@@ -498,6 +504,7 @@ void SettingView::CloseSetting_2_fun()//CloseSetting_2按键按下
     keyboard1.setVisible(false);
     keyboard1.invalidate();
 
+    if(flag) application().gotoDebugScreenNoTransition();
 }
 
 //IP_setting_2保存按钮

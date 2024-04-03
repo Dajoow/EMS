@@ -97,8 +97,8 @@
           {
             "Type": "FlexButton",
             "Name": "buttonSetting",
-            "X": 797,
-            "Y": 17,
+            "X": 796,
+            "Y": 16,
             "Width": 102,
             "Height": 50,
             "ButtonTrigger": {
@@ -5550,7 +5550,7 @@
               {
                 "Type": "ButtonWithLabel",
                 "Name": "cancel",
-                "X": 369,
+                "X": 356,
                 "Y": 53,
                 "Width": 124,
                 "Height": 74,
@@ -9389,6 +9389,279 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
               "ActionComponent": "MainScreen"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Debug",
+        "Components": [
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "dummy",
+            "Y": 526,
+            "Width": 124,
+            "Height": 74,
+            "Pressed": "ipset_bj_pressed.png",
+            "Released": "ipset_bj_released.png",
+            "TextId": "__SingleUse_XAUB",
+            "TextRotation": "0"
+          },
+          {
+            "Type": "Box",
+            "Name": "background",
+            "X": -1,
+            "Width": 1024,
+            "Height": 600,
+            "LockPosition": true,
+            "Color": {
+              "Red": 156,
+              "Green": 189,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "home",
+            "X": 44,
+            "Y": 28,
+            "Width": 48,
+            "Height": 48,
+            "LockPosition": true,
+            "Pressed": "home_FILL0_wght400_GRAD0_opsz48.png",
+            "Released": "home_FILL0_wght400_GRAD0_opsz48.png",
+            "TextId": "__SingleUse_YNAT",
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "open_switch",
+            "X": 474,
+            "Y": 52,
+            "Width": 124,
+            "Height": 74,
+            "Pressed": "ipset_bj_pressed.png",
+            "Released": "ipset_bj_released.png",
+            "TextId": "__SingleUse_WHK6",
+            "TextRotation": "0"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "close_switch",
+            "X": 320,
+            "Y": 52,
+            "Width": 124,
+            "Height": 74,
+            "Pressed": "ipset_bj_pressed.png",
+            "Released": "ipset_bj_released.png",
+            "TextId": "__SingleUse_9FBM",
+            "TextRotation": "0"
+          },
+          {
+            "Type": "Box",
+            "Name": "background_1",
+            "X": -1,
+            "Width": 1024,
+            "Height": 600,
+            "LockPosition": true,
+            "Color": {
+              "Red": 156,
+              "Green": 189,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "Container",
+            "Name": "container1",
+            "X": 83,
+            "Y": 132,
+            "Width": 837,
+            "Height": 379,
+            "LockPosition": true,
+            "Components": [
+              {
+                "Type": "Box",
+                "Name": "box1",
+                "X": 10,
+                "Width": 837,
+                "Height": 379,
+                "LockPosition": true,
+                "Color": {
+                  "Red": 247,
+                  "Green": 247,
+                  "Blue": 121
+                }
+              },
+              {
+                "Type": "TextArea",
+                "Name": "textArea2",
+                "X": 141,
+                "Y": 6,
+                "Width": 576,
+                "Height": 136,
+                "LockPosition": true,
+                "TextId": "__SingleUse_8NKY",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "textArea3",
+                "X": 23,
+                "Y": 150,
+                "Width": 811,
+                "Height": 112,
+                "LockPosition": true,
+                "TextId": "__SingleUse_2IKH",
+                "TextRotation": "0",
+                "AutoSize": true
+              },
+              {
+                "Type": "ButtonWithLabel",
+                "Name": "cancel_2",
+                "X": 178,
+                "Y": 297,
+                "Width": 124,
+                "Height": 74,
+                "LockPosition": true,
+                "Pressed": "ipset_bj_pressed.png",
+                "Released": "ipset_bj_released.png",
+                "TextId": "__SingleUse_SM57",
+                "TextRotation": "0"
+              },
+              {
+                "Type": "FlexButton",
+                "Name": "exit",
+                "X": 544,
+                "Y": 297,
+                "Width": 124,
+                "Height": 74,
+                "ButtonTrigger": {
+                  "Type": "ClickButtonTrigger"
+                },
+                "ButtonStyles": [
+                  {
+                    "Type": "TextButtonStyle",
+                    "Y": 16,
+                    "TextId": "__SingleUse_7UTI",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_347K",
+                      "UseBuffer": true,
+                      "BufferSize": 3
+                    },
+                    "ColorReleased": {
+                      "Red": 10,
+                      "Green": 10,
+                      "Blue": 10
+                    },
+                    "ColorPressed": {
+                      "Red": 10,
+                      "Green": 10,
+                      "Blue": 10
+                    }
+                  },
+                  {
+                    "Type": "ImageButtonStyle",
+                    "LockFlexButtonToImageSize": true,
+                    "ImageReleased": "ipset_bj_released.png",
+                    "ImagePressed": "ipset_bj_pressed.png"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "home",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "home"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MainScreen"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "dummy"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Debug"
+            }
+          },
+          {
+            "InteractionName": "agree",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "cancel_2"
+            },
+            "Action": {
+              "Type": "ActionHide",
+              "ActionComponent": "container1"
+            }
+          },
+          {
+            "InteractionName": "close_switch",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "close_switch"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "switch_close_cb"
+            }
+          },
+          {
+            "InteractionName": "open_switch",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "open_switch"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "switch_open_cb"
+            }
+          },
+          {
+            "InteractionName": "Interaction5",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "cancel_2"
+            },
+            "Action": {
+              "Type": "ActionHide",
+              "ActionComponent": "background_1"
+            }
+          },
+          {
+            "InteractionName": "cancel",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "exit"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MainScreen"
+            }
+          },
+          {
+            "InteractionName": "exit_count",
+            "Trigger": {
+              "Type": "TriggerOnEveryTick",
+              "TickCount": 60
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "exit_count_cb"
             }
           }
         ]
