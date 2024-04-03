@@ -306,6 +306,23 @@ int8_t CANFrameSend(uint8_t cmd, uint8_t *pdata, uint8_t *msg, uint16_t len) {
   return index;
 }
 
+void can_open_switch(){
+ for (size_t i = 0; i < 20; i++)
+        {
+            CANFrameSend(CMD_SWITCH_OPEN, (unsigned char *)&BCMU_ID[i],
+                     FDCAN_SND_Buff, 2);
+        osDelay (10);
+        }
+}
+
+void can_close_switch(){
+ for (size_t i = 0; i < 20; i++)
+        {
+            CANFrameSend(CMD_SWITCH_CLOSE, (unsigned char *)&BCMU_ID[i],
+                     FDCAN_SND_Buff, 2);
+        osDelay (10);
+        }
+}
 // 成功接收后处理函数
 void CAN_DataHandle(uint8_t Queue_NUM_t, uint8_t cmd, void *data,
                     uint16_t len) {
@@ -326,17 +343,27 @@ void CAN_DataHandle(uint8_t Queue_NUM_t, uint8_t cmd, void *data,
 
   memset (bmu_offline[Queue_NUM_POLL], 0,
           sizeof (bmu_offline[Queue_NUM_POLL]));
-  for (int i = 0; i < error_data_num; i++){
-    // group err
-    uint8_t err_id_h = Client_errors[Queue_NUM_POLL][i].error_id_h;
-    if(err_id_h >= 0x01 && err_id_h <= 0x1f){
-        //BMU(组内)板错误
-        if (Client_errors[Queue_NUM_POLL][i].error_id_l == 0x00){
-          bmu_offline[Queue_NUM_POLL][err_id_h - 1]
-            = Client_errors[Queue_NUM_POLL][i].error_code & 0x01; // judge bmu online state
-        }
-    }
+  
+  // update bmu online state
+
+  uint32_t online_state = Client_Sd[Queue_NUM_POLL].bmu_sw_state;
+  for (int i = 0; i < 30; i++)
+  {
+    bmu_offline[Queue_NUM_POLL][i] = (online_state & 0x00000001);
+    online_state >>= 1;
   }
+  
+  // for (int i = 0; i < error_data_num; i++){
+  //   // group err
+  //   uint8_t err_id_h = Client_errors[Queue_NUM_POLL][i].error_id_h;
+  //   if(err_id_h >= 0x01 && err_id_h <= 0x1f){
+  //       //BMU(组内)板错误
+  //       if (Client_errors[Queue_NUM_POLL][i].error_id_l == 0x00){
+  //         bmu_offline[Queue_NUM_POLL][err_id_h - 1]
+  //           = Client_errors[Queue_NUM_POLL][i].error_code & 0x01; // judge bmu online state
+  //       }
+  //   }
+  // }
 
   if (Queue_NUM_t == Queue_NUM_POLL) {
     xTaskNotifyGive(CAN_Poll_TaskHandle);

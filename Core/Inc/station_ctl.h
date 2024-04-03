@@ -38,8 +38,8 @@
 
 #define  FRAME_STATION_HEADER     0x02											 //TCP段中帧头(整个电站的帧头)
 
-#define  CLIENT_SD_ERR_OFT        2904
-#define  CLIENT_SD_TAIL_OFT       2908
+#define  CLIENT_SD_ERR_OFT        2908
+#define  CLIENT_SD_TAIL_OFT       2912
 #define  CLIENT_SD_TAIL_LEN       8
 
 #define  MODBUS_STA_STATUS_PROHIBIT_CHARGE      0x1111
@@ -148,9 +148,10 @@ typedef struct
   uint16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C offset: 744
   uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1% offset: 1464
   uint16_t BAT_SOH[TOTOL_BAT_num]; // 0.1% offset: 2184
+  uint32_t bmu_sw_state; // offset: 2904
   // uint16_t BAT_FAULT[TOTOL_BAT_num];
-  uint32_t error_count; // offset: 2904
-  uint32_t checksum; // offset: 2908
+  uint32_t error_count; // offset: 2908
+  uint32_t checksum; // offset: 2912
   uint32_t frame_tail;
 }Client_Sd_t;
 

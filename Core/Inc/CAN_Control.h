@@ -113,6 +113,9 @@ extern FDCAN_HandleTypeDef  hfdcan2;
 #define CMD_TRANS_STOP  		0xC1
 #define CMD_TRANS_ACK     		0xC2
 
+#define CMD_SWITCH_CLOSE    0xE0
+#define CMD_SWITCH_OPEN     0xE1
+
 #define DATA_NOMAL        		0X80								   //普通数据上传
 #define DATA_URGENT       		0X81									 //紧急数据上传，如报警信息
 

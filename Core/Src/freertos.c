@@ -223,6 +223,7 @@ void Startup(void const * argument)
     http_client_init ();
   }
 
+  TaskTcbPrintf();
   // 开启CPU_Task线程
   osThreadDef (CPU_Task_Thread, CPU_Task, osPriorityIdle, 0, 256);
   CPU_Task_ThreadHandle = osThreadCreate (osThread (CPU_Task_Thread), NULL);
