@@ -22,6 +22,7 @@
 #include "string.h"
 #include "task.h"
 #include "usart.h"
+#include "modbus_data.h"
 
 CANTxMsg_t TxMsg; // 定义发送邮件实体
 CANRxMsg_t RxMsg; // 定义接收邮件实体
@@ -30,6 +31,7 @@ osMessageQId CANQueueHandle[cluster_num];
 osTimerId CANTimer01Handle;
 osThreadId CAN_Rev_TaskHandle;
 osThreadId CAN_Poll_TaskHandle;
+osThreadId switch_ctrl_taskhandle;
 osSemaphoreId ETHSndSemHandle;
 osSemaphoreId http_snd_sem_handle;
 osSemaphoreId ViewUpdateSemHandle;
@@ -323,6 +325,62 @@ void can_close_switch(){
         osDelay (10);
         }
 }
+
+#define CHARGE_CTRL_IDLE 0x0000
+#define CHARGE_CTRL_SW_CLOSE 0x1111
+#define CHARGE_CTRL_SW_OPEN 0x2222
+#define CHARGE_CTRL_ACK 0x5a5a
+
+#define CHARGE_SW_MASK 0x8000
+
+extern Client_Sd_t Client_Sd[cluster_num];
+
+station_charge_ctrl_u station_charge_ctrl;
+static void switch_task(){
+  uint16_t state = 0;
+  while(1){
+    state = station_charge_ctrl.data.charge_ctrl;
+
+    if(station_charge_ctrl.data.charge_ctrl != CHARGE_CTRL_IDLE){
+      switch(state){
+      case CHARGE_CTRL_SW_CLOSE:
+        can_close_switch();
+        int waitting = 1;
+        while(waitting){
+          for (int i = 0; i < cluster_num; i++)
+          {
+            if(Client_Sd[i].bmu_sw_state & CHARGE_SW_MASK){
+              waitting = 0;
+              break;
+            } 
+          }
+          osDelay(1);
+        }
+        station_charge_ctrl.data.charge_ctrl = CHARGE_CTRL_ACK;
+        break;
+      case CHARGE_CTRL_SW_OPEN:
+        can_open_switch();
+        int waitting = 1;
+        while(waitting){
+          for (int i = 0; i < cluster_num; i++)
+          {
+            if(Client_Sd[i].bmu_sw_state & CHARGE_SW_MASK == 0){
+              waitting = 0;
+              break;
+            } 
+          }
+          osDelay(1);
+        }
+        station_charge_ctrl.data.charge_ctrl = CHARGE_CTRL_ACK;
+        break;
+      case CHARGE_CTRL_ACK:
+        break;
+      }
+    }
+    osDelay(1);
+  }
+}
+
 // 成功接收后处理函数
 void CAN_DataHandle(uint8_t Queue_NUM_t, uint8_t cmd, void *data,
                     uint16_t len) {
@@ -680,6 +738,9 @@ void BSMU_CANInit() {
 
   osThreadDef(CAN_Poll_Thread, CAN_Poll, osPriorityNormal, 0, 128);
   CAN_Poll_TaskHandle = osThreadCreate(osThread(CAN_Poll_Thread), NULL);
+
+  osThreadDef(switch_ctrl_task, switch_task, osPriorityNormal, 0, 128);
+  switch_ctrl_taskhandle = osThreadCreate(osThread(switch_ctrl_task), NULL);
 
   fdcan_config(); // 这里配置CAN的筛选器和开启CAN
 }

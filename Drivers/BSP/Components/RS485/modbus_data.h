@@ -77,6 +77,13 @@ typedef union
 } station_info_f32_u;
 
 typedef union{
+  struct {
+    uint16_t charge_ctrl;
+  } data;
+  uint16_t reg[1];
+} station_charge_ctrl_u;
+
+typedef union{
   struct{
     uint16_t cluster_status;
     uint16_t charge_discharge_status;

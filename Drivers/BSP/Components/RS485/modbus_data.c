@@ -39,6 +39,7 @@ static int get_map_buf(const agile_modbus_slave_util_map_t *map, void *buf,
 static int set_map_buf(const agile_modbus_slave_util_map_t *map, int index,
                        int len, void *buf, int bufsz) {
   modbus_data_type_e modbus_data_type = map->data_type;
+  int start_addr = map->start_addr;
 
   size_t size = 0;
 
@@ -54,7 +55,7 @@ static int set_map_buf(const agile_modbus_slave_util_map_t *map, int index,
     break;
   }
 
-  memcpy(map->data + index, buf, len * size);
+  memcpy(map->data + (index - start_addr), buf, len * size);
 
   return 0;
 }
@@ -80,12 +81,25 @@ agile_modbus_slave_util_map_t station_input_regs_map[] = {
         .data_type = MODBUS_FLOAT,
     }};
 
+station_charge_ctrl_u station_charge_ctrl;
+
+agile_modbus_slave_util_map_t station_regs_map[] = {
+    // 充放电控制
+    {
+        .start_addr = 0x00,
+        .end_addr = 0x01,
+        .data = station_charge_ctrl.reg,
+        .data_len = sizeof(station_charge_ctrl.reg),
+        .data_type = MODBUS_UINT16,
+    }};
+
 agile_modbus_slave_util_t station_info = {NULL,
                                           0,
                                           NULL,
                                           0,
-                                          NULL,
-                                          0,
+                                          station_regs_map,
+                                          sizeof(station_regs_map) /
+                                              sizeof(station_regs_map[0]),
                                           station_input_regs_map,
                                           sizeof(station_input_regs_map) /
                                               sizeof(station_input_regs_map[0]),
