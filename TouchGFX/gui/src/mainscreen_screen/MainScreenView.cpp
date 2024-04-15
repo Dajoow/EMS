@@ -1935,19 +1935,20 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
   for (int m = 0;m < cluster_num;m++)
   {
-      err_sum += Client_Sd[cluster_num].error_count;
+      err_sum += Client_Sd[m].error_count;
   }
 
   if (err_sum > 0)//有错误数据，遍历输出
   {
       scrollableContainer1.setVisible(true); //错误显示区域使能
-      for (int i = 0;i < errcount;i++)//清空上轮显示
-      {
-          Unicode::snprintf(t_gen_Buffer[i],10,"%c",' ');
-          Unicode::snprintf(id_gen_Buffer[i],10,"%c",' ');
-          Unicode::snprintf(e_gen_Buffer[i],10,"%c",' ');
-      }
       scrollableContainer1.invalidate();
+      //for (int i = 0;i < errcount;i++)//清空上轮显示
+      //{
+      //    Unicode::snprintf(t_gen_Buffer[i],10,"%c",' ');
+      //    Unicode::snprintf(id_gen_Buffer[i],10,"%c",' ');
+      //    Unicode::snprintf(e_gen_Buffer[i],10,"%c",' ');
+      //}
+
       /*共五种错误信息格式：
       1、BSMU错误
       2、第X簇BCMU错误，其中位宽为2的信息 00 无故障   01和11均有故障  10预警
@@ -2114,6 +2115,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
                   }
               }
           }
+          scrollableContainer1.setVisible(true);
           scrollableContainer1.invalidate();
       }
   }
