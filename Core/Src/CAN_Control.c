@@ -335,9 +335,11 @@ void can_close_switch(){
 
 extern Client_Sd_t Client_Sd[cluster_num];
 
-station_charge_ctrl_u station_charge_ctrl;
+extern station_charge_ctrl_u station_charge_ctrl;
 static void switch_task(){
   uint16_t state = 0;
+  int waitting = 1;
+
   while(1){
     state = station_charge_ctrl.data.charge_ctrl;
 
@@ -345,7 +347,7 @@ static void switch_task(){
       switch(state){
       case CHARGE_CTRL_SW_CLOSE:
         can_close_switch();
-        int waitting = 1;
+        waitting = 1;
         while(waitting){
           for (int i = 0; i < cluster_num; i++)
           {
@@ -360,7 +362,7 @@ static void switch_task(){
         break;
       case CHARGE_CTRL_SW_OPEN:
         can_open_switch();
-        int waitting = 1;
+        waitting = 1;
         while(waitting){
           for (int i = 0; i < cluster_num; i++)
           {

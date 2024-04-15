@@ -1631,10 +1631,10 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
     avg_v.invalidate();
 
   //更新电站信息
-  Unicode::snprintf(zongdianliuBuffer, ZONGDIANLIU_SIZE, "%d", modelToViewData.station_CUR);
+  Unicode::snprintf(zongdianliuBuffer, ZONGDIANLIU_SIZE, "%d", modelToViewData.station_CUR / 100);
   zongdianliu.invalidate();
 
-  Unicode::snprintf(zongdianyaBuffer, ZONGDIANYA_SIZE, "%d", modelToViewData.station_VOL);
+  Unicode::snprintf(zongdianyaBuffer, ZONGDIANYA_SIZE, "%d", modelToViewData.station_VOL / 100);
   zongdianya.invalidate();
 
   Unicode::snprintf(chongdiangonglvBuffer, CHONGDIANGONGLV_SIZE, "%d", modelToViewData.charge_power);
@@ -1653,10 +1653,10 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   Unicode::snprintfFloat(cudianliuBuffer, CUDIANLIU_SIZE, "%.1f", (float)modelToViewData.cluster_CUR*0.01);
   cudianliu.invalidate();
 
-  Unicode::snprintf(zhengjueyuanBuffer, ZHENGJUEYUAN_SIZE, "%d",  modelToViewData.insulation_res_n);
+  Unicode::snprintf(zhengjueyuanBuffer, ZHENGJUEYUAN_SIZE, "%d",  modelToViewData.insulation_res_p);
   zhengjueyuan.invalidate();
 
-  Unicode::snprintf(fujueyuanBuffer, FUJUEYUAN_SIZE, "%d",  modelToViewData.insulation_res_p);
+  Unicode::snprintf(fujueyuanBuffer, FUJUEYUAN_SIZE, "%d",  modelToViewData.insulation_res_n);
   fujueyuan.invalidate();
 
 

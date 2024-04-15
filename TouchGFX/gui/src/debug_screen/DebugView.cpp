@@ -35,6 +35,9 @@ void DebugView::switch_close_cb()
 
 void DebugView::exit_count_cb()
 {
+    if (!container1.isVisible()) {
+      return;
+     }
     if (exit_count > 0) {
         exit_count--;
         Unicode::snprintf(exitBuffer, EXIT_SIZE, "%d", exit_count);

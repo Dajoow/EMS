@@ -357,6 +357,9 @@ httpc_connect (httpc_ctx_t *ctx, const char *host, char *port)
 {
   int ret;
 
+  // todo: There is currently an ugly workaround where we do not have a domain.
+  ipaddr_aton("47.113.147.27", &ctx->host_ip);
+
   // dns resolve, run once
   if (ctx->host_ip.addr == 0)
     {
