@@ -134,7 +134,7 @@ protected:
     char local_server_ip_buff[16];//本地服务器
     char cloud_server_ip_buff[16];//云端
     
-    ButtonWithLabel* BCMU[20];
+    ButtonWithLabel* BCMU_ui[20];
     ButtonWithLabel* BMU[30];
 
     touchgfx::Unicode::UnicodeChar* tim[30];

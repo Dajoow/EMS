@@ -16,6 +16,7 @@ extern "C" {
 #include "station_ctl.h"
 #include "CAN_Control.h"
 #include "sntp_client.h" 
+extern BCMU_Mail_t BCMU[cluster_num];
 extern Client_Sd_t Client_Sd[cluster_num];	
 extern error_info_t Client_errors[cluster_num][MAX_ERROR];			
 };
@@ -41,26 +42,26 @@ MainScreenView::MainScreenView()
   err_id.setHeight(errcount*25+25);
   err_inf.setHeight(errcount * 25+25);
 
-	BCMU[0] = &BCMU1; //用指针数组指向组件，可以在代码中使用循环进行遍历操作
-    BCMU[1] = &BCMU2;//BCMU按键
-    BCMU[2] = &BCMU3;
-    BCMU[3] = &BCMU4;
-    BCMU[4] = &BCMU5;
-    BCMU[5] = &BCMU6;
-    BCMU[6] = &BCMU7;
-    BCMU[7] = &BCMU8;
-    BCMU[8] = &BCMU9;
-    BCMU[9] = &BCMU10;
-    BCMU[10] = &BCMU11;
-    BCMU[11] = &BCMU12;
-    BCMU[12] = &BCMU13;
-    BCMU[13] = &BCMU14;
-    BCMU[14] = &BCMU15;
-    BCMU[15] = &BCMU16;
-    BCMU[16] = &BCMU17;
-    BCMU[17] = &BCMU18;
-    BCMU[18] = &BCMU19;
-    BCMU[19] = &BCMU20;
+	BCMU_ui[0] = &BCMU1; //用指针数组指向组件，可以在代码中使用循环进行遍历操作
+    BCMU_ui[1] = &BCMU2;//BCMU按键
+    BCMU_ui[2] = &BCMU3;
+    BCMU_ui[3] = &BCMU4;
+    BCMU_ui[4] = &BCMU5;
+    BCMU_ui[5] = &BCMU6;
+    BCMU_ui[6] = &BCMU7;
+    BCMU_ui[7] = &BCMU8;
+    BCMU_ui[8] = &BCMU9;
+    BCMU_ui[9] = &BCMU10;
+    BCMU_ui[10] = &BCMU11;
+    BCMU_ui[11] = &BCMU12;
+    BCMU_ui[12] = &BCMU13;
+    BCMU_ui[13] = &BCMU14;
+    BCMU_ui[14] = &BCMU15;
+    BCMU_ui[15] = &BCMU16;
+    BCMU_ui[16] = &BCMU17;
+    BCMU_ui[17] = &BCMU18;
+    BCMU_ui[18] = &BCMU19;
+    BCMU_ui[19] = &BCMU20;
 
     BMU[0] = &BMU1;//BMU按键
     BMU[1] = &BMU2;
@@ -1837,14 +1838,14 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   for (int i = 0;i < 20;i++) {
       if (modelToViewData.BCMU_state[i] == offline)//不使能
       {
-          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
-          BCMU[i]->setTouchable(false);
+          BCMU_ui[i]->setLabelText(touchgfx::TypedText(T_BCMU_0));
+          BCMU_ui[i]->setTouchable(false);
           BCMU_Container.invalidate();
       }
       else  if (modelToViewData.BCMU_state[i] == online)//使能
       {
-          BCMU[i]->setLabelText(touchgfx::TypedText(T_BCMU1-i));
-          BCMU[i]->setTouchable(true);
+          BCMU_ui[i]->setLabelText(touchgfx::TypedText(T_BCMU1-i));
+          BCMU_ui[i]->setTouchable(true);
           BCMU_Container.invalidate();
       }
   }
@@ -1940,15 +1941,16 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
   if (err_sum > 0)//有错误数据，遍历输出
   {
+
+      for (int i = 0;i < errcount;i++)//清空上轮显示
+      {
+          Unicode::snprintf(t_gen_Buffer[i],10,"%c",' ');
+          Unicode::snprintf(id_gen_Buffer[i],10,"%c",' ');
+          e_gen[i].setTypedText(touchgfx::TypedText(T_NO_ERR));
+
+      }
       scrollableContainer1.setVisible(true); //错误显示区域使能
       scrollableContainer1.invalidate();
-      //for (int i = 0;i < errcount;i++)//清空上轮显示
-      //{
-      //    Unicode::snprintf(t_gen_Buffer[i],10,"%c",' ');
-      //    Unicode::snprintf(id_gen_Buffer[i],10,"%c",' ');
-      //    Unicode::snprintf(e_gen_Buffer[i],10,"%c",' ');
-      //}
-
       /*共五种错误信息格式：
       1、BSMU错误
       2、第X簇BCMU错误，其中位宽为2的信息 00 无故障   01和11均有故障  10预警
@@ -1958,6 +1960,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
 
       for (int k = 0;k < cluster_num;k++) //遍历错误二维数组Client_errors[cluster_num][MAX_ERROR]中的cluster_num
       {
+          if (BCMU[k].OnlineOrOffline == Offline) continue;
           for (int i = 0;i < Client_Sd[k].error_count;i++) //Client_errors[cluster_num][MAX_ERROR]中的MAX_ERROR
           {                       
               if (Client_errors[k][i].error_id_h == 0x00) //判断id高8位
