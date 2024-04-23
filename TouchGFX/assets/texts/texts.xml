@@ -6,7 +6,7 @@
   <Texts>
     <TextGroup Id="Err_type">
       <Text Id="NO_ERR" Alignment="Left" TypographyId="STXihei_22">
-        <Translation Language="GB"></Translation>
+        <Translation Language="GB" />
       </Text>
       <Text Id="Err_type4" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">BMU(组间错误)</Translation>
@@ -112,16 +112,16 @@
         <Translation Language="GB">\</Translation>
       </Text>
       <Text Id="BMU_battery_err3" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">电池欠压</Translation>
       </Text>
       <Text Id="BMU_battery_err2" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">电池过压</Translation>
       </Text>
       <Text Id="BMU_battery_err1" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">电池低温</Translation>
       </Text>
       <Text Id="BMU_battery_err0" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">电池高温</Translation>
       </Text>
     </TextGroup>
     <TextGroup Id="BMU_board_err">
@@ -150,22 +150,22 @@
         <Translation Language="GB">\</Translation>
       </Text>
       <Text Id="BMU_board_err7" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">电压采样错误</Translation>
       </Text>
       <Text Id="BMU_board_err6" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">均衡芯片组错误</Translation>
       </Text>
       <Text Id="BMU_board_err5" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">均衡错误代码bit3</Translation>
       </Text>
       <Text Id="BMU_board_err4" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">均衡错误代码bit2</Translation>
       </Text>
       <Text Id="BMU_board_err3" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">均衡错误代码bit1</Translation>
       </Text>
       <Text Id="BMU_board_err2" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">\</Translation>
+        <Translation Language="GB">均衡错误代码bit0</Translation>
       </Text>
       <Text Id="BMU_board_err1" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB">BMU控制错误</Translation>
