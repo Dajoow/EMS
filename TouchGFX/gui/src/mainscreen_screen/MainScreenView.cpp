@@ -2128,7 +2128,7 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
       {
           Unicode::snprintf(t_gen_Buffer[i], 10, "%c", ' ');
           Unicode::snprintf(id_gen_Buffer[i], 10, "%c", ' ');
-          Unicode::snprintf(e_gen_Buffer[i], 10, "%c", ' ');
+          e_gen[i].setTypedText(touchgfx::TypedText(T_NO_ERR));
       }
       scrollableContainer1.setVisible(false);
       scrollableContainer1.invalidate();
