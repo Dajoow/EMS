@@ -27,7 +27,7 @@
 #define HTTPC_ENABLED
 #endif
 
-#define HOST "dz.hk.12y.ltd"
+#define HOST "zbdzbms.online"
 #define HTTPS_PORT "443"
 #define HTTP_PORT "80"
 #define HTTP_HOST HOST
@@ -358,7 +358,7 @@ httpc_connect (httpc_ctx_t *ctx, const char *host, char *port)
   int ret;
 
   // todo: There is currently an ugly workaround where we do not have a domain.
-  ipaddr_aton("47.113.147.27", &ctx->host_ip);
+  /** ipaddr_aton("47.113.147.27", &ctx->host_ip); */
 
   // dns resolve, run once
   if (ctx->host_ip.addr == 0)
