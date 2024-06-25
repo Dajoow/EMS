@@ -36,12 +36,11 @@ KEEP extern const touchgfx::GlyphNode glyphs_segoeui_20_4bpp[] FONT_TABLE_LOCATI
     {  1922, 0x0056,  13,  14,  14,   0,  12,  28,   1, 0x00 },
     {  2020, 0x0057,  19,  14,  14,   0,  19,  29,   1, 0x00 },
     {  2160, 0x0059,  11,  14,  14,   0,  11,  30,   1, 0x00 },
-    {  2244, 0x005C,   9,  16,  14,  -1,   8,   0,   0, 0x00 },
-    {  2324, 0x005F,   9,   2, 254,   0,   8,   0,   0, 0x60 },
-    {  2334, 0x0065,   9,  10,  10,   1,  10,  31,   4, 0x00 },
-    {  2384, 0x0074,   7,  13,  13,   0,   7,  35,   1, 0x00 },
-    {  2436, 0x0077,  15,  10,  10,   0,  14,  36,   1, 0x00 },
-    {  2516, 0x0078,   9,  10,  10,   0,   9,  37,   1, 0x00 }
+    {  2244, 0x005F,   9,   2, 254,   0,   8,   0,   0, 0x60 },
+    {  2254, 0x0065,   9,  10,  10,   1,  10,  31,   4, 0x00 },
+    {  2304, 0x0074,   7,  13,  13,   0,   7,  35,   1, 0x00 },
+    {  2356, 0x0077,  15,  10,  10,   0,  14,  36,   1, 0x00 },
+    {  2436, 0x0078,   9,  10,  10,   0,   9,  37,   1, 0x00 }
 };
 
 // segoeui_20_4bpp
@@ -215,6 +214,6 @@ touchgfx::GeneratedFont& getFont_segoeui_20_4bpp();
 
 touchgfx::GeneratedFont& getFont_segoeui_20_4bpp()
 {
-    static touchgfx::GeneratedFont segoeui_20_4bpp(glyphs_segoeui_20_4bpp, 38, 24, 20, 0, 0, 4, 1, 1, 1, unicodes_segoeui_20_4bpp, kerning_segoeui_20_4bpp, 63, 0, 0, &segoeui_contextualFormsTable);
+    static touchgfx::GeneratedFont segoeui_20_4bpp(glyphs_segoeui_20_4bpp, 37, 24, 20, 0, 0, 4, 1, 1, 1, unicodes_segoeui_20_4bpp, kerning_segoeui_20_4bpp, 63, 0, 0, &segoeui_contextualFormsTable);
     return segoeui_20_4bpp;
 }

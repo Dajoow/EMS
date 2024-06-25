@@ -12,6 +12,7 @@ enum LANGUAGES
 
 enum TEXTS
 {
+    T_NO_ERR,
     T_ERR_TYPE4,
     T_ERR_TYPE3,
     T_ERR_TYPE2,
