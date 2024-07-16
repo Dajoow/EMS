@@ -39,6 +39,7 @@
 #include "usart.h"
 #include "at24cxx.h"
 #include "data_persistence.h"
+#include "screen_sleep.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -212,6 +213,7 @@ void Startup(void const * argument)
   // 开启4G模块线程
   Module4G_Init ();
 
+  screen_sleep_init();
   modbus_init ();
 
   if (bsmuSetting.local_flag){

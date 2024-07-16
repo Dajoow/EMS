@@ -25,6 +25,10 @@
 extern "C"
 {
 #include "gt911.h" 
+#include "lcd.h"
+#include "cmsis_os.h"
+
+extern TimerHandle_t sleep_timer;
 }
 
 void STM32TouchController::init()
@@ -52,9 +56,11 @@ bool STM32TouchController::sampleTouch(int32_t& x, int32_t& y)
 		INT_state = gt911_Scanf();
 		if(INT_state)
 		{
-			x = User_Touch.Touch_XY[0].X_Point;
-			y = User_Touch.Touch_XY[0].Y_Point;
-			return true;
+      xTimerReset(sleep_timer, 0);
+      LCD_ON;
+      x = User_Touch.Touch_XY[0].X_Point;
+      y = User_Touch.Touch_XY[0].Y_Point;
+      return true;
 		}
     return false;
 }
