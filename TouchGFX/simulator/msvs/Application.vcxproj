@@ -41,6 +41,11 @@
     <ClCompile Include="..\..\gui\src\debug_screen\DebugView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\debug_screen\DebugViewBase.cpp"/>
     <ClCompile Include="..\..\generated\simulator\src\mainBase.sync-conflict-20240325-123112-QNIL4DQ.cpp"/>
+    <ClCompile Include="..\..\gui\src\modbus_threshold_setting_screen\Modbus_threshold_settingPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\modbus_threshold_setting_screen\Modbus_threshold_settingView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\modbus_threshold_setting_screen\Modbus_threshold_settingViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\keyboard_modbus.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\keyboard_modbusBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -214,6 +219,11 @@
     <ClInclude Include="..\..\generated\simulator\include\simulator\mainBase.sync-conflict-20240325-123221-QNIL4DQ.hpp"/>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\MJPEGDecoder.sync-conflict-20240325-122934-QNIL4DQ.hpp"/>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.sync-conflict-20240325-122942-QNIL4DQ.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\modbus_threshold_setting_screen\Modbus_threshold_settingPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\modbus_threshold_setting_screen\Modbus_threshold_settingView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\modbus_threshold_setting_screen\Modbus_threshold_settingViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\keyboard_modbus.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\keyboard_modbusBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

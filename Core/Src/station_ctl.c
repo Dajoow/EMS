@@ -38,6 +38,7 @@ Client_Sd_Station_t Client_Sd_Station
 uint8_t bmu_offline[cluster_num][GRP_num];
 error_info_t Client_errors[cluster_num][MAX_ERROR];
 extern cluster_flash_t cluster_flash[cluster_num];
+extern modbus_threshold_flash_t modbus_threshold_flash;
 
 // 硬件到UI数据
 ModelToViewData modelToViewData;

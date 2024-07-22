@@ -26,13 +26,21 @@ SettingViewBase::SettingViewBase() :
     add(background);
 
     daohanglan.setPosition(-2, -2, 1023, 207);
-    save_all.setXY(108, 53);
+    save_all.setXY(264, 53);
     save_all.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     save_all.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OIA8));
     save_all.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     save_all.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 119, 255));
     save_all.setAction(buttonCallback);
     daohanglan.add(save_all);
+
+    threshold.setXY(100, 53);
+    threshold.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
+    threshold.setLabelText(touchgfx::TypedText(T___SINGLEUSE_8UFW));
+    threshold.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    threshold.setLabelColorPressed(touchgfx::Color::getColorFromRGB(0, 119, 255));
+    threshold.setAction(buttonCallback);
+    daohanglan.add(threshold);
 
     start.setXY(744, 31);
     start.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
@@ -42,7 +50,7 @@ SettingViewBase::SettingViewBase() :
     start.setVisible(false);
     daohanglan.add(start);
 
-    cancel.setXY(356, 53);
+    cancel.setXY(425, 53);
     cancel.setBitmaps(touchgfx::Bitmap(BITMAP_IPSET_BJ_RELEASED_ID), touchgfx::Bitmap(BITMAP_IPSET_BJ_PRESSED_ID));
     cancel.setLabelText(touchgfx::TypedText(T___SINGLEUSE_IGM4));
     cancel.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -137,7 +145,7 @@ SettingViewBase::SettingViewBase() :
     _4G.setTypedText(touchgfx::TypedText(T___SINGLEUSE_V6WJ));
     fwq_4g_ipsetting.add(_4G);
 
-    ip_text2_1.setXY(662, 103);
+    ip_text2_1.setXY(664, 103);
     ip_text2_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     ip_text2_1.setLinespacing(0);
     touchgfx::Unicode::snprintf(ip_text2_1Buffer1, IP_TEXT2_1BUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_OQTL).getText());
@@ -213,7 +221,7 @@ SettingViewBase::SettingViewBase() :
     zhuangji_numButton.setAction(buttonCallback);
     fwq_4g_ipsetting.add(zhuangji_numButton);
 
-    cu_num.setPosition(321, 36, 59, 41);
+    cu_num.setPosition(322, 35, 59, 41);
     cu_num.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     cu_num.setLinespacing(0);
     Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XRK5).getText());
@@ -1499,6 +1507,13 @@ void SettingViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When cancel clicked change screen to MainScreen
         //Go to MainScreen with no screen transition
         application().gotoMainScreenScreenNoTransition();
+    }
+    if (&src == &threshold)
+    {
+        //threshold
+        //When threshold clicked change screen to Modbus_threshold_setting
+        //Go to Modbus_threshold_setting with no screen transition
+        application().gotoModbus_threshold_settingScreenNoTransition();
     }
 }
 

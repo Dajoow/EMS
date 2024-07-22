@@ -25,12 +25,16 @@ void DebugView::tearDownScreen()
 
 void DebugView::switch_open_cb()
 {
+#ifndef SIMULATOR
     can_open_switch();
+#endif
 }
 
 void DebugView::switch_close_cb()
 {
+#ifndef SIMULATOR
     can_close_switch();
+#endif
 }
 
 void DebugView::exit_count_cb()

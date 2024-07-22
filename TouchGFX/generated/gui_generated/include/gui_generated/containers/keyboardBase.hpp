@@ -57,10 +57,6 @@ public:
     {
         // Override and implement this function in keyboard
     }
-    virtual void fun_num_0()
-    {
-        // Override and implement this function in keyboard
-    }
     virtual void fun_ok()
     {
         // Override and implement this function in keyboard
@@ -70,6 +66,10 @@ public:
         // Override and implement this function in keyboard
     }
     virtual void fun_de()
+    {
+        // Override and implement this function in keyboard
+    }
+    virtual void fun_num_0()
     {
         // Override and implement this function in keyboard
     }
@@ -83,6 +83,7 @@ protected:
      * Member Declarations
      */
     touchgfx::BoxWithBorder boxWithBorder2;
+    touchgfx::ButtonWithLabel num_0;
     touchgfx::ButtonWithLabel num_1;
     touchgfx::ButtonWithLabel num_2;
     touchgfx::ButtonWithLabel num_3;
@@ -95,11 +96,9 @@ protected:
     touchgfx::ButtonWithLabel but_de;
     touchgfx::ButtonWithLabel but_ce;
     touchgfx::ButtonWithLabel but_ok;
-    touchgfx::ButtonWithLabel num_0;
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::TextAreaWithOneWildcard shownum;
     touchgfx::Image delete_icon;
-    touchgfx::Image keboard_icon;
 
     /*
      * Wildcard Buffers

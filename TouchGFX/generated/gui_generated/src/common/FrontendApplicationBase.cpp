@@ -15,6 +15,8 @@
 #include <gui/setting_screen/SettingPresenter.hpp>
 #include <gui/debug_screen/DebugView.hpp>
 #include <gui/debug_screen/DebugPresenter.hpp>
+#include <gui/modbus_threshold_setting_screen/Modbus_threshold_settingView.hpp>
+#include <gui/modbus_threshold_setting_screen/Modbus_threshold_settingPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -70,4 +72,17 @@ void FrontendApplicationBase::gotoDebugScreenNoTransition()
 void FrontendApplicationBase::gotoDebugScreenNoTransitionImpl()
 {
     touchgfx::makeTransition<DebugView, DebugPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Modbus_threshold_setting
+
+void FrontendApplicationBase::gotoModbus_threshold_settingScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoModbus_threshold_settingScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoModbus_threshold_settingScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<Modbus_threshold_settingView, Modbus_threshold_settingPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

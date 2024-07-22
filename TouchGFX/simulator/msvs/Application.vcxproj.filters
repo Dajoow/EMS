@@ -220,6 +220,18 @@
     <Filter Include="Source Files\generated\gui_generated\debug_screen">
       <UniqueIdentifier>66638D3F-6E85-6DE1-8356-04A7FDBEE1B2</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\modbus_threshold_setting_screen">
+      <UniqueIdentifier>4CE92660-BA17-72ED-A8EA-5C40EC18F148</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\modbus_threshold_setting_screen">
+      <UniqueIdentifier>46996897-97BA-2ECA-B31A-99E320FA71CF</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\modbus_threshold_setting_screen">
+      <UniqueIdentifier>21E67757-974D-D9C6-D4CE-D480EFA6B6A0</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\modbus_threshold_setting_screen">
+      <UniqueIdentifier>D0197ECF-7B70-C927-87A5-C4F24FC4EB2A</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -311,6 +323,21 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\simulator\src\mainBase.sync-conflict-20240325-123112-QNIL4DQ.cpp">
       <Filter>Source Files\generated\simulator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\modbus_threshold_setting_screen\Modbus_threshold_settingPresenter.cpp">
+      <Filter>Source Files\gui\modbus_threshold_setting_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\modbus_threshold_setting_screen\Modbus_threshold_settingView.cpp">
+      <Filter>Source Files\gui\modbus_threshold_setting_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\modbus_threshold_setting_screen\Modbus_threshold_settingViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\modbus_threshold_setting_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\keyboard_modbus.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\keyboard_modbusBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -822,6 +849,21 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.sync-conflict-20240325-122942-QNIL4DQ.hpp">
       <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\modbus_threshold_setting_screen\Modbus_threshold_settingPresenter.hpp">
+      <Filter>Header Files\gui\modbus_threshold_setting_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\modbus_threshold_setting_screen\Modbus_threshold_settingView.hpp">
+      <Filter>Header Files\gui\modbus_threshold_setting_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\modbus_threshold_setting_screen\Modbus_threshold_settingViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\modbus_threshold_setting_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\keyboard_modbus.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\keyboard_modbusBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

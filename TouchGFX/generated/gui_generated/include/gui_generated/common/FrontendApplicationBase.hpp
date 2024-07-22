@@ -29,6 +29,9 @@ public:
     // Debug
     void gotoDebugScreenNoTransition();
 
+    // Modbus_threshold_setting
+    void gotoModbus_threshold_settingScreenNoTransition();
+
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
@@ -42,6 +45,9 @@ protected:
 
     // Debug
     void gotoDebugScreenNoTransitionImpl();
+
+    // Modbus_threshold_setting
+    void gotoModbus_threshold_settingScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

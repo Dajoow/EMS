@@ -315,6 +315,7 @@ protected:
     touchgfx::Box background;
     touchgfx::Container daohanglan;
     touchgfx::ButtonWithLabel save_all;
+    touchgfx::ButtonWithLabel threshold;
     touchgfx::ButtonWithLabel start;
     touchgfx::ButtonWithLabel cancel;
     touchgfx::Container fwq_4g_ipsetting;

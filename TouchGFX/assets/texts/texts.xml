@@ -391,6 +391,429 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_JRVE" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BN6Z" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_IBJ4" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_L6ST" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_QE2K" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BYTM" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_U2RU" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_K2A0" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_8A8A" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_20DT" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_LH73" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_6JAB" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_STY9" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_LAOG" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AXTE" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BW58" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2IDU" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_495O" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_N5LK" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_HV24" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_NQ1R" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_JNNC" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_T4O1" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YDA7" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_WEBK" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_PX0H" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_U5WB" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_8Z2X" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_CBUC" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YD7U" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_BTQZ" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GQBL" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_UFT5" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_S2X1" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GKA4" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_K0DC" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_NUGQ" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_QH9G" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AK5V" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_LQRI" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OY72" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2CH8" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AUZN" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2T1Q" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_UEJM" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_6ZI7" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_701L" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_W5X2" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_9CHD" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_KX78" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">返回</Translation>
+      </Text>
+      <Text Id="__SingleUse_LYET" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">保存</Translation>
+      </Text>
+      <Text Id="__SingleUse_8VZ6" Alignment="Right" TypographyId="SegoeUI_30">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_8YDR" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">.</Translation>
+      </Text>
+      <Text Id="__SingleUse_XY47" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">-</Translation>
+      </Text>
+      <Text Id="__SingleUse_ASH3" Alignment="Center" TypographyId="STxihei_30">
+        <Translation Language="GB">确认</Translation>
+      </Text>
+      <Text Id="__SingleUse_2POG" Alignment="Center" TypographyId="STxihei_20">
+        <Translation Language="GB">清空</Translation>
+      </Text>
+      <Text Id="__SingleUse_RDAZ" Alignment="Center" TypographyId="SegoeUI_20">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_XHHU" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">9</Translation>
+      </Text>
+      <Text Id="__SingleUse_O6Z3" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">8</Translation>
+      </Text>
+      <Text Id="__SingleUse_IEVD" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">7</Translation>
+      </Text>
+      <Text Id="__SingleUse_NF9Q" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">6</Translation>
+      </Text>
+      <Text Id="__SingleUse_D9YB" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">5</Translation>
+      </Text>
+      <Text Id="__SingleUse_40YC" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">4</Translation>
+      </Text>
+      <Text Id="__SingleUse_PSB7" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">3</Translation>
+      </Text>
+      <Text Id="__SingleUse_B7FR" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">2</Translation>
+      </Text>
+      <Text Id="__SingleUse_W7C8" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_6X0R" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">+</Translation>
+      </Text>
+      <Text Id="__SingleUse_UL18" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_OMRV" Alignment="Center" TypographyId="SegoeUI_24">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_CPYF" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LGAR" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_3HG6" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_9BYF" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">负极绝缘电阻下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_4K2D" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZGKK" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_IJFH" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_4SN2" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">正极绝缘电阻下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_2G4F" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_FYF9" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_CUQ5" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_MBBR" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇SOC下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_BPGU" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LOM1" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_FIOQ" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_R1BF" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇SOC上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_G5YJ" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_TGWB" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_YGC3" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_QEWV" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">单体温度下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_UKOL" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_BS15" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_GOHA" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_CIRZ" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">单体温度上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_VZGE" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_51MS" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_K3K0" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_4TON" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇放电温度下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_NX7V" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_8X6D" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_3TNK" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_X47R" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇放电温度上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_FDTN" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_9OZQ" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_SQO2" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_TO30" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇充电温度下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_TD5A" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_IVVF" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_6LFL" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_HJUL" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇充电温度上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_2ET3" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_YZU8" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z92R" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_WE8E" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">单体电压下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_1N4K" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_RGXE" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_GZCM" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_225O" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">单体电压上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_4RUE" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_OOZP" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_LGIW" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_AK8C" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇放电电流上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_E20M" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_K2OM" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_NRTN" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y6M8" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇充电电流上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_PXCE" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_DMQ8" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_7F08" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_3BT8" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇端电压下限</Translation>
+      </Text>
+      <Text Id="__SingleUse_8UFW" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">报警阈值</Translation>
+      </Text>
+      <Text Id="__SingleUse_SKEO" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_AHX7" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
+      <Text Id="__SingleUse_SN2M" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_NU38" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">簇端电压上限</Translation>
+      </Text>
+      <Text Id="__SingleUse_UGLG" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[项目]</Translation>
+      </Text>
+      <Text Id="__SingleUse_FMSS" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[告警阈值]</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z9NK" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[预警阈值]</Translation>
+      </Text>
+      <Text Id="__SingleUse_KEVB" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">[保护阈值]</Translation>
+      </Text>
+      <Text Id="__SingleUse_K4DV" Alignment="Left" TypographyId="STXihei_40">
+        <Translation Language="GB">Modbus 报警阈值设置</Translation>
+      </Text>
+      <Text Id="__SingleUse_JFET" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">返回</Translation>
+      </Text>
+      <Text Id="__SingleUse_CMT9" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">保存</Translation>
+      </Text>
       <Text Id="__SingleUse_347K" Alignment="Left" TypographyId="STxihei_30">
         <Translation Language="GB">10</Translation>
       </Text>
@@ -2560,9 +2983,6 @@
       <Text Id="__SingleUse_90QN" Alignment="Right" TypographyId="SegoeUI_30">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_55MX" Alignment="Center" TypographyId="SegoeUI_24">
-        <Translation Language="GB">0</Translation>
-      </Text>
       <Text Id="__SingleUse_OJHM" Alignment="Center" TypographyId="STxihei_30">
         <Translation Language="GB">确认</Translation>
       </Text>
@@ -2689,7 +3109,7 @@
     </TextGroup>
   </Texts>
   <Typographies>
-    <Typography Id="Default" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="Default" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=".-+" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_24" Font="segoeui.ttf" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="!" WildcardCharacters="0123456789.-" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,!" WildcardCharacterRanges="0-9,a-z,0x7B2C,0x7C7B,0x7EC4,0x53F7,0x7535,0x6C60,0x9519,0x8BEF,0x8B66" />
     <Typography Id="STXihei_24" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
@@ -2697,7 +3117,7 @@
     <Typography Id="SegoeUI_20" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_20" Font="STXIHEI.TTF" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="." WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_30" Font="STXIHEI.TTF" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="SegoeUI_30" Font="segoeui.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="SegoeUI_30" Font="segoeui.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=".+- " WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_60" Font="STXIHEI.TTF" Size="60" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_18" Font="seguisb.ttf" Size="17" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="uibold20" Font="seguisb.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />

@@ -9,7 +9,7 @@
     ],
     "settings": {
         "files.associations": {
-            "can_control.h": "c"
+            "data_persistence.h": "c"
         }
     },
     "extensions": {}

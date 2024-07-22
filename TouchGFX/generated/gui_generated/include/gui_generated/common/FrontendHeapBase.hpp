@@ -18,6 +18,8 @@
 #include <gui/setting_screen/SettingPresenter.hpp>
 #include <gui/debug_screen/DebugView.hpp>
 #include <gui/debug_screen/DebugPresenter.hpp>
+#include <gui/modbus_threshold_setting_screen/Modbus_threshold_settingView.hpp>
+#include <gui/modbus_threshold_setting_screen/Modbus_threshold_settingPresenter.hpp>
 
 
 /**
@@ -43,7 +45,8 @@ public:
     typedef touchgfx::meta::TypeList< MainScreenView,
             touchgfx::meta::TypeList< SettingView,
             touchgfx::meta::TypeList< DebugView,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< Modbus_threshold_settingView,
+            touchgfx::meta::Nil > > >
             > GeneratedViewTypes;
 
     /**
@@ -58,7 +61,8 @@ public:
     typedef touchgfx::meta::TypeList< MainScreenPresenter,
             touchgfx::meta::TypeList< SettingPresenter,
             touchgfx::meta::TypeList< DebugPresenter,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< Modbus_threshold_settingPresenter,
+            touchgfx::meta::Nil > > >
             > GeneratedPresenterTypes;
 
     /**

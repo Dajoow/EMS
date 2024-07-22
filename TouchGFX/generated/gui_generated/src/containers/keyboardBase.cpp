@@ -10,12 +10,20 @@ keyboardBase::keyboardBase() :
     buttonCallback(this, &keyboardBase::buttonCallbackHandler)
 {
     setWidth(350);
-    setHeight(292);
+    setHeight(291);
     boxWithBorder2.setPosition(0, 84, 350, 270);
     boxWithBorder2.setColor(touchgfx::Color::getColorFromRGB(236, 236, 236));
     boxWithBorder2.setBorderColor(touchgfx::Color::getColorFromRGB(236, 236, 236));
     boxWithBorder2.setBorderSize(1);
     add(boxWithBorder2);
+
+    num_0.setXY(263, 224);
+    num_0.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
+    num_0.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OMRV));
+    num_0.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    num_0.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    num_0.setAction(buttonCallback);
+    add(num_0);
 
     num_1.setXY(7, 92);
     num_1.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
@@ -105,21 +113,13 @@ keyboardBase::keyboardBase() :
     but_ce.setAction(buttonCallback);
     add(but_ce);
 
-    but_ok.setXY(7, 292);
+    but_ok.setXY(7, 291);
     but_ok.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_CONFIRN_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_CONFIRN_ID));
     but_ok.setLabelText(touchgfx::TypedText(T___SINGLEUSE_OJHM));
     but_ok.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     but_ok.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     but_ok.setAction(buttonCallback);
     add(but_ok);
-
-    num_0.setXY(263, 224);
-    num_0.setBitmaps(touchgfx::Bitmap(BITMAP_KEYBOARD_RELEASED_ID), touchgfx::Bitmap(BITMAP_KEYBOARD_PRESSED_ID));
-    num_0.setLabelText(touchgfx::TypedText(T___SINGLEUSE_55MX));
-    num_0.setLabelColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    num_0.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    num_0.setAction(buttonCallback);
-    add(num_0);
 
     boxWithBorder1.setPosition(7, 15, 349, 69);
     boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
@@ -140,10 +140,6 @@ keyboardBase::keyboardBase() :
     delete_icon.setXY(291, 113);
     delete_icon.setBitmap(touchgfx::Bitmap(BITMAP_DELETE_ID));
     add(delete_icon);
-
-    keboard_icon.setXY(38, 315);
-    keboard_icon.setBitmap(touchgfx::Bitmap(BITMAP_KEYBOARD_ICON_ID));
-    add(keboard_icon);
 }
 
 keyboardBase::~keyboardBase()
@@ -221,13 +217,6 @@ void keyboardBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //Call fun_num_9
         fun_num_9();
     }
-    if (&src == &num_0)
-    {
-        //fun_num_0
-        //When num_0 clicked call virtual function
-        //Call fun_num_0
-        fun_num_0();
-    }
     if (&src == &but_ok)
     {
         //fun_ok
@@ -248,5 +237,12 @@ void keyboardBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When but_de clicked call virtual function
         //Call fun_de
         fun_de();
+    }
+    if (&src == &num_0)
+    {
+        //fun_num_0
+        //When num_0 clicked call virtual function
+        //Call fun_num_0
+        fun_num_0();
     }
 }

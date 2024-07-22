@@ -42,11 +42,11 @@ void keyboard::SetBufPar(void* p, uint8_t size)
 
 void keyboard::fun_num_1()
 {
-    if(weishu == 0){ //µ±³õÖµÎª0£¬µã»÷1ºó£¬ÊıÖµÎª1
+    if(weishu == 0){ //å½“åˆå€¼ä¸º0ï¼Œç‚¹å‡»1åï¼Œæ•°å€¼ä¸º1
         buff = 1;
         weishu = 1;
     }
-    else{//³õÖµ²»Îª0
+    else{//åˆå€¼ä¸ä¸º0
         buff = buff*10 + 1;
         weishu++;
         if(buff >= 65535){
@@ -230,7 +230,7 @@ void keyboard::fun_num_0()
     fun_ok();
 }
 
-//ÇåÁã
+//æ¸…é›¶
 void keyboard::fun_ce()
 {
     buff = 0;
@@ -241,14 +241,14 @@ void keyboard::fun_ce()
     fun_ok();
 }
 
-//É¾³ıÄ©Î»
+//åˆ é™¤æœ«ä½
 void keyboard::fun_de()
 {
-    if(!buff){//³õÖµÎª0
+    if(!buff){//åˆå€¼ä¸º0
         buff = 0;
         weishu = 0;
     }
-    else{//³õÖµ²»Îª0
+    else{//åˆå€¼ä¸ä¸º0
         buff = buff/10;
         weishu--;
         if(!buff){
@@ -268,7 +268,7 @@ void keyboard::fun_ok()
     tem = buff;
     if(des!=NULL){
         refreshFlag = 1;
-        if(dessize == 1){ //±äÁ¿µÄ×Ö½ÚÊı
+        if(dessize == 1){ //å˜é‡çš„å­—èŠ‚æ•°
             if(tem > 255)
                 tem = 255;
             *(uint8_t*)(des) = tem;
