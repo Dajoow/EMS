@@ -359,9 +359,9 @@ void cal_modbus_cluster_data (void){
     cluster_info_f32[i].data.cluster_soh = Client_Sd[i].cluster_SOH * 0.1;
 
     cluster_info_f32[i].data.pos_insulation_res
-        = Client_Sd[i].insulation_res_p / 1000; // Mohm
+        = Client_Sd[i].insulation_res_p / 1000.0; // Mohm
     cluster_info_f32[i].data.neg_insulation_res
-        = Client_Sd[i].insulation_res_n / 1000; // Mohm
+        = Client_Sd[i].insulation_res_n / 1000.0; // Mohm
 
     cluster_info_f32[i].data.chargeable_capacity = clu_charge_cap[i];
     cluster_info_f32[i].data.dischargeable_capacity = clu_discharge_cap[i];
@@ -373,15 +373,15 @@ void cal_modbus_cluster_data (void){
     if (cell_max_vol[i].val * 0.001 <= CLU_CHARGE_STAGE_SW_VOL){
       cluster_info_f32[i].data.max_charge_current = CLU_CHARGE_STAGE1_CUR;
       cluster_info_f32[i].data.max_charge_power
-          = CLU_CHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
+          = CLU_CHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1 * 0.001; //kW
     }else{
       cluster_info_f32[i].data.max_charge_current = CLU_CHARGE_STAGE2_CUR;
       cluster_info_f32[i].data.max_charge_power
-          = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
+          = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1 * 0.001; //kW
     }
     cluster_info_f32[i].data.max_discharge_current = CLU_DISCHARGE_STAGE1_CUR;
     cluster_info_f32[i].data.max_discharge_power
-        = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1;
+        = CLU_DISCHARGE_STAGE1_CUR * Client_Sd[i].cluster_VOL * 0.1 * 0.001; // kW
 
     cluster_info_f32[i].data.accumulated_charge_capacity =
         cluster_flash[i].charging_sum;
@@ -566,7 +566,7 @@ void cal_modbus_warning_data(void){
         = (Client_Sd[i].insulation_res_n < CLU_INSUL_RES_N_LOW_WARN);
 
     cluster_warning[i].data.clus_v_high_alarm = (Client_Sd[i].cluster_VOL * 0.1 > CLU_HIGH_VOLT_ALARM);
-    cluster_warning[i].data.clus_v_low_alarm = (Client_Sd[i].cluster_VOL * 0.1 <CLU_HIGH_VOLT_ALARM);
+    cluster_warning[i].data.clus_v_low_alarm = (Client_Sd[i].cluster_VOL * 0.1 < CLU_LOW_VOLT_ALARM);
     cluster_warning[i].data.cell_v_high_alarm
         = (cell_max_vol[i].val * 0.001 > CELL_HIGH_VOLT_ALARM);
     cluster_warning[i].data.cell_v_low_alarm
@@ -586,7 +586,7 @@ void cal_modbus_warning_data(void){
         = (Client_Sd[i].insulation_res_n < CLU_INSUL_RES_N_LOW_ALARM);
 
     cluster_warning[i].data.clus_v_high_protect = (Client_Sd[i].cluster_VOL * 0.1 > CLU_HIGH_VOLT_PROTECT);
-    cluster_warning[i].data.clus_v_low_protect = (Client_Sd[i].cluster_VOL * 0.1 <CLU_HIGH_VOLT_PROTECT);
+    cluster_warning[i].data.clus_v_low_protect = (Client_Sd[i].cluster_VOL * 0.1 < CLU_LOW_VOLT_PROTECT);
     cluster_warning[i].data.cell_v_high_protect
         = (cell_max_vol[i].val * 0.001 > CELL_HIGH_VOLT_PROTECT);
     cluster_warning[i].data.cell_v_low_protect
