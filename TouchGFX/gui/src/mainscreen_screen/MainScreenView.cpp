@@ -1632,10 +1632,10 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
     avg_v.invalidate();
 
   //更新电站信息
-  Unicode::snprintf(zongdianliuBuffer, ZONGDIANLIU_SIZE, "%d", modelToViewData.station_CUR / 100);
+  Unicode::snprintf(zongdianliuBuffer, ZONGDIANLIU_SIZE, "%d", modelToViewData.station_CUR / 10);
   zongdianliu.invalidate();
 
-  Unicode::snprintf(zongdianyaBuffer, ZONGDIANYA_SIZE, "%d", modelToViewData.station_VOL / 100);
+  Unicode::snprintf(zongdianyaBuffer, ZONGDIANYA_SIZE, "%d", modelToViewData.station_VOL / 10);
   zongdianya.invalidate();
 
   Unicode::snprintf(chongdiangonglvBuffer, CHONGDIANGONGLV_SIZE, "%d", modelToViewData.charge_power);
