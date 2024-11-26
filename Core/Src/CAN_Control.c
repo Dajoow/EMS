@@ -331,7 +331,7 @@ void can_close_switch(){
 #define CHARGE_CTRL_SW_OPEN 0x2222
 #define CHARGE_CTRL_ACK 0x5a5a
 
-#define CHARGE_SW_MASK 0x8000
+#define CHARGE_SW_MASK 0x80000000
 
 extern Client_Sd_t Client_Sd[cluster_num];
 
@@ -349,6 +349,8 @@ static void switch_task(){
         can_close_switch();
         waitting = 1;
         while(waitting){
+					waitting++;
+
           for (int i = 0; i < cluster_num; i++)
           {
             if(Client_Sd[i].bmu_sw_state & CHARGE_SW_MASK){
@@ -356,30 +358,49 @@ static void switch_task(){
               break;
             } 
           }
-          osDelay(1);
+
+          // waitting timeout = 30s
+          if (waitting > 300){
+            break;
+          }
+          osDelay(100);
         }
-        station_charge_ctrl.data.charge_ctrl = CHARGE_CTRL_ACK;
+        // if not timeout
+        if (waitting == 0) {
+          station_charge_ctrl.data.charge_ctrl = CHARGE_CTRL_ACK;
+        }
         break;
       case CHARGE_CTRL_SW_OPEN:
         can_open_switch();
         waitting = 1;
         while(waitting){
+					waitting++;
+
           for (int i = 0; i < cluster_num; i++)
           {
-            if(Client_Sd[i].bmu_sw_state & CHARGE_SW_MASK == 0){
+            if((Client_Sd[i].bmu_sw_state & CHARGE_SW_MASK) == 0){
               waitting = 0;
               break;
-            } 
+            }
           }
-          osDelay(1);
+
+          // waitting timeout = 30s
+          if (waitting > 300){
+            break;
+          }
+          osDelay(100);
         }
-        station_charge_ctrl.data.charge_ctrl = CHARGE_CTRL_ACK;
+
+        // if not timeout
+        if (waitting == 0) {
+          station_charge_ctrl.data.charge_ctrl = CHARGE_CTRL_ACK;
+        }
         break;
       case CHARGE_CTRL_ACK:
         break;
       }
     }
-    osDelay(1);
+    osDelay(10);
   }
 }
 
