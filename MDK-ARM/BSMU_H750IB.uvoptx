@@ -157,41 +157,41 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>77</LineNumber>
+          <LineNumber>347</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-1878548484</Address>
+          <Address>-1878521076</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
+          <Filename>..\Core\Src\CAN_Control.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\77</Expression>
+          <Expression>\\BSMU_H750IB\../Core/Src/CAN_Control.c\347</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>88</LineNumber>
+          <LineNumber>35</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-1878548454</Address>
+          <Address>-1878677940</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
+          <Filename>..\Drivers\BSP\Components\RS485\modbus_data.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\88</Expression>
+          <Expression>\\\../Drivers/BSP/Components/RS485/modbus_data.c\35</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>88</LineNumber>
+          <LineNumber>195</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-1878548264</Address>
+          <Address>-1878478238</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -200,80 +200,57 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\../Drivers/BSP/Components/RS485/modbus_slave.c\88</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>420</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>-1878733572</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\420</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>103</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>-1878548388</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\103</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>116</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>-1878548274</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Drivers\BSP\Components\RS485\modbus_slave.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\116</Expression>
+          <Expression>\\BSMU_H750IB\../Drivers/BSP/Components/RS485/modbus_slave.c\195</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>slave_util</ItemText>
+          <ItemText>cluster_info_f32[i].data.cluster_soc</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>slave_info</ItemText>
+          <ItemText>Client_Sd[i].cluster_SOC,0x10</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>map</ItemText>
+          <ItemText>station_charge_ctrl.data.charge_ctrl</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>state</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Client_Sd</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>mb_rtu_ctx-&gt;read_buf</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>slave_info</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>msg</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>1</SubType>
-          <ItemText>0x24048948</ItemText>
-          <AccSizeX>2</AccSizeX>
+          <SubType>0</SubType>
+          <ItemText>map-&gt;data</ItemText>
+          <AccSizeX>4</AccSizeX>
         </Mm>
       </MemoryWindow1>
       <Tracepoint>
@@ -350,7 +327,7 @@
 
   <Group>
     <GroupName>Application/User/Core</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

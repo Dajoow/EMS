@@ -56,7 +56,6 @@ MainScreenViewBase::MainScreenViewBase() :
     add(buttonSetting);
 
     batteryshowarea.setPosition(0, 80, 1024, 522);
-    batteryshowarea.setVisible(false);
     batterygroup.setPosition(268, 7, 756, 503);
     S10_1.setPosition(263, 418, 22, 25);
     S10_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -585,7 +584,7 @@ MainScreenViewBase::MainScreenViewBase() :
     CellTempText12.setTypedText(touchgfx::TypedText(T___SINGLEUSE_W00D));
     batterygroup.add(CellTempText12);
 
-    dianchixinxi.setPosition(239, 54, 364, 34);
+    dianchixinxi.setPosition(240, 12, 364, 34);
     dianchixinxi.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     dianchixinxi.setLinespacing(0);
     touchgfx::Unicode::snprintf(dianchixinxiBuffer1, DIANCHIXINXIBUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_NJE3).getText());
@@ -594,6 +593,16 @@ MainScreenViewBase::MainScreenViewBase() :
     dianchixinxi.setWildcard2(dianchixinxiBuffer2);
     dianchixinxi.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6ZPC));
     batterygroup.add(dianchixinxi);
+
+    bal_state.setPosition(193, 54, 364, 34);
+    bal_state.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    bal_state.setLinespacing(0);
+    touchgfx::Unicode::snprintf(bal_stateBuffer1, BAL_STATEBUFFER1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_K7C6).getText());
+    bal_state.setWildcard1(bal_stateBuffer1);
+    touchgfx::Unicode::snprintf(bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_G145).getText());
+    bal_state.setWildcard2(bal_stateBuffer2);
+    bal_state.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S088));
+    batterygroup.add(bal_state);
 
     S12.setPosition(610, 418, 22, 25);
     S12.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -1305,7 +1314,7 @@ MainScreenViewBase::MainScreenViewBase() :
     avg_tem.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FEIO));
     debug_show.add(avg_tem);
 
-    avg_soc.setPosition(27, 42, 233, 27);
+    avg_soc.setPosition(33, 42, 233, 27);
     avg_soc.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     avg_soc.setLinespacing(0);
     Unicode::snprintf(avg_socBuffer, AVG_SOC_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_X6YL).getText());
@@ -1326,6 +1335,7 @@ MainScreenViewBase::MainScreenViewBase() :
     add(batteryshowarea);
 
     shouye.setPosition(-2, 78, 1026, 522);
+    shouye.setVisible(false);
     PCS_menu.setPosition(810, 286, 219, 239);
     PCS_menu.setVisible(false);
     PCS_BG.setPosition(14, 2, 190, 218);
@@ -1503,11 +1513,11 @@ MainScreenViewBase::MainScreenViewBase() :
     Unit_A1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_09OZ));
     cu_info.add(Unit_A1);
 
-    Unit__zu.setPosition(228, 121, 43, 32);
-    Unit__zu.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    Unit__zu.setLinespacing(0);
-    Unit__zu.setTypedText(touchgfx::TypedText(T___SINGLEUSE_U8MT));
-    cu_info.add(Unit__zu);
+    Unit__mohm.setPosition(228, 121, 43, 32);
+    Unit__mohm.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    Unit__mohm.setLinespacing(0);
+    Unit__mohm.setTypedText(touchgfx::TypedText(T___SINGLEUSE_U8MT));
+    cu_info.add(Unit__mohm);
 
     Unit_hao.setPosition(228, 81, 43, 32);
     Unit_hao.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -1601,11 +1611,11 @@ MainScreenViewBase::MainScreenViewBase() :
     Chinese_cudianliu.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OOS5));
     cu_info.add(Chinese_cudianliu);
 
-    Chinese_dianchizushuliang.setPosition(15, 121, 120, 33);
-    Chinese_dianchizushuliang.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    Chinese_dianchizushuliang.setLinespacing(0);
-    Chinese_dianchizushuliang.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MME9));
-    cu_info.add(Chinese_dianchizushuliang);
+    Chinese_cluster_res.setPosition(15, 121, 120, 33);
+    Chinese_cluster_res.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    Chinese_cluster_res.setLinespacing(0);
+    Chinese_cluster_res.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MME9));
+    cu_info.add(Chinese_cluster_res);
 
     Chinese_cubianhao.setPosition(15, 79, 120, 33);
     Chinese_cubianhao.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));

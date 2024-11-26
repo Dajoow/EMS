@@ -2,15 +2,8 @@
     "folders": [
         {
             "path": "."
-        },
-        {
-            "path": ".."
         }
     ],
-    "settings": {
-        "files.associations": {
-            "data_persistence.h": "c"
-        }
-    },
+    "settings": {},
     "extensions": {}
 }

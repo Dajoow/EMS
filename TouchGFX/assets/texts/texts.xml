@@ -391,6 +391,15 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_G145" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">不均衡</Translation>
+      </Text>
+      <Text Id="__SingleUse_K7C6" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">-</Translation>
+      </Text>
+      <Text Id="__SingleUse_S088" Alignment="Center" TypographyId="STxihei_20">
+        <Translation Language="GB">均衡状态Cell&lt;value&gt; &lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_JRVE" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
@@ -2588,7 +2597,7 @@
         <Translation Language="GB">簇编号</Translation>
       </Text>
       <Text Id="__SingleUse_MME9" Alignment="Center" TypographyId="STXihei_24">
-        <Translation Language="GB">电池组数量</Translation>
+        <Translation Language="GB">簇内阻</Translation>
       </Text>
       <Text Id="__SingleUse_OOS5" Alignment="Center" TypographyId="STXihei_24">
         <Translation Language="GB">簇电流</Translation>
@@ -2648,7 +2657,7 @@
         <Translation Language="GB">号</Translation>
       </Text>
       <Text Id="__SingleUse_U8MT" Alignment="Center" TypographyId="STXihei_24">
-        <Translation Language="GB">组</Translation>
+        <Translation Language="GB">mΩ</Translation>
       </Text>
       <Text Id="__SingleUse_09OZ" Alignment="Center" TypographyId="SegoeUI_24">
         <Translation Language="GB">A</Translation>

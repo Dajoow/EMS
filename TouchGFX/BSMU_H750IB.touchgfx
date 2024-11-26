@@ -118,7 +118,6 @@
             "Y": 80,
             "Width": 1024,
             "Height": 522,
-            "Visible": false,
             "LockPosition": true,
             "Components": [
               {
@@ -1172,8 +1171,8 @@
                   {
                     "Type": "TextArea",
                     "Name": "dianchixinxi",
-                    "X": 239,
-                    "Y": 54,
+                    "X": 240,
+                    "Y": 12,
                     "Width": 364,
                     "Height": 34,
                     "TextId": "__SingleUse_6ZPC",
@@ -1185,6 +1184,26 @@
                     },
                     "Wildcard2": {
                       "TextId": "__SingleUse_VPNW",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    }
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "bal_state",
+                    "X": 193,
+                    "Y": 54,
+                    "Width": 364,
+                    "Height": 34,
+                    "TextId": "__SingleUse_S088",
+                    "TextRotation": "0",
+                    "Wildcard1": {
+                      "TextId": "__SingleUse_K7C6",
+                      "UseBuffer": true,
+                      "BufferSize": 10
+                    },
+                    "Wildcard2": {
+                      "TextId": "__SingleUse_G145",
                       "UseBuffer": true,
                       "BufferSize": 10
                     }
@@ -2838,7 +2857,7 @@
                   {
                     "Type": "TextArea",
                     "Name": "avg_soc",
-                    "X": 27,
+                    "X": 33,
                     "Y": 42,
                     "Width": 233,
                     "Height": 27,
@@ -2876,6 +2895,7 @@
             "Y": 78,
             "Width": 1026,
             "Height": 522,
+            "Visible": false,
             "Components": [
               {
                 "Type": "Container",
@@ -3114,7 +3134,7 @@
                     "Name": "IP2",
                     "X": 152,
                     "Y": 134,
-                    "Width": 20,
+                    "Width": 19,
                     "Height": 34,
                     "TextId": "__SingleUse_MN9S",
                     "TextRotation": "0",
@@ -3225,7 +3245,7 @@
                   },
                   {
                     "Type": "TextArea",
-                    "Name": "Unit__zu",
+                    "Name": "Unit__mohm",
                     "X": 228,
                     "Y": 121,
                     "Width": 43,
@@ -3397,7 +3417,7 @@
                   },
                   {
                     "Type": "TextArea",
-                    "Name": "Chinese_dianchizushuliang",
+                    "Name": "Chinese_cluster_res",
                     "X": 15,
                     "Y": 121,
                     "Width": 120,
@@ -4817,7 +4837,7 @@
                         "Type": "TextArea",
                         "Name": "textArea2",
                         "X": 693,
-                        "Width": 104,
+                        "Width": 103,
                         "Height": 31,
                         "TextId": "__SingleUse_MCEE",
                         "TextRotation": "0",

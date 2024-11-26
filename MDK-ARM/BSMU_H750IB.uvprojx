@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_projx.xsd">
-
   <SchemaVersion>2.1</SchemaVersion>
-
   <Header>### uVision Project, (C) Keil Software</Header>
-
   <Targets>
     <Target>
       <TargetName>BSMU_H750IB</TargetName>
@@ -1664,6 +1661,11 @@
               <FilePath>../touchgfx/gui/src/containers/keyboard.cpp</FilePath>
             </File>
             <File>
+              <FileName>keyboard_modbus.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/gui/src/containers/keyboard_modbus.cpp</FilePath>
+            </File>
+            <File>
               <FileName>MainScreenPresenter.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/gui/src/mainscreen_screen/mainscreenpresenter.cpp</FilePath>
@@ -1672,6 +1674,16 @@
               <FileName>MainScreenView.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/gui/src/mainscreen_screen/mainscreenview.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Modbus_threshold_settingPresenter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/gui/src/modbus_threshold_setting_screen/modbus_threshold_settingpresenter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Modbus_threshold_settingView.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/gui/src/modbus_threshold_setting_screen/modbus_threshold_settingview.cpp</FilePath>
             </File>
             <File>
               <FileName>Model.cpp</FileName>
@@ -1687,21 +1699,6 @@
               <FileName>SettingView.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/gui/src/setting_screen/settingview.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Modbus_threshold_settingPresenter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\gui\src\modbus_threshold_setting_screen\Modbus_threshold_settingPresenter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Modbus_threshold_settingView.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\gui\src\modbus_threshold_setting_screen\Modbus_threshold_settingView.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>keyboard_modbus.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\gui\src\containers\keyboard_modbus.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1883,6 +1880,11 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_20_4bpp_15.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_20_4bpp_17.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_20_4bpp_17.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_20_4bpp_18.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_20_4bpp_18.cpp</FilePath>
@@ -2048,6 +2050,11 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_30_4bpp_11.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_30_4bpp_12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_30_4bpp_12.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_30_4bpp_13.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_30_4bpp_13.cpp</FilePath>
@@ -2076,11 +2083,6 @@
               <FileName>Font_STXIHEI_TTF_32_4bpp_0.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_32_4bpp_0.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_STXIHEI_TTF_30_4bpp_12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_30_4bpp_12.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_32_4bpp_10.cpp</FileName>
@@ -2123,6 +2125,11 @@
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_40_4bpp_10.cpp</FilePath>
             </File>
             <File>
+              <FileName>Font_STXIHEI_TTF_40_4bpp_12.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_40_4bpp_12.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Font_STXIHEI_TTF_40_4bpp_14.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_40_4bpp_14.cpp</FilePath>
@@ -2136,6 +2143,16 @@
               <FileName>Font_STXIHEI_TTF_40_4bpp_16.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_40_4bpp_16.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_40_4bpp_17.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_40_4bpp_17.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Font_STXIHEI_TTF_40_4bpp_18.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/fonts/src/font_stxihei_ttf_40_4bpp_18.cpp</FilePath>
             </File>
             <File>
               <FileName>Font_STXIHEI_TTF_60_4bpp_0.cpp</FileName>
@@ -2156,6 +2173,11 @@
               <FileName>GeneratedFont.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/generatedfont.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>image_alternate_theme_images_bars_1024x600_bottom_floating_action.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/__generated/image_alternate_theme_images_bars_1024x600_bottom_floating_action.cpp</FilePath>
             </File>
             <File>
               <FileName>image_alternate_theme_images_widgets_togglebutton_medium_round_text_off_normal.cpp</FileName>
@@ -2363,6 +2385,11 @@
               <FilePath>../touchgfx/generated/images/src/image_mainpage_chunengdianzhan_w.cpp</FilePath>
             </File>
             <File>
+              <FileName>image_modbus_setting.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/images/src/image_modbus_setting.cpp</FilePath>
+            </File>
+            <File>
               <FileName>image_rs485_bj.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/images/src/image_rs485_bj.cpp</FilePath>
@@ -2513,6 +2540,11 @@
               <FilePath>../touchgfx/generated/fonts/src/kerning_stxihei_ttf_60_4bpp.cpp</FilePath>
             </File>
             <File>
+              <FileName>keyboard_modbusBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/gui_generated/src/containers/keyboard_modbusbase.cpp</FilePath>
+            </File>
+            <File>
               <FileName>keyboardBase.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/gui_generated/src/containers/keyboardbase.cpp</FilePath>
@@ -2526,6 +2558,11 @@
               <FileName>MainScreenViewBase.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/gui_generated/src/mainscreen_screen/mainscreenviewbase.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Modbus_threshold_settingViewBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>../touchgfx/generated/gui_generated/src/modbus_threshold_setting_screen/modbus_threshold_settingviewbase.cpp</FilePath>
             </File>
             <File>
               <FileName>SettingViewBase.cpp</FileName>
@@ -2616,41 +2653,6 @@
               <FileName>UnmappedDataFont.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>../touchgfx/generated/fonts/src/unmappeddatafont.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_STXIHEI_TTF_40_4bpp_12.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\fonts\src\Font_STXIHEI_TTF_40_4bpp_12.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_STXIHEI_TTF_40_4bpp_17.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\fonts\src\Font_STXIHEI_TTF_40_4bpp_17.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Font_STXIHEI_TTF_40_4bpp_18.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\fonts\src\Font_STXIHEI_TTF_40_4bpp_18.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Modbus_threshold_settingViewBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\gui_generated\src\modbus_threshold_setting_screen\Modbus_threshold_settingViewBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>keyboard_modbusBase.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\gui_generated\src\containers\keyboard_modbusBase.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_modbus_setting.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\images\src\image_modbus_setting.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>image_alternate_theme_images_bars_1024x600_bottom_floating_action.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\TouchGFX\generated\images\src\__generated\image_alternate_theme_images_bars_1024x600_bottom_floating_action.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -14202,7 +14204,7 @@
                   <IncludeLibraryModules></IncludeLibraryModules>
                   <ComprImg>1</ComprImg>
                 </CommonProperty>
-                <FileArmAds/>
+                <FileArmAds></FileArmAds>
               </FileOption>
             </File>
             <File>
@@ -14228,20 +14230,18 @@
       </Groups>
     </Target>
   </Targets>
-
   <RTE>
-    <apis/>
+    <apis></apis>
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.6.0" condition="ARMv6_7_8-M Device">
-        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"/>
+        <package name="CMSIS" schemaVersion="1.7.7" url="http://www.keil.com/pack/" vendor="ARM" version="5.9.0"></package>
         <targetInfos>
-          <targetInfo name="BSMU_H750IB"/>
+          <targetInfo name="BSMU_H750IB"></targetInfo>
         </targetInfos>
       </component>
     </components>
-    <files/>
+    <files></files>
   </RTE>
-
   <LayerInfo>
     <Layers>
       <Layer>
@@ -14250,5 +14250,4 @@
       </Layer>
     </Layers>
   </LayerInfo>
-
 </Project>

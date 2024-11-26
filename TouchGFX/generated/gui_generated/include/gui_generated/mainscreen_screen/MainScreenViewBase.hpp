@@ -343,6 +343,7 @@ protected:
     touchgfx::TextAreaWithOneWildcard CellTempText11;
     touchgfx::TextAreaWithOneWildcard CellTempText12;
     touchgfx::TextAreaWithTwoWildcards dianchixinxi;
+    touchgfx::TextAreaWithTwoWildcards bal_state;
     touchgfx::TextArea S12;
     touchgfx::TextArea S11;
     touchgfx::TextArea S10;
@@ -476,7 +477,7 @@ protected:
     touchgfx::TextArea Unit_kohm1;
     touchgfx::TextArea Unit_V1;
     touchgfx::TextArea Unit_A1;
-    touchgfx::TextArea Unit__zu;
+    touchgfx::TextArea Unit__mohm;
     touchgfx::TextArea Unit_hao;
     touchgfx::TextAreaWithOneWildcard fujueyuan;
     touchgfx::TextAreaWithOneWildcard zhengjueyuan;
@@ -490,7 +491,7 @@ protected:
     touchgfx::TextArea Chinese_zhengjueyuan;
     touchgfx::TextArea Chinese_cudianya;
     touchgfx::TextArea Chinese_cudianliu;
-    touchgfx::TextArea Chinese_dianchizushuliang;
+    touchgfx::TextArea Chinese_cluster_res;
     touchgfx::TextArea Chinese_cubianhao;
     touchgfx::TextArea dancushishishuju;
     touchgfx::Image dianzhanbj;
@@ -667,6 +668,10 @@ protected:
     touchgfx::Unicode::UnicodeChar dianchixinxiBuffer1[DIANCHIXINXIBUFFER1_SIZE];
     static const uint16_t DIANCHIXINXIBUFFER2_SIZE = 10;
     touchgfx::Unicode::UnicodeChar dianchixinxiBuffer2[DIANCHIXINXIBUFFER2_SIZE];
+    static const uint16_t BAL_STATEBUFFER1_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar bal_stateBuffer1[BAL_STATEBUFFER1_SIZE];
+    static const uint16_t BAL_STATEBUFFER2_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar bal_stateBuffer2[BAL_STATEBUFFER2_SIZE];
     static const uint16_t ZU_SIZE = 8;
     touchgfx::Unicode::UnicodeChar zuBuffer[ZU_SIZE];
     static const uint16_t CU_SIZE = 8;

@@ -19,6 +19,8 @@ KEEP extern const touchgfx::GlyphNode glyphs_STXIHEI_TTF_24_4bpp[] FONT_TABLE_LO
     {  1115, 0x003F,  11,  17,  17,   2,  14,   0,   0, 0x00 },
     {  1217, 0x0049,   3,  17,  17,   1,   5,   0,   0, 0x00 },
     {  1251, 0x0050,  11,  17,  17,   2,  14,   0,   0, 0x00 },
+    {  1353, 0x006D,  20,  13,  13,   1,  23,   0,   0, 0x00 },
+    {  1483, 0x03A9,  17,  17,  17,   1,  18,   0,   0, 0x00 },
     {     0, 0x3002,   6,   6,   5,   3,  24,   0,   0, 0x00 },
     {     0, 0x4E0A,  22,  21,  18,   1,  24,   0,   0, 0x00 },
     {   231, 0x4E91,  21,  21,  17,   1,  24,   0,   0, 0x00 },
@@ -192,6 +194,6 @@ touchgfx::GeneratedFont& getFont_STXIHEI_TTF_24_4bpp();
 
 touchgfx::GeneratedFont& getFont_STXIHEI_TTF_24_4bpp()
 {
-    static touchgfx::GeneratedFont STXIHEI_TTF_24_4bpp(glyphs_STXIHEI_TTF_24_4bpp, 114, 29, 24, 0, 0, 4, 1, 0, 0, unicodes_STXIHEI_TTF_24_4bpp, kerning_STXIHEI_TTF_24_4bpp, 63, 0, 0, 0);
+    static touchgfx::GeneratedFont STXIHEI_TTF_24_4bpp(glyphs_STXIHEI_TTF_24_4bpp, 116, 29, 24, 0, 0, 4, 1, 0, 0, unicodes_STXIHEI_TTF_24_4bpp, kerning_STXIHEI_TTF_24_4bpp, 63, 0, 0, 0);
     return STXIHEI_TTF_24_4bpp;
 }
