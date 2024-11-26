@@ -268,15 +268,16 @@ void cal_modbus_cluster_data (void){
         cell_cnt++;
       }
 
-      uint32_t grp_balance_state = 0;
-      grp_balance_state = (Client_Sd[i].bal_state >> (j + 1)) & 0x00000001;
-      if (grp_balance_state){
-        memset (&cell_charge_balance_status[i][j * GRP_BAT_num], 0xff, GRP_BAT_num);
-        memset (&cell_discharge_balance_status[i][j * GRP_BAT_num], 0xff, GRP_BAT_num);
-      }else{
-        memset (&cell_charge_balance_status[i][j * GRP_BAT_num], 0x00, GRP_BAT_num);
-        memset (&cell_discharge_balance_status[i][j * GRP_BAT_num], 0x00, GRP_BAT_num);
-      }
+    // todo
+    //   uint32_t grp_balance_state = 0;
+    //   grp_balance_state = (Client_Sd[i].bal_state >> (j + 1)) & 0x00000001;
+    //   if (grp_balance_state){
+    //     memset (&cell_charge_balance_status[i][j * GRP_BAT_num], 0xff, GRP_BAT_num);
+    //     memset (&cell_discharge_balance_status[i][j * GRP_BAT_num], 0xff, GRP_BAT_num);
+    //   }else{
+    //     memset (&cell_charge_balance_status[i][j * GRP_BAT_num], 0x00, GRP_BAT_num);
+    //     memset (&cell_discharge_balance_status[i][j * GRP_BAT_num], 0x00, GRP_BAT_num);
+    //   }
     }
 
     cell_avg_vol[i] /= cell_cnt;

@@ -55,7 +55,7 @@ extern EEPROM_BSMU bsmuSetting;
 extern osSemaphoreId http_snd_sem_handle;
 osThreadId httpc_handle = NULL;
 
-Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E420)));
+Client_Sd_Station_t httpc_station_statistics __attribute__ ((at (0xC040E6A0)));
 Client_Sd_t httpc_clusters[cluster_num] __attribute__ ((at (0xC0400000)));
 
 httpc_ctx_t http_client;
@@ -193,7 +193,7 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     goto end;
   cJSON_AddItemToObject (obj, "bn", bn);
 
-  cJSON *bal_state = cJSON_CreateNumber (data->bal_state);
+  cJSON *bal_state = cJSON_CreateString ("NULL");
   if (bal_state == NULL)
     goto end;
   cJSON_AddItemToObject (obj, "bal_state", bal_state);

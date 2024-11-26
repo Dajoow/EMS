@@ -17,6 +17,12 @@
 
 #include "stdint.h"
 
+// get struct member size
+#define  GET_MEMBER_SIZE(type, member)   sizeof(((type*)0)->member)
+
+// get struct member size offset
+#define  GET_MEMBER_OFFSET(type, member)  ((size_t)(&(((type*)0)->member)))
+
 #define use_test_data             0                         //测试状态（发送模拟数据）
 
 #define  cluster_num              20                        //电池簇个数
@@ -38,8 +44,8 @@
 
 #define  FRAME_STATION_HEADER     0x02											 //TCP段中帧头(整个电站的帧头)
 
-#define  CLIENT_SD_ERR_OFT        2908
-#define  CLIENT_SD_TAIL_OFT       2912
+#define  CLIENT_SD_ERR_OFT        GET_MEMBER_OFFSET(Client_Sd_t, error_count)
+#define  CLIENT_SD_TAIL_OFT       GET_MEMBER_OFFSET(Client_Sd_t, checksum)
 #define  CLIENT_SD_TAIL_LEN       8
 
 #define  MODBUS_STA_STATUS_PROHIBIT_CHARGE      0x1111
@@ -143,16 +149,17 @@ typedef struct
   uint16_t insulation_res_p; // 1k
   uint16_t insulation_res_n; // 1k
   uint8_t  grp_num;
-  uint8_t  grp_bat_num; // offset: 19
-  uint32_t bal_state; // [29:0] grp30-grp1 balance state offset:20
-  uint16_t BAT_VOL[TOTOL_BAT_num]; // 0.1mV offset: 24
-  uint16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C offset: 744
-  uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1% offset: 1464
-  uint16_t BAT_SOH[TOTOL_BAT_num]; // 0.1% offset: 2184
-  uint32_t bmu_sw_state; // offset: 2904
+  uint8_t  grp_bat_num;
+  uint8_t bal_state[1+GRP_num]; // see doc
+  uint16_t BAT_VOL[TOTOL_BAT_num]; // 0.1mV
+  uint16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C 
+  uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1% 
+  uint16_t BAT_SOH[TOTOL_BAT_num]; // 0.1%
+  float cluster_res;
+  uint32_t bmu_sw_state; 
   // uint16_t BAT_FAULT[TOTOL_BAT_num];
-  uint32_t error_count; // offset: 2908
-  uint32_t checksum; // offset: 2912
+  uint32_t error_count; 
+  uint32_t checksum; 
   uint32_t frame_tail;
 }Client_Sd_t;
 
