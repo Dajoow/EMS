@@ -50,8 +50,8 @@ void Model::tick()
         modelToViewData.station_SOC = Client_Sd_Station.station_SOC;
         modelToViewData.station_SOH = Client_Sd_Station.station_SOH;
         modelToViewData.charge_power = Client_Sd_Station.charge_power;
-        modelToViewData.discharge_power = modelToViewData.discharge_power;
-        modelToViewData.station_state = modelToViewData.station_state;
+        modelToViewData.discharge_power = Client_Sd_Station.discharge_power;
+        modelToViewData.station_state = Client_Sd_Station.station_state;
         //20簇状态数据VIEW更新
         for (uint8_t i = 0; i < cluster_num; i++)
         {
