@@ -1557,13 +1557,13 @@ MainScreenViewBase::MainScreenViewBase() :
     cudianliu.setTypedText(touchgfx::TypedText(T___SINGLEUSE_TRJ5));
     cu_info.add(cudianliu);
 
-    zushuliang.setPosition(143, 123, 82, 28);
-    zushuliang.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    zushuliang.setLinespacing(0);
-    Unicode::snprintf(zushuliangBuffer, ZUSHULIANG_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GQPH).getText());
-    zushuliang.setWildcard(zushuliangBuffer);
-    zushuliang.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WPKB));
-    cu_info.add(zushuliang);
+    cluster_res.setPosition(143, 123, 82, 28);
+    cluster_res.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    cluster_res.setLinespacing(0);
+    Unicode::snprintf(cluster_resBuffer, CLUSTER_RES_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GQPH).getText());
+    cluster_res.setWildcard(cluster_resBuffer);
+    cluster_res.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WPKB));
+    cu_info.add(cluster_res);
 
     cubianhao.setPosition(143, 81, 82, 28);
     cubianhao.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));

@@ -483,7 +483,7 @@ protected:
     touchgfx::TextAreaWithOneWildcard zhengjueyuan;
     touchgfx::TextAreaWithOneWildcard cudianya;
     touchgfx::TextAreaWithOneWildcard cudianliu;
-    touchgfx::TextAreaWithOneWildcard zushuliang;
+    touchgfx::TextAreaWithOneWildcard cluster_res;
     touchgfx::TextAreaWithOneWildcard cubianhao;
     touchgfx::TextArea Chinese_2;
     touchgfx::TextArea Chinese_fujueyuan;
@@ -702,8 +702,8 @@ protected:
     touchgfx::Unicode::UnicodeChar cudianyaBuffer[CUDIANYA_SIZE];
     static const uint16_t CUDIANLIU_SIZE = 10;
     touchgfx::Unicode::UnicodeChar cudianliuBuffer[CUDIANLIU_SIZE];
-    static const uint16_t ZUSHULIANG_SIZE = 10;
-    touchgfx::Unicode::UnicodeChar zushuliangBuffer[ZUSHULIANG_SIZE];
+    static const uint16_t CLUSTER_RES_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar cluster_resBuffer[CLUSTER_RES_SIZE];
     static const uint16_t CUBIANHAO_SIZE = 10;
     touchgfx::Unicode::UnicodeChar cubianhaoBuffer[CUBIANHAO_SIZE];
     static const uint16_t FANGDIANGONGLV_SIZE = 10;

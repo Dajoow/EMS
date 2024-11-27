@@ -3325,7 +3325,7 @@
                   },
                   {
                     "Type": "TextArea",
-                    "Name": "zushuliang",
+                    "Name": "cluster_res",
                     "X": 143,
                     "Y": 123,
                     "Width": 82,
