@@ -1095,6 +1095,7 @@ void MainScreenView::BMU1_clicked()
   
   BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2, BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
 	BMU_BG.invalidate();
+  // update balance state
   //更新选定组编号
   Unicode::snprintf(zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
   zu.invalidate();
@@ -1538,6 +1539,38 @@ void MainScreenView::BMU30_clicked()
   presenter->ViewtoModelDat(viewToModelData);
 }
 
+void MainScreenView::balance_state_update(int no_bmu)
+{
+#ifndef SIMULATOR
+  uint8_t switching_state;
+  uint8_t bal_state;
+
+  switching_state = Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_SWITCH_MASK;
+
+  // only update when bal switching finished
+  if(switching_state){
+    Unicode::snprintf(bal_stateBuffer1, BAL_STATEBUFFER1_SIZE, "%d", (Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_CELL_MASK) >> 4);
+    switch (bal_state)
+    {
+    case BAL_STATE_IDLE:
+      Unicode::snprintf(bal_stateBuffer2, BAL_STATEBUFFER1_SIZE, "%s", "空闲");
+      break;
+    
+    case BAL_STATE_FORWARD:
+      Unicode::snprintf(bal_stateBuffer2, BAL_STATEBUFFER1_SIZE, "%s", "正向");
+      break;
+
+    case BAL_STATE_INVERSE:
+      Unicode::snprintf(bal_stateBuffer2, BAL_STATEBUFFER1_SIZE, "%s", "反向");
+      break;
+
+    default:
+      break;
+    }
+  }
+#endif // !SIMULATOR
+}
+
  uint8_t MainScreenView::get_one_bit_value(uint16_t src, uint8_t bit_num) //bit_num 1~16
 {
     return (uint8_t)((src >> (bit_num - 1)) & 1);
@@ -1649,6 +1682,9 @@ void MainScreenView::NotifyViewMsg(ModelToViewData modelToViewData)
   cubianhao.invalidate();
 
   Unicode::snprintfFloat(cudianyaBuffer, CUDIANYA_SIZE, "%.1f", (float)modelToViewData.cluster_VOL*0.1);
+  cudianya.invalidate();
+
+  Unicode::snprintfFloat(cluster_resBuffer, CLUSTER_RES_SIZE, "%.0f", (float)modelToViewData.cluster_res);
   cudianya.invalidate();
 
   Unicode::snprintfFloat(cudianliuBuffer, CUDIANLIU_SIZE, "%.1f", (float)modelToViewData.cluster_CUR*0.01);

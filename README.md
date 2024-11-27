@@ -211,8 +211,8 @@
 | 0xC03B 0000——0xC03D 8000-1(160kB)(8KB*20)        |    FDCAN_REV_Buff     |
 | 0xC03D 8000——0xC03F 8000-1(128kB)                | FDCAN_REV_Buff(预留)  |
 | 0xC03F 8000——0xC040 0000-1(32kB)                 |    FDCAN_SND_Buff     |
-| 0xC040 0000——0xC040 E420-1                       |     httpc_clusters    |
-| 0xC040 E420——0XC001 C700-1                       |httpc_station_statistics|
+| 0xC040 0000——0xC040 E6A0-1                       |     httpc_clusters    |
+| 0xC040 E6A0——0XC001 C700-1                       |httpc_station_statistics|
 |                                                  |                       |
 |                                                  |                       |
 |                                                  |                       |

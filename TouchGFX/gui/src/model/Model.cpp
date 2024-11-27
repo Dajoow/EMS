@@ -62,6 +62,7 @@ void Model::tick()
         modelToViewData.cluster_CUR = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].cluster_CUR;
         modelToViewData.cluster_SOC = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].cluster_SOC;
         modelToViewData.cluster_SOH = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].cluster_SOH;
+        modelToViewData.cluster_res = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].cluster_res;
         modelToViewData.insulation_res_p = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].insulation_res_p;
         modelToViewData.insulation_res_n = Client_Sd[viewToModelDataTemp.BCMU_SEL-1].insulation_res_n;
         //某组数据VIEW更新

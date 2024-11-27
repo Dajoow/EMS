@@ -104,6 +104,8 @@ public:
     bool show_batteryshowarea_State();
     virtual void show_batteryshowarea_on();
     virtual void show_batteryshowarea_off();
+    
+    virtual void balance_state_update(int no_bmu);
 
     virtual void handleTickEvent();
   
