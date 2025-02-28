@@ -100,7 +100,7 @@ static int read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_info *s
                 need_len = map_len;
             }
             
-            slave_util->get(map, map_buf,now_address ,need_len);
+            slave_util->get(map, map_buf, now_address, need_len);
 
             if (function == AGILE_MODBUS_FC_READ_COILS || function == AGILE_MODBUS_FC_READ_DISCRETE_INPUTS) {
                 uint8_t *ptr = map_buf;

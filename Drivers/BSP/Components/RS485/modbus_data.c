@@ -29,7 +29,11 @@ static int get_map_buf(const agile_modbus_slave_util_map_t *map, void *buf,
     break;
   }
   default:
-    memcpy(buf, map->data + (index - start_addr), len);
+		if (modbus_data_type == MODBUS_BIT){
+      memcpy(buf, map->data + (index - start_addr), len);
+		}else{
+			memcpy(buf, map->data + (index - start_addr), len * 2);
+		}
     break;
   }
 
@@ -55,7 +59,7 @@ static int set_map_buf(const agile_modbus_slave_util_map_t *map, int index,
     break;
   }
 
-  memcpy(map->data + (index - start_addr), buf, len * size);
+  memcpy(map->data + index, buf, len * size);
 
   return 0;
 }
@@ -86,7 +90,7 @@ station_charge_ctrl_u station_charge_ctrl;
 agile_modbus_slave_util_map_t station_regs_map[] = {
     // 充放电控制
     {
-        .start_addr = 0x00,
+        .start_addr = 0x01,
         .end_addr = 0x01,
         .data = station_charge_ctrl.reg,
         .data_len = sizeof(station_charge_ctrl.reg),
