@@ -141,7 +141,7 @@
 
 //单簇数据包结构
 //注意内存对齐   现在这个结构体的大小为4的倍数
-typedef struct 
+typedef struct
 {
   /* data */
   uint16_t frame_header;
@@ -157,14 +157,14 @@ typedef struct
   uint8_t  grp_bat_num;
   uint8_t bal_state[1+GRP_num]; // see doc
   uint16_t BAT_VOL[TOTOL_BAT_num]; // 0.1mV
-  uint16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C 
-  uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1% 
+  int16_t BAT_TMP[TOTOL_BAT_num]; // 0.01°C 
+  uint16_t BAT_SOC[TOTOL_BAT_num]; // 0.1%
   uint16_t BAT_SOH[TOTOL_BAT_num]; // 0.1%
   float cluster_res;
-  uint32_t bmu_sw_state; 
+  uint32_t bmu_sw_state;
   // uint16_t BAT_FAULT[TOTOL_BAT_num];
-  uint32_t error_count; 
-  uint32_t checksum; 
+  uint32_t error_count;
+  uint32_t checksum;
   uint32_t frame_tail;
 }Client_Sd_t;
 
@@ -179,7 +179,7 @@ extern uint8_t bmu_offline[cluster_num][GRP_num];
 
 //电站数据包结构
 //注意内存对齐   现在这个结构体的大小为4的倍数
-typedef struct 
+typedef struct
 {
   /* data */
   uint16_t frame_header;
@@ -219,7 +219,7 @@ typedef struct{
   uint16_t insulation_res_n;
   //具体一组电池信息
   uint16_t BAT_VOL[12];
-  uint16_t BAT_TMP[12];
+  int16_t BAT_TMP[12];
   uint16_t BAT_SOC[12];
   uint16_t BAT_FAULT[12];
 }ModelToViewData;
