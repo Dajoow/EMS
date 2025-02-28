@@ -219,43 +219,43 @@ void cal_modbus_cluster_data (void){
         cell_soc[i][index].f32 = Client_Sd[i].BAT_SOC[index] * 0.1;
         cell_soh[i][index].f32 = Client_Sd[i].BAT_SOH[index] * 0.1;
 
-        if (Client_Sd[i].BAT_VOL[index] > cell_max_vol->val){
+        if (Client_Sd[i].BAT_VOL[index] > cell_max_vol[i].val){
             cell_max_vol[i].cluster_id = i + 1;
             cell_max_vol[i].cell_id = index + 1;
             cell_max_vol[i].val = Client_Sd[i].BAT_VOL[index];
         }
-        if (Client_Sd[i].BAT_TMP[index] > cell_max_temp->val){
+        if (Client_Sd[i].BAT_TMP[index] > cell_max_temp[i].val){
             cell_max_temp[i].cluster_id = i + 1;
             cell_max_temp[i].cell_id = index + 1;
             cell_max_temp[i].val = Client_Sd[i].BAT_TMP[index];
         }
-        if (Client_Sd[i].BAT_SOC[index] > cell_max_soc->val){
+        if (Client_Sd[i].BAT_SOC[index] > cell_max_soc[i].val){
             cell_max_soc[i].cluster_id = i + 1;
             cell_max_soc[i].cell_id = index + 1;
             cell_max_soc[i].val = Client_Sd[i].BAT_SOC[index];
         }
-        if (Client_Sd[i].BAT_SOH[index] > cell_max_soh->val){
+        if (Client_Sd[i].BAT_SOH[index] > cell_max_soh[i].val){
             cell_max_soh[i].cluster_id = i + 1;
             cell_max_soh[i].cell_id = index + 1;
             cell_max_soh[i].val = Client_Sd[i].BAT_SOH[index];
         }
 
-        if (Client_Sd[i].BAT_VOL[index] < cell_min_vol->val){
+        if (Client_Sd[i].BAT_VOL[index] < cell_min_vol[i].val){
             cell_min_vol[i].cluster_id = i + 1;
             cell_min_vol[i].cell_id = index + 1;
             cell_min_vol[i].val = Client_Sd[i].BAT_VOL[index];
         }
-        if (Client_Sd[i].BAT_TMP[index] < cell_min_temp->val){
+        if (Client_Sd[i].BAT_TMP[index] < cell_min_temp[i].val){
             cell_min_temp[i].cluster_id = i + 1;
             cell_min_temp[i].cell_id = index + 1;
             cell_min_temp[i].val = Client_Sd[i].BAT_TMP[index];
         }
-        if (Client_Sd[i].BAT_SOC[index] < cell_min_soc->val){
+        if (Client_Sd[i].BAT_SOC[index] < cell_min_soc[i].val){
             cell_min_soc[i].cluster_id = i + 1;
             cell_min_soc[i].cell_id = index + 1;
             cell_min_soc[i].val = Client_Sd[i].BAT_SOC[index];
         }
-        if (Client_Sd[i].BAT_SOH[index] < cell_min_soh->val){
+        if (Client_Sd[i].BAT_SOH[index] < cell_min_soh[i].val){
             cell_min_soh[i].cluster_id = i + 1;
             cell_min_soh[i].cell_id = index + 1;
             cell_min_soh[i].val = Client_Sd[i].BAT_SOH[index];

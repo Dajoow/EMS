@@ -132,7 +132,12 @@
 #define CLU_INSUL_RES_N_LOW_ALARM               (modbus_threshold_flash.clu_insul_res_n_low_alarm)
 #define CLU_INSUL_RES_N_LOW_PROTECT             (modbus_threshold_flash.clu_insul_res_n_low_protect)
 
-
+#define BAL_STATE_CELL_MASK                     0xF0
+#define BAL_STATE_SWITCH_MASK                   0x08
+#define BAL_STATE_BAL_MASK                      0x03
+#define BAL_STATE_IDLE                          0x00
+#define BAL_STATE_FORWARD                       0x01
+#define BAL_STATE_INVERSE                       0x02
 
 //单簇数据包结构
 //注意内存对齐   现在这个结构体的大小为4的倍数
@@ -209,6 +214,7 @@ typedef struct{
   int16_t  cluster_CUR;
   uint16_t cluster_SOC;
   uint16_t cluster_SOH;
+  float cluster_res;
   uint16_t insulation_res_p;
   uint16_t insulation_res_n;
   //具体一组电池信息
