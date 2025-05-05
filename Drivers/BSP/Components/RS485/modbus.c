@@ -8,8 +8,8 @@
 
 osThreadId modbus_taskhandle = NULL;
 
-uint8_t modbus_send_buf[AGILE_MODBUS_MAX_ADU_LENGTH];
-uint8_t modbus_read_buf[AGILE_MODBUS_MAX_ADU_LENGTH];
+uint8_t modbus_send_buf[BUFFERSIZE];
+uint8_t modbus_read_buf[BUFFERSIZE];
 
 extern bsmu_modbus_data_t bsmu_modbus_data[];
 
