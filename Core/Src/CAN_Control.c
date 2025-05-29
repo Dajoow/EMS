@@ -601,13 +601,13 @@ CAN_Poll (void const *argument)
                 if (ulTaskNotifyTake (pdTRUE, WAIT_PACK_TIME)) {
                     ACK_ERROR_TIME                       = 0;
                     BCMU[Queue_NUM_POLL].OnlineOrOffline = Online;
-                    Client_Sd[Queue_NUM_POLL].work_state = Online;
+                    // Client_Sd[Queue_NUM_POLL].work_state = Online;
                     Queue_NUM_POLL++;
                 } else {
                     ACK_ERROR_TIME++;
                     if (ACK_ERROR_TIME > ACK_ERROR_TIME_MAX) {
                         BCMU[Queue_NUM_POLL].OnlineOrOffline = Offline;
-                        Client_Sd[Queue_NUM_POLL].work_state = Offline;
+                        // Client_Sd[Queue_NUM_POLL].work_state = Offline;
                         ACK_ERROR_TIME                       = 0;
                         Queue_NUM_POLL++;
                         continue;
@@ -616,7 +616,7 @@ CAN_Poll (void const *argument)
                 vTaskDelay (bsmuSetting.poll_T);
             } else {
                 BCMU[Queue_NUM_POLL].OnlineOrOffline = Offline;
-                Client_Sd[Queue_NUM_POLL].work_state = Offline;
+                // Client_Sd[Queue_NUM_POLL].work_state = Offline;
                 Queue_NUM_POLL++;
             }
         }
