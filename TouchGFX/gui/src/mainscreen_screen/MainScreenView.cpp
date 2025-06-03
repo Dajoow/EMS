@@ -1592,15 +1592,15 @@ MainScreenView::balance_state_update (int no_bmu)
                            (Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_CELL_MASK) >> 4);
         switch (balance_state) {
             case BAL_STATE_IDLE:
-                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER1_SIZE, "%s", "空闲");
+                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", "空闲");
                 break;
 
             case BAL_STATE_FORWARD:
-                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER1_SIZE, "%s", "正向");
+                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", "正向");
                 break;
 
             case BAL_STATE_INVERSE:
-                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER1_SIZE, "%s", "反向");
+                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", "反向");
                 break;
 
             default:
