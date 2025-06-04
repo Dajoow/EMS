@@ -2842,10 +2842,10 @@
                   {
                     "Type": "TextArea",
                     "Name": "avg_tem",
-                    "X": 33,
-                    "Y": 69,
-                    "Width": 221,
-                    "Height": 24,
+                    "X": 44,
+                    "Y": 68,
+                    "Width": 160,
+                    "Height": 25,
                     "TextId": "__SingleUse_FEIO",
                     "TextRotation": "0",
                     "Wildcard1": {
@@ -2857,9 +2857,9 @@
                   {
                     "Type": "TextArea",
                     "Name": "avg_soc",
-                    "X": 33,
-                    "Y": 42,
-                    "Width": 233,
+                    "X": 44,
+                    "Y": 41,
+                    "Width": 160,
                     "Height": 27,
                     "TextId": "__SingleUse_EPD9",
                     "TextRotation": "0",
@@ -2872,10 +2872,10 @@
                   {
                     "Type": "TextArea",
                     "Name": "avg_v",
-                    "X": 33,
-                    "Y": 15,
-                    "Width": 226,
-                    "Height": 27,
+                    "X": 44,
+                    "Y": 13,
+                    "Width": 160,
+                    "Height": 28,
                     "TextId": "__SingleUse_OHJG",
                     "TextRotation": "0",
                     "Wildcard1": {

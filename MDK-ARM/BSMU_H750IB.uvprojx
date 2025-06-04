@@ -1710,7 +1710,7 @@
           <GroupOption>
             <CommonProperty>
               <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTCodeConst>1</RVCTCodeConst>
               <RVCTZI>0</RVCTZI>
               <RVCTOtherData>0</RVCTOtherData>
               <ModuleSelection>0</ModuleSelection>

@@ -1590,19 +1590,17 @@ MainScreenView::balance_state_update (int no_bmu)
     if (switching_state) {
         Unicode::snprintf (bal_stateBuffer1, BAL_STATEBUFFER1_SIZE, "%d",
                            (Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_CELL_MASK) >> 4);
+        balance_state = BAL_STATE_FORWARD;
         switch (balance_state) {
             case BAL_STATE_IDLE:
-                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", "空闲");
+                Unicode::fromUTF8 ((const uint8_t *)"空闲", bal_stateBuffer2, BAL_STATEBUFFER2_SIZE);
                 break;
-
             case BAL_STATE_FORWARD:
-                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", "正向");
+                Unicode::fromUTF8 ((const uint8_t *)"正向", bal_stateBuffer2, BAL_STATEBUFFER2_SIZE);
                 break;
-
             case BAL_STATE_INVERSE:
-                Unicode::snprintf (bal_stateBuffer2, BAL_STATEBUFFER2_SIZE, "%s", "反向");
+                Unicode::fromUTF8 ((const uint8_t *)"反向", bal_stateBuffer2, BAL_STATEBUFFER2_SIZE);
                 break;
-
             default:
                 break;
         }

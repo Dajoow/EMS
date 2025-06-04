@@ -1306,7 +1306,7 @@ MainScreenViewBase::MainScreenViewBase() :
     batteryshowarea.add(cu);
 
     debug_show.setPosition(258, -2, 250, 97);
-    avg_tem.setPosition(33, 69, 221, 24);
+    avg_tem.setPosition(44, 68, 160, 25);
     avg_tem.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     avg_tem.setLinespacing(0);
     Unicode::snprintf(avg_temBuffer, AVG_TEM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_BMV2).getText());
@@ -1314,7 +1314,7 @@ MainScreenViewBase::MainScreenViewBase() :
     avg_tem.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FEIO));
     debug_show.add(avg_tem);
 
-    avg_soc.setPosition(33, 42, 233, 27);
+    avg_soc.setPosition(44, 41, 160, 27);
     avg_soc.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     avg_soc.setLinespacing(0);
     Unicode::snprintf(avg_socBuffer, AVG_SOC_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_X6YL).getText());
@@ -1322,7 +1322,7 @@ MainScreenViewBase::MainScreenViewBase() :
     avg_soc.setTypedText(touchgfx::TypedText(T___SINGLEUSE_EPD9));
     debug_show.add(avg_soc);
 
-    avg_v.setPosition(33, 15, 226, 27);
+    avg_v.setPosition(44, 13, 160, 28);
     avg_v.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     avg_v.setLinespacing(0);
     Unicode::snprintf(avg_vBuffer, AVG_V_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_I5VS).getText());
