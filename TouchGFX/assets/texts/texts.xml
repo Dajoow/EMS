@@ -391,11 +391,11 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_G145" Alignment="Left" TypographyId="SegoeUI_20">
+        <Translation Language="GB">空闲</Translation>
+      </Text>
       <Text Id="__SingleUse_K7C6" Alignment="Left" TypographyId="SegoeUI_20">
         <Translation Language="GB">0</Translation>
-      </Text>
-      <Text Id="__SingleUse_G145" Alignment="Center" TypographyId="STxihei_20">
-        <Translation Language="GB">空闲</Translation>
       </Text>
       <Text Id="__SingleUse_S088" Alignment="Center" TypographyId="STxihei_20">
         <Translation Language="GB">均衡状态: Cell&lt;value&gt; &lt;value&gt;</Translation>
@@ -3123,7 +3123,7 @@
     <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,!" WildcardCharacterRanges="0-9,a-z,0x7B2C,0x7C7B,0x7EC4,0x53F7,0x7535,0x6C60,0x9519,0x8BEF,0x8B66" />
     <Typography Id="STXihei_24" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_40" Font="STXIHEI.TTF" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="SegoeUI_20" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="空闲正反向" WildcardCharacterRanges="0-9,0x4E00-0x9FFF,0x7a7a,0x95f2,0x6b63,0x53cd,0x5411" />
+    <Typography Id="SegoeUI_20" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_20" Font="STXIHEI.TTF" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=".空闲正反向" WildcardCharacterRanges="0-9" />
     <Typography Id="STxihei_30" Font="STXIHEI.TTF" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_30" Font="segoeui.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=".+- " WildcardCharacterRanges="0-9" />
