@@ -580,9 +580,13 @@ httpc_task (void const *args)
         {
             httpc_connect (&http_client, HOST, HTTPS_PORT);
 
-            httpc_send_data_statistics (&http_client);
+//            httpc_send_data_statistics (&http_client);
 
-            httpc_send_data_clusters (&http_client);
+//            httpc_send_data_clusters (&http_client);
+            if(httpc_send_data_clusters (&http_client) == 0)//clusters data send successfully
+            {
+                httpc_send_data_statistics (&http_client);
+            }
 
             httpc_disconnect (&http_client);
         }
