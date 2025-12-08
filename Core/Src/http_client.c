@@ -26,7 +26,7 @@
 #define HTTPC_ENABLED
 #endif
 
-#define HOST           "zbdzbms.online"
+#define HOST           "hdzbdzbms.online"
 #define HTTPS_PORT     "443"
 #define HTTP_PORT      "80"
 #define HTTP_HOST      HOST
@@ -423,57 +423,106 @@ httpc_disconnect (httpc_ctx_t *ctx)
     return 0;
 }
 
-#define REC_BUFFER_LEN 256
+#define REC_BUFFER_LEN 1024  // 增大缓冲区大小
+
 static int
 httpc_recv (httpc_ctx_t *ctx)
 {
-    char buffer[REC_BUFFER_LEN];
-    char *ret = NULL;
-    char content_len[4]; // length always < 999
-    int err_code = 0;
-
+    char buffer[REC_BUFFER_LEN];  // 接收缓冲区，长度为REC_BUFFER_LEN
+    char *http_start = NULL;      // 指向HTTP响应起始位置的指针
+    int ssl_ret = 0;              // SSL读取操作的返回值
+    int total_received = 0;       // 总共接收到的字节数
+    
+    // 1. 初始化接收缓冲区，全部清零
+    memset(buffer, 0, sizeof(buffer));
+    
+    // 2. 循环读取SSL数据
     do {
-        err_code = mbedtls_ssl_read (ctx->mbedtls.ssl_ctx, buffer, sizeof (buffer));
-
-        if (err_code == MBEDTLS_ERR_SSL_WANT_READ || err_code == MBEDTLS_ERR_SSL_WANT_WRITE) { continue; }
-
-        if (err_code == MBEDTLS_ERR_SSL_PEER_CLOSE_NOTIFY) { break; }
-
-        if (err_code < 0) {
-            Debug_printf ("failed! mbedtls_ssl_read returned %d\n\n", err_code);
-            break;
+        // 从SSL连接读取数据，使用偏移量避免覆盖已接收的数据
+        ssl_ret = mbedtls_ssl_read(ctx->mbedtls.ssl_ctx, 
+                                  buffer + total_received, 
+                                  sizeof(buffer) - total_received - 1);
+        
+        // 如果SSL需要更多数据或需要发送数据，继续循环
+        if (ssl_ret == MBEDTLS_ERR_SSL_WANT_READ || 
+            ssl_ret == MBEDTLS_ERR_SSL_WANT_WRITE) {
+            continue;  // 继续尝试读取
         }
-
-        if (err_code > 0) { break; }
-    } while (1);
-
-    // Debug_printf ("%s\r\n", buffer);
-
-    if (ret = strstr (buffer, "HTTP/1.1 ")) {
-        char *mime_ptr = NULL;
-        mime_ptr       = strstr (ret, " ");
-        if (mime_ptr != NULL) {
-            mime_ptr += 1;
-
-            while (*mime_ptr && (*mime_ptr == ' ' || *mime_ptr == '\t')) mime_ptr++;
+        
+        // 如果对端关闭了连接，跳出循环
+        if (ssl_ret == MBEDTLS_ERR_SSL_PEER_CLOSE_NOTIFY) {
+            break;  // 对端发送了关闭通知
         }
-        err_code = atoi (mime_ptr);
+        
+        // 如果SSL读取出错，打印错误信息并返回错误码
+        if (ssl_ret < 0) {
+            Debug_printf("SSL read error: %d\n", ssl_ret);
+            return ssl_ret;  // 返回SSL错误码
+        }
+        
+        // 如果成功读取到数据
+        if (ssl_ret > 0) {
+            total_received += ssl_ret;     // 更新总接收字节数
+            buffer[total_received] = '\0';  // 在接收数据末尾添加null终止符，确保字符串安全
+            
+            // 检查是否已经收到了完整的HTTP头部（HTTP头部以\r\n\r\n结束）
+            if (strstr(buffer, "\r\n\r\n") != NULL) {
+                break;  // 收到完整HTTP头部，可以停止读取
+            }
+            
+            // 防止缓冲区溢出，如果缓冲区快满了，打印警告并停止读取
+            if (total_received >= sizeof(buffer) - 1) {
+                Debug_printf("Warning: Buffer full, may have truncated response\n");
+                break;  // 缓冲区已满，可能截断了响应
+            }
+        }
+    } while (ssl_ret > 0);  // 只要还有数据就继续读取
+    
+    // 打印调试信息，显示总共接收了多少字节
+    Debug_printf("Received %d bytes\n", total_received);
+    
+    // 3. 在接收到的数据中查找HTTP响应起始位置
+    http_start = strstr(buffer, "HTTP/");
+    if (http_start == NULL) {
+        Debug_printf("Error: No HTTP header found\n");
+        return -1;  // 没有找到HTTP头部，返回错误
     }
-
-    if (err_code != 200) { return err_code; }
-
-    if (ret = strstr (buffer, "code")) {
-        char *mime_ptr = NULL;
-        mime_ptr       = strstr (ret, ":");
-        if (mime_ptr != NULL) {
-            mime_ptr += 1;
-
-            while (*mime_ptr && (*mime_ptr == ',' || *mime_ptr == '\t')) mime_ptr++;
-        }
-        err_code = atoi (mime_ptr);
+    
+    // 4. 找到HTTP版本后面的第一个空格（HTTP/1.1和状态码之间的空格）
+    char *space_pos = strchr(http_start, ' ');
+    if (space_pos == NULL) {
+        Debug_printf("Error: No space after HTTP version\n");
+        return -2;  // 没有找到空格，HTTP格式错误
     }
-
-    return err_code;
+    
+    // 5. 将指针移动到空格后面，即状态码开始的位置
+    char *status_start = space_pos + 1;
+    
+    // 6. 跳过状态码前面可能存在的空格或制表符
+    while (*status_start == ' ' || *status_start == '\t') {
+        status_start++;  // 移动到状态码的第一个数字
+    }
+    
+    // 7. 验证状态码是否是三位数字
+    // 使用isdigit()函数检查三个字符是否都是数字
+    if (!isdigit(status_start[0]) || 
+        !isdigit(status_start[1]) || 
+        !isdigit(status_start[2])) {
+        Debug_printf("Error: Status code not 3 digits at: %.10s\n", status_start);
+        return -3;  // 状态码格式错误，不是三位数字
+    }
+    
+    // 8. 将三个数字字符转换为整数状态码
+    // 例如，字符'2','0','0'转换为整数200
+    int http_status = (status_start[0] - '0') * 100 +  // 百位数字
+                      (status_start[1] - '0') * 10 +   // 十位数字
+                      (status_start[2] - '0');         // 个位数字
+    
+    // 打印解析到的HTTP状态码
+    Debug_printf("HTTP status code: %d\n", http_status);
+    
+    // 返回HTTP状态码，如200表示成功
+    return http_status;
 }
 
 static int
@@ -508,7 +557,7 @@ httpc_send_data_statistics (httpc_ctx_t *ctx)
     ctx->json_statistics_len = -1;
 
     ret = httpc_recv (&http_client);
-    if (ret) {
+    if (ret!=200) {
         Debug_printf ("statistics data send failed %d\r\n", ret);
         // todo: inform UI
     }
@@ -522,37 +571,82 @@ httpc_send_data_clusters (httpc_ctx_t *ctx)
     int ret;
     char http_header[284];
 
+    Debug_printf("Start sending clusters data...\n");
+    
     memcpy (ctx->clusters_data, &Client_Sd, sizeof (Client_Sd_t) * cluster_num);
 
     for (int i = 0; i < ctx->clusters_sum; i++) {
+        Debug_printf("Processing clusters %d\n", i);
+        
         // skip offline
-        if (BCMU[i].OnlineOrOffline == Offline) continue;
+        if (BCMU[i].OnlineOrOffline == Offline) {
+            Debug_printf("cluster %d offline，skip\n", i);
+            continue;
+        }
 
         // skip invalid data
-        if (ctx->clusters_data[i].cluster_No > 20 || ctx->clusters_data[i].cluster_No < 1) { continue; }
+        if (ctx->clusters_data[i].cluster_No > 20 || ctx->clusters_data[i].cluster_No < 1) { 
+            Debug_printf("cluster %d Invalid number: %d，skip\n", i, ctx->clusters_data[i].cluster_No);
+            continue; 
+        }
 
+        Debug_printf("For cluster %d to create payload...\n", i);
         ret = create_clusters_payload (ctx, i);
 
         if (ret == -1) {
             Debug_printf ("create clusters payload failed\r\n");
             break;
         }
+        
+        Debug_printf("Create payload success, JSON lenth: %d\n", ctx->json_clusters_len);
 
         int http_header_len
             = snprintf (http_header, sizeof (http_header), HTTP_HEADER (API_CLUSTERS), ctx->json_clusters_len);
+        
+        Debug_printf("HTTP header_len: %d\n", http_header_len);
 
+        Debug_printf("Send HTTP header...\n");
         ret = https_send (ctx, http_header, http_header_len);
-        ret = https_send (ctx, ctx->json_clusters, ctx->json_clusters_len);
+        Debug_printf("https_send(header) return: %d\n", ret);
+        
+        if (ret < 0) {
+            Debug_printf("Send HTTP header failed!\n");
+            vPortFree (ctx->json_clusters);
+            ctx->json_clusters = NULL;
+            ctx->json_clusters_len = -1;
+            continue;  // 继续下一个集群
+        }
 
-        // free josn string
+        Debug_printf("Send JSON data...\n");
+        ret = https_send (ctx, ctx->json_clusters, ctx->json_clusters_len);
+        Debug_printf("https_send(JSON) return: %d\n", ret);
+        
+        if (ret < 0) {
+            Debug_printf("Send JSON data failed!\n");
+            vPortFree (ctx->json_clusters);
+            ctx->json_clusters = NULL;
+            ctx->json_clusters_len = -1;
+            continue;  // 继续下一个集群
+        }
+
+        // free json string
         vPortFree (ctx->json_clusters);
         ctx->json_clusters     = NULL;
         ctx->json_clusters_len = -1;
 
+        Debug_printf("Waiting for server response...\n");
         ret = httpc_recv (&http_client);
-        if (ret) {
+        Debug_printf("httpc_recv return: %d\n", ret);
+        
+        if (ret != 200) {
             Debug_printf ("clusters data send failed %d\r\n", ret);
+            
+            // 注意：这里打印的是指针地址，不是内容！
+            Debug_printf ("json_clusters is %d\r\n", ctx->clusters_data);
+            
             // todo: inform UI
+        } else {
+            Debug_printf("cluster %d Sent successfully!\n", i);
         }
     }
 
@@ -574,20 +668,19 @@ httpc_task (void const *args)
     // httpc_connect (&http_client, HOST, HTTPS_PORT);
     // httpc_verify_cert (&http_client);
     // httpc_disconnect (&http_client);
-
+    // 定义两个临时的缓存变量
+Client_Sd_t temp_clusters[cluster_num];
+Client_Sd_Station_t temp_station;
     while (1) {
         if (xSemaphoreTake (http_snd_sem_handle, portMAX_DELAY) == pdTRUE) // 等待获取信号量(等待FDCAN轮询完大概1s)
         {
+//            memcpy(temp_clusters, Client_Sd, sizeof(Client_Sd)); 
+//            memcpy(&temp_station, &Client_Sd_Station, sizeof(Client_Sd_Station));
             httpc_connect (&http_client, HOST, HTTPS_PORT);
-
-//            httpc_send_data_statistics (&http_client);
-
-//            httpc_send_data_clusters (&http_client);
-            if(httpc_send_data_clusters (&http_client) == 0)//clusters data send successfully
+            if(httpc_send_data_clusters (&http_client) == 200)
             {
                 httpc_send_data_statistics (&http_client);
             }
-
             httpc_disconnect (&http_client);
         }
         osDelay (1);
