@@ -260,7 +260,7 @@ httpc_ctx_init_default (httpc_ctx_t *ctx)
     ctx->json_clusters_len   = -1;
     ctx->statistics_data     = &httpc_station_statistics;
     ctx->clusters_data       = httpc_clusters;
-    ctx->clusters_sum        = bsmuSetting.cu_num;
+    ctx->clusters_sum        = cluster_num;
 
     ctx->mbedtls.net_ctx  = &server_fd;
     ctx->mbedtls.ssl_ctx  = &ssl;

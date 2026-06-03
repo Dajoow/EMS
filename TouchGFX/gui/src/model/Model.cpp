@@ -54,24 +54,25 @@ Model::tick ()
             modelToViewData.BCMU_state[i] = BCMU[i].OnlineOrOffline; // 离线状态到时候要加这里
         }
         // 某簇数据VIEW更新
-        modelToViewData.cluster_VOL      = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].cluster_VOL;
-        modelToViewData.cluster_CUR      = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].cluster_CUR;
-        modelToViewData.cluster_SOC      = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].cluster_SOC;
-        modelToViewData.cluster_SOH      = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].cluster_SOH;
-        modelToViewData.cluster_res      = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].cluster_res;
-        modelToViewData.insulation_res_p = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].insulation_res_p;
-        modelToViewData.insulation_res_n = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1].insulation_res_n;
+        uint8_t bcmu_sel = viewToModelDataTemp.BCMU_SEL;
+        uint8_t bmu_sel  = viewToModelDataTemp.BMU_SEL;
+        if (bcmu_sel < 1 || bcmu_sel > cluster_num) bcmu_sel = 1;
+        if (bmu_sel < 1 || bmu_sel > GRP_num) bmu_sel = 1;
+        modelToViewData.cluster_VOL      = Client_Sd[bcmu_sel - 1].cluster_VOL;
+        modelToViewData.cluster_CUR      = Client_Sd[bcmu_sel - 1].cluster_CUR;
+        modelToViewData.cluster_SOC      = Client_Sd[bcmu_sel - 1].cluster_SOC;
+        modelToViewData.cluster_SOH      = Client_Sd[bcmu_sel - 1].cluster_SOH;
+        modelToViewData.cluster_res      = Client_Sd[bcmu_sel - 1].cluster_res;
+        modelToViewData.insulation_res_p = Client_Sd[bcmu_sel - 1].insulation_res_p;
+        modelToViewData.insulation_res_n = Client_Sd[bcmu_sel - 1].insulation_res_n;
         // 某组数据VIEW更新
         for (uint8_t i = 0; i < GRP_BAT_num; i++) {
-            modelToViewData.BAT_VOL[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1]
-                                             .BAT_VOL[(viewToModelDataTemp.BMU_SEL - 1) * GRP_BAT_num + i];
-            modelToViewData.BAT_TMP[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1]
-                                             .BAT_TMP[(viewToModelDataTemp.BMU_SEL - 1) * GRP_BAT_num + i];
+            modelToViewData.BAT_VOL[i] = Client_Sd[bcmu_sel - 1].BAT_VOL[(bmu_sel - 1) * GRP_BAT_num + i];
+            modelToViewData.BAT_TMP[i] = Client_Sd[bcmu_sel - 1].BAT_TMP[(bmu_sel - 1) * GRP_BAT_num + i];
             // todo
             // modelToViewData.BAT_FAULT[i] =
             // Client_Sd[viewToModelDataTemp.BCMU_SEL-1].BAT_FAULT[(viewToModelDataTemp.BMU_SEL-1)*GRP_BAT_num + i];
-            modelToViewData.BAT_SOC[i] = Client_Sd[viewToModelDataTemp.BCMU_SEL - 1]
-                                             .BAT_SOC[(viewToModelDataTemp.BMU_SEL - 1) * GRP_BAT_num + i];
+            modelToViewData.BAT_SOC[i] = Client_Sd[bcmu_sel - 1].BAT_SOC[(bmu_sel - 1) * GRP_BAT_num + i];
         }
         // 将硬件数据传递给VIEW
         modelListener->NotifyViewMsg (modelToViewData);

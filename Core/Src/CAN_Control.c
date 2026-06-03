@@ -51,14 +51,17 @@ uint8_t FDCAN_REV_Buff[cluster_num][FDCAN_REV_BuffSize]
 uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize] __attribute__ ((section (".CANSndBuff"))); // FDCAN发送缓存区  32k
 #endif
 BCMU_Mail_t BCMU[cluster_num];
-uint8_t BCMU_ID[cluster_num][2]
-    = { BCMU1_ID >> 8,  BCMU1_ID & 0x00ff,  BCMU2_ID >> 8,  BCMU2_ID & 0x00ff,  BCMU3_ID >> 8,  BCMU3_ID & 0x00ff,
-        BCMU4_ID >> 8,  BCMU4_ID & 0x00ff,  BCMU5_ID >> 8,  BCMU5_ID & 0x00ff,  BCMU6_ID >> 8,  BCMU6_ID & 0x00ff,
-        BCMU7_ID >> 8,  BCMU7_ID & 0x00ff,  BCMU8_ID >> 8,  BCMU8_ID & 0x00ff,  BCMU9_ID >> 8,  BCMU9_ID & 0x00ff,
-        BCMU10_ID >> 8, BCMU10_ID & 0x00ff, BCMU11_ID >> 8, BCMU11_ID & 0x00ff, BCMU12_ID >> 8, BCMU12_ID & 0x00ff,
-        BCMU13_ID >> 8, BCMU13_ID & 0x00ff, BCMU14_ID >> 8, BCMU14_ID & 0x00ff, BCMU15_ID >> 8, BCMU15_ID & 0x00ff,
-        BCMU16_ID >> 8, BCMU16_ID & 0x00ff, BCMU17_ID >> 8, BCMU17_ID & 0x00ff, BCMU18_ID >> 8, BCMU18_ID & 0x00ff,
-        BCMU19_ID >> 8, BCMU19_ID & 0x00ff, BCMU20_ID >> 8, BCMU20_ID & 0x00ff };
+//uint8_t BCMU_ID[cluster_num][2]
+//    = { BCMU1_ID >> 8,  BCMU1_ID & 0x00ff,  BCMU2_ID >> 8,  BCMU2_ID & 0x00ff,  BCMU3_ID >> 8,  BCMU3_ID & 0x00ff,
+//        BCMU4_ID >> 8,  BCMU4_ID & 0x00ff,  BCMU5_ID >> 8,  BCMU5_ID & 0x00ff,  BCMU6_ID >> 8,  BCMU6_ID & 0x00ff,
+//        BCMU7_ID >> 8,  BCMU7_ID & 0x00ff,  BCMU8_ID >> 8,  BCMU8_ID & 0x00ff,  BCMU9_ID >> 8,  BCMU9_ID & 0x00ff,
+//        BCMU10_ID >> 8, BCMU10_ID & 0x00ff, BCMU11_ID >> 8, BCMU11_ID & 0x00ff, BCMU12_ID >> 8, BCMU12_ID & 0x00ff,
+//        BCMU13_ID >> 8, BCMU13_ID & 0x00ff, BCMU14_ID >> 8, BCMU14_ID & 0x00ff, BCMU15_ID >> 8, BCMU15_ID & 0x00ff,
+//        BCMU16_ID >> 8, BCMU16_ID & 0x00ff, BCMU17_ID >> 8, BCMU17_ID & 0x00ff, BCMU18_ID >> 8, BCMU18_ID & 0x00ff,
+//        BCMU19_ID >> 8, BCMU19_ID & 0x00ff, BCMU20_ID >> 8, BCMU20_ID & 0x00ff };
+uint8_t BCMU_ID[cluster_num][2] = {
+    { BCMU1_ID >> 8, BCMU1_ID & 0x00ff }
+};
 #else
 uint8_t FDCAN_REV_Buff[FDCAN_REV_BuffSize]; // FDCAN接收缓存区  8k
 uint8_t FDCAN_SND_Buff[FDCAN_SND_BuffSize]; // FDCAN发送缓存区  32k
@@ -181,44 +184,44 @@ ReturnBCMU_Mail (CANRxMsg_t *CANRxMsg)
     switch (StdId) {
         case BCMU1_ID:
             return (&BCMU[0]);
-        case BCMU2_ID:
-            return (&BCMU[1]);
-        case BCMU3_ID:
-            return (&BCMU[2]);
-        case BCMU4_ID:
-            return (&BCMU[3]);
-        case BCMU5_ID:
-            return (&BCMU[4]);
-        case BCMU6_ID:
-            return (&BCMU[5]);
-        case BCMU7_ID:
-            return (&BCMU[6]);
-        case BCMU8_ID:
-            return (&BCMU[7]);
-        case BCMU9_ID:
-            return (&BCMU[8]);
-        case BCMU10_ID:
-            return (&BCMU[9]);
-        case BCMU11_ID:
-            return (&BCMU[10]);
-        case BCMU12_ID:
-            return (&BCMU[11]);
-        case BCMU13_ID:
-            return (&BCMU[12]);
-        case BCMU14_ID:
-            return (&BCMU[13]);
-        case BCMU15_ID:
-            return (&BCMU[14]);
-        case BCMU16_ID:
-            return (&BCMU[15]);
-        case BCMU17_ID:
-            return (&BCMU[16]);
-        case BCMU18_ID:
-            return (&BCMU[17]);
-        case BCMU19_ID:
-            return (&BCMU[18]);
-        case BCMU20_ID:
-            return (&BCMU[19]);
+//        case BCMU2_ID:
+//            return (&BCMU[1]);
+//        case BCMU3_ID:
+//            return (&BCMU[2]);
+//        case BCMU4_ID:
+//            return (&BCMU[3]);
+//        case BCMU5_ID:
+//            return (&BCMU[4]);
+//        case BCMU6_ID:
+//            return (&BCMU[5]);
+//        case BCMU7_ID:
+//            return (&BCMU[6]);
+//        case BCMU8_ID:
+//            return (&BCMU[7]);
+//        case BCMU9_ID:
+//            return (&BCMU[8]);
+//        case BCMU10_ID:
+//            return (&BCMU[9]);
+//        case BCMU11_ID:
+//            return (&BCMU[10]);
+//        case BCMU12_ID:
+//            return (&BCMU[11]);
+//        case BCMU13_ID:
+//            return (&BCMU[12]);
+//        case BCMU14_ID:
+//            return (&BCMU[13]);
+//        case BCMU15_ID:
+//            return (&BCMU[14]);
+//        case BCMU16_ID:
+//            return (&BCMU[15]);
+//        case BCMU17_ID:
+//            return (&BCMU[16]);
+//        case BCMU18_ID:
+//            return (&BCMU[17]);
+//        case BCMU19_ID:
+//            return (&BCMU[18]);
+//        case BCMU20_ID:
+//            return (&BCMU[19]);
 
         default:
             return NULL;
@@ -296,7 +299,7 @@ CANFrameSend (uint8_t cmd, uint8_t *pdata, uint8_t *msg, uint16_t len)
 void
 can_open_switch ()
 {
-    for (size_t i = 0; i < 20; i++) {
+    for (size_t i = 0; i < cluster_num; i++) {
         CANFrameSend (CMD_SWITCH_OPEN, (unsigned char *)&BCMU_ID[i], FDCAN_SND_Buff, 2);
         osDelay (10);
     }
@@ -305,7 +308,7 @@ can_open_switch ()
 void
 can_close_switch ()
 {
-    for (size_t i = 0; i < 20; i++) {
+    for (size_t i = 0; i < cluster_num; i++) {
         CANFrameSend (CMD_SWITCH_CLOSE, (unsigned char *)&BCMU_ID[i], FDCAN_SND_Buff, 2);
         osDelay (10);
     }
@@ -403,7 +406,7 @@ CAN_DataHandle (uint8_t Queue_NUM_t, uint8_t cmd, void *data, uint16_t len)
     // update bmu online state
 
     uint32_t online_state = Client_Sd[Queue_NUM_POLL].bmu_sw_state;
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         bmu_offline[Queue_NUM_POLL][i] = (online_state & 0x00000001);
         online_state >>= 1;
     }
@@ -652,62 +655,62 @@ BSMU_CANInit ()
     osMessageQDef (CANQueue1, 5120, uint8_t);
     CANQueueHandle[0] = osMessageCreate (osMessageQ (CANQueue1), NULL);
 
-    osMessageQDef (CANQueue2, 5120, uint8_t);
-    CANQueueHandle[1] = osMessageCreate (osMessageQ (CANQueue2), NULL);
+//    osMessageQDef (CANQueue2, 5120, uint8_t);
+//    CANQueueHandle[1] = osMessageCreate (osMessageQ (CANQueue2), NULL);
 
-    osMessageQDef (CANQueue3, 5120, uint8_t);
-    CANQueueHandle[2] = osMessageCreate (osMessageQ (CANQueue3), NULL);
+//    osMessageQDef (CANQueue3, 5120, uint8_t);
+//    CANQueueHandle[2] = osMessageCreate (osMessageQ (CANQueue3), NULL);
 
-    osMessageQDef (CANQueue4, 5120, uint8_t);
-    CANQueueHandle[3] = osMessageCreate (osMessageQ (CANQueue4), NULL);
+//    osMessageQDef (CANQueue4, 5120, uint8_t);
+//    CANQueueHandle[3] = osMessageCreate (osMessageQ (CANQueue4), NULL);
 
-    osMessageQDef (CANQueue5, 5120, uint8_t);
-    CANQueueHandle[4] = osMessageCreate (osMessageQ (CANQueue5), NULL);
+//    osMessageQDef (CANQueue5, 5120, uint8_t);
+//    CANQueueHandle[4] = osMessageCreate (osMessageQ (CANQueue5), NULL);
 
-    osMessageQDef (CANQueue6, 5120, uint8_t);
-    CANQueueHandle[5] = osMessageCreate (osMessageQ (CANQueue6), NULL);
+//    osMessageQDef (CANQueue6, 5120, uint8_t);
+//    CANQueueHandle[5] = osMessageCreate (osMessageQ (CANQueue6), NULL);
 
-    osMessageQDef (CANQueue7, 5120, uint8_t);
-    CANQueueHandle[6] = osMessageCreate (osMessageQ (CANQueue7), NULL);
+//    osMessageQDef (CANQueue7, 5120, uint8_t);
+//    CANQueueHandle[6] = osMessageCreate (osMessageQ (CANQueue7), NULL);
 
-    osMessageQDef (CANQueue8, 5120, uint8_t);
-    CANQueueHandle[7] = osMessageCreate (osMessageQ (CANQueue8), NULL);
+//    osMessageQDef (CANQueue8, 5120, uint8_t);
+//    CANQueueHandle[7] = osMessageCreate (osMessageQ (CANQueue8), NULL);
 
-    osMessageQDef (CANQueue9, 5120, uint8_t);
-    CANQueueHandle[8] = osMessageCreate (osMessageQ (CANQueue9), NULL);
+//    osMessageQDef (CANQueue9, 5120, uint8_t);
+//    CANQueueHandle[8] = osMessageCreate (osMessageQ (CANQueue9), NULL);
 
-    osMessageQDef (CANQueue10, 5120, uint8_t);
-    CANQueueHandle[9] = osMessageCreate (osMessageQ (CANQueue10), NULL);
+//    osMessageQDef (CANQueue10, 5120, uint8_t);
+//    CANQueueHandle[9] = osMessageCreate (osMessageQ (CANQueue10), NULL);
 
-    osMessageQDef (CANQueue11, 5120, uint8_t);
-    CANQueueHandle[10] = osMessageCreate (osMessageQ (CANQueue11), NULL);
+//    osMessageQDef (CANQueue11, 5120, uint8_t);
+//    CANQueueHandle[10] = osMessageCreate (osMessageQ (CANQueue11), NULL);
 
-    osMessageQDef (CANQueue12, 5120, uint8_t);
-    CANQueueHandle[11] = osMessageCreate (osMessageQ (CANQueue12), NULL);
+//    osMessageQDef (CANQueue12, 5120, uint8_t);
+//    CANQueueHandle[11] = osMessageCreate (osMessageQ (CANQueue12), NULL);
 
-    osMessageQDef (CANQueue13, 5120, uint8_t);
-    CANQueueHandle[12] = osMessageCreate (osMessageQ (CANQueue13), NULL);
+//    osMessageQDef (CANQueue13, 5120, uint8_t);
+//    CANQueueHandle[12] = osMessageCreate (osMessageQ (CANQueue13), NULL);
 
-    osMessageQDef (CANQueue14, 5120, uint8_t);
-    CANQueueHandle[13] = osMessageCreate (osMessageQ (CANQueue14), NULL);
+//    osMessageQDef (CANQueue14, 5120, uint8_t);
+//    CANQueueHandle[13] = osMessageCreate (osMessageQ (CANQueue14), NULL);
 
-    osMessageQDef (CANQueue15, 5120, uint8_t);
-    CANQueueHandle[14] = osMessageCreate (osMessageQ (CANQueue15), NULL);
+//    osMessageQDef (CANQueue15, 5120, uint8_t);
+//    CANQueueHandle[14] = osMessageCreate (osMessageQ (CANQueue15), NULL);
 
-    osMessageQDef (CANQueue16, 5120, uint8_t);
-    CANQueueHandle[15] = osMessageCreate (osMessageQ (CANQueue16), NULL);
+//    osMessageQDef (CANQueue16, 5120, uint8_t);
+//    CANQueueHandle[15] = osMessageCreate (osMessageQ (CANQueue16), NULL);
 
-    osMessageQDef (CANQueue17, 5120, uint8_t);
-    CANQueueHandle[16] = osMessageCreate (osMessageQ (CANQueue17), NULL);
+//    osMessageQDef (CANQueue17, 5120, uint8_t);
+//    CANQueueHandle[16] = osMessageCreate (osMessageQ (CANQueue17), NULL);
 
-    osMessageQDef (CANQueue18, 5120, uint8_t);
-    CANQueueHandle[17] = osMessageCreate (osMessageQ (CANQueue18), NULL);
+//    osMessageQDef (CANQueue18, 5120, uint8_t);
+//    CANQueueHandle[17] = osMessageCreate (osMessageQ (CANQueue18), NULL);
 
-    osMessageQDef (CANQueue19, 5120, uint8_t);
-    CANQueueHandle[18] = osMessageCreate (osMessageQ (CANQueue19), NULL);
+//    osMessageQDef (CANQueue19, 5120, uint8_t);
+//    CANQueueHandle[18] = osMessageCreate (osMessageQ (CANQueue19), NULL);
 
-    osMessageQDef (CANQueue20, 5120, uint8_t);
-    CANQueueHandle[19] = osMessageCreate (osMessageQ (CANQueue20), NULL);
+//    osMessageQDef (CANQueue20, 5120, uint8_t);
+//    CANQueueHandle[19] = osMessageCreate (osMessageQ (CANQueue20), NULL);
 
     for (uint8_t i = 0; i < cluster_num; i++) {
         BCMU[i].ID                 = BCMU_ID[i][0] << 8 | BCMU_ID[i][1];

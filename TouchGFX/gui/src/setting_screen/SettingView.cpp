@@ -921,8 +921,9 @@ void SettingView::zhuangji_set()
 
 void SettingView::zu_set_save()//点击保存按键
 {
-    //如果装机组数值的上限超过了20，就取20
-    if (SettingBuff_temp.cu_num >= 20) SettingBuff_temp.cu_num = 20;
+    //如果装机组数值的上限超过了cluster_num，就取cluster_num
+    if (SettingBuff_temp.cu_num < 1) SettingBuff_temp.cu_num = 1;
+    if (SettingBuff_temp.cu_num > cluster_num) SettingBuff_temp.cu_num = cluster_num;
     SettingBuff.cu_num = SettingBuff_temp.cu_num; //完成赋值操作
 
     Unicode::snprintf(cu_numBuffer, CU_NUM_SIZE, "%d", SettingBuff.cu_num); //因为显示的文本格为字符串的形式，进行拷贝和类型转换

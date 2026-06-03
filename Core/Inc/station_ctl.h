@@ -25,8 +25,8 @@
 
 #define use_test_data                        0 // 测试状态（发送模拟数据）
 
-#define cluster_num                          20                      // 电池簇个数
-#define GRP_num                              30                      // 一簇中电池组数
+#define cluster_num                          1                      // 电池簇个数(20->1)
+#define GRP_num                              2                      // 一簇中电池组数(30->2)
 #define GRP_BAT_num                          12                      // 一组中电池数
 #define TOTOL_BAT_num                        (GRP_num * GRP_BAT_num) // 总电池数，为了内存对齐这个值为2的倍数
 #define CELL_CAP_AH                          500

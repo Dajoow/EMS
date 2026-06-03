@@ -106,10 +106,12 @@ CalStationData (void)
         }
     }
 
-    Client_Sd_Station.station_VOL /= OnlineNUM;
-    Client_Sd_Station.station_CUR /= OnlineNUM;
-    Client_Sd_Station.station_SOC /= OnlineNUM;
-    Client_Sd_Station.station_SOH /= OnlineNUM;
+    if (OnlineNUM > 0) {
+        Client_Sd_Station.station_VOL /= OnlineNUM;
+        Client_Sd_Station.station_CUR /= OnlineNUM;
+        Client_Sd_Station.station_SOC /= OnlineNUM;
+        Client_Sd_Station.station_SOH /= OnlineNUM;
+    }
 
     Client_Sd_Station.charge_power    = 0;
     Client_Sd_Station.discharge_power = 0;
@@ -147,31 +149,31 @@ typedef struct {
     uint16_t val;
 } cell_info_t;
 
-cell_info_t cell_max_vol[20];
-cell_info_t cell_min_vol[20];
-cell_info_t cell_max_temp[20];
-cell_info_t cell_min_temp[20];
-cell_info_t cell_max_soc[20];
-cell_info_t cell_min_soc[20];
-cell_info_t cell_max_soh[20];
-cell_info_t cell_min_soh[20];
-uint32_t cell_avg_vol[20];
-uint32_t cell_avg_temp[20];
-uint32_t cell_avg_soc[20];
-uint32_t cell_avg_soh[20];
-float clu_charge_cap[20];    // kwh
-float clu_discharge_cap[20]; // kwh
+cell_info_t cell_max_vol[cluster_num];
+cell_info_t cell_min_vol[cluster_num];
+cell_info_t cell_max_temp[cluster_num];
+cell_info_t cell_min_temp[cluster_num];
+cell_info_t cell_max_soc[cluster_num];
+cell_info_t cell_min_soc[cluster_num];
+cell_info_t cell_max_soh[cluster_num];
+cell_info_t cell_min_soh[cluster_num];
+uint32_t cell_avg_vol[cluster_num];
+uint32_t cell_avg_temp[cluster_num];
+uint32_t cell_avg_soc[cluster_num];
+uint32_t cell_avg_soh[cluster_num];
+float clu_charge_cap[cluster_num];    // kwh
+float clu_discharge_cap[cluster_num]; // kwh
 
-extern cluster_info_u16_u cluster_info_u16[20];
-extern cluster_info_f32_u cluster_info_f32[20];
+extern cluster_info_u16_u cluster_info_u16[cluster_num];
+extern cluster_info_f32_u cluster_info_f32[cluster_num];
 
-extern modbus_float_u cell_vol[20][360];
-extern modbus_float_u cell_temp[20][360];
-extern modbus_float_u cell_soc[20][360];
-extern modbus_float_u cell_soh[20][360];
+extern modbus_float_u cell_vol[cluster_num][TOTOL_BAT_num];
+extern modbus_float_u cell_temp[cluster_num][TOTOL_BAT_num];
+extern modbus_float_u cell_soc[cluster_num][TOTOL_BAT_num];
+extern modbus_float_u cell_soh[cluster_num][TOTOL_BAT_num];
 
-extern uint8_t cell_charge_balance_status[20][360];
-extern uint8_t cell_discharge_balance_status[20][360];
+extern uint8_t cell_charge_balance_status[cluster_num][TOTOL_BAT_num];
+extern uint8_t cell_discharge_balance_status[cluster_num][TOTOL_BAT_num];
 
 extern cluster_flash_t cluster_flash[cluster_num];
 
@@ -496,7 +498,7 @@ cal_modbus_sta_data (void)
     station_info_u16.data.installed_cluster_count  = bsmuSetting.cu_num;
 }
 
-extern cluster_warning_u cluster_warning[20];
+extern cluster_warning_u cluster_warning[cluster_num];
 
 void
 cal_modbus_warning_data (void)

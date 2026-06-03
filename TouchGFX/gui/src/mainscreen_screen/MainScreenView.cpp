@@ -23,6 +23,20 @@ extern error_info_t Client_errors[cluster_num][MAX_ERROR];
 
 #endif
 
+static bool
+is_bcmu_enabled (uint8_t index)
+{
+    volatile uint8_t enabled_count = cluster_num;
+    return index >= 1 && index <= enabled_count;
+}
+
+static bool
+is_bmu_enabled (uint8_t index)
+{
+    volatile uint8_t enabled_count = GRP_num;
+    return index >= 1 && index <= enabled_count;
+}
+
 MainScreenView::MainScreenView () : BMUMenuCallback (*this)
 {
     counter  = 0;
@@ -31,12 +45,12 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     viewToModelData.BCMU_SEL = 1; // 1-20
     viewToModelData.BMU_SEL  = 1; // 1-30
 
-    /*先不显示BCMU选择块*/
+    // hide BCMU/BMU selection box first
     BCMU_SEL_BOX.setVisible (false);
     BMU_SEL_BOX.setVisible (false);
     /*setStateChangedCallback() 函数注册回调函数*/
     BMUMenu.setStateChangedCallback (BMUMenuCallback);
-    err_time.setHeight (errcount * 25 + 25); // 设置错误信息打印的显示区域
+    err_time.setHeight (errcount * 25 + 25); // 设置错误信息打印的显示区�?
     err_id.setHeight (errcount * 25 + 25);
     err_inf.setHeight (errcount * 25 + 25);
 
@@ -92,7 +106,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     BMU[28] = &BMU29;
     BMU[29] = &BMU30;
 
-    SOC_view[0]  = &SOC1_view; // SOC进度条
+    SOC_view[0]  = &SOC1_view; // SOC进度�?
     SOC_view[1]  = &SOC2_view;
     SOC_view[2]  = &SOC3_view;
     SOC_view[3]  = &SOC4_view;
@@ -105,7 +119,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     SOC_view[10] = &SOC11_view;
     SOC_view[11] = &SOC12_view;
 
-    tim[0]  = &err_time0Buffer[0]; // 错误信息时间戳，在第一列
+    tim[0]  = &err_time0Buffer[0]; // 错误信息时间戳，在第一�?
     tim[1]  = &err_time1Buffer[0];
     tim[2]  = &err_time2Buffer[0];
     tim[3]  = &err_time3Buffer[0];
@@ -147,7 +161,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     id[18] = &err_id18Buffer[0];
     id[19] = &err_id19Buffer[0];
 
-    id_wild[0]  = &err_id0; // 错误信息id，现在使用wild动态通配符显示自定义类型，在第二列
+    id_wild[0]  = &err_id0; // 错误信息id，现在使用wild动态通配符显示自定义类型，在第二�?
     id_wild[1]  = &err_id1;
     id_wild[2]  = &err_id2;
     id_wild[3]  = &err_id3;
@@ -168,7 +182,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     id_wild[18] = &err_id18;
     id_wild[19] = &err_id19;
 
-    inf[0]  = &err_inf0; // 错误信息类型，在第三列
+    inf[0]  = &err_inf0; // 错误信息类型，在第三�?
     inf[1]  = &err_inf1;
     inf[2]  = &err_inf2;
     inf[3]  = &err_inf3;
@@ -189,7 +203,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     inf[18] = &err_inf18;
     inf[19] = &err_inf19;
 
-    for (int i = 0; i < errcount; i++) // 初始化错误信息
+    for (int i = 0; i < errcount; i++) // 初始化错误信�?
     {
         t_gen[i].setXY (30, 25 * (i + 1));
         t_gen[i].setColor (touchgfx::Color::getColorFromRGB (255, 0, 0));
@@ -224,21 +238,21 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     //{
     //     /*touchgfx::Unicode::snprintf(e_gen_Buffer[i], 10, "%d", 12);*/
     //     //e_gen[i].setTypedText(touchgfx::TypedText(T_BSMU_ERR1));
-    //     //id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板
+    //     //id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误�?
     //    /* Unicode::snprintf(t_gen_Buffer[i], 10, "%s", u_time);*/
 
     //    /*Unicode::fromUTF8(str_di, u_di, 128);*/
     //
     //
-    //    //sprintf(id_temp,"第%d组",i); //char 类型
+    //    //sprintf(id_temp,"�?d�?,i); //char 类型
     //    //Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[i],
     //    10);//touchgfx仅支持显示unicode类型
     //
-    //    //sprintf(id_temp, "第%d簇BCMU错误错错错错错", 2); //char 类型
+    //    //sprintf(id_temp, "�?d簇BCMU错误错错错错�?, 2); //char 类型
     //    //Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[i],
     //    20);//touchgfx仅支持显示unicode类型
     //
-    //    sprintf(id_temp, "第%d簇BCMU错误(故障)", i); //char 类型
+    //    sprintf(id_temp, "�?d簇BCMU错误(故障)", i); //char 类型
     //    Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[i],
     //    20);//touchgfx仅支持显示unicode类型
     //    //touchgfx::Unicode::snprintf(id_gen_Buffer[i], 10, "%s", u_di);
@@ -289,7 +303,7 @@ MainScreenView::show_batteryshowarea_on () // 电池界面显示
  * @return {*}
  */
 void
-MainScreenView::show_batteryshowarea_off () // 电池界面不显示
+MainScreenView::show_batteryshowarea_off () // 电池界面不显�?
 {
     BCMU_SEL_BOX.setVisible (false);
     BCMU_SEL_BOX.invalidate ();
@@ -302,7 +316,7 @@ MainScreenView::show_batteryshowarea_off () // 电池界面不显示
     /*   BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2,
        BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
        BMU_BG.invalidate();*/
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -386,12 +400,12 @@ void
 MainScreenView::BCMU1_clicked ()
 {
     viewToModelData.BCMU_SEL = 1;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU1.getX () - (BCMU_SEL_BOX.getWidth () - BCMU1.getWidth ()) / 2,
                         BCMU1.getY () - (BCMU_SEL_BOX.getHeight () - BCMU1.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -399,7 +413,7 @@ MainScreenView::BCMU1_clicked ()
 
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[0][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -422,20 +436,23 @@ MainScreenView::BCMU1_clicked ()
 void
 MainScreenView::BCMU2_clicked ()
 {
+    if (!is_bcmu_enabled(2)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 2;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU2.getX () - (BCMU_SEL_BOX.getWidth () - BCMU2.getWidth ()) / 2,
                         BCMU2.getY () - (BCMU_SEL_BOX.getHeight () - BCMU2.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[1][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -457,20 +474,23 @@ MainScreenView::BCMU2_clicked ()
 void
 MainScreenView::BCMU3_clicked ()
 {
+    if (!is_bcmu_enabled(3)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 3;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU3.getX () - (BCMU_SEL_BOX.getWidth () - BCMU3.getWidth ()) / 2,
                         BCMU3.getY () - (BCMU_SEL_BOX.getHeight () - BCMU3.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[2][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -491,20 +511,23 @@ MainScreenView::BCMU3_clicked ()
 void
 MainScreenView::BCMU4_clicked ()
 {
+    if (!is_bcmu_enabled(4)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 4;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU4.getX () - (BCMU_SEL_BOX.getWidth () - BCMU4.getWidth ()) / 2,
                         BCMU4.getY () - (BCMU_SEL_BOX.getHeight () - BCMU4.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[3][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -525,20 +548,23 @@ MainScreenView::BCMU4_clicked ()
 void
 MainScreenView::BCMU5_clicked ()
 {
+    if (!is_bcmu_enabled(5)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 5;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU5.getX () - (BCMU_SEL_BOX.getWidth () - BCMU5.getWidth ()) / 2,
                         BCMU5.getY () - (BCMU_SEL_BOX.getHeight () - BCMU5.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[4][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -559,20 +585,23 @@ MainScreenView::BCMU5_clicked ()
 void
 MainScreenView::BCMU6_clicked ()
 {
+    if (!is_bcmu_enabled(6)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 6;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU6.getX () - (BCMU_SEL_BOX.getWidth () - BCMU6.getWidth ()) / 2,
                         BCMU6.getY () - (BCMU_SEL_BOX.getHeight () - BCMU6.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[5][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -593,20 +622,23 @@ MainScreenView::BCMU6_clicked ()
 void
 MainScreenView::BCMU7_clicked ()
 {
+    if (!is_bcmu_enabled(7)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 7;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU7.getX () - (BCMU_SEL_BOX.getWidth () - BCMU7.getWidth ()) / 2,
                         BCMU7.getY () - (BCMU_SEL_BOX.getHeight () - BCMU7.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[6][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -627,20 +659,23 @@ MainScreenView::BCMU7_clicked ()
 void
 MainScreenView::BCMU8_clicked ()
 {
+    if (!is_bcmu_enabled(8)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 8;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU8.getX () - (BCMU_SEL_BOX.getWidth () - BCMU8.getWidth ()) / 2,
                         BCMU8.getY () - (BCMU_SEL_BOX.getHeight () - BCMU8.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[7][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -661,20 +696,23 @@ MainScreenView::BCMU8_clicked ()
 void
 MainScreenView::BCMU9_clicked ()
 {
+    if (!is_bcmu_enabled(9)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 9;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU9.getX () - (BCMU_SEL_BOX.getWidth () - BCMU9.getWidth ()) / 2,
                         BCMU9.getY () - (BCMU_SEL_BOX.getHeight () - BCMU9.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[8][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -695,20 +733,23 @@ MainScreenView::BCMU9_clicked ()
 void
 MainScreenView::BCMU10_clicked ()
 {
+    if (!is_bcmu_enabled(10)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 10;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU10.getX () - (BCMU_SEL_BOX.getWidth () - BCMU10.getWidth ()) / 2,
                         BCMU10.getY () - (BCMU_SEL_BOX.getHeight () - BCMU10.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[9][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -729,20 +770,23 @@ MainScreenView::BCMU10_clicked ()
 void
 MainScreenView::BCMU11_clicked ()
 {
+    if (!is_bcmu_enabled(11)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 11;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU11.getX () - (BCMU_SEL_BOX.getWidth () - BCMU11.getWidth ()) / 2,
                         BCMU11.getY () - (BCMU_SEL_BOX.getHeight () - BCMU11.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[10][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -763,20 +807,23 @@ MainScreenView::BCMU11_clicked ()
 void
 MainScreenView::BCMU12_clicked ()
 {
+    if (!is_bcmu_enabled(12)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 12;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU12.getX () - (BCMU_SEL_BOX.getWidth () - BCMU12.getWidth ()) / 2,
                         BCMU12.getY () - (BCMU_SEL_BOX.getHeight () - BCMU12.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[11][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -797,20 +844,23 @@ MainScreenView::BCMU12_clicked ()
 void
 MainScreenView::BCMU13_clicked ()
 {
+    if (!is_bcmu_enabled(13)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 13;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU13.getX () - (BCMU_SEL_BOX.getWidth () - BCMU13.getWidth ()) / 2,
                         BCMU13.getY () - (BCMU_SEL_BOX.getHeight () - BCMU13.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[12][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -831,20 +881,23 @@ MainScreenView::BCMU13_clicked ()
 void
 MainScreenView::BCMU14_clicked ()
 {
+    if (!is_bcmu_enabled(14)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 14;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU14.getX () - (BCMU_SEL_BOX.getWidth () - BCMU14.getWidth ()) / 2,
                         BCMU14.getY () - (BCMU_SEL_BOX.getHeight () - BCMU14.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[13][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -865,20 +918,23 @@ MainScreenView::BCMU14_clicked ()
 void
 MainScreenView::BCMU15_clicked ()
 {
+    if (!is_bcmu_enabled(15)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 15;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU15.getX () - (BCMU_SEL_BOX.getWidth () - BCMU15.getWidth ()) / 2,
                         BCMU15.getY () - (BCMU_SEL_BOX.getHeight () - BCMU15.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[14][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -899,20 +955,23 @@ MainScreenView::BCMU15_clicked ()
 void
 MainScreenView::BCMU16_clicked ()
 {
+    if (!is_bcmu_enabled(16)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 16;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU16.getX () - (BCMU_SEL_BOX.getWidth () - BCMU16.getWidth ()) / 2,
                         BCMU16.getY () - (BCMU_SEL_BOX.getHeight () - BCMU16.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[15][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -933,20 +992,23 @@ MainScreenView::BCMU16_clicked ()
 void
 MainScreenView::BCMU17_clicked ()
 {
+    if (!is_bcmu_enabled(17)) {
+        return;
+    }
     viewToModelData.BCMU_SEL = 17;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU17.getX () - (BCMU_SEL_BOX.getWidth () - BCMU17.getWidth ()) / 2,
                         BCMU17.getY () - (BCMU_SEL_BOX.getHeight () - BCMU17.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[16][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -967,20 +1029,23 @@ MainScreenView::BCMU17_clicked ()
 void
 MainScreenView::BCMU18_clicked ()
 {
+    if (!is_bcmu_enabled(18)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 18;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU18.getX () - (BCMU_SEL_BOX.getWidth () - BCMU18.getWidth ()) / 2,
                         BCMU18.getY () - (BCMU_SEL_BOX.getHeight () - BCMU18.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[17][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -1001,20 +1066,23 @@ MainScreenView::BCMU18_clicked ()
 void
 MainScreenView::BCMU19_clicked ()
 {
+    if (!is_bcmu_enabled(19)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 19;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU19.getX () - (BCMU_SEL_BOX.getWidth () - BCMU19.getWidth ()) / 2,
                         BCMU19.getY () - (BCMU_SEL_BOX.getHeight () - BCMU19.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[18][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -1035,20 +1103,23 @@ MainScreenView::BCMU19_clicked ()
 void
 MainScreenView::BCMU20_clicked ()
 {
+    if (!is_bcmu_enabled(20)) {
+    return;
+}
     viewToModelData.BCMU_SEL = 20;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU20.getX () - (BCMU_SEL_BOX.getWidth () - BCMU20.getWidth ()) / 2,
                         BCMU20.getY () - (BCMU_SEL_BOX.getHeight () - BCMU20.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编号
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
     // CellStateShow();
     // 更新BMU按键使能
 #ifndef SIMULATOR
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < GRP_num; i++) {
         if (bmu_offline[19][i] == 0) // 0表示在线，非0离线
         {
             BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -1070,12 +1141,12 @@ void
 MainScreenView::BMU1_clicked ()
 {
     viewToModelData.BMU_SEL = 1;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU1.getX () - (BMU_SEL_BOX.getWidth () - BMU1.getWidth ()) / 2,
                        BMU1.getY () - (BMU_SEL_BOX.getHeight () - BMU1.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1087,12 +1158,12 @@ void
 MainScreenView::BMU2_clicked ()
 {
     viewToModelData.BMU_SEL = 2;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU2.getX () - (BMU_SEL_BOX.getWidth () - BMU2.getWidth ()) / 2,
                        BMU2.getY () - (BMU_SEL_BOX.getHeight () - BMU2.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1103,13 +1174,16 @@ MainScreenView::BMU2_clicked ()
 void
 MainScreenView::BMU3_clicked ()
 {
+    if (!is_bmu_enabled(3)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 3;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU3.getX () - (BMU_SEL_BOX.getWidth () - BMU3.getWidth ()) / 2,
                        BMU3.getY () - (BMU_SEL_BOX.getHeight () - BMU3.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1120,13 +1194,16 @@ MainScreenView::BMU3_clicked ()
 void
 MainScreenView::BMU4_clicked ()
 {
+    if (!is_bmu_enabled(4)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 4;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU4.getX () - (BMU_SEL_BOX.getWidth () - BMU4.getWidth ()) / 2,
                        BMU4.getY () - (BMU_SEL_BOX.getHeight () - BMU4.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1137,13 +1214,16 @@ MainScreenView::BMU4_clicked ()
 void
 MainScreenView::BMU5_clicked ()
 {
+    if (!is_bmu_enabled(5)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 5;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU5.getX () - (BMU_SEL_BOX.getWidth () - BMU5.getWidth ()) / 2,
                        BMU5.getY () - (BMU_SEL_BOX.getHeight () - BMU5.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1154,13 +1234,16 @@ MainScreenView::BMU5_clicked ()
 void
 MainScreenView::BMU6_clicked ()
 {
+    if (!is_bmu_enabled(6)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 6;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU6.getX () - (BMU_SEL_BOX.getWidth () - BMU6.getWidth ()) / 2,
                        BMU6.getY () - (BMU_SEL_BOX.getHeight () - BMU6.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1171,13 +1254,16 @@ MainScreenView::BMU6_clicked ()
 void
 MainScreenView::BMU7_clicked ()
 {
+    if (!is_bmu_enabled(7)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 7;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU7.getX () - (BMU_SEL_BOX.getWidth () - BMU7.getWidth ()) / 2,
                        BMU7.getY () - (BMU_SEL_BOX.getHeight () - BMU7.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1188,13 +1274,16 @@ MainScreenView::BMU7_clicked ()
 void
 MainScreenView::BMU8_clicked ()
 {
+    if (!is_bmu_enabled(8)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 8;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU8.getX () - (BMU_SEL_BOX.getWidth () - BMU8.getWidth ()) / 2,
                        BMU8.getY () - (BMU_SEL_BOX.getHeight () - BMU8.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1205,13 +1294,16 @@ MainScreenView::BMU8_clicked ()
 void
 MainScreenView::BMU9_clicked ()
 {
+    if (!is_bmu_enabled(9)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 9;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU9.getX () - (BMU_SEL_BOX.getWidth () - BMU9.getWidth ()) / 2,
                        BMU9.getY () - (BMU_SEL_BOX.getHeight () - BMU9.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1222,13 +1314,16 @@ MainScreenView::BMU9_clicked ()
 void
 MainScreenView::BMU10_clicked ()
 {
+    if (!is_bmu_enabled(10)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 10;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU10.getX () - (BMU_SEL_BOX.getWidth () - BMU10.getWidth ()) / 2,
                        BMU10.getY () - (BMU_SEL_BOX.getHeight () - BMU10.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1239,13 +1334,16 @@ MainScreenView::BMU10_clicked ()
 void
 MainScreenView::BMU11_clicked ()
 {
+    if (!is_bmu_enabled(11)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 11;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU11.getX () - (BMU_SEL_BOX.getWidth () - BMU11.getWidth ()) / 2,
                        BMU11.getY () - (BMU_SEL_BOX.getHeight () - BMU11.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1256,13 +1354,16 @@ MainScreenView::BMU11_clicked ()
 void
 MainScreenView::BMU12_clicked ()
 {
+    if (!is_bmu_enabled(12)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 12;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU12.getX () - (BMU_SEL_BOX.getWidth () - BMU12.getWidth ()) / 2,
                        BMU12.getY () - (BMU_SEL_BOX.getHeight () - BMU12.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1273,13 +1374,16 @@ MainScreenView::BMU12_clicked ()
 void
 MainScreenView::BMU13_clicked ()
 {
+    if (!is_bmu_enabled(13)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 13;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU13.getX () - (BMU_SEL_BOX.getWidth () - BMU13.getWidth ()) / 2,
                        BMU13.getY () - (BMU_SEL_BOX.getHeight () - BMU13.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1290,13 +1394,16 @@ MainScreenView::BMU13_clicked ()
 void
 MainScreenView::BMU14_clicked ()
 {
+    if (!is_bmu_enabled(14)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 14;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU14.getX () - (BMU_SEL_BOX.getWidth () - BMU14.getWidth ()) / 2,
                        BMU14.getY () - (BMU_SEL_BOX.getHeight () - BMU14.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1307,13 +1414,16 @@ MainScreenView::BMU14_clicked ()
 void
 MainScreenView::BMU15_clicked ()
 {
+    if (!is_bmu_enabled(15)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 15;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU15.getX () - (BMU_SEL_BOX.getWidth () - BMU15.getWidth ()) / 2,
                        BMU15.getY () - (BMU_SEL_BOX.getHeight () - BMU15.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1324,13 +1434,16 @@ MainScreenView::BMU15_clicked ()
 void
 MainScreenView::BMU16_clicked ()
 {
+    if (!is_bmu_enabled(16)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 16;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU16.getX () - (BMU_SEL_BOX.getWidth () - BMU16.getWidth ()) / 2,
                        BMU16.getY () - (BMU_SEL_BOX.getHeight () - BMU16.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1341,13 +1454,16 @@ MainScreenView::BMU16_clicked ()
 void
 MainScreenView::BMU17_clicked ()
 {
+    if (!is_bmu_enabled(17)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 17;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU17.getX () - (BMU_SEL_BOX.getWidth () - BMU17.getWidth ()) / 2,
                        BMU17.getY () - (BMU_SEL_BOX.getHeight () - BMU17.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1358,13 +1474,16 @@ MainScreenView::BMU17_clicked ()
 void
 MainScreenView::BMU18_clicked ()
 {
+    if (!is_bmu_enabled(18)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 18;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU18.getX () - (BMU_SEL_BOX.getWidth () - BMU18.getWidth ()) / 2,
                        BMU18.getY () - (BMU_SEL_BOX.getHeight () - BMU18.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1375,13 +1494,16 @@ MainScreenView::BMU18_clicked ()
 void
 MainScreenView::BMU19_clicked ()
 {
+    if (!is_bmu_enabled(19)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 19;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU19.getX () - (BMU_SEL_BOX.getWidth () - BMU19.getWidth ()) / 2,
                        BMU19.getY () - (BMU_SEL_BOX.getHeight () - BMU19.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1392,13 +1514,16 @@ MainScreenView::BMU19_clicked ()
 void
 MainScreenView::BMU20_clicked ()
 {
+    if (!is_bmu_enabled(20)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 20;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU20.getX () - (BMU_SEL_BOX.getWidth () - BMU20.getWidth ()) / 2,
                        BMU20.getY () - (BMU_SEL_BOX.getHeight () - BMU20.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1409,13 +1534,16 @@ MainScreenView::BMU20_clicked ()
 void
 MainScreenView::BMU21_clicked ()
 {
+    if (!is_bmu_enabled(21)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 21;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU21.getX () - (BMU_SEL_BOX.getWidth () - BMU21.getWidth ()) / 2,
                        BMU21.getY () - (BMU_SEL_BOX.getHeight () - BMU21.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1426,13 +1554,16 @@ MainScreenView::BMU21_clicked ()
 void
 MainScreenView::BMU22_clicked ()
 {
+    if (!is_bmu_enabled(22)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 22;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU22.getX () - (BMU_SEL_BOX.getWidth () - BMU22.getWidth ()) / 2,
                        BMU22.getY () - (BMU_SEL_BOX.getHeight () - BMU22.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1443,13 +1574,16 @@ MainScreenView::BMU22_clicked ()
 void
 MainScreenView::BMU23_clicked ()
 {
+    if (!is_bmu_enabled(23)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 23;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU23.getX () - (BMU_SEL_BOX.getWidth () - BMU23.getWidth ()) / 2,
                        BMU23.getY () - (BMU_SEL_BOX.getHeight () - BMU23.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1460,13 +1594,16 @@ MainScreenView::BMU23_clicked ()
 void
 MainScreenView::BMU24_clicked ()
 {
+    if (!is_bmu_enabled(24)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 24;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU24.getX () - (BMU_SEL_BOX.getWidth () - BMU24.getWidth ()) / 2,
                        BMU24.getY () - (BMU_SEL_BOX.getHeight () - BMU24.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1477,13 +1614,16 @@ MainScreenView::BMU24_clicked ()
 void
 MainScreenView::BMU25_clicked ()
 {
+    if (!is_bmu_enabled(25)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 25;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU25.getX () - (BMU_SEL_BOX.getWidth () - BMU25.getWidth ()) / 2,
                        BMU25.getY () - (BMU_SEL_BOX.getHeight () - BMU25.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1494,13 +1634,16 @@ MainScreenView::BMU25_clicked ()
 void
 MainScreenView::BMU26_clicked ()
 {
+    if (!is_bmu_enabled(26)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 26;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU26.getX () - (BMU_SEL_BOX.getWidth () - BMU26.getWidth ()) / 2,
                        BMU26.getY () - (BMU_SEL_BOX.getHeight () - BMU26.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1511,13 +1654,16 @@ MainScreenView::BMU26_clicked ()
 void
 MainScreenView::BMU27_clicked ()
 {
+    if (!is_bmu_enabled(27)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 27;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU27.getX () - (BMU_SEL_BOX.getWidth () - BMU27.getWidth ()) / 2,
                        BMU27.getY () - (BMU_SEL_BOX.getHeight () - BMU27.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1528,13 +1674,16 @@ MainScreenView::BMU27_clicked ()
 void
 MainScreenView::BMU28_clicked ()
 {
+    if (!is_bmu_enabled(28)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 28;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU28.getX () - (BMU_SEL_BOX.getWidth () - BMU28.getWidth ()) / 2,
                        BMU28.getY () - (BMU_SEL_BOX.getHeight () - BMU28.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1545,13 +1694,16 @@ MainScreenView::BMU28_clicked ()
 void
 MainScreenView::BMU29_clicked ()
 {
+    if (!is_bmu_enabled(29)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 29;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU29.getX () - (BMU_SEL_BOX.getWidth () - BMU29.getWidth ()) / 2,
                        BMU29.getY () - (BMU_SEL_BOX.getHeight () - BMU29.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1562,13 +1714,16 @@ MainScreenView::BMU29_clicked ()
 void
 MainScreenView::BMU30_clicked ()
 {
+    if (!is_bmu_enabled(30)) {
+        return;
+    }
     viewToModelData.BMU_SEL = 30;
-    // 更新BCMU选择块位置
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU30.getX () - (BMU_SEL_BOX.getWidth () - BMU30.getWidth ()) / 2,
                        BMU30.getY () - (BMU_SEL_BOX.getHeight () - BMU30.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编号
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1582,14 +1737,20 @@ MainScreenView::balance_state_update (int no_bmu)
 #ifndef SIMULATOR
     uint8_t switching_state;
     uint8_t balance_state;
+    uint8_t bcmu_index;
 
-    switching_state = Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_SWITCH_MASK;
-    balance_state   = Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_BAL_MASK;
+    if (viewToModelData.BCMU_SEL < 1 || viewToModelData.BCMU_SEL > cluster_num || no_bmu < 1 || no_bmu > GRP_num) {
+        return;
+    }
+
+    bcmu_index      = viewToModelData.BCMU_SEL - 1;
+    switching_state = Client_Sd[bcmu_index].bal_state[no_bmu - 1] & BAL_STATE_SWITCH_MASK;
+    balance_state   = Client_Sd[bcmu_index].bal_state[no_bmu - 1] & BAL_STATE_BAL_MASK;
 
     // only update when bal switching finished
     if (switching_state) {
         Unicode::snprintf (bal_stateBuffer1, BAL_STATEBUFFER1_SIZE, "%d",
-                           (Client_Sd[viewToModelData.BCMU_SEL].bal_state[no_bmu] & BAL_STATE_CELL_MASK) >> 4);
+                           (Client_Sd[bcmu_index].bal_state[no_bmu - 1] & BAL_STATE_CELL_MASK) >> 4);
         balance_state = BAL_STATE_FORWARD;
         switch (balance_state) {
             case BAL_STATE_IDLE:
@@ -1651,16 +1812,23 @@ MainScreenView::gettime ()
 void
 MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 {
+    if (viewToModelData.BCMU_SEL < 1 || viewToModelData.BCMU_SEL > cluster_num) {
+        viewToModelData.BCMU_SEL = 1;
+    }
+    if (viewToModelData.BMU_SEL < 1 || viewToModelData.BMU_SEL > GRP_num) {
+        viewToModelData.BMU_SEL = 1;
+    }
+
     // 更新LCD帧率
     Unicode::snprintf (FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%d", modelToViewData.frameRate);
     FrameRateText.invalidate ();
 
-    // 更新CELLSHOW中提示
+    // 更新CELLSHOW中提�?
     Unicode::snprintf (dianchixinxiBuffer1, DIANCHIXINXIBUFFER1_SIZE, "%d", viewToModelData.BCMU_SEL);
     Unicode::snprintf (dianchixinxiBuffer2, DIANCHIXINXIBUFFER2_SIZE, "%d", viewToModelData.BMU_SEL);
     dianchixinxi.invalidate ();
 
-    // 更新所有单体电池电压(原/10000  现在/1000)
+    // 更新所有单体电池电�?�?10000  现在/1000)
     Unicode::snprintfFloat (CellText1Buffer, CELLTEXT1_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[0] / 1000);
     CellText1.invalidate ();
 
@@ -1696,7 +1864,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 
     Unicode::snprintfFloat (CellText12Buffer, CELLTEXT12_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[11] / 1000);
     CellText12.invalidate ();
-    // 显示平均电压（调试用）
+    // 显示平均电压（调试用�?
     float sum_v = 0;
     for (int i = 0; i < 12; i++) { sum_v += (float)modelToViewData.BAT_VOL[i] / 1000; }
     float avg_V = sum_v / 12;
@@ -1735,7 +1903,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     Unicode::snprintf (fujueyuanBuffer, FUJUEYUAN_SIZE, "%d", modelToViewData.insulation_res_n);
     fujueyuan.invalidate ();
 
-    // 更新电池指示图，增加变色功能：0~20显示红色 20~60黄色 60~100绿色
+    // 更新电池指示图，增加变色功能�?~20显示红色 20~60黄色 60~100绿色
     // SOC1_view.setValue((float)modelToViewData.BAT_SOC[0] / 10);
     // SOC2_view.setValue((float)modelToViewData.BAT_SOC[1] / 10);
     // SOC3_view.setValue((float)modelToViewData.BAT_SOC[2] / 10);
@@ -1848,51 +2016,16 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     Unicode::snprintfFloat (avg_temBuffer, AVG_TEM_SIZE, "%.2f", avg_T);
     avg_tem.invalidate ();
 
-    // 更新BCMU框选图标
-    if (BCMU_SEL_BOX.isVisible () == false) {
+    // 更新BCMU框选图�?
+    if (BCMU_SEL_BOX.isVisible() == false) 
+    {
         if (modelToViewData.BCMU_state[0] == online)
-            BCMU1_clicked ();
-        else if (modelToViewData.BCMU_state[1] == online)
-            BCMU2_clicked ();
-        else if (modelToViewData.BCMU_state[2] == online)
-            BCMU3_clicked ();
-        else if (modelToViewData.BCMU_state[3] == online)
-            BCMU4_clicked ();
-        else if (modelToViewData.BCMU_state[4] == online)
-            BCMU5_clicked ();
-        else if (modelToViewData.BCMU_state[5] == online)
-            BCMU6_clicked ();
-        else if (modelToViewData.BCMU_state[6] == online)
-            BCMU7_clicked ();
-        else if (modelToViewData.BCMU_state[7] == online)
-            BCMU8_clicked ();
-        else if (modelToViewData.BCMU_state[8] == online)
-            BCMU9_clicked ();
-        else if (modelToViewData.BCMU_state[9] == online)
-            BCMU10_clicked ();
-        else if (modelToViewData.BCMU_state[10] == online)
-            BCMU11_clicked ();
-        else if (modelToViewData.BCMU_state[11] == online)
-            BCMU12_clicked ();
-        else if (modelToViewData.BCMU_state[12] == online)
-            BCMU13_clicked ();
-        else if (modelToViewData.BCMU_state[13] == online)
-            BCMU14_clicked ();
-        else if (modelToViewData.BCMU_state[14] == online)
-            BCMU15_clicked ();
-        else if (modelToViewData.BCMU_state[15] == online)
-            BCMU16_clicked ();
-        else if (modelToViewData.BCMU_state[16] == online)
-            BCMU17_clicked ();
-        else if (modelToViewData.BCMU_state[17] == online)
-            BCMU18_clicked ();
-        else if (modelToViewData.BCMU_state[18] == online)
-            BCMU19_clicked ();
-        else if (modelToViewData.BCMU_state[19] == online)
-            BCMU20_clicked ();
+        {
+            BCMU1_clicked();
+        }
     }
 
-    for (uint8_t i = 0; i < 20; i++) {
+    for (uint8_t i = 0; i < cluster_num; i++) {
         if (modelToViewData.BCMU_state[i] == offline && BCMU_SEL_BOX.isVisible () == true
             && viewToModelData.BCMU_SEL == i + 1) {
             BCMU_SEL_BOX.setVisible (false);
@@ -1901,8 +2034,8 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
         }
     }
 
-    for (int i = 0; i < 20; i++) {
-        if (modelToViewData.BCMU_state[i] == offline) // 不使能
+    for (int i = 0; i < cluster_num; i++) {
+        if (modelToViewData.BCMU_state[i] == offline) // 不使�?
         {
             BCMU_ui[i]->setLabelText (touchgfx::TypedText (T_BCMU_0));
             BCMU_ui[i]->setTouchable (false);
@@ -1915,9 +2048,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
         }
     }
 
-    if (modelToViewData.BCMU_state[viewToModelData.BCMU_SEL - 1] == online) // 当前选中的BCMU使能，刷新其BMU的状态
+    if (modelToViewData.BCMU_state[viewToModelData.BCMU_SEL - 1] == online) // 当前选中的BCMU使能，刷新其BMU的状�?
     {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < GRP_num; i++) {
             if (bmu_offline[viewToModelData.BCMU_SEL - 1][i] == 0) // 0表示在线，非0离线)
             {
                 BMU[i]->setLabelText (touchgfx::TypedText (T_BMU1 + i));
@@ -1936,7 +2069,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 
     // 更新ip信息
 
-    http_get_wan_ip (local_ip_buff, 16); // 给local_ip_buff赋值char类型的变量
+    http_get_wan_ip (local_ip_buff, 16); // 给local_ip_buff赋值char类型的变�?
     Unicode::UnicodeChar wan_ip_buf[16];
     Unicode::strncpy (wan_ip_buf, local_ip_buff, 16);
     Unicode::snprintf (local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);
@@ -1976,7 +2109,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     //{
     //     /*touchgfx::Unicode::snprintf(e_gen_Buffer[i], 10, "%d", 12);*/
     //     e_gen[i].setTypedText(touchgfx::TypedText(T_BSMU_ERR1));
-    //     id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误板
+    //     id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误�?
     //     Unicode::snprintf(t_gen_Buffer[i], 10, "%s", u_time);
     //     t_gen[i].resizeToCurrentText();
     //     id_gen[i].resizeToCurrentText();
@@ -2000,9 +2133,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
         scrollableContainer1.invalidate ();
         /*共五种错误信息格式：
         1、BSMU错误
-        2、第X簇BCMU错误，其中位宽为2的信息 00 无故障   01和11均有故障  10预警
-        3、第X簇X组BMU(组内)板错误
-        4、第X簇X组BMU(组内)X号电池错误
+        2、第X簇BCMU错误，其中位宽为2的信�?00 无故�?  01�?1均有故障  10预警
+        3、第X簇X组BMU(组内)板错�?
+        4、第X簇X组BMU(组内)X号电池错�?
         5、第X簇BMU(组间错误)*/
 
         for (int k = 0; k < cluster_num; k++) // 遍历错误二维数组Client_errors[cluster_num][MAX_ERROR]中的cluster_num
@@ -2010,9 +2143,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
             if (BCMU[k].OnlineOrOffline == Offline) continue;
             for (int i = 0; i < Client_Sd[k].error_count; i++) // Client_errors[cluster_num][MAX_ERROR]中的MAX_ERROR
             {
-                if (Client_errors[k][i].error_id_h == 0x00) // 判断id高8位
+                if (Client_errors[k][i].error_id_h == 0x00) // 判断id�?�?
                 {
-                    if (Client_errors[k][i].error_id_l == 0x00) // 判断id低8位，BSMU错误
+                    if (Client_errors[k][i].error_id_l == 0x00) // 判断id�?位，BSMU错误
                     {
                         for (int j = 0; j < 16; j++) // 逐位判断错误信息，并输出
                         {
@@ -2021,18 +2154,18 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 gettime ();
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time);                                              // 打印错误时间
-                                id_gen[err_counter].setTypedText (touchgfx::TypedText (T_ERR_TYPE0));    // 错误板
+                                id_gen[err_counter].setTypedText (touchgfx::TypedText (T_ERR_TYPE0));    // 错误�?
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BSMU_ERR0 - j)); // 错误类型
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;
                             }
                         }
                     } else if (Client_errors[k][i].error_id_l == 0x01
-                               || Client_errors[k][i].error_id_l == 0x02) // 判断id低8位，BCMU错误
+                               || Client_errors[k][i].error_id_l == 0x02) // 判断id�?位，BCMU错误
                     {
-                        if (Client_errors[k][i].error_id_l == 0x01) // 错误位宽为2
+                        if (Client_errors[k][i].error_id_l == 0x01) // 错误位宽�?
                         {
                             for (int j = 0; j < 8; j++) {
                                 if (get_two_bit_value (Client_errors[k][i].error_code, j + 1) == 2) // 预警
@@ -2041,14 +2174,14 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                     gettime ();
                                     Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                        u_time); // 打印错误时间
-                                    sprintf (id_temp, "第%d簇BCMU错误(预警)",
+                                    sprintf (id_temp, "BCMU%d warn",
                                              k + 1); // char 类型
                                     Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                        20); // touchgfx仅支持显示unicode类型
                                     // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1));
-                                    // //错误板
+                                    // //错误�?
                                     e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BCMU_ERR_2BIT_0 - j));
-                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                     id_gen[err_counter].resizeToCurrentText ();
                                     e_gen[err_counter].resizeToCurrentText ();
                                     err_counter++;
@@ -2061,41 +2194,41 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                     gettime ();
                                     Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                        u_time); // 打印错误时间
-                                    sprintf (id_temp, "第%d簇BCMU错误(故障)",
+                                    sprintf (id_temp, "BCMU%d fault",
                                              k + 1); // char 类型
                                     Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                        20); // touchgfx仅支持显示unicode类型
                                     // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1));
-                                    // //错误板
+                                    // //错误�?
                                     e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BCMU_ERR_2BIT_0 - j));
-                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                     id_gen[err_counter].resizeToCurrentText ();
                                     e_gen[err_counter].resizeToCurrentText ();
                                     err_counter++;
                                 }
                             }
                         }
-                        if (Client_errors[k][i].error_id_l == 0x02) // 错误位宽为1
+                        if (Client_errors[k][i].error_id_l == 0x02) // 错误位宽�?
                         {
                             for (int j = 0; j < 16; j++) {
-                                if (get_one_bit_value (Client_errors[k][i].error_code, j + 1) == 0) // 无故障
+                                if (get_one_bit_value (Client_errors[k][i].error_code, j + 1) == 0) // 无故�?
                                 {
                                 } else if (get_one_bit_value (Client_errors[k][i].error_code,
                                                               j + 1)
-                                           == 1) // 无故障
+                                           == 1) // 无故�?
                                 {
                                     if (err_counter >= errcount) err_counter = err_counter % errcount;
                                     gettime ();
                                     Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                        u_time); // 打印错误时间
-                                    sprintf (id_temp, "第%d簇BCMU错误",
+                                    sprintf (id_temp, "BCMU%d error",
                                              k + 1); // char 类型
                                     Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                        20); // touchgfx仅支持显示unicode类型
                                     // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1));
-                                    // //错误板
+                                    // //错误�?
                                     e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BCMU_ERR0 - j));
-                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                     id_gen[err_counter].resizeToCurrentText ();
                                     e_gen[err_counter].resizeToCurrentText ();
                                     err_counter++;
@@ -2104,12 +2237,12 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                         }
                     }
                 } else if (Client_errors[k][i].error_id_h >= 0x01
-                           && Client_errors[k][i].error_id_h <= 0x1F) // 判断id高8位
+                           && Client_errors[k][i].error_id_h <= 0x1F) // 判断id�?�?
                 {
-                    if (Client_errors[k][i].error_id_l == 0x00) // BMU（组内）板错误
+                    if (Client_errors[k][i].error_id_l == 0x00) // BMU（组内）板错�?
                     {
                         /*Unicode::snprintf(id[i], 20, "%s",
-                         * "BMU(组内)板错误!\0");*/
+                         * "BMU(组内)板错�?\0");*/
                         for (int j = 0; j < 16; j++) {
                             if (get_one_bit_value (Client_errors[k][i].error_code, j + 1) == 1) {
                                 if (err_counter >= errcount) err_counter = err_counter % errcount;
@@ -2117,14 +2250,14 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time); // 打印错误时间
                                 // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE2));
-                                // //错误板
-                                sprintf (id_temp, "第%d簇%d组BMU(组内)板错误", k + 1,
+                                // //错误�?
+                                sprintf (id_temp, "BCMU%d BMU%d board error", k + 1,
                                          Client_errors[k][i].error_id_h); // char 类型
                                 Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                    20); // touchgfx仅支持显示unicode类型
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BMU_BOARD_ERR0 - j));
 
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;
@@ -2140,22 +2273,22 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time); // 打印错误时间
                                 // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE3));
-                                // //错误板
-                                sprintf (id_temp, "第%d簇%d组BMU(组内)%d号电池错误", k + 1,
+                                // //错误�?
+                                sprintf (id_temp, "BCMU%d BMU%d Cell%d error", k + 1,
                                          Client_errors[k][i].error_id_h,
                                          Client_errors[k][i].error_id_l); // char 类型
                                 Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                    20); // touchgfx仅支持显示unicode类型
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BMU_BATTERY_ERR0 - j));
 
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;
                             }
                         }
                     }
-                } else if (Client_errors[k][i].error_id_h == 0x20) // 判断id高8位
+                } else if (Client_errors[k][i].error_id_h == 0x20) // 判断id�?�?
                 {
                     if (Client_errors[k][i].error_id_l == 0) // BMU(组间错误)
                     {
@@ -2166,13 +2299,13 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time); // 打印错误时间
                                 // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE4));
-                                // //错误板
-                                sprintf (id_temp, "第%d簇BMU(组间错误)",
+                                // //错误�?
+                                sprintf (id_temp, "�?d簇BMU(组间错误)",
                                          k + 1); // char 类型
                                 Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                    20); // touchgfx仅支持显示unicode类型
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BMU_BETWEEN_ERR0 - j));
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显示
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;

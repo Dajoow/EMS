@@ -198,3 +198,4 @@ cmake-build-*/
 EIDE/build
 MDK-ARM/BSMU_H750IB/
 touchgfx_backup*
+.codex_tmp/
