@@ -858,6 +858,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU30.setLabelText(touchgfx::TypedText(T_BMU30));
     BMU30.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU30.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU30.setVisible(false);
     BMU30.setAction(buttonCallback);
     BMU_Container.add(BMU30);
 
@@ -866,6 +867,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU29.setLabelText(touchgfx::TypedText(T_BMU29));
     BMU29.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU29.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU29.setVisible(false);
     BMU29.setAction(buttonCallback);
     BMU_Container.add(BMU29);
 
@@ -874,6 +876,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU28.setLabelText(touchgfx::TypedText(T_BMU28));
     BMU28.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU28.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU28.setVisible(false);
     BMU28.setAction(buttonCallback);
     BMU_Container.add(BMU28);
 
@@ -882,6 +885,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU27.setLabelText(touchgfx::TypedText(T_BMU27));
     BMU27.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU27.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU27.setVisible(false);
     BMU27.setAction(buttonCallback);
     BMU_Container.add(BMU27);
 
@@ -890,6 +894,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU26.setLabelText(touchgfx::TypedText(T_BMU26));
     BMU26.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU26.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU26.setVisible(false);
     BMU26.setAction(buttonCallback);
     BMU_Container.add(BMU26);
 
@@ -898,6 +903,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU25.setLabelText(touchgfx::TypedText(T_BMU25));
     BMU25.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU25.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU25.setVisible(false);
     BMU25.setAction(buttonCallback);
     BMU_Container.add(BMU25);
 
@@ -906,6 +912,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU24.setLabelText(touchgfx::TypedText(T_BMU24));
     BMU24.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU24.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU24.setVisible(false);
     BMU24.setAction(buttonCallback);
     BMU_Container.add(BMU24);
 
@@ -914,6 +921,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU23.setLabelText(touchgfx::TypedText(T_BMU23));
     BMU23.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU23.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU23.setVisible(false);
     BMU23.setAction(buttonCallback);
     BMU_Container.add(BMU23);
 
@@ -922,6 +930,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU22.setLabelText(touchgfx::TypedText(T_BMU22));
     BMU22.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU22.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU22.setVisible(false);
     BMU22.setAction(buttonCallback);
     BMU_Container.add(BMU22);
 
@@ -930,6 +939,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU21.setLabelText(touchgfx::TypedText(T_BMU21));
     BMU21.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU21.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU21.setVisible(false);
     BMU21.setAction(buttonCallback);
     BMU_Container.add(BMU21);
 
@@ -938,6 +948,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU20.setLabelText(touchgfx::TypedText(T_BMU20));
     BMU20.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU20.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU20.setVisible(false);
     BMU20.setAction(buttonCallback);
     BMU_Container.add(BMU20);
 
@@ -946,6 +957,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU19.setLabelText(touchgfx::TypedText(T_BMU19));
     BMU19.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU19.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU19.setVisible(false);
     BMU19.setAction(buttonCallback);
     BMU_Container.add(BMU19);
 
@@ -954,6 +966,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU18.setLabelText(touchgfx::TypedText(T_BMU18));
     BMU18.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU18.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU18.setVisible(false);
     BMU18.setAction(buttonCallback);
     BMU_Container.add(BMU18);
 
@@ -962,6 +975,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU17.setLabelText(touchgfx::TypedText(T_BMU17));
     BMU17.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU17.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU17.setVisible(false);
     BMU17.setAction(buttonCallback);
     BMU_Container.add(BMU17);
 
@@ -970,6 +984,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU16.setLabelText(touchgfx::TypedText(T_BMU16));
     BMU16.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU16.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU16.setVisible(false);
     BMU16.setAction(buttonCallback);
     BMU_Container.add(BMU16);
 
@@ -978,6 +993,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU15.setLabelText(touchgfx::TypedText(T_BMU15));
     BMU15.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU15.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU15.setVisible(false);
     BMU15.setAction(buttonCallback);
     BMU_Container.add(BMU15);
 
@@ -986,6 +1002,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU14.setLabelText(touchgfx::TypedText(T_BMU14));
     BMU14.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU14.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU14.setVisible(false);
     BMU14.setAction(buttonCallback);
     BMU_Container.add(BMU14);
 
@@ -994,6 +1011,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU13.setLabelText(touchgfx::TypedText(T_BMU13));
     BMU13.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU13.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU13.setVisible(false);
     BMU13.setAction(buttonCallback);
     BMU_Container.add(BMU13);
 
@@ -1002,6 +1020,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU12.setLabelText(touchgfx::TypedText(T_BMU12));
     BMU12.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU12.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU12.setVisible(false);
     BMU12.setAction(buttonCallback);
     BMU_Container.add(BMU12);
 
@@ -1010,6 +1029,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU11.setLabelText(touchgfx::TypedText(T_BMU11));
     BMU11.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU11.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU11.setVisible(false);
     BMU11.setAction(buttonCallback);
     BMU_Container.add(BMU11);
 
@@ -1018,6 +1038,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU10.setLabelText(touchgfx::TypedText(T_BMU10));
     BMU10.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU10.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU10.setVisible(false);
     BMU10.setAction(buttonCallback);
     BMU_Container.add(BMU10);
 
@@ -1026,6 +1047,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU9.setLabelText(touchgfx::TypedText(T_BMU9));
     BMU9.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU9.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU9.setVisible(false);
     BMU9.setAction(buttonCallback);
     BMU_Container.add(BMU9);
 
@@ -1034,6 +1056,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU8.setLabelText(touchgfx::TypedText(T_BMU8));
     BMU8.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU8.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU8.setVisible(false);
     BMU8.setAction(buttonCallback);
     BMU_Container.add(BMU8);
 
@@ -1042,6 +1065,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU7.setLabelText(touchgfx::TypedText(T_BMU7));
     BMU7.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU7.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU7.setVisible(false);
     BMU7.setAction(buttonCallback);
     BMU_Container.add(BMU7);
 
@@ -1050,6 +1074,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU6.setLabelText(touchgfx::TypedText(T_BMU6));
     BMU6.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU6.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU6.setVisible(false);
     BMU6.setAction(buttonCallback);
     BMU_Container.add(BMU6);
 
@@ -1058,6 +1083,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU5.setLabelText(touchgfx::TypedText(T_BMU5));
     BMU5.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU5.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU5.setVisible(false);
     BMU5.setAction(buttonCallback);
     BMU_Container.add(BMU5);
 
@@ -1066,6 +1092,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU4.setLabelText(touchgfx::TypedText(T_BMU4));
     BMU4.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU4.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU4.setVisible(false);
     BMU4.setAction(buttonCallback);
     BMU_Container.add(BMU4);
 
@@ -1074,6 +1101,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BMU3.setLabelText(touchgfx::TypedText(T_BMU3));
     BMU3.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BMU3.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BMU3.setVisible(false);
     BMU3.setAction(buttonCallback);
     BMU_Container.add(BMU3);
 
@@ -1132,6 +1160,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU20.setLabelText(touchgfx::TypedText(T_BCMU20));
     BCMU20.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU20.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU20.setVisible(false);
     BCMU20.setAction(buttonCallback);
     BCMU_Container.add(BCMU20);
 
@@ -1140,6 +1169,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU19.setLabelText(touchgfx::TypedText(T_BCMU19));
     BCMU19.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU19.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU19.setVisible(false);
     BCMU19.setAction(buttonCallback);
     BCMU_Container.add(BCMU19);
 
@@ -1148,6 +1178,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU18.setLabelText(touchgfx::TypedText(T_BCMU18));
     BCMU18.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU18.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU18.setVisible(false);
     BCMU18.setAction(buttonCallback);
     BCMU_Container.add(BCMU18);
 
@@ -1156,6 +1187,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU17.setLabelText(touchgfx::TypedText(T_BCMU17));
     BCMU17.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU17.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU17.setVisible(false);
     BCMU17.setAction(buttonCallback);
     BCMU_Container.add(BCMU17);
 
@@ -1164,6 +1196,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU16.setLabelText(touchgfx::TypedText(T_BCMU16));
     BCMU16.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU16.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU16.setVisible(false);
     BCMU16.setAction(buttonCallback);
     BCMU_Container.add(BCMU16);
 
@@ -1172,6 +1205,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU15.setLabelText(touchgfx::TypedText(T_BCMU15));
     BCMU15.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU15.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU15.setVisible(false);
     BCMU15.setAction(buttonCallback);
     BCMU_Container.add(BCMU15);
 
@@ -1180,6 +1214,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU14.setLabelText(touchgfx::TypedText(T_BCMU14));
     BCMU14.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU14.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU14.setVisible(false);
     BCMU14.setAction(buttonCallback);
     BCMU_Container.add(BCMU14);
 
@@ -1188,6 +1223,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU13.setLabelText(touchgfx::TypedText(T_BCMU13));
     BCMU13.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU13.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU13.setVisible(false);
     BCMU13.setAction(buttonCallback);
     BCMU_Container.add(BCMU13);
 
@@ -1196,6 +1232,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU12.setLabelText(touchgfx::TypedText(T_BCMU12));
     BCMU12.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU12.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU12.setVisible(false);
     BCMU12.setAction(buttonCallback);
     BCMU_Container.add(BCMU12);
 
@@ -1204,6 +1241,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU11.setLabelText(touchgfx::TypedText(T_BCMU11));
     BCMU11.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU11.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU11.setVisible(false);
     BCMU11.setAction(buttonCallback);
     BCMU_Container.add(BCMU11);
 
@@ -1212,6 +1250,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU10.setLabelText(touchgfx::TypedText(T_BCMU10));
     BCMU10.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU10.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU10.setVisible(false);
     BCMU10.setAction(buttonCallback);
     BCMU_Container.add(BCMU10);
 
@@ -1220,6 +1259,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU9.setLabelText(touchgfx::TypedText(T_BCMU9));
     BCMU9.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU9.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU9.setVisible(false);
     BCMU9.setAction(buttonCallback);
     BCMU_Container.add(BCMU9);
 
@@ -1228,6 +1268,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU8.setLabelText(touchgfx::TypedText(T_BCMU8));
     BCMU8.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU8.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU8.setVisible(false);
     BCMU8.setAction(buttonCallback);
     BCMU_Container.add(BCMU8);
 
@@ -1236,6 +1277,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU7.setLabelText(touchgfx::TypedText(T_BCMU7));
     BCMU7.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU7.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU7.setVisible(false);
     BCMU7.setAction(buttonCallback);
     BCMU_Container.add(BCMU7);
 
@@ -1244,6 +1286,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU6.setLabelText(touchgfx::TypedText(T_BCMU6));
     BCMU6.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU6.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU6.setVisible(false);
     BCMU6.setAction(buttonCallback);
     BCMU_Container.add(BCMU6);
 
@@ -1252,6 +1295,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU5.setLabelText(touchgfx::TypedText(T_BCMU5));
     BCMU5.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU5.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU5.setVisible(false);
     BCMU5.setAction(buttonCallback);
     BCMU_Container.add(BCMU5);
 
@@ -1260,6 +1304,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU4.setLabelText(touchgfx::TypedText(T_BCMU4));
     BCMU4.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU4.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU4.setVisible(false);
     BCMU4.setAction(buttonCallback);
     BCMU_Container.add(BCMU4);
 
@@ -1268,6 +1313,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU3.setLabelText(touchgfx::TypedText(T_BCMU3));
     BCMU3.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU3.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU3.setVisible(false);
     BCMU3.setAction(buttonCallback);
     BCMU_Container.add(BCMU3);
 
@@ -1276,6 +1322,7 @@ MainScreenViewBase::MainScreenViewBase() :
     BCMU2.setLabelText(touchgfx::TypedText(T_BCMU2));
     BCMU2.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     BCMU2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(151, 203, 230));
+    BCMU2.setVisible(false);
     BCMU2.setAction(buttonCallback);
     BCMU_Container.add(BCMU2);
 

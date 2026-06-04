@@ -2,7 +2,7 @@
 {
   "Application": {
     "Name": "BSMU_H750IB",
-    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "TouchGfxPath": "C:/TouchGFX/4.21.4/touchgfx",
     "AvailableColorDepths": [ 16 ],
     "AvailableLCDs":
     {
