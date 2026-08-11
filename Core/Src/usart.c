@@ -157,7 +157,7 @@ void MX_USART2_UART_Init(void)
   else if(bsmuSetting.RS485Bps == 5){
 	huart2.Init.BaudRate = 4800;
   }else{
-	huart2.Init.BaudRate = 115200;
+	huart2.Init.BaudRate = 9600;
   }
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
@@ -521,7 +521,7 @@ void ResetUart2REV()
 }
 
 // uart4打印调试信息
-void Debug_printf(char *format, ...)
+void Debug_printf(const char *format, ...)
 {
 	uint16_t length = 0;
 	va_list args;
@@ -544,7 +544,7 @@ void Debug_printf(char *format, ...)
 	va_end(args);
 }
 
-void cmb_printf(char *format, ...)
+void cmb_printf(const char *format, ...)
 {
 	uint16_t length = 0;
 	va_list args;

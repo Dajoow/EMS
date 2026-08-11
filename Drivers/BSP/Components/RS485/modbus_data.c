@@ -29,12 +29,21 @@ static int get_map_buf(const agile_modbus_slave_util_map_t *map, void *buf,
     }
     break;
   }
-  default:
-		if (modbus_data_type == MODBUS_BIT){
-      memcpy(buf, map->data + (index - start_addr), len);
-		}else{
-			memcpy(buf, map->data + (index - start_addr), len * 2);
-		}
+  default:{
+      const uint8_t *src = (uint8_t *)map->data;
+      int offset = index - start_addr;
+
+      if(modbus_data_type == MODBUS_BIT)
+      {
+        memcpy(buf, src + offset, len);
+      }
+      else
+      {
+        memcpy( buf,
+                src+offset * sizeof(uint16_t),
+                len * sizeof(uint16_t));
+      }
+    }
     break;
   }
 
@@ -59,8 +68,11 @@ static int set_map_buf(const agile_modbus_slave_util_map_t *map, int index,
     size = 1;
     break;
   }
+    uint8_t *dst = (uint8_t *)map->data;
+    int offset = index - start_addr;
 
-  memcpy(map->data + index, buf, len * size);
+    memcpy(dst + offset * size, buf, len * size);
+  //memcpy(map->data + index, buf, len * size);
 
   return 0;
 }

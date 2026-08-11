@@ -28,6 +28,8 @@
 #include "AT_module_4g.h"
 #include "CAN_Control.h"
 #include "RS485.h"
+#include "modbus_slave.h"
+#include "modbus.h"
 #include "client.h"
 #include "fdcan.h"
 #include "gt911.h"
@@ -40,6 +42,7 @@
 #include "at24cxx.h"
 #include "data_persistence.h"
 #include "screen_sleep.h"
+#include "EMS_strategy.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -81,6 +84,7 @@ osMutexId DebugUartMutexHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
+void TaskTcbPrintf(void);
 void CPU_Task (void const *argument);
 /* USER CODE END FunctionPrototypes */
 

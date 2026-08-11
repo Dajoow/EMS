@@ -49,7 +49,7 @@ static const agile_modbus_slave_util_map_t *get_map_by_addr(const agile_modbus_s
 static int read_registers(agile_modbus_t *ctx, struct agile_modbus_slave_info *slave_info, const agile_modbus_slave_util_t *slave_util)
 {
     uint8_t map_buf[512];
-    int slave_addr = slave_info->sft->slave;
+    //int slave_addr = slave_info->sft->slave;
     int function = slave_info->sft->function;
     int address = slave_info->address;
     int nb = slave_info->nb;

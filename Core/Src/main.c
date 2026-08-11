@@ -66,7 +66,7 @@ uint32_t g_osRuntimeCounter = 0;        //FreeRTOS运行计数
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MPU_Initialize(void);
+//static void MPU_Initialize(void);
 static void MPU_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
@@ -104,7 +104,7 @@ int main(void)
   SCB_EnableICache();
 
   /* Enable D-Cache---------------------------------------------------------*/
-  SCB_EnableDCache();
+  //SCB_EnableDCache();/* 仅用于USART2 DMA Cache一致性诊断，测试完成后恢复。 */
 
   /* MCU Configuration--------------------------------------------------------*/
 

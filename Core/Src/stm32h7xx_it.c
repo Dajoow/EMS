@@ -25,6 +25,7 @@
 #include "string.h"
 #include "usart.h"
 #include "AT_module_4g.h"
+#include "modbus.h" /* USART2 IDLE 中断仅在诊断开关开启时保存轻量接收现场。 */
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -223,6 +224,9 @@ void USART2_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 0 */
 	uint16_t temp;
   BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+#if MODBUS_RX_DIAG_ENABLE
+  uint32_t uart2_isr_snapshot = huart2.Instance->ISR; /* 在 HAL 清除错误标志前保存 USART2 硬件现场。 */
+#endif
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
@@ -241,6 +245,15 @@ void USART2_IRQHandler(void)
       uart2_buff.recv_len = BUFFERSIZE - temp;
       // 将已接收到的数据进行拷贝，防止数据覆盖造成丢失
       memcpy(uart2_buff.recv_buf, uart2_buff.dma_buf, uart2_buff.recv_len);
+#if MODBUS_RX_DIAG_ENABLE
+      modbus_rx_diag_capture_isr(
+        uart2_isr_snapshot,          /* 传入 HAL 处理前的 USART2 ISR 硬件标志。 */
+        huart2.ErrorCode,            /* 传入 HAL_UART_IRQHandler 处理后的错误码。 */
+        temp,                        /* 传入 DMA 剩余未接收的字节数。 */
+        uart2_buff.recv_len,         /* 传入 IDLE 中断计算出的实际帧长度。 */
+        uart2_buff.dma_buf,          /* 传入 DMA 直接写入的原始缓冲区。 */
+        uart2_buff.recv_buf);        /* 传入 ISR memcpy 后供 Modbus 任务使用的缓冲区。 */
+#endif
       // 接收完成标志置位
       uart2_buff.recv_end_flag = 1;
       if(modbus_taskhandle != NULL){

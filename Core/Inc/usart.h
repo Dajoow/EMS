@@ -62,8 +62,8 @@ void Init_printf(void);
 void ResetUart5REV(void);
 void ResetUart4REV(void);
 void ResetUart2REV(void);
-void Debug_printf(char *format, ...);
-void cmb_printf(char *format, ...);
+void Debug_printf(const char *format, ...);
+void cmb_printf(const char *format, ...);
 void Module4G_printf(char *format, ...);
 /* USER CODE END Prototypes */
 
