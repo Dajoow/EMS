@@ -100,6 +100,7 @@ public:
 
     virtual void show_shouye();
     virtual void show_batteryshowarea();
+    void show_device_status();
 
     bool show_batteryshowarea_State();
     virtual void show_batteryshowarea_on();
@@ -108,6 +109,7 @@ public:
     virtual void balance_state_update(int no_bmu);
 
     virtual void handleTickEvent();
+    void NotifyDeviceStatus(const DeviceStatusData& deviceStatus);
   
 
     virtual uint8_t get_one_bit_value(uint16_t src, uint8_t bit_num);
@@ -126,10 +128,44 @@ public:
 
 
 protected:
+    void deviceButtonClicked(const touchgfx::AbstractButton& source);
+    void deviceNavClicked(const touchgfx::AbstractButtonContainer& source);
+    void configureDeviceLine(touchgfx::TextAreaWithOneWildcard& line,
+                             touchgfx::Unicode::UnicodeChar* buffer,
+                             touchgfx::TypedTextId textId,
+                             int16_t y);
+    void updateFaultText(uint16_t faultRaw);
+
     ViewToModelData viewToModelData;
 	int counter;
     int counter2;
     BMUMenuCallback_t BMUMenuCallback;
+    touchgfx::Callback<MainScreenView, const touchgfx::AbstractButton&> deviceButtonCallback;
+    touchgfx::Callback<MainScreenView, const touchgfx::AbstractButtonContainer&> deviceNavCallback;
+
+    touchgfx::Container deviceStatusArea;
+    touchgfx::Box deviceStatusBackground;
+    touchgfx::Container acdcStatusCard;
+    touchgfx::Container dcdcStatusCard;
+    touchgfx::Box acdcCardBackground;
+    touchgfx::Box dcdcCardBackground;
+    touchgfx::Box acdcStatusDot;
+    touchgfx::Box dcdcStatusDot;
+    touchgfx::TextArea acdcTitle;
+    touchgfx::TextArea dcdcTitle;
+    touchgfx::ClickListener< touchgfx::ImageButtonStyle< touchgfx::ClickButtonTrigger > > deviceStatusButton;
+    touchgfx::ButtonWithLabel dcdcStartButton;
+    touchgfx::ButtonWithLabel dcdcStopButton;
+
+    static const uint8_t ACDC_DEVICE_LINE_COUNT = 8;
+    static const uint8_t DCDC_DEVICE_LINE_COUNT = 9;
+    static const uint16_t DEVICE_LINE_BUFFER_SIZE = 64;
+    touchgfx::TextAreaWithOneWildcard acdcDeviceLine[ACDC_DEVICE_LINE_COUNT];
+    touchgfx::TextAreaWithOneWildcard dcdcDeviceLine[DCDC_DEVICE_LINE_COUNT];
+    touchgfx::Unicode::UnicodeChar acdcDeviceBuffer[ACDC_DEVICE_LINE_COUNT][DEVICE_LINE_BUFFER_SIZE];
+    touchgfx::Unicode::UnicodeChar dcdcDeviceBuffer[DCDC_DEVICE_LINE_COUNT][DEVICE_LINE_BUFFER_SIZE];
+    DeviceStatusData lastDeviceStatus;
+    uint16_t stopConfirmationTicks;
 
 //显示ip信息
     char local_ip_buff[17]; //本地ip

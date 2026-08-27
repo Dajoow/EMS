@@ -22,6 +22,7 @@ public:
 #ifndef SIMULATOR
     virtual void NotifyViewMsg(ModelToViewData modelToViewData){};
 #endif
+    virtual void NotifyDeviceStatus(const DeviceStatusData& deviceStatus){};
 
 protected:
     Model* model;

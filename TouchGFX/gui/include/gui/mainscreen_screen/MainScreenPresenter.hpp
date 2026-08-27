@@ -32,8 +32,10 @@ public:
 #ifndef SIMULATOR
     virtual void NotifyViewMsg(ModelToViewData modelToViewData);
 #endif
+    virtual void NotifyDeviceStatus(const DeviceStatusData& deviceStatus);
 
     void ViewtoModelDat(const ViewToModelData& Data);
+    int requestDcdcSafeStop();
 
 private:
     MainScreenPresenter();

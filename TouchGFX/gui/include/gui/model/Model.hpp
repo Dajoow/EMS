@@ -17,10 +17,12 @@ public:
 
     void tick();
     void ViewtoModelDat(const ViewToModelData& Data);
+    int requestDcdcSafeStop();
 
     //void err_inf(const err_info& err);
 protected:
     ModelListener* modelListener;
+    uint8_t deviceStatusTick;
 };
 
 #endif // MODEL_HPP

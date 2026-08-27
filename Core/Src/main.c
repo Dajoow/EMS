@@ -100,19 +100,19 @@ int main(void)
 	__enable_irq();
   /* USER CODE END 1 */
 
+  /* MPU Configuration--------------------------------------------------------*/
+  MPU_Config();
+
   /* Enable I-Cache---------------------------------------------------------*/
   SCB_EnableICache();
 
   /* Enable D-Cache---------------------------------------------------------*/
-  //SCB_EnableDCache();/* 仅用于USART2 DMA Cache一致性诊断，测试完成后恢复。 */
+  SCB_EnableDCache();
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
-  /* MPU Configuration--------------------------------------------------------*/
-  MPU_Config();
 
   /* USER CODE BEGIN Init */
 //	SCB->CACR|=1<<2;   //强制D-Cache透写,CPU 每次操作 Cache 里面的数据，同时也会更新到 SRAM 里面，不需要再发送clean操作，保证D Cache 和 SRAM 里面数据一致。
@@ -307,6 +307,37 @@ void MPU_Config(void)
   MPU_InitStruct.Size = MPU_REGION_SIZE_4MB;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /**
+   * Region 5专门覆盖UART5、UART4和USART2的DMA缓冲区地址槽。
+   *
+   * 三个Uart_BUFF在当前Keil链接映射中的固定地址分别为：
+   *   UART5  ：0x30000000～0x30000C03；
+   *   UART4  ：0x30001000～0x30001C03；
+   *   USART2 ：0x30002000～0x30002C03。
+   *
+   * 每个对象独占一个4 KB地址槽，因此需要设置为不可缓存的完整范围是
+   * 0x30000000～0x30002FFF。这里先建立一个16 KB MPU Region，再通过
+   * SubRegionDisable=0xC0关闭最后两个2 KB子区，确保0x30003000～
+   * 0x30003FFF以及后续D2 SRAM仍保持原有内存属性。
+   *
+   * 该区域配置为Normal、Shareable、Non-cacheable、Non-bufferable，
+   * 使CPU和DMA直接访问同一份SRAM数据，避免D-Cache产生旧帧或CRC异常。
+   */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER5;
+  MPU_InitStruct.BaseAddress = 0x30000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_16KB;
+  MPU_InitStruct.SubRegionDisable = 0xC0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
   /* Enables the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 

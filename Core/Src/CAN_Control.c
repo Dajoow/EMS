@@ -325,7 +325,7 @@ extern Client_Sd_t Client_Sd[cluster_num];
 
 extern station_charge_ctrl_u station_charge_ctrl;
 static void
-switch_task ()
+switch_task (void const *argument)
 {
     uint16_t state = 0;
     int waitting   = 1;

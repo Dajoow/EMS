@@ -5334,7 +5334,7 @@ char * vTaskName()
     return pxCurrentTCB->pcTaskName;
 }
 /*-----------------------------------------------------------*/
-
+extern void Debug_printf(char *format, ...);
 void TaskTcbPrintf(void)
 {
         Debug_printf("\"pcbcount\",    %d,\r\n", configMAX_PRIORITIES);

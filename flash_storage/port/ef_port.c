@@ -32,7 +32,7 @@
 #include "sfud.h"
 #include "usart.h"
 
-static uint8_t log_buf[128];
+static char log_buf[128];
 
 osSemaphoreId ef_lock;
 

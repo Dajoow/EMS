@@ -44,6 +44,7 @@ typedef struct                                      /* 定义写命令队列内�
     uint16_t count;                                 /* 需要连续写入的寄存器数量。 */
     uint16_t values[DCDC_MODBUS_MAX_WRITE_REGISTERS]; /* 在提交时复制数据，避免调用者缓冲区失效。 */
     uint32_t sequence;                              /* 命令序号，用于匹配公开的执行状态。 */
+    uint32_t submitted_tick;                        /* 命令成功占用槽位时的HAL Tick，用于限制总执行时间。 */
 } dcdc_modbus_write_command_t;                     /* DCDC 内部写命令类型名称。 */
 
 static QueueHandle_t dcdc_write_queue = NULL;      /* 保存长度为一的 DCDC 写命令队列句柄。 */
@@ -103,6 +104,8 @@ static void acdc_update_communication_state(int rc); /* 声明 ACDC 独立通信
 static void dcdc_update_communication_state(int rc); /* 声明 DCDC 独立通信状态更新函数。 */
 static uint8_t dcdc_write_address_allowed(uint16_t address, uint16_t count); /* 声明写地址白名单检查函数。 */
 static uint8_t dcdc_write_value_allowed(uint16_t address, uint16_t value); /* 声明特殊控制寄存器数值检查函数。 */
+static uint8_t dcdc_write_is_safe_stop(uint16_t address, const uint16_t *values, uint16_t count); /* 声明离线时仍允许提交的停机命令判断。 */
+static uint8_t dcdc_write_is_start(uint16_t address, const uint16_t *values, uint16_t count); /* 声明需要执行故障门禁的启动命令判断。 */
 static void dcdc_process_write_command(agile_modbus_t *ctx); /* 声明队列中单条写命令的执行和读回校验函数。 */
 #if DCDC_MODBUS_PC_TEST_ENABLE
 static void dcdc_process_pc_test_trigger(void); /* 声明 Keil Watch 魔术值触发检查函数。 */
@@ -154,6 +157,71 @@ const volatile dcdc_modbus_write_status_t *dcdc_modbus_get_write_status(void)
     return &g_dcdc_modbus_write_status; /* 返回最近写命令状态，供界面、策略和 Keil Watch 只读观察。 */
 }
 
+void modbus_copy_gui_snapshot(
+    acdc_modbus_data_t *acdc_data,
+    dcdc_modbus_data_t *dcdc_data,
+    dcdc_modbus_write_status_t *write_status)
+{
+    /*
+     * 三份状态只由 Modbus 任务写入。禁止任务切换后一次性复制，可保证
+     * TouchGFX 不会在写任务更新结构体中途读到混合字段；临界区内不做计算。
+     */
+    taskENTER_CRITICAL();
+    if (acdc_data != NULL) {
+        memcpy(acdc_data, (const void *)&g_acdc_modbus_data, sizeof(*acdc_data));
+    }
+    if (dcdc_data != NULL) {
+        memcpy(dcdc_data, (const void *)&g_dcdc_modbus_data, sizeof(*dcdc_data));
+    }
+    if (write_status != NULL) {
+        memcpy(write_status, (const void *)&g_dcdc_modbus_write_status, sizeof(*write_status));
+    }
+    taskEXIT_CRITICAL();
+}
+
+uint32_t dcdc_modbus_get_data_age_ms(void)
+{
+    uint32_t last_update_tick = g_dcdc_modbus_data.last_update_tick; /* 原子读取最近完整轮询成功时刻。 */
+
+    if (last_update_tick == 0U) {                                  /* 上电后尚未完成过一轮有效读取。 */
+        return UINT32_MAX;                                         /* 返回最大值明确表示数据不可用于控制。 */
+    }
+
+    return HAL_GetTick() - last_update_tick;                        /* 无符号减法可正确处理HAL Tick回绕。 */
+}
+
+uint8_t dcdc_modbus_data_is_fresh(void)
+{
+    if (g_dcdc_modbus_data.online == 0U) {                          /* 离线状态下禁止依赖旧数据启动设备。 */
+        return 0U;
+    }
+
+    return (uint8_t)(dcdc_modbus_get_data_age_ms() <=               /* 同时要求最近完整数据没有超过阈值。 */
+                     DCDC_MODBUS_DATA_FRESHNESS_MS);
+}
+
+uint8_t dcdc_modbus_is_running(void)
+{
+    return (uint8_t)((dcdc_modbus_data_is_fresh() != 0U) &&          /* 只使用在线且未过期的一致数据。 */
+                     (g_dcdc_modbus_data.fault_raw == 0U) &&        /* 0x0405 无有效故障位。 */
+                     (g_dcdc_modbus_data.work_state ==              /* 0x0404 明确处于恒压限流运行状态。 */
+                      DCDC_WORK_STATE_CV_CURRENT_LIMIT));
+}
+
+uint8_t dcdc_modbus_is_stopped(void)
+{
+    return (uint8_t)((dcdc_modbus_data_is_fresh() != 0U) &&          /* 离线或旧数据不能证明设备已经停机。 */
+                     (g_dcdc_modbus_data.fault_raw == 0U) &&        /* 状态 4 且无故障才解释为停机/待机。 */
+                     (g_dcdc_modbus_data.work_state ==
+                      DCDC_WORK_STATE_STOP_OR_FAULT));
+}
+
+uint8_t dcdc_modbus_is_faulted(void)
+{
+    return (uint8_t)((dcdc_modbus_data_is_fresh() != 0U) &&          /* 只根据当前新鲜数据判断实时故障。 */
+                     (g_dcdc_modbus_data.fault_raw != 0U));          /* 任一已定义故障位置位都属于故障。 */
+}
+
 static uint8_t dcdc_write_address_allowed(uint16_t address, uint16_t count)
 {
     uint32_t end_address; /* 使用 32 位计算末地址，避免 16 位地址加法发生溢出。 */
@@ -184,17 +252,41 @@ static uint8_t dcdc_write_address_allowed(uint16_t address, uint16_t count)
 static uint8_t dcdc_write_value_allowed(uint16_t address, uint16_t value)
 {
     if (address == 0x0402U) {                 /* 单独检查工作模式选择寄存器。 */
-        return (uint8_t)((value == 0U) ||      /* 允许写 0：待机状态。 */
-                         (value == 1U) ||      /* 允许写 1：恒压限流模式。 */
-                         (value == 3U));       /* 允许写 3：恒流模式。 */
+        return (uint8_t)((value == DCDC_WORK_MODE_STANDBY) ||          /* 新协议允许写 0：待机。 */
+                         (value == DCDC_WORK_MODE_CV_CURRENT_LIMIT));  /* 新协议允许写 1：恒压限流。 */
     }
 
     if (address == 0x0403U) {                 /* 单独检查启停控制寄存器。 */
-        return (uint8_t)((value == 4U) ||      /* 允许写 4：DCDC 手动开机。 */
-                         (value == 5U));       /* 允许写 5：DCDC 手动关机。 */
+        return (uint8_t)((value == DCDC_RUN_COMMAND_START) || /* 允许写 4：DCDC 手动开机。 */
+                         (value == DCDC_RUN_COMMAND_STOP));   /* 允许写 5：DCDC 手动关机。 */
     }
 
     return 1U; /* 参数区和特殊功能寄存器的工程范围将在接真实设备前另行增加限制。 */
+}
+
+static uint8_t dcdc_write_is_safe_stop(uint16_t address, const uint16_t *values, uint16_t count)
+{
+    if ((values == NULL) || (count != 1U)) {                        /* 安全停机只接受明确的单寄存器命令。 */
+        return 0U;
+    }
+
+    if ((address == 0x0403U) && (values[0] == DCDC_RUN_COMMAND_STOP)) { /* 0x0403写5是协议定义的手动关机。 */
+        return 1U;
+    }
+
+    if ((address == 0x0402U) && (values[0] == DCDC_WORK_MODE_STANDBY)) { /* 0x0402写0请求待机，不产生功率传输。 */
+        return 1U;
+    }
+
+    return 0U;                                                       /* 启动、运行模式和参数命令必须通过新鲜度门禁。 */
+}
+
+static uint8_t dcdc_write_is_start(uint16_t address, const uint16_t *values, uint16_t count)
+{
+    return (uint8_t)((values != NULL) &&                             /* 必须提供有效的命令值指针。 */
+                     (count == 1U) &&                               /* 启动控制只允许单寄存器写入。 */
+                     (address == 0x0403U) &&                        /* 0x0403 是启停控制寄存器。 */
+                     (values[0] == DCDC_RUN_COMMAND_START));        /* 只有写 4 的启动命令需要故障门禁。 */
 }
 
 int dcdc_modbus_write_multiple_async(uint16_t address, const uint16_t *values, uint16_t count)
@@ -220,14 +312,32 @@ int dcdc_modbus_write_multiple_async(uint16_t address, const uint16_t *values, u
         return DCDC_WRITE_SUBMIT_NOT_READY;                      /* 初始化前禁止提交写命令。 */
     }
 
-    taskENTER_CRITICAL();                                        /* 原子检查并占用唯一写命令槽位。 */
+    taskENTER_CRITICAL();                                        /* 原子检查新鲜度并占用唯一写命令槽位。 */
     if (dcdc_write_busy != 0U) {                                 /* 检查上一条命令是否尚未完成。 */
         taskEXIT_CRITICAL();                                     /* 离开临界区后再向调用者返回忙。 */
         return DCDC_WRITE_SUBMIT_BUSY;                           /* 拒绝堆积可能过时的控制命令。 */
     }
+
+    if ((dcdc_modbus_data_is_fresh() == 0U) &&                   /* 启动、模式和参数命令要求完整数据新鲜。 */
+        (dcdc_write_is_safe_stop(address, values, count) == 0U)) { /* 明确的关机/待机命令不受该门禁阻断。 */
+        g_dcdc_modbus_write_status.stale_reject_count++;         /* 累加数据过期拒绝次数，便于Watch观察。 */
+        g_dcdc_modbus_write_status.last_error = DCDC_WRITE_EXEC_STALE_DATA; /* 保存最近拒绝原因。 */
+        taskEXIT_CRITICAL();                                     /* 未占用命令槽位，直接退出临界区。 */
+        return DCDC_WRITE_SUBMIT_STALE_DATA;                     /* 告知业务层刷新数据后再提交。 */
+    }
+
+    if ((dcdc_write_is_start(address, values, count) != 0U) &&   /* 启动命令还必须通过当前故障门禁。 */
+        (dcdc_modbus_is_faulted() != 0U)) {                      /* 0x0405 任一故障位置位时禁止开机。 */
+        g_dcdc_modbus_write_status.device_fault_reject_count++; /* 累加故障拒绝次数，便于界面和Watch诊断。 */
+        g_dcdc_modbus_write_status.last_error = DCDC_WRITE_EXEC_DEVICE_FAULT; /* 保存明确的拒绝原因。 */
+        taskEXIT_CRITICAL();                                     /* 未占用命令槽位，直接退出临界区。 */
+        return DCDC_WRITE_SUBMIT_DEVICE_FAULT;                   /* 告知业务层应先处理并清除设备故障。 */
+    }
+
     dcdc_write_busy = 1U;                                        /* 占用写命令槽位，阻止其他任务并发提交。 */
     dcdc_write_sequence++;                                       /* 为新命令生成本次上电周期内的唯一序号。 */
     command.sequence = dcdc_write_sequence;                      /* 把新序号写入即将入队的命令副本。 */
+    command.submitted_tick = HAL_GetTick();                      /* 固化提交时刻，后续重试不能无限延长。 */
     taskEXIT_CRITICAL();                                         /* 完成共享变量更新后退出临界区。 */
 
     command.address = address;                                   /* 保存本次命令的起始寄存器地址。 */
@@ -240,8 +350,12 @@ int dcdc_modbus_write_multiple_async(uint16_t address, const uint16_t *values, u
         (count == 1U) ? 0x06U : 0x10U;                            /* 单写使用 0x06，多写使用 0x10。 */
     g_dcdc_modbus_write_status.address = address;                /* 公开记录待执行命令起始地址。 */
     g_dcdc_modbus_write_status.count = count;                    /* 公开记录待执行命令寄存器数量。 */
+    g_dcdc_modbus_write_status.attempt_count = 0U;               /* 尚未发送任何写请求。 */
+    g_dcdc_modbus_write_status.readback_confirmed = 0U;          /* 尚未通过0x03读回确认。 */
     g_dcdc_modbus_write_status.last_error = 0;                   /* 新命令开始前清除上一条命令错误码。 */
     g_dcdc_modbus_write_status.sequence = command.sequence;      /* 公开新命令序号。 */
+    g_dcdc_modbus_write_status.submitted_tick = command.submitted_tick; /* 公开命令提交时刻。 */
+    g_dcdc_modbus_write_status.started_tick = 0U;                /* Modbus任务尚未取出该命令。 */
     g_dcdc_modbus_write_status.completed_tick = 0U;              /* 命令尚未完成，所以完成时间清零。 */
     memset((void *)g_dcdc_modbus_write_status.requested, 0,      /* 清零公开的目标值数组。 */
            sizeof(g_dcdc_modbus_write_status.requested));       /* 确保旧命令尾部值不会造成误判。 */
@@ -265,6 +379,18 @@ int dcdc_modbus_write_multiple_async(uint16_t address, const uint16_t *values, u
 int dcdc_modbus_write_single_async(uint16_t address, uint16_t value)
 {
     return dcdc_modbus_write_multiple_async(address, &value, 1U); /* 复用统一提交流程并指定一只寄存器。 */
+}
+
+int dcdc_modbus_set_work_mode_async(uint16_t mode)
+{
+    return dcdc_modbus_write_single_async(0x0402U, mode); /* 复用白名单和值域检查提交工作模式命令。 */
+}
+
+int dcdc_modbus_set_run_async(uint8_t enable)
+{
+    uint16_t command_value = (enable != 0U) ? DCDC_RUN_COMMAND_START : DCDC_RUN_COMMAND_STOP; /* 4开机、5关机。 */
+
+    return dcdc_modbus_write_single_async(0x0403U, command_value); /* 通过正式安全队列异步下发。 */
 }
 
 #if DCDC_MODBUS_PC_TEST_ENABLE
@@ -1017,8 +1143,8 @@ static int dcdc_poll(agile_modbus_t *ctx)
         return rc;                             /* 第二帧失败时也不提交第一帧的局部数据。 */
     }
 
-    g_dcdc_modbus_data.work_state = status_reg[0]; /* 0x0404，保存 DCDC 当前工作状态原始值。 */
-    g_dcdc_modbus_data.fault_raw = status_reg[1];  /* 0x0405，保存尚未定义具体位含义的故障值。 */
+    g_dcdc_modbus_data.work_state = status_reg[0]; /* 0x0404 保存原始状态；状态4需结合0x0405区分停机与故障。 */
+    g_dcdc_modbus_data.fault_raw = status_reg[1];  /* 0x0405 保存完整故障位掩码，0表示当前没有有效故障。 */
 
     for (index = 0U; index < 8U; index++) {        /* 依次解析 0x0406～0x040D 八路温度。 */
         g_dcdc_modbus_data.temperature_c[index] =  /* 把当前温度写入对应的工程量数组元素。 */
@@ -1107,7 +1233,11 @@ static void dcdc_process_write_command(agile_modbus_t *ctx)
     dcdc_modbus_write_command_t command;                    /* 保存从队列取出的完整写命令副本。 */
     uint16_t verify_values[DCDC_MODBUS_MAX_WRITE_REGISTERS]; /* 保存功能码 0x03 的写后读回数据。 */
     uint16_t index;                                         /* 用于逐项比较目标值和读回值。 */
-    int rc;                                                 /* 保存写响应和读回事务的执行结果。 */
+    uint8_t attempt;                                        /* 保存当前是第几次有限写尝试。 */
+    uint8_t values_match;                                   /* 1表示本次0x03读回值与目标完全一致。 */
+    int write_rc;                                           /* 保存功能码0x06或0x10写响应结果。 */
+    int readback_rc;                                        /* 保存功能码0x03读回事务结果。 */
+    int rc = MODBUS_MASTER_VERIFY_ERROR;                    /* 保存本条命令最终对外报告的结果。 */
 
     if (dcdc_write_queue == NULL) {                         /* 队列创建失败时不能处理写命令。 */
         return;                                             /* 保持常规轮询运行并直接返回。 */
@@ -1118,35 +1248,82 @@ static void dcdc_process_write_command(agile_modbus_t *ctx)
     }
 
     g_dcdc_modbus_write_status.state = DCDC_WRITE_STATE_RUNNING; /* 通知业务层命令已开始执行。 */
+    g_dcdc_modbus_write_status.started_tick = HAL_GetTick(); /* 记录任务真正开始处理该命令的时刻。 */
+    g_dcdc_modbus_write_status.attempt_count = 0U;          /* 执行前尚未发起任何写事务。 */
+    g_dcdc_modbus_write_status.readback_confirmed = 0U;     /* 只有后续严格读回一致才会置一。 */
     g_dcdc_modbus_write_status.last_error = 0;              /* 开始执行前清除上一阶段错误码。 */
     memset(verify_values, 0, sizeof(verify_values));        /* 清零局部读回数组，避免残留栈数据。 */
 
-    rc = modbus_master_write_registers(                     /* 首先发送功能码 0x06 或 0x10 写请求。 */
-        ctx,                                                /* 使用唯一 Modbus 任务的 RTU 上下文。 */
-        DCDC_MODBUS_SLAVE_ADDR,                             /* 写框架当前只允许访问 DCDC 从站。 */
-        command.address,                                    /* 使用队列中保存的目标起始地址。 */
-        command.count,                                      /* 使用队列中保存的连续写入数量。 */
-        command.values);                                    /* 使用提交时复制的稳定目标值数组。 */
+    if ((dcdc_modbus_data_is_fresh() == 0U) &&              /* 执行前再次检查，防止排队期间数据变旧。 */
+        (dcdc_write_is_safe_stop(command.address, command.values, command.count) == 0U)) { /* 关机/待机仍允许尝试。 */
+        rc = DCDC_WRITE_EXEC_STALE_DATA;                    /* 未发总线写请求，直接报告数据过期。 */
+        g_dcdc_modbus_write_status.stale_reject_count++;    /* 累加执行阶段的新鲜度拒绝次数。 */
+    } else if ((dcdc_write_is_start(command.address, command.values, command.count) != 0U) && /* 排队期间可能出现新故障。 */
+               (dcdc_modbus_is_faulted() != 0U)) {          /* 执行前再次读取0x0405镜像并禁止带故障启动。 */
+        rc = DCDC_WRITE_EXEC_DEVICE_FAULT;                  /* 不向总线发出启动请求。 */
+        g_dcdc_modbus_write_status.device_fault_reject_count++; /* 累加执行阶段故障拒绝次数。 */
+    } else if ((HAL_GetTick() - command.submitted_tick) >=  /* 检查命令是否已经在队列中等待过久。 */
+               DCDC_MODBUS_WRITE_TOTAL_TIMEOUT_MS) {
+        rc = DCDC_WRITE_EXEC_TOTAL_TIMEOUT;                 /* 过期命令不得再改变DCDC状态。 */
+        g_dcdc_modbus_write_status.total_timeout_count++;   /* 累加命令总超时次数。 */
+    } else {
+        for (attempt = 1U; attempt <= DCDC_MODBUS_WRITE_MAX_ATTEMPTS; attempt++) { /* 执行有限次数尝试。 */
+            if ((HAL_GetTick() - command.submitted_tick) >= /* 每次真正写入前重新检查总时限。 */
+                DCDC_MODBUS_WRITE_TOTAL_TIMEOUT_MS) {
+                rc = DCDC_WRITE_EXEC_TOTAL_TIMEOUT;         /* 禁止开始可能已经过时的新尝试。 */
+                g_dcdc_modbus_write_status.total_timeout_count++; /* 记录总时限保护动作。 */
+                break;
+            }
 
-    if (rc == MODBUS_MASTER_OK) {                           /* 只有写响应成功才执行 0x03 读回。 */
-        /*
-        * 0x06或0x10写响应处理完成后等待一个完整RTU帧间隔，
-        * 再使用0x03读取相同地址，防止写响应和读请求距离过近。
-        */
-        osDelay(MODBUS_RTU_FRAME_GAP_MS);
-        rc = modbus_master_read_holding_registers(          /* 写后立即读取相同寄存器范围。 */
-            ctx,                                            /* 继续使用当前唯一 RTU 上下文。 */
-            DCDC_MODBUS_SLAVE_ADDR,                         /* 从同一台 DCDC 读取确认值。 */
-            command.address,                                /* 读回起始地址必须与写入地址一致。 */
-            command.count,                                  /* 读回数量必须与写入数量一致。 */
-            verify_values);                                 /* 将协议解析后的寄存器值保存到局部数组。 */
-    }
+            g_dcdc_modbus_write_status.attempt_count = attempt; /* 公开当前尝试次数供Watch观察。 */
+            memset(verify_values, 0, sizeof(verify_values)); /* 每次读回前清除上一次尝试的值。 */
 
-    if (rc == MODBUS_MASTER_OK) {                           /* 写响应和读回请求均成功后比较数值。 */
-        for (index = 0U; index < command.count; index++) {  /* 逐只寄存器执行严格一致性比较。 */
-            if (verify_values[index] != command.values[index]) { /* 检查从站实际保存值是否等于目标值。 */
-                rc = MODBUS_MASTER_VERIFY_ERROR;            /* 任一项不一致就标记写后读回失败。 */
-                break;                                      /* 已确定失败，无需继续比较剩余数据。 */
+            write_rc = modbus_master_write_registers(      /* 发送功能码0x06或0x10写请求。 */
+                ctx,                                       /* 使用唯一Modbus任务的RTU上下文。 */
+                DCDC_MODBUS_SLAVE_ADDR,                    /* 写框架只访问地址0xFF的真实DCDC。 */
+                command.address,                           /* 使用提交时保存的目标起始地址。 */
+                command.count,                             /* 使用提交时保存的连续写入数量。 */
+                command.values);                           /* 使用队列内部稳定副本，避免调用者改值。 */
+
+            /*
+             * 即使写响应超时或CRC错误，也不能立即盲目重发。
+             * 从站可能已经执行写入但响应在链路中损坏，因此先读回目标地址确认实际状态。
+             */
+            osDelay(MODBUS_RTU_FRAME_GAP_MS);               /* 写事务结束后保留完整RTU静默间隔。 */
+            readback_rc = modbus_master_read_holding_registers( /* 使用0x03确认从站实际保存值。 */
+                ctx,                                       /* 继续使用当前唯一RTU上下文。 */
+                DCDC_MODBUS_SLAVE_ADDR,                    /* 从同一台DCDC读取确认值。 */
+                command.address,                           /* 读回起始地址与写入地址严格一致。 */
+                command.count,                             /* 读回数量与写入数量严格一致。 */
+                verify_values);                            /* 保存本次协议解析后的实际值。 */
+
+            values_match = 0U;                             /* 默认认为尚未确认写入成功。 */
+            if (readback_rc == MODBUS_MASTER_OK) {         /* 只有合法0x03响应才能比较寄存器值。 */
+                values_match = 1U;                         /* 先假设全部读回值一致。 */
+                for (index = 0U; index < command.count; index++) { /* 逐项严格比较目标和实际值。 */
+                    if (verify_values[index] != command.values[index]) {
+                        values_match = 0U;                 /* 任一寄存器不同即未确认成功。 */
+                        break;
+                    }
+                }
+            }
+
+            if (values_match != 0U) {                      /* 读回一致是写成功的唯一判据。 */
+                rc = MODBUS_MASTER_OK;                     /* 即使写响应丢失，也可确认设备已经执行。 */
+                g_dcdc_modbus_write_status.readback_confirmed = 1U; /* 向业务层公开确认结果。 */
+                break;                                    /* 已成功，不再重复发送控制命令。 */
+            }
+
+            if (write_rc != MODBUS_MASTER_OK) {            /* 写响应本身失败时优先保留该错误。 */
+                rc = write_rc;
+            } else if (readback_rc != MODBUS_MASTER_OK) {  /* 写响应正常但读回事务失败。 */
+                rc = readback_rc;
+            } else {
+                rc = MODBUS_MASTER_VERIFY_ERROR;           /* 两笔事务均正常但从站值与目标不一致。 */
+            }
+
+            if (attempt < DCDC_MODBUS_WRITE_MAX_ATTEMPTS) { /* 尚有剩余次数时才进入重试等待。 */
+                osDelay(DCDC_MODBUS_WRITE_RETRY_DELAY_MS); /* 避免连续请求过快占用总线。 */
             }
         }
     }
@@ -1158,7 +1335,8 @@ static void dcdc_process_write_command(agile_modbus_t *ctx)
     g_dcdc_modbus_write_status.last_error = (int16_t)rc;    /* 保存最终写入或读回校验结果。 */
     g_dcdc_modbus_write_status.completed_tick = HAL_GetTick(); /* 记录本条命令完成时刻。 */
 
-    if (rc == MODBUS_MASTER_OK) {                           /* 判断写响应和读回比较是否全部成功。 */
+    if ((rc == MODBUS_MASTER_OK) &&                         /* 成功必须同时满足事务结果为零， */
+        (g_dcdc_modbus_write_status.readback_confirmed != 0U)) { /* 且已经取得严格一致的0x03读回。 */
         g_dcdc_modbus_write_status.state = DCDC_WRITE_STATE_SUCCESS; /* 向业务层报告写命令成功。 */
     } else {                                               /* 处理超时、帧错误或读回不一致。 */
         g_dcdc_modbus_write_status.state = DCDC_WRITE_STATE_FAILED; /* 向业务层报告写命令失败。 */
@@ -1173,7 +1351,7 @@ static void modbus_task(void const *args)
 {
     agile_modbus_rtu_t mb_rtu;             /* 在任务栈上创建 RTU 模式上下文对象。 */
     agile_modbus_t *ctx = &mb_rtu._ctx;    /* 获取通用 Agile Modbus 上下文指针。 */
-    //int acdc_rc;                           /* 保存整轮 ACDC 轮询结果。 */
+    int acdc_rc;                            /* 保存整轮 ACDC 只读轮询结果。 */
     int dcdc_rc;                           /* 保存整轮 DCDC 轮询结果。 */
 
     (void)args; /* 当前任务不使用创建时传入的参数。 */
@@ -1186,8 +1364,8 @@ static void modbus_task(void const *args)
         sizeof(modbus_read_buf)); /* 绑定静态收发缓冲并初始化 Modbus RTU 后端。 */
 
     while (1) {
-        //acdc_rc = acdc_poll(ctx);                    /* 先按固定数据块顺序完成一次 ACDC 轮询。 */
-        //acdc_update_communication_state(acdc_rc);    /* 根据本轮结果更新 ACDC 自己的在线状态。 */
+        acdc_rc = acdc_poll(ctx);                      /* 先按固定数据块顺序完成一次 ACDC 只读轮询。 */
+        acdc_update_communication_state(acdc_rc);      /* 独立更新 ACDC 在线状态，不提供任何写入口。 */
 
         /*
         * ACDC最后一帧结束后不能立即切换到DCDC发送下一帧。
@@ -1197,7 +1375,7 @@ static void modbus_task(void const *args)
         * 即使本轮ACDC失败，也等待相同时间再访问DCDC，
         * 避免ACDC迟到响应被误认为DCDC响应。
         */
-        //osDelay(MODBUS_RTU_FRAME_GAP_MS);
+        osDelay(MODBUS_RTU_FRAME_GAP_MS);
 
         dcdc_rc = dcdc_poll(ctx);                    /* 无论 ACDC 是否成功，都继续执行 DCDC 轮询。 */
         dcdc_update_communication_state(dcdc_rc);    /* 根据本轮结果更新 DCDC 自己的在线状态。 */
@@ -1210,7 +1388,7 @@ static void modbus_task(void const *args)
 #if DCDC_MODBUS_PC_TEST_ENABLE
         dcdc_process_pc_test_trigger();              /* 检查 Keil Watch 是否写入 0x5AA5 PC 模拟触发值。 */
 #endif
-        //dcdc_process_write_command(ctx);             /* 每轮最多执行一条写命令并立即使用 0x03 读回校验。 */
+        dcdc_process_write_command(ctx);               /* 每轮最多执行一条写命令，并在保护范围内重试和读回确认。 */
         osDelay(MODBUS_POLL_PERIOD_MS);              /* 一轮双从站轮询结束后延时，避免持续占用总线。 */
     }
 }

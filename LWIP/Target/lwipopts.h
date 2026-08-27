@@ -143,6 +143,10 @@
 
 // #define LWIP_DEBUG
 #include "usart.h"
+#ifdef LWIP_PLATFORM_DIAG
+#undef LWIP_PLATFORM_DIAG
+#endif
+
 #define LWIP_PLATFORM_DIAG(x) do {Debug_printf x;} while(0)
 /* USER CODE END 1 */
 

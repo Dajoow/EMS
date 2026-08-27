@@ -27,6 +27,56 @@ public:
   ViewToModelData(): reflashFlag(false), BCMU_SEL(1), BMU_SEL(1){}
 };
 
+enum DeviceUiState
+{
+  DEVICE_UI_OFFLINE = 0,
+  DEVICE_UI_STALE,
+  DEVICE_UI_STOPPED,
+  DEVICE_UI_RUNNING,
+  DEVICE_UI_FAULT,
+  DEVICE_UI_UNKNOWN
+};
+
+struct DeviceStatusData
+{
+  uint8_t acdcOnline;
+  uint8_t acdcAlarm;
+  uint32_t acdcAgeMs;
+  float acdcDcVoltage;
+  float acdcDcCurrent;
+  float acdcAcVoltage;
+  float acdcAcCurrent;
+  uint16_t acdcFrequency;
+  uint16_t acdcRectifierCount;
+  uint32_t acdcRectifierPower;
+
+  uint8_t dcdcState;
+  uint16_t dcdcFaultRaw;
+  uint32_t dcdcAgeMs;
+  float dcdcBVoltage;
+  float dcdcBCurrent;
+  uint16_t dcdcBPower;
+  float dcdcPVoltage;
+  float dcdcPCurrent;
+  uint16_t dcdcPPower;
+  float dcdcMaxTemperature;
+
+  uint8_t writeState;
+  uint8_t writeAttempts;
+  uint8_t readbackConfirmed;
+  int16_t writeError;
+  uint32_t writeSequence;
+
+  DeviceStatusData()
+    : acdcOnline(0), acdcAlarm(0), acdcAgeMs(0xFFFFFFFFUL),
+      acdcDcVoltage(0), acdcDcCurrent(0), acdcAcVoltage(0), acdcAcCurrent(0),
+      acdcFrequency(0), acdcRectifierCount(0), acdcRectifierPower(0),
+      dcdcState(DEVICE_UI_OFFLINE), dcdcFaultRaw(0), dcdcAgeMs(0xFFFFFFFFUL),
+      dcdcBVoltage(0), dcdcBCurrent(0), dcdcBPower(0),
+      dcdcPVoltage(0), dcdcPCurrent(0), dcdcPPower(0), dcdcMaxTemperature(0),
+      writeState(0), writeAttempts(0), readbackConfirmed(0), writeError(0), writeSequence(0) {}
+};
+
 //class err_info {
 //public:
 //	bool err_reflashFlag;

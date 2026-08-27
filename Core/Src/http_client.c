@@ -34,14 +34,15 @@
 #define API_STATISTICS "/api/bmsRequest/sendSum"
 #define API_CLUSTERS   "/api/bmsRequest/clusterData"
 
-#define HTTP_HEADER(api)                                                                                               \
-    "POST "##api " HTTP/1.1\r\n"                                                                                       \
-                 "HOST: " HTTPS_HOST "\r\n"                                                                            \
-                 "Accept: application/json\r\n"                                                                        \
-                 "Connection: keep-alive\r\n"                                                                          \
-                 "User-Agent: BSMU LWIP/" LWIP_VERSION_STRING "\r\n"                                                   \
-                 "Content-Length: %d\r\n"                                                                              \
-                 "\r\n"
+#define HTTP_HEADER \
+                "POST %s HTTP/1.1\r\n" \
+                "HOST: " HTTPS_HOST "\r\n" \
+                "Content-Type: application/json\r\n" \
+                "Content-Length: %d\r\n" \
+                "Accept: application/json\r\n" \
+                "User-Agent: BSMU LWIP/" LWIP_VERSION_STRING "\r\n" \
+                "Connection: keep-alive\r\n\r\n"
+                
 
 extern struct netif gnetif;
 extern Client_Sd_t Client_Sd[cluster_num];
@@ -69,39 +70,48 @@ create_statistics_payload (httpc_ctx_t *ctx)
 {
     int len                   = -1;
     Client_Sd_Station_t *data = ctx->statistics_data;
-
-    cJSON *obj = cJSON_CreateObject ();
+    //避免跳转进入尚未完成初始化的变量作用域，方便可靠清理资源。
+    cJSON *obj = NULL;
+    cJSON *sta = NULL;
+    cJSON *vs = NULL;
+    cJSON *is = NULL;
+    cJSON *soc = NULL;
+    cJSON *soh = NULL;
+    cJSON *cp = NULL;
+    cJSON *dp = NULL;
+    cJSON *token = NULL;
+    obj = cJSON_CreateObject ();
     if (obj == NULL) goto end;
 
-    cJSON *sta = cJSON_CreateNumber (data->station_state);
+    sta = cJSON_CreateNumber (data->station_state);
     if (sta == NULL) goto end;
     cJSON_AddItemToObject (obj, "sta", sta);
 
-    cJSON *vs = cJSON_CreateNumber (data->station_VOL);
+    vs = cJSON_CreateNumber (data->station_VOL);
     if (vs == NULL) goto end;
     cJSON_AddItemToObject (obj, "vs", vs);
 
-    cJSON *is = cJSON_CreateNumber (data->station_CUR);
+    is = cJSON_CreateNumber (data->station_CUR);
     if (is == NULL) goto end;
     cJSON_AddItemToObject (obj, "is", is);
 
-    cJSON *soc = cJSON_CreateNumber (data->station_SOC);
+    soc = cJSON_CreateNumber (data->station_SOC);
     if (soc == NULL) goto end;
     cJSON_AddItemToObject (obj, "soc", soc);
 
-    cJSON *soh = cJSON_CreateNumber (data->station_SOH);
+    soh = cJSON_CreateNumber (data->station_SOH);
     if (soh == NULL) goto end;
     cJSON_AddItemToObject (obj, "soh", soh);
 
-    cJSON *cp = cJSON_CreateNumber (data->charge_power);
+    cp = cJSON_CreateNumber (data->charge_power);
     if (cp == NULL) goto end;
     cJSON_AddItemToObject (obj, "cp", cp);
 
-    cJSON *dp = cJSON_CreateNumber (data->discharge_power);
+    dp = cJSON_CreateNumber (data->discharge_power);
     if (dp == NULL) goto end;
     cJSON_AddItemToObject (obj, "dp", dp);
 
-    cJSON *token = cJSON_CreateString (SERVER_TOKEN);
+    token = cJSON_CreateString (SERVER_TOKEN);
     if (token == NULL) goto end;
     cJSON_AddItemToObject (obj, "token", token);
 
@@ -127,104 +137,123 @@ create_clusters_payload (httpc_ctx_t *ctx, int index)
     Client_Sd_t *data = &ctx->clusters_data[index];
     unsigned char base64_buffer[1024];
     int base64_buffer_len = sizeof (base64_buffer);
-
-    cJSON *obj = cJSON_CreateObject ();
+    cJSON *obj = NULL;
+    cJSON *sid = NULL;
+    cJSON *sta = NULL;
+    cJSON *vs = NULL;
+    cJSON *is = NULL;
+    cJSON *soc = NULL;
+    cJSON *soh = NULL;
+    cJSON *rp = NULL;
+    cJSON *rn = NULL;
+    cJSON *un = NULL;
+    cJSON *bn = NULL;
+    cJSON *bal_state = NULL;
+    cJSON *vb = NULL;
+    cJSON *tb = NULL;
+    cJSON *socb = NULL;
+    cJSON *sohb = NULL;
+    cJSON *wb_cnt = NULL;
+    cJSON *wb = NULL;
+    cJSON *clu_res = NULL;
+    cJSON *token = NULL;
+    obj = cJSON_CreateObject ();
     if (obj == NULL) goto end;
 
-    cJSON *sid = cJSON_CreateNumber (data->cluster_No);
+    sid = cJSON_CreateNumber (data->cluster_No);
     if (sid == NULL) goto end;
     cJSON_AddItemToObject (obj, "sid", sid);
 
-    cJSON *sta = cJSON_CreateNumber (data->work_state);
+    sta = cJSON_CreateNumber (data->work_state);
     if (sta == NULL) goto end;
     cJSON_AddItemToObject (obj, "sta", sta);
 
-    cJSON *vs = cJSON_CreateNumber (data->cluster_VOL);
+    vs = cJSON_CreateNumber (data->cluster_VOL);
     if (vs == NULL) goto end;
     cJSON_AddItemToObject (obj, "vs", vs);
 
-    cJSON *is = cJSON_CreateNumber (data->cluster_CUR);
+    is = cJSON_CreateNumber (data->cluster_CUR);
     if (is == NULL) goto end;
     cJSON_AddItemToObject (obj, "is", is);
 
-    cJSON *soc = cJSON_CreateNumber (data->cluster_SOC);
+    soc = cJSON_CreateNumber (data->cluster_SOC);
     if (soc == NULL) goto end;
     cJSON_AddItemToObject (obj, "soc", soc);
 
-    cJSON *soh = cJSON_CreateNumber (data->cluster_SOH);
+    soh = cJSON_CreateNumber (data->cluster_SOH);
     if (soh == NULL) goto end;
     cJSON_AddItemToObject (obj, "soh", soh);
 
-    cJSON *rp = cJSON_CreateNumber (data->insulation_res_p);
+    rp = cJSON_CreateNumber (data->insulation_res_p);
     if (rp == NULL) goto end;
     cJSON_AddItemToObject (obj, "rp", rp);
 
-    cJSON *rn = cJSON_CreateNumber (data->insulation_res_n);
+    rn = cJSON_CreateNumber (data->insulation_res_n);
     if (rn == NULL) goto end;
     cJSON_AddItemToObject (obj, "rn", rn);
 
-    cJSON *un = cJSON_CreateNumber (data->grp_num);
+    un = cJSON_CreateNumber (data->grp_num);
     if (un == NULL) goto end;
     cJSON_AddItemToObject (obj, "un", un);
 
-    cJSON *bn = cJSON_CreateNumber (data->grp_bat_num);
+    bn = cJSON_CreateNumber (data->grp_bat_num);
     if (bn == NULL) goto end;
     cJSON_AddItemToObject (obj, "bn", bn);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)data->bal_state, GRP_num + 1);
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
 
-    cJSON *bal_state = cJSON_CreateString (base64_buffer);
+    bal_state = cJSON_CreateString ((const char *)base64_buffer);
     if (bal_state == NULL) goto end;
     cJSON_AddItemToObject (obj, "bal_state", bal_state);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)data->BAT_VOL,
                                  TOTOL_BAT_num * sizeof (uint16_t));
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
-    cJSON *vb = cJSON_CreateString (base64_buffer);
+    vb = cJSON_CreateString ((const char *)base64_buffer);
     if (vb == NULL) goto end;
     cJSON_AddItemToObject (obj, "vb", vb);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)data->BAT_TMP,
                                  TOTOL_BAT_num * sizeof (uint16_t));
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
-    cJSON *tb = cJSON_CreateString (base64_buffer);
+    tb = cJSON_CreateString ((const char *)base64_buffer);
     if (tb == NULL) goto end;
     cJSON_AddItemToObject (obj, "tb", tb);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)data->BAT_SOC,
                                  TOTOL_BAT_num * sizeof (uint16_t));
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
-    cJSON *socb = cJSON_CreateString (base64_buffer);
+    socb = cJSON_CreateString ((const char *)base64_buffer);
     if (socb == NULL) goto end;
     cJSON_AddItemToObject (obj, "socb", socb);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)data->BAT_SOH,
                                  TOTOL_BAT_num * sizeof (uint16_t));
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
-    cJSON *sohb = cJSON_CreateString (base64_buffer);
+    sohb = cJSON_CreateString ((const char *)base64_buffer);
     if (sohb == NULL) goto end;
     cJSON_AddItemToObject (obj, "sohb", sohb);
 
-    cJSON *wb_cnt = cJSON_CreateNumber (data->error_count);
+    wb_cnt = cJSON_CreateNumber (data->error_count);
     if (wb_cnt == NULL) goto end;
     cJSON_AddItemToObject (obj, "wb_cnt", wb_cnt);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)Client_errors[data->cluster_No - 1],
                                  data->error_count * sizeof (error_info_t));
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
-    cJSON *wb = cJSON_CreateString (base64_buffer);
+    wb = cJSON_CreateString ((const char *)base64_buffer);
     if (wb == NULL) goto end;
     cJSON_AddItemToObject (obj, "wb", wb);
 
     ret = mbedtls_base64_encode (base64_buffer, base64_buffer_len, NULL, (uint8_t *)&(data->cluster_res),
                                  sizeof (float));
     if (ret != 0) { Debug_printf ("MBEDTLS_ERR_BASE64_BUFFER_TOO_SMALL\r\n"); }
-    cJSON *clu_res = cJSON_CreateString (base64_buffer);
+    clu_res = cJSON_CreateString ((const char *)base64_buffer);
     if (clu_res == NULL) goto end;
     cJSON_AddItemToObject (obj, "clu_res", clu_res);
 
-    cJSON *token = cJSON_CreateString (SERVER_TOKEN);
+    token = cJSON_CreateString (SERVER_TOKEN);
     if (token == NULL) goto end;
     cJSON_AddItemToObject (obj, "token", token);
 
@@ -440,8 +469,8 @@ httpc_recv (httpc_ctx_t *ctx)
     do {
         // 从SSL连接读取数据，使用偏移量避免覆盖已接收的数据
         ssl_ret = mbedtls_ssl_read(ctx->mbedtls.ssl_ctx, 
-                                  buffer + total_received, 
-                                  sizeof(buffer) - total_received - 1);
+                                  (unsigned char *)buffer + total_received, 
+                                  sizeof(buffer) - total_received - 1U);
         
         // 如果SSL需要更多数据或需要发送数据，继续循环
         if (ssl_ret == MBEDTLS_ERR_SSL_WANT_READ || 
@@ -530,7 +559,7 @@ https_send (httpc_ctx_t *ctx, const char *pkg, int len)
 {
     int ret = 0;
 
-    ret = mbedtls_ssl_write (ctx->mbedtls.ssl_ctx, pkg, len);
+    ret = mbedtls_ssl_write (ctx->mbedtls.ssl_ctx, (const unsigned char *)pkg, (size_t)len);
     if (ret != len) { Debug_printf ("ssl write failed -0x%x\r\n", -ret); }
 
     return ret;
@@ -547,7 +576,10 @@ httpc_send_data_statistics (httpc_ctx_t *ctx)
     create_statistics_payload (ctx);
 
     int http_header_len
-        = snprintf (http_header, sizeof (http_header), HTTP_HEADER (API_STATISTICS), ctx->json_statistics_len);
+        = snprintf (http_header, sizeof (http_header), 
+                    HTTP_HEADER, 
+                     API_STATISTICS,
+                    ctx->json_statistics_len);
     https_send (ctx, http_header, http_header_len);
     https_send (ctx, ctx->json_statistics, ctx->json_statistics_len);
 
@@ -601,7 +633,10 @@ httpc_send_data_clusters (httpc_ctx_t *ctx)
         Debug_printf("Create payload success, JSON lenth: %d\n", ctx->json_clusters_len);
 
         int http_header_len
-            = snprintf (http_header, sizeof (http_header), HTTP_HEADER (API_CLUSTERS), ctx->json_clusters_len);
+            = snprintf (http_header, sizeof (http_header),
+                        HTTP_HEADER,
+                        API_CLUSTERS, 
+                        ctx->json_clusters_len);
         
         Debug_printf("HTTP header_len: %d\n", http_header_len);
 
@@ -669,8 +704,8 @@ httpc_task (void const *args)
     // httpc_verify_cert (&http_client);
     // httpc_disconnect (&http_client);
     // 定义两个临时的缓存变量
-Client_Sd_t temp_clusters[cluster_num];
-Client_Sd_Station_t temp_station;
+//Client_Sd_t temp_clusters[cluster_num];
+//Client_Sd_Station_t temp_station;
     while (1) {
         if (xSemaphoreTake (http_snd_sem_handle, portMAX_DELAY) == pdTRUE) // 等待获取信号量(等待FDCAN轮询完大概1s)
         {
@@ -686,7 +721,7 @@ Client_Sd_Station_t temp_station;
         osDelay (1);
     }
 
-end:
+//end:
     // mbedtls_ssl_close_notify( ctx->mbedtls.ssl_ctx );
 
     // mbedtls_net_free( ctx->mbedtls.net_ctx );

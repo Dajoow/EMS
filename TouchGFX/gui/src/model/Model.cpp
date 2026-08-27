@@ -22,6 +22,7 @@ extern "C" {
 #include "cmsis_os.h"
 #include "task.h"
 #include "lcd.h"
+#include "modbus.h"
 extern BCMU_Mail_t BCMU[cluster_num];
 extern osSemaphoreId ViewUpdateSemHandle;
 };
@@ -29,12 +30,69 @@ extern osSemaphoreId ViewUpdateSemHandle;
 
 ViewToModelData viewToModelDataTemp;
 
-Model::Model () : modelListener (0) {}
+Model::Model () : modelListener (0), deviceStatusTick (0) {}
 
 void
 Model::tick ()
 {
 #ifndef SIMULATOR
+    if (++deviceStatusTick >= 30U) {
+        acdc_modbus_data_t acdcData;
+        dcdc_modbus_data_t dcdcData;
+        dcdc_modbus_write_status_t writeStatus;
+        DeviceStatusData ui;
+        uint32_t now = HAL_GetTick();
+        uint8_t index;
+
+        deviceStatusTick = 0U;
+        modbus_copy_gui_snapshot(&acdcData, &dcdcData, &writeStatus);
+
+        ui.acdcOnline = acdcData.online;
+        ui.acdcAgeMs = (acdcData.last_update_tick == 0U) ? 0U : (now - acdcData.last_update_tick);
+        ui.acdcDcVoltage = acdcData.dc_bus_voltage_v;
+        ui.acdcDcCurrent = acdcData.dc_load_current_a;
+        ui.acdcAcVoltage = acdcData.ac_voltage_v;
+        ui.acdcAcCurrent = acdcData.ac_current_a;
+        ui.acdcFrequency = acdcData.ac_frequency_hz;
+        ui.acdcRectifierCount = acdcData.rectifier_count;
+        ui.acdcRectifierPower = acdcData.rectifier_total_power_w;
+        for (index = 0U; index < 12U; index++) {
+            if (acdcData.ac_alarm[index] != 0U) {
+                ui.acdcAlarm = 1U;
+                break;
+            }
+        }
+
+        ui.dcdcAgeMs = (dcdcData.last_update_tick == 0U) ? 0U : (now - dcdcData.last_update_tick);
+        if ((dcdcData.online == 0U) || (dcdcData.last_update_tick == 0U)) {
+            ui.dcdcState = DEVICE_UI_OFFLINE;
+        } else if (ui.dcdcAgeMs > DCDC_MODBUS_DATA_FRESHNESS_MS) {
+            ui.dcdcState = DEVICE_UI_STALE;
+        } else if (dcdcData.fault_raw != 0U) {
+            ui.dcdcState = DEVICE_UI_FAULT;
+        } else if (dcdcData.work_state == DCDC_WORK_STATE_CV_CURRENT_LIMIT) {
+            ui.dcdcState = DEVICE_UI_RUNNING;
+        } else if (dcdcData.work_state == DCDC_WORK_STATE_STOP_OR_FAULT) {
+            ui.dcdcState = DEVICE_UI_STOPPED;
+        } else {
+            ui.dcdcState = DEVICE_UI_UNKNOWN;
+        }
+        ui.dcdcFaultRaw = dcdcData.fault_raw;
+        ui.dcdcBVoltage = dcdcData.b_voltage_v;
+        ui.dcdcBCurrent = dcdcData.b_current_a;
+        ui.dcdcBPower = dcdcData.b_power_w;
+        ui.dcdcPVoltage = dcdcData.p_voltage_v;
+        ui.dcdcPCurrent = dcdcData.p_current_a;
+        ui.dcdcPPower = dcdcData.p_power_w;
+        ui.dcdcMaxTemperature = dcdcData.max_temperature_c;
+        ui.writeState = writeStatus.state;
+        ui.writeAttempts = writeStatus.attempt_count;
+        ui.readbackConfirmed = writeStatus.readback_confirmed;
+        ui.writeError = writeStatus.last_error;
+        ui.writeSequence = writeStatus.sequence;
+        modelListener->NotifyDeviceStatus(ui);
+    }
+
     modelToViewData.frameRateCount++; // 再CPUtask线程中1s清零
     // 获取信号量但不阻塞
     // 更新数据原因1.CAN采集完成传过来信号量 或者 2. VIEW通知要更新
@@ -78,6 +136,25 @@ Model::tick ()
         modelListener->NotifyViewMsg (modelToViewData);
     }
 
+#else
+    if (++deviceStatusTick >= 30U) {
+        DeviceStatusData demo;
+        deviceStatusTick = 0U;
+        demo.acdcOnline = 0U;
+        demo.acdcAgeMs = 0U;
+        demo.dcdcState = DEVICE_UI_UNKNOWN;
+        demo.dcdcAgeMs = 0U;
+        modelListener->NotifyDeviceStatus(demo);
+    }
+#endif
+}
+
+int Model::requestDcdcSafeStop()
+{
+#ifndef SIMULATOR
+    return dcdc_modbus_set_run_async(0U);
+#else
+    return -3;
 #endif
 }
 // 接受来自VIEW的数据并处理

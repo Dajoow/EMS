@@ -67,7 +67,7 @@ static void retry_delay_1ms(void) {
 static sfud_err spi_write_read(const sfud_spi *spi, const uint8_t *write_buf, size_t write_size, uint8_t *read_buf,
     size_t read_size) {
     sfud_err result = SFUD_SUCCESS;
-    uint8_t send_data, read_data;
+    //uint8_t send_data, read_data;
 
     /**
      * add your spi write and read code
@@ -88,9 +88,12 @@ static sfud_err spi_write_read(const sfud_spi *spi, const uint8_t *write_buf, si
     memcpy (temp_write, write_buf, write_size);
 
     HAL_GPIO_WritePin(spi_dev->cs_gpiox, spi_dev->cs_gpio_pin, GPIO_PIN_RESET);
-
-    result = HAL_SPI_TransmitReceive (spi_dev->spix, temp_write, temp_read,
-                             write_size + read_size, 0xff);
+    HAL_StatusTypeDef hal_status;
+    hal_status = HAL_SPI_TransmitReceive (spi_dev->spix, temp_write, temp_read,
+                             (uint16_t)(write_size + read_size), 0xff);
+    result = (hal_status == HAL_OK)
+       ? SFUD_SUCCESS
+       : SFUD_ERR_TIMEOUT;
 
     HAL_GPIO_WritePin (spi_dev->cs_gpiox, spi_dev->cs_gpio_pin, GPIO_PIN_SET);
 
@@ -122,7 +125,7 @@ extern SPI_HandleTypeDef hspi2;
 
 spi_user_data w25q_spi2 = { &hspi2, SPI2_NSS_GPIO_Port, SPI2_NSS_Pin, NULL };
 
-sfud_spi_port_init (sfud_flash * flash)
+sfud_err sfud_spi_port_init (sfud_flash * flash)
 {
     sfud_err result = SFUD_SUCCESS;
 

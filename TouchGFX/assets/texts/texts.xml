@@ -4,6 +4,71 @@
     <Language Id="GB" />
   </Languages>
   <Texts>
+    <TextGroup Id="DeviceStatus">
+      <Text Id="ACDC_MONITOR_TITLE" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">ACDC 只读监听</Translation>
+      </Text>
+      <Text Id="DCDC_CONTROL_TITLE" Alignment="Center" TypographyId="STXihei_24">
+        <Translation Language="GB">DCDC 状态与控制</Translation>
+      </Text>
+      <Text Id="DEVICE_DYNAMIC" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DEVICE_COMM" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">通信：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DEVICE_AGE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">数据年龄：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ACDC_DC_BUS" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">直流母线：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ACDC_DC_LOAD" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">直流负载：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ACDC_AC" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">交流输入：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ACDC_FREQUENCY" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">交流频率：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ACDC_RECTIFIER" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">整流模块：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="ACDC_ALARM" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">告警：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_WORK_STATE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">工作状态：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_FAULT" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">故障：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_B_SIDE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">B侧：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_P_SIDE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">P侧：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_TEMPERATURE" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">最高温度：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_LAST_COMMAND" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">最近命令：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_COMMAND_RESULT" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">命令结果：&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="DCDC_START_DISABLED" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">启动（禁用）</Translation>
+      </Text>
+      <Text Id="DCDC_SAFE_STOP" Alignment="Center" TypographyId="STXihei_22">
+        <Translation Language="GB">安全停机</Translation>
+      </Text>
+      <Text Id="DEVICE_GLYPHS" Alignment="Left" TypographyId="STXihei_22">
+        <Translation Language="GB">通信在线离线数据过期电压电流频率整流模块功率告警无有工作运行停止故障未知侧最高温度最近命令空闲等待执行成功失败读回确认未确认再次点击安全停机已提交拒绝繁忙准备尚未解除只读监听状态控制启动禁用秒毫伏安瓦赫兹次</Translation>
+      </Text>
+    </TextGroup>
     <TextGroup Id="Err_type">
       <Text Id="NO_ERR" Alignment="Left" TypographyId="STXihei_22">
         <Translation Language="GB" />
@@ -3120,7 +3185,7 @@
   <Typographies>
     <Typography Id="Default" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=".-+" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_24" Font="segoeui.ttf" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="!" WildcardCharacters="0123456789.-" WildcardCharacterRanges="0-9" />
-    <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,!" WildcardCharacterRanges="0-9,a-z,0x7B2C,0x7C7B,0x7EC4,0x53F7,0x7535,0x6C60,0x9519,0x8BEF,0x8B66" />
+    <Typography Id="STXihei_22" Font="STXIHEI.TTF" Size="22" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=".,/ -:_!通信在线离线数据过期电压流频率整模块功告警无有工作状态运行停止故障未知侧最高温度最近命令空闲等待执行成功失败读回确认未再次点击安全停机已提交拒绝繁忙准备尚解除只监听控制启动禁用秒毫伏安瓦赫兹次年月" WildcardCharacterRanges="0-9,A-Z,a-z,0x7B2C,0x7C7B,0x7EC4,0x53F7,0x7535,0x6C60,0x9519,0x8BEF,0x8B66" />
     <Typography Id="STXihei_24" Font="STXIHEI.TTF" Size="24" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="STXihei_40" Font="STXIHEI.TTF" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SegoeUI_20" Font="segoeui.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />

@@ -6,6 +6,7 @@
 #include <touchgfx/Callback.hpp>
 #include <touchgfx/Color.hpp>
 #include <touchgfx/Utils.hpp>
+#include <images/BitmapDatabase.hpp>
 
 #ifndef SIMULATOR
 extern "C" {
@@ -17,7 +18,7 @@ extern "C" {
 #include "time.h"
 
 extern BCMU_Mail_t BCMU[cluster_num];
-extern Client_Sd_t Client_Sd[cluster_num];
+//extern Client_Sd_t Client_Sd[cluster_num];
 extern error_info_t Client_errors[cluster_num][MAX_ERROR];
 };
 
@@ -37,7 +38,11 @@ is_bmu_enabled (uint8_t index)
     return index >= 1 && index <= enabled_count;
 }
 
-MainScreenView::MainScreenView () : BMUMenuCallback (*this)
+MainScreenView::MainScreenView ()
+    : BMUMenuCallback (*this),
+      deviceButtonCallback (this, &MainScreenView::deviceButtonClicked),
+      deviceNavCallback (this, &MainScreenView::deviceNavClicked),
+      stopConfirmationTicks (0U)
 {
     counter  = 0;
     counter2 = 1;
@@ -50,7 +55,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     BMU_SEL_BOX.setVisible (false);
     /*setStateChangedCallback() 函数注册回调函数*/
     BMUMenu.setStateChangedCallback (BMUMenuCallback);
-    err_time.setHeight (errcount * 25 + 25); // 设置错误信息打印的显示区�?
+    err_time.setHeight (errcount * 25 + 25); // 设置错误信息打印的显示区�?
     err_id.setHeight (errcount * 25 + 25);
     err_inf.setHeight (errcount * 25 + 25);
 
@@ -106,7 +111,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     BMU[28] = &BMU29;
     BMU[29] = &BMU30;
 
-    SOC_view[0]  = &SOC1_view; // SOC进度�?
+    SOC_view[0]  = &SOC1_view; // SOC进度�?
     SOC_view[1]  = &SOC2_view;
     SOC_view[2]  = &SOC3_view;
     SOC_view[3]  = &SOC4_view;
@@ -119,7 +124,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     SOC_view[10] = &SOC11_view;
     SOC_view[11] = &SOC12_view;
 
-    tim[0]  = &err_time0Buffer[0]; // 错误信息时间戳，在第一�?
+    tim[0]  = &err_time0Buffer[0]; // 错误信息时间戳，在第一�?
     tim[1]  = &err_time1Buffer[0];
     tim[2]  = &err_time2Buffer[0];
     tim[3]  = &err_time3Buffer[0];
@@ -161,7 +166,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     id[18] = &err_id18Buffer[0];
     id[19] = &err_id19Buffer[0];
 
-    id_wild[0]  = &err_id0; // 错误信息id，现在使用wild动态通配符显示自定义类型，在第二�?
+    id_wild[0]  = &err_id0; // 错误信息id，现在使用wild动态通配符显示自定义类型，在第二�?
     id_wild[1]  = &err_id1;
     id_wild[2]  = &err_id2;
     id_wild[3]  = &err_id3;
@@ -182,7 +187,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     id_wild[18] = &err_id18;
     id_wild[19] = &err_id19;
 
-    inf[0]  = &err_inf0; // 错误信息类型，在第三�?
+    inf[0]  = &err_inf0; // 错误信息类型，在第三�?
     inf[1]  = &err_inf1;
     inf[2]  = &err_inf2;
     inf[3]  = &err_inf3;
@@ -203,7 +208,7 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     inf[18] = &err_inf18;
     inf[19] = &err_inf19;
 
-    for (int i = 0; i < errcount; i++) // 初始化错误信�?
+    for (int i = 0; i < errcount; i++) // 初始化错误信�?
     {
         t_gen[i].setXY (30, 25 * (i + 1));
         t_gen[i].setColor (touchgfx::Color::getColorFromRGB (255, 0, 0));
@@ -238,21 +243,21 @@ MainScreenView::MainScreenView () : BMUMenuCallback (*this)
     //{
     //     /*touchgfx::Unicode::snprintf(e_gen_Buffer[i], 10, "%d", 12);*/
     //     //e_gen[i].setTypedText(touchgfx::TypedText(T_BSMU_ERR1));
-    //     //id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误�?
+    //     //id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误�?
     //    /* Unicode::snprintf(t_gen_Buffer[i], 10, "%s", u_time);*/
 
     //    /*Unicode::fromUTF8(str_di, u_di, 128);*/
     //
     //
-    //    //sprintf(id_temp,"�?d�?,i); //char 类型
+    //    //sprintf(id_temp,"�?d�?,i); //char 类型
     //    //Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[i],
     //    10);//touchgfx仅支持显示unicode类型
     //
-    //    //sprintf(id_temp, "�?d簇BCMU错误错错错错�?, 2); //char 类型
+    //    //sprintf(id_temp, "�?d簇BCMU错误错错错错�?, 2); //char 类型
     //    //Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[i],
     //    20);//touchgfx仅支持显示unicode类型
     //
-    //    sprintf(id_temp, "�?d簇BCMU错误(故障)", i); //char 类型
+    //    sprintf(id_temp, "�?d簇BCMU错误(故障)", i); //char 类型
     //    Unicode::fromUTF8((const uint8_t*)id_temp, id_gen_Buffer[i],
     //    20);//touchgfx仅支持显示unicode类型
     //    //touchgfx::Unicode::snprintf(id_gen_Buffer[i], 10, "%s", u_di);
@@ -303,7 +308,7 @@ MainScreenView::show_batteryshowarea_on () // 电池界面显示
  * @return {*}
  */
 void
-MainScreenView::show_batteryshowarea_off () // 电池界面不显�?
+MainScreenView::show_batteryshowarea_off () // 电池界面不显�?
 {
     BCMU_SEL_BOX.setVisible (false);
     BCMU_SEL_BOX.invalidate ();
@@ -316,7 +321,7 @@ MainScreenView::show_batteryshowarea_off () // 电池界面不显�?
     /*   BMU_SEL_BOX.setXY(BMU1.getX()-(BMU_SEL_BOX.getWidth()-BMU1.getWidth())/2,
        BMU1.getY()-(BMU_SEL_BOX.getHeight()-BMU1.getHeight())/2);
        BMU_BG.invalidate();*/
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -327,6 +332,90 @@ void
 MainScreenView::setupScreen ()
 {
     MainScreenViewBase::setupScreen ();
+
+    /* 在首页和电池状态之间插入设备状态导航，保持全部新增控件位于手工 View 层。 */
+    buttonState.setX (620);
+    buttonSetting.setX (815);
+
+    /* 与原首页/电池状态导航相同：固定双态图片加ClickButtonTrigger。 */
+    deviceStatusButton.setBitmaps (touchgfx::Bitmap (BITMAP_DEVICE_STATE_RELEASED_ID),
+                                   touchgfx::Bitmap (BITMAP_DEVICE_STATE_PRESSED_ID));
+    deviceStatusButton.setBitmapXY (0, 0);
+    deviceStatusButton.setAction (deviceNavCallback);
+    deviceStatusButton.setPosition (478, 19, 126, 44);
+    add (deviceStatusButton);
+
+    deviceStatusArea.setPosition (0, 78, 1024, 522);
+    deviceStatusBackground.setPosition (0, 0, 1024, 522);
+    deviceStatusBackground.setColor (touchgfx::Color::getColorFromRGB (156, 189, 255));
+    deviceStatusArea.add (deviceStatusBackground);
+
+    acdcStatusCard.setPosition (28, 24, 470, 470);
+    acdcCardBackground.setPosition (0, 0, 470, 470);
+    acdcCardBackground.setColor (touchgfx::Color::getColorFromRGB (248, 250, 255));
+    acdcStatusCard.add (acdcCardBackground);
+    acdcTitle.setPosition (80, 18, 320, 40);
+    acdcTitle.setTypedText (touchgfx::TypedText (T_ACDC_MONITOR_TITLE));
+    acdcTitle.setColor (touchgfx::Color::getColorFromRGB (35, 50, 75));
+    acdcStatusCard.add (acdcTitle);
+    acdcStatusDot.setPosition (38, 29, 16, 16);
+    acdcStatusDot.setColor (touchgfx::Color::getColorFromRGB (150, 150, 150));
+    acdcStatusCard.add (acdcStatusDot);
+
+    static const touchgfx::TypedTextId acdcTextIds[ACDC_DEVICE_LINE_COUNT] = {
+        T_DEVICE_COMM, T_DEVICE_AGE, T_ACDC_DC_BUS, T_ACDC_DC_LOAD,
+        T_ACDC_AC, T_ACDC_FREQUENCY, T_ACDC_RECTIFIER, T_ACDC_ALARM
+    };
+    for (uint8_t i = 0U; i < ACDC_DEVICE_LINE_COUNT; i++) {
+        configureDeviceLine (acdcDeviceLine[i], acdcDeviceBuffer[i], acdcTextIds[i],
+                             (int16_t)(76 + (i * 43)));
+        acdcStatusCard.add (acdcDeviceLine[i]);
+    }
+    deviceStatusArea.add (acdcStatusCard);
+
+    dcdcStatusCard.setPosition (526, 24, 470, 470);
+    dcdcCardBackground.setPosition (0, 0, 470, 470);
+    dcdcCardBackground.setColor (touchgfx::Color::getColorFromRGB (248, 250, 255));
+    dcdcStatusCard.add (dcdcCardBackground);
+    dcdcTitle.setPosition (80, 18, 320, 40);
+    dcdcTitle.setTypedText (touchgfx::TypedText (T_DCDC_CONTROL_TITLE));
+    dcdcTitle.setColor (touchgfx::Color::getColorFromRGB (35, 50, 75));
+    dcdcStatusCard.add (dcdcTitle);
+    dcdcStatusDot.setPosition (38, 29, 16, 16);
+    dcdcStatusDot.setColor (touchgfx::Color::getColorFromRGB (150, 150, 150));
+    dcdcStatusCard.add (dcdcStatusDot);
+
+    static const touchgfx::TypedTextId dcdcTextIds[DCDC_DEVICE_LINE_COUNT] = {
+        T_DEVICE_COMM, T_DEVICE_AGE, T_DCDC_WORK_STATE, T_DCDC_FAULT,
+        T_DCDC_B_SIDE, T_DCDC_P_SIDE, T_DCDC_TEMPERATURE,
+        T_DCDC_LAST_COMMAND, T_DCDC_COMMAND_RESULT
+    };
+    for (uint8_t i = 0U; i < DCDC_DEVICE_LINE_COUNT; i++) {
+        configureDeviceLine (dcdcDeviceLine[i], dcdcDeviceBuffer[i], dcdcTextIds[i],
+                             (int16_t)(66 + (i * 34)));
+        dcdcStatusCard.add (dcdcDeviceLine[i]);
+    }
+
+    dcdcStartButton.setXY (80, 382);
+    dcdcStartButton.setBitmaps (touchgfx::Bitmap (BITMAP_IPSET_BJ_RELEASED_ID),
+                                touchgfx::Bitmap (BITMAP_IPSET_BJ_PRESSED_ID));
+    dcdcStartButton.setLabelText (touchgfx::TypedText (T_DCDC_START_DISABLED));
+    dcdcStartButton.setLabelColor (touchgfx::Color::getColorFromRGB (130, 130, 130));
+    dcdcStartButton.setTouchable (false);
+    dcdcStatusCard.add (dcdcStartButton);
+
+    dcdcStopButton.setXY (265, 382);
+    dcdcStopButton.setBitmaps (touchgfx::Bitmap (BITMAP_IPSET_BJ_RELEASED_ID),
+                               touchgfx::Bitmap (BITMAP_IPSET_BJ_PRESSED_ID));
+    dcdcStopButton.setLabelText (touchgfx::TypedText (T_DCDC_SAFE_STOP));
+    dcdcStopButton.setLabelColor (touchgfx::Color::getColorFromRGB (190, 20, 20));
+    dcdcStopButton.setLabelColorPressed (touchgfx::Color::getColorFromRGB (255, 0, 0));
+    dcdcStopButton.setAction (deviceButtonCallback);
+    dcdcStatusCard.add (dcdcStopButton);
+    deviceStatusArea.add (dcdcStatusCard);
+
+    deviceStatusArea.setVisible (false);
+    add (deviceStatusArea);
     // 通知model更新数据
     viewToModelData.reflashFlag = true;
     presenter->ViewtoModelDat (viewToModelData);
@@ -359,6 +448,13 @@ MainScreenView::inf_play (TextAreaWithOneWildcard *a, int b)
 void
 MainScreenView::handleTickEvent ()
 {
+    if (stopConfirmationTicks > 0U) {
+        stopConfirmationTicks--;
+        if (stopConfirmationTicks == 0U) {
+            Unicode::fromUTF8 ((const uint8_t *)"未提交", dcdcDeviceBuffer[8], DEVICE_LINE_BUFFER_SIZE);
+            dcdcDeviceLine[8].invalidate ();
+        }
+    }
     if (++digitalSeconds >= 60) {
         digitalSeconds = 0;
         if (++digitalMinutes >= 60) {
@@ -383,6 +479,7 @@ MainScreenView::show_shouye ()
 {
     shouye.setVisible (true);
     batteryshowarea.setVisible (false);
+    deviceStatusArea.setVisible (false);
     shouye.invalidate ();
     batteryshowarea.invalidate ();
 }
@@ -392,20 +489,193 @@ MainScreenView::show_batteryshowarea ()
 {
     shouye.setVisible (false);
     batteryshowarea.setVisible (true);
+    deviceStatusArea.setVisible (false);
     shouye.invalidate ();
     batteryshowarea.invalidate ();
+}
+
+void
+MainScreenView::show_device_status ()
+{
+    shouye.setVisible (false);
+    batteryshowarea.setVisible (false);
+    deviceStatusArea.setVisible (true);
+    show_batteryshowarea_off ();
+    shouye.invalidate ();
+    batteryshowarea.invalidate ();
+    deviceStatusArea.invalidate ();
+}
+
+void
+MainScreenView::configureDeviceLine (touchgfx::TextAreaWithOneWildcard& line,
+                                     touchgfx::Unicode::UnicodeChar* buffer,
+                                     touchgfx::TypedTextId textId,
+                                     int16_t y)
+{
+    buffer[0] = 0;
+    line.setPosition (28, y, 414, 30);
+    line.setTypedText (touchgfx::TypedText (textId));
+    line.setWildcard (buffer);
+    line.setColor (touchgfx::Color::getColorFromRGB (30, 35, 45));
+}
+
+void
+MainScreenView::deviceButtonClicked (const touchgfx::AbstractButton& source)
+{
+    if (&source == &dcdcStopButton) {
+        if (stopConfirmationTicks == 0U) {
+            stopConfirmationTicks = 300U;
+            Unicode::fromUTF8 ((const uint8_t *)"再次点击确认安全停机",
+                               dcdcDeviceBuffer[8], DEVICE_LINE_BUFFER_SIZE);
+        } else {
+            int result = presenter->requestDcdcSafeStop ();
+            stopConfirmationTicks = 0U;
+            Unicode::fromUTF8 ((const uint8_t *)(result == 0 ? "已提交" : "提交被拒绝"),
+                               dcdcDeviceBuffer[8], DEVICE_LINE_BUFFER_SIZE);
+        }
+        dcdcDeviceLine[8].invalidate ();
+    }
+}
+
+void
+MainScreenView::deviceNavClicked (const touchgfx::AbstractButtonContainer& source)
+{
+    (void)source;
+    show_device_status ();
+}
+
+static void formatDeviceDecimal (char* destination, size_t size, float value, uint8_t decimals,
+                                 const char* unit)
+{
+    int32_t scale = (decimals == 2U) ? 100 : 10;
+    int32_t scaled = (int32_t)(value * (float)scale + (value >= 0.0f ? 0.5f : -0.5f));
+    uint32_t magnitude = (uint32_t)(scaled < 0 ? -scaled : scaled);
+    if (decimals == 2U) {
+        snprintf (destination, size, "%s%lu.%02lu %s", scaled < 0 ? "-" : "",
+                  (unsigned long)(magnitude / 100U), (unsigned long)(magnitude % 100U), unit);
+    } else {
+        snprintf (destination, size, "%s%lu.%01lu %s", scaled < 0 ? "-" : "",
+                  (unsigned long)(magnitude / 10U), (unsigned long)(magnitude % 10U), unit);
+    }
+}
+
+void
+MainScreenView::NotifyDeviceStatus (const DeviceStatusData& deviceStatus)
+{
+    char ascii[DEVICE_LINE_BUFFER_SIZE];
+    lastDeviceStatus = deviceStatus;
+
+    const bool acdcStale = deviceStatus.acdcOnline &&
+                           (deviceStatus.acdcAgeMs == 0xFFFFFFFFUL || deviceStatus.acdcAgeMs > 2000UL);
+    Unicode::fromUTF8 ((const uint8_t *)(!deviceStatus.acdcOnline ? "离线" :
+                                        (acdcStale ? "数据过期" : "在线")),
+                       acdcDeviceBuffer[0], DEVICE_LINE_BUFFER_SIZE);
+    if (deviceStatus.acdcAgeMs == 0xFFFFFFFFUL) {
+        Unicode::fromUTF8 ((const uint8_t *)"--", acdcDeviceBuffer[1], DEVICE_LINE_BUFFER_SIZE);
+    } else {
+        Unicode::snprintf (acdcDeviceBuffer[1], DEVICE_LINE_BUFFER_SIZE, "%u ms",
+                           (unsigned int)deviceStatus.acdcAgeMs);
+    }
+    formatDeviceDecimal (ascii, sizeof(ascii), deviceStatus.acdcDcVoltage, 1U, "V");
+    Unicode::fromUTF8 ((const uint8_t *)ascii, acdcDeviceBuffer[2], DEVICE_LINE_BUFFER_SIZE);
+    formatDeviceDecimal (ascii, sizeof(ascii), deviceStatus.acdcDcCurrent, 1U, "A");
+    Unicode::fromUTF8 ((const uint8_t *)ascii, acdcDeviceBuffer[3], DEVICE_LINE_BUFFER_SIZE);
+    snprintf (ascii, sizeof(ascii), "%lu.%01lu V / %lu.%01lu A",
+              (unsigned long)(deviceStatus.acdcAcVoltage * 10.0f) / 10U,
+              (unsigned long)(deviceStatus.acdcAcVoltage * 10.0f) % 10U,
+              (unsigned long)(deviceStatus.acdcAcCurrent * 10.0f) / 10U,
+              (unsigned long)(deviceStatus.acdcAcCurrent * 10.0f) % 10U);
+    Unicode::fromUTF8 ((const uint8_t *)ascii, acdcDeviceBuffer[4], DEVICE_LINE_BUFFER_SIZE);
+    Unicode::snprintf (acdcDeviceBuffer[5], DEVICE_LINE_BUFFER_SIZE, "%u Hz", deviceStatus.acdcFrequency);
+    Unicode::snprintf (acdcDeviceBuffer[6], DEVICE_LINE_BUFFER_SIZE, "%u / %u W",
+                       deviceStatus.acdcRectifierCount, (unsigned int)deviceStatus.acdcRectifierPower);
+    Unicode::fromUTF8 ((const uint8_t *)(deviceStatus.acdcAlarm ? "有" : "无"),
+                       acdcDeviceBuffer[7], DEVICE_LINE_BUFFER_SIZE);
+
+    const char* dcdcStateText = "未知";
+    uint16_t dcdcColor = touchgfx::Color::getColorFromRGB (150, 150, 150);
+    if (deviceStatus.dcdcState == DEVICE_UI_OFFLINE) {
+        dcdcStateText = "离线";
+        dcdcColor = touchgfx::Color::getColorFromRGB (220, 40, 40);
+    } else if (deviceStatus.dcdcState == DEVICE_UI_STALE) {
+        dcdcStateText = "数据过期";
+        dcdcColor = touchgfx::Color::getColorFromRGB (230, 170, 20);
+    } else if (deviceStatus.dcdcState == DEVICE_UI_RUNNING) {
+        dcdcStateText = "运行";
+        dcdcColor = touchgfx::Color::getColorFromRGB (30, 180, 70);
+    } else if (deviceStatus.dcdcState == DEVICE_UI_STOPPED) {
+        dcdcStateText = "停止";
+        dcdcColor = touchgfx::Color::getColorFromRGB (70, 120, 210);
+    } else if (deviceStatus.dcdcState == DEVICE_UI_FAULT) {
+        dcdcStateText = "故障";
+        dcdcColor = touchgfx::Color::getColorFromRGB (220, 40, 40);
+    }
+    dcdcStatusDot.setColor (dcdcColor);
+    acdcStatusDot.setColor (!deviceStatus.acdcOnline
+        ? touchgfx::Color::getColorFromRGB (220, 40, 40)
+        : (acdcStale ? touchgfx::Color::getColorFromRGB (230, 170, 20)
+                     : touchgfx::Color::getColorFromRGB (30, 180, 70)));
+    Unicode::fromUTF8 ((const uint8_t *)(deviceStatus.dcdcState == DEVICE_UI_OFFLINE ? "离线" : "在线"),
+                       dcdcDeviceBuffer[0], DEVICE_LINE_BUFFER_SIZE);
+    if (deviceStatus.dcdcAgeMs == 0xFFFFFFFFUL) {
+        Unicode::fromUTF8 ((const uint8_t *)"--", dcdcDeviceBuffer[1], DEVICE_LINE_BUFFER_SIZE);
+    } else {
+        Unicode::snprintf (dcdcDeviceBuffer[1], DEVICE_LINE_BUFFER_SIZE, "%u ms",
+                           (unsigned int)deviceStatus.dcdcAgeMs);
+    }
+    Unicode::fromUTF8 ((const uint8_t *)dcdcStateText, dcdcDeviceBuffer[2], DEVICE_LINE_BUFFER_SIZE);
+    updateFaultText (deviceStatus.dcdcFaultRaw);
+    snprintf (ascii, sizeof(ascii), "%.1f V / %.2f A / %u W",
+              deviceStatus.dcdcBVoltage, deviceStatus.dcdcBCurrent, deviceStatus.dcdcBPower);
+    Unicode::fromUTF8 ((const uint8_t *)ascii, dcdcDeviceBuffer[4], DEVICE_LINE_BUFFER_SIZE);
+    snprintf (ascii, sizeof(ascii), "%.1f V / %.2f A / %u W",
+              deviceStatus.dcdcPVoltage, deviceStatus.dcdcPCurrent, deviceStatus.dcdcPPower);
+    Unicode::fromUTF8 ((const uint8_t *)ascii, dcdcDeviceBuffer[5], DEVICE_LINE_BUFFER_SIZE);
+    formatDeviceDecimal (ascii, sizeof(ascii), deviceStatus.dcdcMaxTemperature, 1U, "C");
+    Unicode::fromUTF8 ((const uint8_t *)ascii, dcdcDeviceBuffer[6], DEVICE_LINE_BUFFER_SIZE);
+
+    const char* commandText = "空闲";
+    if (deviceStatus.writeState == 1U) commandText = "等待";
+    else if (deviceStatus.writeState == 2U) commandText = "执行";
+    else if (deviceStatus.writeState == 3U) commandText = "成功";
+    else if (deviceStatus.writeState == 4U) commandText = "失败";
+    Unicode::fromUTF8 ((const uint8_t *)commandText, dcdcDeviceBuffer[7], DEVICE_LINE_BUFFER_SIZE);
+    if (stopConfirmationTicks == 0U) {
+        Unicode::snprintf (dcdcDeviceBuffer[8], DEVICE_LINE_BUFFER_SIZE, "seq %u / err %d / %u",
+                           (unsigned int)deviceStatus.writeSequence, deviceStatus.writeError,
+                           deviceStatus.readbackConfirmed);
+    }
+
+    for (uint8_t i = 0U; i < ACDC_DEVICE_LINE_COUNT; i++) acdcDeviceLine[i].invalidate ();
+    for (uint8_t i = 0U; i < DCDC_DEVICE_LINE_COUNT; i++) dcdcDeviceLine[i].invalidate ();
+    acdcStatusDot.invalidate ();
+    dcdcStatusDot.invalidate ();
+}
+
+void
+MainScreenView::updateFaultText (uint16_t faultRaw)
+{
+    const char* text = "无";
+    if (faultRaw & 0x0004U) text = "B侧过压";
+    else if (faultRaw & 0x0001U) text = "P侧过压";
+    else if (faultRaw & 0x0002U) text = "P侧欠压";
+    else if (faultRaw & 0x0008U) text = "B侧欠压";
+    else if (faultRaw & 0x0020U) text = "过流";
+    else if (faultRaw & 0x0300U) text = "温度故障";
+    else if (faultRaw != 0U) text = "未知故障";
+    Unicode::fromUTF8 ((const uint8_t *)text, dcdcDeviceBuffer[3], DEVICE_LINE_BUFFER_SIZE);
 }
 
 void
 MainScreenView::BCMU1_clicked ()
 {
     viewToModelData.BCMU_SEL = 1;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU1.getX () - (BCMU_SEL_BOX.getWidth () - BCMU1.getWidth ()) / 2,
                         BCMU1.getY () - (BCMU_SEL_BOX.getHeight () - BCMU1.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -440,12 +710,12 @@ MainScreenView::BCMU2_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 2;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU2.getX () - (BCMU_SEL_BOX.getWidth () - BCMU2.getWidth ()) / 2,
                         BCMU2.getY () - (BCMU_SEL_BOX.getHeight () - BCMU2.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -478,12 +748,12 @@ MainScreenView::BCMU3_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 3;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU3.getX () - (BCMU_SEL_BOX.getWidth () - BCMU3.getWidth ()) / 2,
                         BCMU3.getY () - (BCMU_SEL_BOX.getHeight () - BCMU3.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -515,12 +785,12 @@ MainScreenView::BCMU4_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 4;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU4.getX () - (BCMU_SEL_BOX.getWidth () - BCMU4.getWidth ()) / 2,
                         BCMU4.getY () - (BCMU_SEL_BOX.getHeight () - BCMU4.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -552,12 +822,12 @@ MainScreenView::BCMU5_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 5;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU5.getX () - (BCMU_SEL_BOX.getWidth () - BCMU5.getWidth ()) / 2,
                         BCMU5.getY () - (BCMU_SEL_BOX.getHeight () - BCMU5.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -589,12 +859,12 @@ MainScreenView::BCMU6_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 6;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU6.getX () - (BCMU_SEL_BOX.getWidth () - BCMU6.getWidth ()) / 2,
                         BCMU6.getY () - (BCMU_SEL_BOX.getHeight () - BCMU6.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -626,12 +896,12 @@ MainScreenView::BCMU7_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 7;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU7.getX () - (BCMU_SEL_BOX.getWidth () - BCMU7.getWidth ()) / 2,
                         BCMU7.getY () - (BCMU_SEL_BOX.getHeight () - BCMU7.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -663,12 +933,12 @@ MainScreenView::BCMU8_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 8;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU8.getX () - (BCMU_SEL_BOX.getWidth () - BCMU8.getWidth ()) / 2,
                         BCMU8.getY () - (BCMU_SEL_BOX.getHeight () - BCMU8.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -700,12 +970,12 @@ MainScreenView::BCMU9_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 9;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU9.getX () - (BCMU_SEL_BOX.getWidth () - BCMU9.getWidth ()) / 2,
                         BCMU9.getY () - (BCMU_SEL_BOX.getHeight () - BCMU9.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -737,12 +1007,12 @@ MainScreenView::BCMU10_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 10;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU10.getX () - (BCMU_SEL_BOX.getWidth () - BCMU10.getWidth ()) / 2,
                         BCMU10.getY () - (BCMU_SEL_BOX.getHeight () - BCMU10.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -774,12 +1044,12 @@ MainScreenView::BCMU11_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 11;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU11.getX () - (BCMU_SEL_BOX.getWidth () - BCMU11.getWidth ()) / 2,
                         BCMU11.getY () - (BCMU_SEL_BOX.getHeight () - BCMU11.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -811,12 +1081,12 @@ MainScreenView::BCMU12_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 12;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU12.getX () - (BCMU_SEL_BOX.getWidth () - BCMU12.getWidth ()) / 2,
                         BCMU12.getY () - (BCMU_SEL_BOX.getHeight () - BCMU12.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -848,12 +1118,12 @@ MainScreenView::BCMU13_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 13;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU13.getX () - (BCMU_SEL_BOX.getWidth () - BCMU13.getWidth ()) / 2,
                         BCMU13.getY () - (BCMU_SEL_BOX.getHeight () - BCMU13.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -885,12 +1155,12 @@ MainScreenView::BCMU14_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 14;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU14.getX () - (BCMU_SEL_BOX.getWidth () - BCMU14.getWidth ()) / 2,
                         BCMU14.getY () - (BCMU_SEL_BOX.getHeight () - BCMU14.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -922,12 +1192,12 @@ MainScreenView::BCMU15_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 15;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU15.getX () - (BCMU_SEL_BOX.getWidth () - BCMU15.getWidth ()) / 2,
                         BCMU15.getY () - (BCMU_SEL_BOX.getHeight () - BCMU15.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -959,12 +1229,12 @@ MainScreenView::BCMU16_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 16;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU16.getX () - (BCMU_SEL_BOX.getWidth () - BCMU16.getWidth ()) / 2,
                         BCMU16.getY () - (BCMU_SEL_BOX.getHeight () - BCMU16.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -996,12 +1266,12 @@ MainScreenView::BCMU17_clicked ()
         return;
     }
     viewToModelData.BCMU_SEL = 17;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU17.getX () - (BCMU_SEL_BOX.getWidth () - BCMU17.getWidth ()) / 2,
                         BCMU17.getY () - (BCMU_SEL_BOX.getHeight () - BCMU17.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -1033,12 +1303,12 @@ MainScreenView::BCMU18_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 18;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU18.getX () - (BCMU_SEL_BOX.getWidth () - BCMU18.getWidth ()) / 2,
                         BCMU18.getY () - (BCMU_SEL_BOX.getHeight () - BCMU18.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -1070,12 +1340,12 @@ MainScreenView::BCMU19_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 19;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU19.getX () - (BCMU_SEL_BOX.getWidth () - BCMU19.getWidth ()) / 2,
                         BCMU19.getY () - (BCMU_SEL_BOX.getHeight () - BCMU19.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -1107,12 +1377,12 @@ MainScreenView::BCMU20_clicked ()
     return;
 }
     viewToModelData.BCMU_SEL = 20;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
     BCMU_SEL_BOX.setVisible (true);
     BCMU_SEL_BOX.setXY (BCMU20.getX () - (BCMU_SEL_BOX.getWidth () - BCMU20.getWidth ()) / 2,
                         BCMU20.getY () - (BCMU_SEL_BOX.getHeight () - BCMU20.getHeight ()) / 2);
     BCMU_BG.invalidate ();
-    // 更新选定簇编�?
+    // 更新选定簇编�?
     Unicode::snprintf (cuBuffer, CU_SIZE, "%d", viewToModelData.BCMU_SEL);
     cu.invalidate ();
     /*滑出BMU菜单*/
@@ -1141,12 +1411,12 @@ void
 MainScreenView::BMU1_clicked ()
 {
     viewToModelData.BMU_SEL = 1;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU1.getX () - (BMU_SEL_BOX.getWidth () - BMU1.getWidth ()) / 2,
                        BMU1.getY () - (BMU_SEL_BOX.getHeight () - BMU1.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1158,12 +1428,12 @@ void
 MainScreenView::BMU2_clicked ()
 {
     viewToModelData.BMU_SEL = 2;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU2.getX () - (BMU_SEL_BOX.getWidth () - BMU2.getWidth ()) / 2,
                        BMU2.getY () - (BMU_SEL_BOX.getHeight () - BMU2.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1178,12 +1448,12 @@ MainScreenView::BMU3_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 3;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU3.getX () - (BMU_SEL_BOX.getWidth () - BMU3.getWidth ()) / 2,
                        BMU3.getY () - (BMU_SEL_BOX.getHeight () - BMU3.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1198,12 +1468,12 @@ MainScreenView::BMU4_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 4;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU4.getX () - (BMU_SEL_BOX.getWidth () - BMU4.getWidth ()) / 2,
                        BMU4.getY () - (BMU_SEL_BOX.getHeight () - BMU4.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1218,12 +1488,12 @@ MainScreenView::BMU5_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 5;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU5.getX () - (BMU_SEL_BOX.getWidth () - BMU5.getWidth ()) / 2,
                        BMU5.getY () - (BMU_SEL_BOX.getHeight () - BMU5.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1238,12 +1508,12 @@ MainScreenView::BMU6_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 6;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU6.getX () - (BMU_SEL_BOX.getWidth () - BMU6.getWidth ()) / 2,
                        BMU6.getY () - (BMU_SEL_BOX.getHeight () - BMU6.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1258,12 +1528,12 @@ MainScreenView::BMU7_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 7;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU7.getX () - (BMU_SEL_BOX.getWidth () - BMU7.getWidth ()) / 2,
                        BMU7.getY () - (BMU_SEL_BOX.getHeight () - BMU7.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1278,12 +1548,12 @@ MainScreenView::BMU8_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 8;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU8.getX () - (BMU_SEL_BOX.getWidth () - BMU8.getWidth ()) / 2,
                        BMU8.getY () - (BMU_SEL_BOX.getHeight () - BMU8.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1298,12 +1568,12 @@ MainScreenView::BMU9_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 9;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU9.getX () - (BMU_SEL_BOX.getWidth () - BMU9.getWidth ()) / 2,
                        BMU9.getY () - (BMU_SEL_BOX.getHeight () - BMU9.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1318,12 +1588,12 @@ MainScreenView::BMU10_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 10;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU10.getX () - (BMU_SEL_BOX.getWidth () - BMU10.getWidth ()) / 2,
                        BMU10.getY () - (BMU_SEL_BOX.getHeight () - BMU10.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1338,12 +1608,12 @@ MainScreenView::BMU11_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 11;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU11.getX () - (BMU_SEL_BOX.getWidth () - BMU11.getWidth ()) / 2,
                        BMU11.getY () - (BMU_SEL_BOX.getHeight () - BMU11.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1358,12 +1628,12 @@ MainScreenView::BMU12_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 12;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU12.getX () - (BMU_SEL_BOX.getWidth () - BMU12.getWidth ()) / 2,
                        BMU12.getY () - (BMU_SEL_BOX.getHeight () - BMU12.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1378,12 +1648,12 @@ MainScreenView::BMU13_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 13;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU13.getX () - (BMU_SEL_BOX.getWidth () - BMU13.getWidth ()) / 2,
                        BMU13.getY () - (BMU_SEL_BOX.getHeight () - BMU13.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1398,12 +1668,12 @@ MainScreenView::BMU14_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 14;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU14.getX () - (BMU_SEL_BOX.getWidth () - BMU14.getWidth ()) / 2,
                        BMU14.getY () - (BMU_SEL_BOX.getHeight () - BMU14.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1418,12 +1688,12 @@ MainScreenView::BMU15_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 15;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU15.getX () - (BMU_SEL_BOX.getWidth () - BMU15.getWidth ()) / 2,
                        BMU15.getY () - (BMU_SEL_BOX.getHeight () - BMU15.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1438,12 +1708,12 @@ MainScreenView::BMU16_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 16;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU16.getX () - (BMU_SEL_BOX.getWidth () - BMU16.getWidth ()) / 2,
                        BMU16.getY () - (BMU_SEL_BOX.getHeight () - BMU16.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1458,12 +1728,12 @@ MainScreenView::BMU17_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 17;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU17.getX () - (BMU_SEL_BOX.getWidth () - BMU17.getWidth ()) / 2,
                        BMU17.getY () - (BMU_SEL_BOX.getHeight () - BMU17.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1478,12 +1748,12 @@ MainScreenView::BMU18_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 18;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU18.getX () - (BMU_SEL_BOX.getWidth () - BMU18.getWidth ()) / 2,
                        BMU18.getY () - (BMU_SEL_BOX.getHeight () - BMU18.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1498,12 +1768,12 @@ MainScreenView::BMU19_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 19;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU19.getX () - (BMU_SEL_BOX.getWidth () - BMU19.getWidth ()) / 2,
                        BMU19.getY () - (BMU_SEL_BOX.getHeight () - BMU19.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1518,12 +1788,12 @@ MainScreenView::BMU20_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 20;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU20.getX () - (BMU_SEL_BOX.getWidth () - BMU20.getWidth ()) / 2,
                        BMU20.getY () - (BMU_SEL_BOX.getHeight () - BMU20.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1538,12 +1808,12 @@ MainScreenView::BMU21_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 21;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU21.getX () - (BMU_SEL_BOX.getWidth () - BMU21.getWidth ()) / 2,
                        BMU21.getY () - (BMU_SEL_BOX.getHeight () - BMU21.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1558,12 +1828,12 @@ MainScreenView::BMU22_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 22;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU22.getX () - (BMU_SEL_BOX.getWidth () - BMU22.getWidth ()) / 2,
                        BMU22.getY () - (BMU_SEL_BOX.getHeight () - BMU22.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1578,12 +1848,12 @@ MainScreenView::BMU23_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 23;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU23.getX () - (BMU_SEL_BOX.getWidth () - BMU23.getWidth ()) / 2,
                        BMU23.getY () - (BMU_SEL_BOX.getHeight () - BMU23.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1598,12 +1868,12 @@ MainScreenView::BMU24_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 24;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU24.getX () - (BMU_SEL_BOX.getWidth () - BMU24.getWidth ()) / 2,
                        BMU24.getY () - (BMU_SEL_BOX.getHeight () - BMU24.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1618,12 +1888,12 @@ MainScreenView::BMU25_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 25;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU25.getX () - (BMU_SEL_BOX.getWidth () - BMU25.getWidth ()) / 2,
                        BMU25.getY () - (BMU_SEL_BOX.getHeight () - BMU25.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1638,12 +1908,12 @@ MainScreenView::BMU26_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 26;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU26.getX () - (BMU_SEL_BOX.getWidth () - BMU26.getWidth ()) / 2,
                        BMU26.getY () - (BMU_SEL_BOX.getHeight () - BMU26.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1658,12 +1928,12 @@ MainScreenView::BMU27_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 27;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU27.getX () - (BMU_SEL_BOX.getWidth () - BMU27.getWidth ()) / 2,
                        BMU27.getY () - (BMU_SEL_BOX.getHeight () - BMU27.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1678,12 +1948,12 @@ MainScreenView::BMU28_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 28;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU28.getX () - (BMU_SEL_BOX.getWidth () - BMU28.getWidth ()) / 2,
                        BMU28.getY () - (BMU_SEL_BOX.getHeight () - BMU28.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1698,12 +1968,12 @@ MainScreenView::BMU29_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 29;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU29.getX () - (BMU_SEL_BOX.getWidth () - BMU29.getWidth ()) / 2,
                        BMU29.getY () - (BMU_SEL_BOX.getHeight () - BMU29.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1718,12 +1988,12 @@ MainScreenView::BMU30_clicked ()
         return;
     }
     viewToModelData.BMU_SEL = 30;
-    // 更新BCMU选择块位�?
+    // 更新BCMU选择块位�?
 
     BMU_SEL_BOX.setXY (BMU30.getX () - (BMU_SEL_BOX.getWidth () - BMU30.getWidth ()) / 2,
                        BMU30.getY () - (BMU_SEL_BOX.getHeight () - BMU30.getHeight ()) / 2);
     BMU_BG.invalidate ();
-    // 更新选定组编�?
+    // 更新选定组编�?
     Unicode::snprintf (zuBuffer, ZU_SIZE, "%d", viewToModelData.BMU_SEL);
     zu.invalidate ();
 
@@ -1823,12 +2093,12 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     Unicode::snprintf (FrameRateTextBuffer, FRAMERATETEXT_SIZE, "%d", modelToViewData.frameRate);
     FrameRateText.invalidate ();
 
-    // 更新CELLSHOW中提�?
+    // 更新CELLSHOW中提�?
     Unicode::snprintf (dianchixinxiBuffer1, DIANCHIXINXIBUFFER1_SIZE, "%d", viewToModelData.BCMU_SEL);
     Unicode::snprintf (dianchixinxiBuffer2, DIANCHIXINXIBUFFER2_SIZE, "%d", viewToModelData.BMU_SEL);
     dianchixinxi.invalidate ();
 
-    // 更新所有单体电池电�?�?10000  现在/1000)
+    // 更新所有单体电池电�?�?10000  现在/1000)
     Unicode::snprintfFloat (CellText1Buffer, CELLTEXT1_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[0] / 1000);
     CellText1.invalidate ();
 
@@ -1864,7 +2134,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 
     Unicode::snprintfFloat (CellText12Buffer, CELLTEXT12_SIZE, "%.3f", (float)modelToViewData.BAT_VOL[11] / 1000);
     CellText12.invalidate ();
-    // 显示平均电压（调试用�?
+    // 显示平均电压（调试用�?
     float sum_v = 0;
     for (int i = 0; i < 12; i++) { sum_v += (float)modelToViewData.BAT_VOL[i] / 1000; }
     float avg_V = sum_v / 12;
@@ -1888,13 +2158,13 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     Unicode::snprintf (cubianhaoBuffer, CUBIANHAO_SIZE, "%d", viewToModelData.BCMU_SEL);
     cubianhao.invalidate ();
 
-    Unicode::snprintfFloat (cudianyaBuffer, CUDIANYA_SIZE, "%.1f", (float)modelToViewData.cluster_VOL * 0.1);
+    Unicode::snprintfFloat (cudianyaBuffer, CUDIANYA_SIZE, "%.1f", (float)modelToViewData.cluster_VOL * 0.1f);
     cudianya.invalidate ();
 
     Unicode::snprintfFloat (cluster_resBuffer, CLUSTER_RES_SIZE, "%.0f", (float)modelToViewData.cluster_res);
     cluster_res.invalidate ();
 
-    Unicode::snprintfFloat (cudianliuBuffer, CUDIANLIU_SIZE, "%.1f", (float)modelToViewData.cluster_CUR * 0.01);
+    Unicode::snprintfFloat (cudianliuBuffer, CUDIANLIU_SIZE, "%.1f", (float)modelToViewData.cluster_CUR * 0.01f);
     cudianliu.invalidate ();
 
     Unicode::snprintf (zhengjueyuanBuffer, ZHENGJUEYUAN_SIZE, "%d", modelToViewData.insulation_res_p);
@@ -1903,7 +2173,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     Unicode::snprintf (fujueyuanBuffer, FUJUEYUAN_SIZE, "%d", modelToViewData.insulation_res_n);
     fujueyuan.invalidate ();
 
-    // 更新电池指示图，增加变色功能�?~20显示红色 20~60黄色 60~100绿色
+    // 更新电池指示图，增加变色功能�?~20显示红色 20~60黄色 60~100绿色
     // SOC1_view.setValue((float)modelToViewData.BAT_SOC[0] / 10);
     // SOC2_view.setValue((float)modelToViewData.BAT_SOC[1] / 10);
     // SOC3_view.setValue((float)modelToViewData.BAT_SOC[2] / 10);
@@ -1967,7 +2237,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 
     float sum_soc = 0;
     for (int i = 0; i < 12; i++) { sum_soc += modelToViewData.BAT_SOC[i] / 10; }
-    float avg_S = sum_soc / 12.0;
+    float avg_S = sum_soc / 12.0f;
     Unicode::snprintfFloat (avg_socBuffer, AVG_SOC_SIZE, "%.1f", avg_S);
     avg_soc.invalidate ();
 
@@ -2012,11 +2282,11 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 
     float sum_tem = 0;
     for (int i = 0; i < 12; i++) { sum_tem += modelToViewData.BAT_TMP[i] / 100; }
-    float avg_T = sum_tem / 12.0;
+    float avg_T = sum_tem / 12.0f;
     Unicode::snprintfFloat (avg_temBuffer, AVG_TEM_SIZE, "%.2f", avg_T);
     avg_tem.invalidate ();
 
-    // 更新BCMU框选图�?
+    // 更新BCMU框选图�?
     if (BCMU_SEL_BOX.isVisible() == false) 
     {
         if (modelToViewData.BCMU_state[0] == online)
@@ -2035,7 +2305,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     }
 
     for (int i = 0; i < cluster_num; i++) {
-        if (modelToViewData.BCMU_state[i] == offline) // 不使�?
+        if (modelToViewData.BCMU_state[i] == offline) // 不使能
         {
             BCMU_ui[i]->setLabelText (touchgfx::TypedText (T_BCMU_0));
             BCMU_ui[i]->setTouchable (false);
@@ -2048,7 +2318,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
         }
     }
 
-    if (modelToViewData.BCMU_state[viewToModelData.BCMU_SEL - 1] == online) // 当前选中的BCMU使能，刷新其BMU的状�?
+    if (modelToViewData.BCMU_state[viewToModelData.BCMU_SEL - 1] == online) // 当前选中的BCMU使能，刷新其BMU的状态
     {
         for (int i = 0; i < GRP_num; i++) {
             if (bmu_offline[viewToModelData.BCMU_SEL - 1][i] == 0) // 0表示在线，非0离线)
@@ -2069,7 +2339,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
 
     // 更新ip信息
 
-    http_get_wan_ip (local_ip_buff, 16); // 给local_ip_buff赋值char类型的变�?
+    http_get_wan_ip (local_ip_buff, 16); // 给local_ip_buff赋值char类型的变量
     Unicode::UnicodeChar wan_ip_buf[16];
     Unicode::strncpy (wan_ip_buf, local_ip_buff, 16);
     Unicode::snprintf (local_ipBuffer, LOCAL_IP_SIZE, "%s", wan_ip_buf);
@@ -2100,7 +2370,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     int err_counter = 0;
     int err_sum     = 0;
     char id_temp[128];
-    char err_temp[128];
+    //char err_temp[128];
 
     // Client_Sd[cluster_num].error_count
     // Client_errors[cluster_num][MAX_ERROR]
@@ -2109,7 +2379,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
     //{
     //     /*touchgfx::Unicode::snprintf(e_gen_Buffer[i], 10, "%d", 12);*/
     //     e_gen[i].setTypedText(touchgfx::TypedText(T_BSMU_ERR1));
-    //     id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误�?
+    //     id_gen[i].setTypedText(touchgfx::TypedText(T_ERR_TYPE3)); //错误�?
     //     Unicode::snprintf(t_gen_Buffer[i], 10, "%s", u_time);
     //     t_gen[i].resizeToCurrentText();
     //     id_gen[i].resizeToCurrentText();
@@ -2133,9 +2403,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
         scrollableContainer1.invalidate ();
         /*共五种错误信息格式：
         1、BSMU错误
-        2、第X簇BCMU错误，其中位宽为2的信�?00 无故�?  01�?1均有故障  10预警
-        3、第X簇X组BMU(组内)板错�?
-        4、第X簇X组BMU(组内)X号电池错�?
+        2、第X簇BCMU错误，其中位宽为2的信�?00 无故�?  01�?1均有故障  10预警
+        3、第X簇X组BMU(组内)板错�?
+        4、第X簇X组BMU(组内)X号电池错�?
         5、第X簇BMU(组间错误)*/
 
         for (int k = 0; k < cluster_num; k++) // 遍历错误二维数组Client_errors[cluster_num][MAX_ERROR]中的cluster_num
@@ -2143,9 +2413,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
             if (BCMU[k].OnlineOrOffline == Offline) continue;
             for (int i = 0; i < Client_Sd[k].error_count; i++) // Client_errors[cluster_num][MAX_ERROR]中的MAX_ERROR
             {
-                if (Client_errors[k][i].error_id_h == 0x00) // 判断id�?�?
+                if (Client_errors[k][i].error_id_h == 0x00) // 判断id�?�?
                 {
-                    if (Client_errors[k][i].error_id_l == 0x00) // 判断id�?位，BSMU错误
+                    if (Client_errors[k][i].error_id_l == 0x00) // 判断id�?位，BSMU错误
                     {
                         for (int j = 0; j < 16; j++) // 逐位判断错误信息，并输出
                         {
@@ -2154,18 +2424,18 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 gettime ();
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time);                                              // 打印错误时间
-                                id_gen[err_counter].setTypedText (touchgfx::TypedText (T_ERR_TYPE0));    // 错误�?
+                                id_gen[err_counter].setTypedText (touchgfx::TypedText (T_ERR_TYPE0));    // 错误�?
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BSMU_ERR0 - j)); // 错误类型
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;
                             }
                         }
                     } else if (Client_errors[k][i].error_id_l == 0x01
-                               || Client_errors[k][i].error_id_l == 0x02) // 判断id�?位，BCMU错误
+                               || Client_errors[k][i].error_id_l == 0x02) // 判断id�?位，BCMU错误
                     {
-                        if (Client_errors[k][i].error_id_l == 0x01) // 错误位宽�?
+                        if (Client_errors[k][i].error_id_l == 0x01) // 错误位宽�?
                         {
                             for (int j = 0; j < 8; j++) {
                                 if (get_two_bit_value (Client_errors[k][i].error_code, j + 1) == 2) // 预警
@@ -2179,9 +2449,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                     Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                        20); // touchgfx仅支持显示unicode类型
                                     // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1));
-                                    // //错误�?
+                                    // //错误�?
                                     e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BCMU_ERR_2BIT_0 - j));
-                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                     id_gen[err_counter].resizeToCurrentText ();
                                     e_gen[err_counter].resizeToCurrentText ();
                                     err_counter++;
@@ -2199,23 +2469,23 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                     Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                        20); // touchgfx仅支持显示unicode类型
                                     // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1));
-                                    // //错误�?
+                                    // //错误�?
                                     e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BCMU_ERR_2BIT_0 - j));
-                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                     id_gen[err_counter].resizeToCurrentText ();
                                     e_gen[err_counter].resizeToCurrentText ();
                                     err_counter++;
                                 }
                             }
                         }
-                        if (Client_errors[k][i].error_id_l == 0x02) // 错误位宽�?
+                        if (Client_errors[k][i].error_id_l == 0x02) // 错误位宽�?
                         {
                             for (int j = 0; j < 16; j++) {
-                                if (get_one_bit_value (Client_errors[k][i].error_code, j + 1) == 0) // 无故�?
+                                if (get_one_bit_value (Client_errors[k][i].error_code, j + 1) == 0) // 无故�?
                                 {
                                 } else if (get_one_bit_value (Client_errors[k][i].error_code,
                                                               j + 1)
-                                           == 1) // 无故�?
+                                           == 1) // 无故�?
                                 {
                                     if (err_counter >= errcount) err_counter = err_counter % errcount;
                                     gettime ();
@@ -2226,9 +2496,9 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                     Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                        20); // touchgfx仅支持显示unicode类型
                                     // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE1));
-                                    // //错误�?
+                                    // //错误�?
                                     e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BCMU_ERR0 - j));
-                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                    t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                     id_gen[err_counter].resizeToCurrentText ();
                                     e_gen[err_counter].resizeToCurrentText ();
                                     err_counter++;
@@ -2237,12 +2507,12 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                         }
                     }
                 } else if (Client_errors[k][i].error_id_h >= 0x01
-                           && Client_errors[k][i].error_id_h <= 0x1F) // 判断id�?�?
+                           && Client_errors[k][i].error_id_h <= 0x1F) // 判断id�?�?
                 {
-                    if (Client_errors[k][i].error_id_l == 0x00) // BMU（组内）板错�?
+                    if (Client_errors[k][i].error_id_l == 0x00) // BMU（组内）板错�?
                     {
                         /*Unicode::snprintf(id[i], 20, "%s",
-                         * "BMU(组内)板错�?\0");*/
+                         * "BMU(组内)板错�?\0");*/
                         for (int j = 0; j < 16; j++) {
                             if (get_one_bit_value (Client_errors[k][i].error_code, j + 1) == 1) {
                                 if (err_counter >= errcount) err_counter = err_counter % errcount;
@@ -2250,14 +2520,14 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time); // 打印错误时间
                                 // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE2));
-                                // //错误�?
+                                // //错误�?
                                 sprintf (id_temp, "BCMU%d BMU%d board error", k + 1,
                                          Client_errors[k][i].error_id_h); // char 类型
                                 Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                    20); // touchgfx仅支持显示unicode类型
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BMU_BOARD_ERR0 - j));
 
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;
@@ -2273,7 +2543,7 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time); // 打印错误时间
                                 // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE3));
-                                // //错误�?
+                                // //错误�?
                                 sprintf (id_temp, "BCMU%d BMU%d Cell%d error", k + 1,
                                          Client_errors[k][i].error_id_h,
                                          Client_errors[k][i].error_id_l); // char 类型
@@ -2281,14 +2551,14 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                                    20); // touchgfx仅支持显示unicode类型
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BMU_BATTERY_ERR0 - j));
 
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;
                             }
                         }
                     }
-                } else if (Client_errors[k][i].error_id_h == 0x20) // 判断id�?�?
+                } else if (Client_errors[k][i].error_id_h == 0x20) // 判断id�?�?
                 {
                     if (Client_errors[k][i].error_id_l == 0) // BMU(组间错误)
                     {
@@ -2299,13 +2569,13 @@ MainScreenView::NotifyViewMsg (ModelToViewData modelToViewData)
                                 Unicode::snprintf (t_gen_Buffer[err_counter], 20, "%s",
                                                    u_time); // 打印错误时间
                                 // id_gen[err_counter].setTypedText(touchgfx::TypedText(T_ERR_TYPE4));
-                                // //错误�?
-                                sprintf (id_temp, "�?d簇BMU(组间错误)",
+                                // //错误�?
+                                sprintf (id_temp, "%d簇BMU(组间错误)",
                                          k + 1); // char 类型
                                 Unicode::fromUTF8 ((const uint8_t *)id_temp, id_gen_Buffer[err_counter],
                                                    20); // touchgfx仅支持显示unicode类型
                                 e_gen[err_counter].setTypedText (touchgfx::TypedText (T_BMU_BETWEEN_ERR0 - j));
-                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
+                                t_gen[err_counter].resizeToCurrentText (); // 调整文本大小以正常显�?
                                 id_gen[err_counter].resizeToCurrentText ();
                                 e_gen[err_counter].resizeToCurrentText ();
                                 err_counter++;

@@ -49,8 +49,33 @@
 #define MODBUS_OFFLINE_LIMIT             3U
 #define DCDC_MODBUS_WRITE_QUEUE_LENGTH   1U     /* 只允许一条 DCDC 写命令等待执行，防止控制命令堆积。 */
 #define DCDC_MODBUS_MAX_WRITE_REGISTERS  14U    /* 0x0427～0x0434 参数区最多连续十四只寄存器。 */
-#define DCDC_MODBUS_PC_TEST_ENABLE       0U     /* 当前阶段启用 Keil Watch 写触发器；连接真实 DCDC 前必须改为 0。 */
+#define DCDC_MODBUS_DATA_FRESHNESS_MS    2000U  /* 除安全停机外，写命令要求最近完整轮询数据不超过 2 秒。 */
+#define DCDC_MODBUS_WRITE_MAX_ATTEMPTS   3U     /* 单条写命令最多尝试三次，避免故障总线上无限重试。 */
+#define DCDC_MODBUS_WRITE_RETRY_DELAY_MS 20U    /* 两次写入尝试之间保留 20 ms 总线恢复时间。 */
+#define DCDC_MODBUS_WRITE_TOTAL_TIMEOUT_MS 4000U /* 从提交起最多允许执行 4 秒，超时命令不得继续写设备。 */
+#define DCDC_MODBUS_PC_TEST_ENABLE       0U     /* 正式界面接入后关闭 Keil Watch 写触发器，避免与 TouchGFX 控制入口并存。 */
 #define DCDC_MODBUS_PC_TEST_MAGIC        0x5AA5U /* 只有 trigger 写入该魔术值时才提交 PC 模拟写命令。 */
+
+/* DCDC 0x0402 工作模式选择寄存器的有效值。 */
+#define DCDC_WORK_MODE_STANDBY           0U     /* 写 0 请求设备进入待机状态。 */
+#define DCDC_WORK_MODE_CV_CURRENT_LIMIT  1U     /* 写 1 选择恒压限流模式。 */
+
+/* DCDC 0x0403 启停控制寄存器的命令值。 */
+#define DCDC_RUN_COMMAND_START           4U     /* 写 4 执行手动开机。 */
+#define DCDC_RUN_COMMAND_STOP            5U     /* 写 5 执行手动关机。 */
+
+/* DCDC 0x0404 原始状态值；状态 4 必须结合 0x0405 才能区分停机和故障。 */
+#define DCDC_WORK_STATE_CV_CURRENT_LIMIT 1U     /* 恒压限流运行状态。 */
+#define DCDC_WORK_STATE_STOP_OR_FAULT    4U     /* 停机/待机或故障共用的厂家状态值。 */
+
+/* DCDC 0x0405 故障位定义；允许按位组合。 */
+#define DCDC_FAULT_P_OVERVOLTAGE         0x0001U /* P 侧过压。 */
+#define DCDC_FAULT_P_UNDERVOLTAGE        0x0002U /* P 侧欠压。 */
+#define DCDC_FAULT_B_OVERVOLTAGE         0x0004U /* B 侧过压。 */
+#define DCDC_FAULT_B_UNDERVOLTAGE        0x0008U /* B 侧欠压。 */
+#define DCDC_FAULT_OVERCURRENT           0x0020U /* 充放电过流。 */
+#define DCDC_FAULT_CHARGE_OVERTEMP       0x0100U /* 充电高温保护。 */
+#define DCDC_FAULT_OVERTEMP              0x0200U /* 高温保护。 */
 
 #define MODBUS_BLOCKING_RX_DIAG_ENABLE   0U     /* 0 恢复 USART2 DMA+IDLE 接收；改为 1 时才启用阻塞定长 A/B 诊断。 */
 #define MODBUS_RX_DIAG_ENABLE            1U     /* 1 编译详细收帧诊断；正式版本改为 0 可完全移除诊断代码和变量。 */
@@ -79,8 +104,14 @@ typedef enum                                  /* 定义提交 DCDC 写命令时�
     DCDC_WRITE_SUBMIT_OK = 0,                 /* 命令参数有效，并已成功放入写命令队列。 */
     DCDC_WRITE_SUBMIT_INVALID = -1,           /* 地址、数量、数值或指针不符合安全规则。 */
     DCDC_WRITE_SUBMIT_BUSY = -2,              /* 上一条写命令尚未完成，本次命令未被接收。 */
-    DCDC_WRITE_SUBMIT_NOT_READY = -3          /* 写命令队列尚未创建，Modbus 模块未初始化。 */
+    DCDC_WRITE_SUBMIT_NOT_READY = -3,         /* 写命令队列尚未创建，Modbus 模块未初始化。 */
+    DCDC_WRITE_SUBMIT_STALE_DATA = -4,        /* DCDC 数据不新鲜；除安全停机外拒绝提交控制命令。 */
+    DCDC_WRITE_SUBMIT_DEVICE_FAULT = -7       /* 0x0405 存在有效故障位，拒绝提交启动命令。 */
 } dcdc_modbus_write_submit_result_t;          /* DCDC 写命令提交结果类型名称。 */
+
+#define DCDC_WRITE_EXEC_STALE_DATA       (-5) /* 命令执行前数据已过期，未向 DCDC 发出写请求。 */
+#define DCDC_WRITE_EXEC_TOTAL_TIMEOUT     (-6) /* 命令从提交起已超过总时限，停止后续尝试。 */
+#define DCDC_WRITE_EXEC_DEVICE_FAULT      (-8) /* 命令执行前发现 0x0405 故障，未向 DCDC 发出启动请求。 */
 
 typedef struct                                /* 定义 EMS 内部保存的 ACDC 实时数据镜像。 */
 {
@@ -119,8 +150,8 @@ typedef struct                                /* 定义 EMS 内部保存的 ACDC
 
 typedef struct                                /* 定义 EMS 内部保存的 DCDC 实时数据镜像。 */
 {
-    uint16_t work_state;                      /* 0x0404，DCDC 工作状态：0 待机、1 恒压恒流、2 恒流、3 故障。 */
-    uint16_t fault_raw;                       /* 0x0405，DCDC 原始故障位；文档未给位定义，所以暂不拆分。 */
+    uint16_t work_state;                      /* 0x0404 原始状态：1 恒压限流；4 表示停机/待机或故障，须结合 fault_raw。 */
+    uint16_t fault_raw;                       /* 0x0405 原始故障位掩码；0 表示当前没有有效故障，非零可按 DCDC_FAULT_* 拆分。 */
     float temperature_c[8];                   /* 0x0406～0x040D，八路有符号温度，原始值除以 10 得到 ℃。 */
     float max_temperature_c;                  /* 0x040E，机器内部最高温度，原始有符号值除以 10。 */
     uint16_t b_power_w;                       /* 0x041B，B 侧实时功率，协议示例表明原始值单位为 W。 */
@@ -142,13 +173,20 @@ typedef struct                                /* 保存最近一条 DCDC 写命�
 {
     uint8_t state;                            /* 当前执行状态，取值见 dcdc_modbus_write_state_t。 */
     uint8_t function_code;                    /* 实际使用的功能码：单写为 0x06，多写为 0x10。 */
+    uint8_t attempt_count;                    /* 本条命令已经发起的写尝试次数，最大为三次。 */
+    uint8_t readback_confirmed;               /* 0x03 读回值与请求值完全一致时置 1。 */
     uint16_t address;                         /* 最近一条写命令的保持寄存器起始地址。 */
     uint16_t count;                           /* 最近一条写命令连续写入的寄存器数量。 */
     uint16_t requested[DCDC_MODBUS_MAX_WRITE_REGISTERS]; /* 最近一次要求写入的原始寄存器值。 */
     uint16_t readback[DCDC_MODBUS_MAX_WRITE_REGISTERS];  /* 写成功后使用 0x03 读取的校验值。 */
     int16_t last_error;                       /* 最近写事务错误码，0 成功，-4 表示读回不一致。 */
     uint32_t sequence;                        /* 每接受一条新命令就递增，用于区分不同测试。 */
+    uint32_t submitted_tick;                  /* 命令成功进入队列时的 HAL Tick。 */
+    uint32_t started_tick;                    /* Modbus 任务开始执行该命令时的 HAL Tick。 */
     uint32_t completed_tick;                  /* 最近一条命令完成时的 HAL Tick。 */
+    uint32_t stale_reject_count;              /* 因 DCDC 数据不新鲜而拒绝的累计次数。 */
+    uint32_t device_fault_reject_count;       /* 因 0x0405 存在故障而拒绝启动的累计次数。 */
+    uint32_t total_timeout_count;              /* 因命令总执行时间超限而终止的累计次数。 */
 } dcdc_modbus_write_status_t;                 /* DCDC 写命令状态类型名称。 */
 
 typedef struct                                /* 定义仅用于 PC Modbus Slave 模拟的 Keil Watch 触发器。 */
@@ -227,7 +265,18 @@ void modbus_init(void);                       /* 初始化 Modbus RTU 主站任�
 const volatile acdc_modbus_data_t *acdc_modbus_get_data(void); /* 获取 ACDC 数据镜像的只读指针。 */
 const volatile dcdc_modbus_data_t *dcdc_modbus_get_data(void); /* 获取 DCDC 数据镜像的只读指针。 */
 const volatile dcdc_modbus_write_status_t *dcdc_modbus_get_write_status(void); /* 获取最近写命令状态。 */
+void modbus_copy_gui_snapshot(            /* 在短临界区内复制界面需要的三份状态，避免任务切换造成撕裂读取。 */
+    acdc_modbus_data_t *acdc_data,
+    dcdc_modbus_data_t *dcdc_data,
+    dcdc_modbus_write_status_t *write_status);
+uint32_t dcdc_modbus_get_data_age_ms(void); /* 获取最近一轮完整 DCDC 数据距当前的毫秒数。 */
+uint8_t dcdc_modbus_data_is_fresh(void); /* 判断 DCDC 在线且最近完整数据未超过新鲜度阈值。 */
+uint8_t dcdc_modbus_is_running(void); /* 数据新鲜、无故障且 0x0404 为 1 时返回 1。 */
+uint8_t dcdc_modbus_is_stopped(void); /* 数据新鲜、无故障且 0x0404 为 4 时返回 1。 */
+uint8_t dcdc_modbus_is_faulted(void); /* 数据新鲜且 0x0405 任一故障位置位时返回 1。 */
 int dcdc_modbus_write_single_async(uint16_t address, uint16_t value); /* 异步提交一条功能码 0x06 单写命令。 */
 int dcdc_modbus_write_multiple_async(uint16_t address, const uint16_t *values, uint16_t count); /* 异步提交功能码 0x10 多写命令。 */
+int dcdc_modbus_set_work_mode_async(uint16_t mode); /* 异步设置 DCDC 工作模式，内部写 0x0402。 */
+int dcdc_modbus_set_run_async(uint8_t enable); /* 异步启停 DCDC，1 启动、0 安全停机。 */
 
 #endif                                       /* __MODBUS_H_ */

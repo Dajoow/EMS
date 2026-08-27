@@ -1,6 +1,6 @@
 # Hdu_EMS_H750 项目上下文
 
-> 最近核对：2026-08-11（Asia/Shanghai）  
+> 最近核对：2026-08-27（Asia/Shanghai）
 > 工程根目录：本文所在目录  
 > 事实标记：**[已验证]** 表示可由当前源码、Git、已有测试记录或本对话截图确认；**[代码推断]** 表示由当前代码路径推导、尚未做现场验证；**[待确认]** 表示当前材料不足。  
 > 维护规则：接手者必须先核对实际工程和 `git diff`。本文是恢复上下文的入口，不是源码与硬件实测的替代品。
@@ -25,7 +25,11 @@
 - **[已验证]** DCDC `Skip response` 期间曾出现电池页面异常值；该问题仍未定位，继续作为独立问题挂起。
 - **[已验证]** 真实DCDC（地址`0xFF`）只读联调已经通过四级接收缓冲诊断和PC侧被动RS485抓帧确认：EMS内部ISR/任务/解析缓冲复制一致；PC在DCDC端看到的2080帧完整响应CRC全部正确，但EMS仍偶发收到CRC尾字节错误，问题范围已缩小到RS485物理链路、EMS侧收发器或USART采样链路。当前缺少逻辑分析仪，问题作为已知风险暂缓，不视为已解决。
 - **[已验证]** 2026-08-11 已完成PC作为唯一主站、USB-RS485直连真实DCDC的两组10分钟Modbus Poll对照：`0x0404/11`为`Tx=1205、Err=15`，`0x041B/6`为`Tx=1223、Err=8`。两组日志中的核心Modbus响应帧CRC均正确，异常主要表现为完整有效帧之后偶发附加单字节以及少量无响应；测试到此暂停，根因仍保留为待硬件仪器定位事项。
+- **[已验证]** 已恢复D-Cache，并新增仅覆盖`0x30000000～0x30002FFF`的USART DMA非缓存MPU区域；DCDC写队列现已具备2秒数据新鲜度、最多3次尝试、4秒总时限、写后读回以及故障启动门禁。2026-08-27 接入TouchGFX设备状态页时已关闭`DCDC_MODBUS_PC_TEST_ENABLE`，Keil Watch写触发器不再编译。
+- **[已验证]** 真实DCDC启停已验证基本可用：`0x0402=0`准备后写`0x0403=4`可进入`work_state=1`，写`0x0403=5`可进入`work_state=4、fault_raw=0`；但是5轮启停重复性测试在第三次启动时触发`fault_raw=0x0004`（B侧过压），测试已中止，当前禁止继续启动，详见7.8节和V1.7测试文档第22章。
 - **[已验证]** 2026-07-22 已对当前工作区执行完整 Keil Rebuild：0 errors、10 warnings，成功链接并生成 `.axf`、`.hex`、`.map`。
+- **[已验证]** 2026-08-27 已新增TouchGFX“设备状态”页：左侧ACDC只读监听，右侧DCDC状态与受保护控制；DCDC启动按钮禁用，安全停机需二次确认。未连接任何ACDC/DCDC设备时，实机LCD显示、顶部导航、页面切换和初始零值正常。
+- **[已验证]** TouchGFX 4.21.4已安装在`C:/TouchGFX/4.21.4`；当前设备状态页版本通过Simulator链接和Keil ARMCC5构建，最终为0 errors、3个既有scatter warning。
 
 ### 1.3 最终需要实现的功能
 
@@ -33,14 +37,14 @@
 - 将两个设备的寄存器数据按协议缩放、符号和字节序转换成独立工程量结构。
 - 提供 DCDC 安全的异步写命令框架，包含白名单、单/多寄存器写、写后读回、状态与错误统计。
 - 具备单从站断线隔离、自动恢复、CRC/异常响应处理，不污染 CAN/电池数据和 UI。
-- 完成真实 ACDC、真实 DCDC 的只读联调；在互锁和范围校验完成后再开放真实 DCDC 控制。
+- 完成真实 ACDC、真实 DCDC 的只读联调；完成真实DCDC启停状态机、保护原因定位和重复性验收后，才允许接入TouchGFX或EMS自动控制。
 
 ### 1.4 明确不在当前范围内
 
 - **[已验证]** 不因 Modbus 改造重画板或新增第二路 RS485；现阶段复用现有一路二线接口。
 - **[已验证]** 当前工程没有 NetX Duo；网络栈是 LwIP。
 - **[已验证]** 当前源码未发现 MQTT/MQTTS 客户端、Broker、主题或客户端标识配置；云端通道是 HTTPS。除非后续需求变更，不把 MQTT 视为现有功能。
-- **[已验证]** 本阶段不执行真实 DCDC 启停/充放电控制，也不在异常根因未解决时将 PC 测试入口用于真实设备。
+- **[已验证]** 当前只允许人工监护下通过Keil Watch执行受保护的真实DCDC启停验证；不允许接入TouchGFX、EMS自动策略、无人值守闭环或充放电功率调节。
 - **[待确认]** ACDC 写控制是否属于最终范围；目前实现和测试重点是 ACDC 只读。
 
 ## 2. 开发环境
@@ -67,7 +71,7 @@
 | RTOS | FreeRTOS V10.3.1 + CMSIS-RTOS v1 API | **[已验证]** 中间件头文件、任务创建方式 |
 | 网络栈 | LwIP 2.1.2 Cube | **[已验证]** `.ioc` |
 | TLS | mbedTLS 2.16.2 | **[已验证]** `version.h` |
-| GUI | TouchGFX 4.21.4 路径曾用于生成/模拟器 | **[已验证]** `项目记忆.md`；当前本机安装有效性待确认 |
+| GUI | TouchGFX 4.21.4，安装路径`C:/TouchGFX/4.21.4` | **[已验证]** Designer、文本/字体/图片生成、Simulator和Keil构建均已实际运行 |
 | Modbus | Agile Modbus（仓内源码） | **[已验证]** `agile_modbus/`；精确版本待确认 |
 | 持久化库 | EasyFlash + SFUD（仓内源码） | **[已验证]** `flash_storage/`；精确版本待确认 |
 
@@ -82,7 +86,7 @@
 | CAN/电池采集 | `Core/Src/CAN_Control.c`：FDCAN 收发、轮询、队列、上报信号量 |
 | 数据聚合 | `Core/Src/station_ctl.c`：簇/站级数据结构和统计计算 |
 | EMS 策略 | `Core/Inc/EMS_strategy.h`、`Core/Src/EMS_strategy.c`：未跟踪的新模块；已参与当前 Keil 构建，职责和功能验证仍待确认 |
-| Modbus 主站 | `Drivers/BSP/Components/RS485/modbus.c/.h`：ACDC/DCDC 轮询、状态、DCDC 写队列和 PC 触发 |
+| Modbus 主站 | `Drivers/BSP/Components/RS485/modbus.c/.h`：ACDC/DCDC 轮询、状态和DCDC异步写队列；PC Watch触发已关闭 |
 | RS485 接收 | `Core/Src/usart.c`、`RS485.*`、`modbus_slave.*`：USART2 DMA/IDLE 接收与任务通知 |
 | 本地网络 | `Core/Src/client.c`：从 EEPROM 读取目标 IP/端口并建立本地 TCP 客户端 |
 | 云端网络 | `Core/Src/http_client.c`：DNS、TLS、HTTPS JSON 上报 |
@@ -132,13 +136,14 @@
 ### 4.1 时钟、内存、MPU、Cache
 
 - CPU/SYSCLK 480 MHz，HCLK/AXI/AHB 240 MHz，APB1~4 120 MHz；HSE 25 MHz，PLL 为系统时钟源。
-- `main()` 开启 I-Cache 和 D-Cache。
+- `main()`先执行`MPU_Config()`，随后开启I-Cache和D-Cache；当前D-Cache已正式恢复。
 - MPU 区域：
   - `0x30040000`，32 KB，不可执行、不可缓存/缓冲，用于 Ethernet 描述符/缓冲相关区域；另有 256 B 子区域配置。
   - `0x30020000`，32 KB，不可执行、不可缓存，用作 LwIP heap。
   - `0xC0000000`，4 MB，外部 SDRAM 区。
+  - `0x30000000`起始的Region 5：16 KB Normal/Shareable/Non-cacheable/Non-bufferable，并通过`SubRegionDisable=0xC0`关闭最后4 KB，实际只覆盖`0x30000000～0x30002FFF`。该范围对应UART5、UART4、USART2三个4 KB DMA地址槽，不覆盖`0x30003000`之后的其他D2 SRAM。
 - 固定地址：`ETHSendBuffAdd=0xC0384000`、`CANRevBuffStartAdd=0xC03B0000`、`CANSndBuffStartAdd=0xC03F8000`；云端缓存还使用 `0xC0400000` 和 `0xC040E6A0`。
-- **注意：** 固定地址、链接段、MPU 与 Cache/DMA 必须成套核对，不得单独移动。
+- **注意：** 固定地址、链接段、MPU 与 Cache/DMA 必须成套核对，不得单独移动。若链接映射导致任一`Uart_BUFF`离开上述三个地址槽，必须同步调整MPU范围并重新验证。
 
 ### 4.2 Ethernet、LAN8742、LwIP
 
@@ -177,9 +182,9 @@
 | 一轮后的延时 | 500 ms |
 | 离线门限 | 连续失败 3 次 |
 | DCDC 写队列 | 长度 1；最多连续 14 个寄存器 |
-| PC Watch 触发 | 当前 `DCDC_MODBUS_PC_TEST_ENABLE=0`，真实设备阶段已关闭；历史模拟使用魔术值宏 `DCDC_MODBUS_PC_TEST_MAGIC` |
+| PC Watch 触发 | 当前 `DCDC_MODBUS_PC_TEST_ENABLE=0`；Keil Watch触发器不编译，DCDC安全停机只通过受保护的异步API提交 |
 
-**安全要求：真实 DCDC 接入前，必须将 `DCDC_MODBUS_PC_TEST_ENABLE` 改为 0、重新编译，并确认没有调试器残留写操作。**
+**安全要求：保持`DCDC_MODBUS_PC_TEST_ENABLE=0`。TouchGFX仅开放需要二次确认的安全停机，DCDC启动按钮保持禁用；不得重新启用Watch写入口绕过界面与故障门禁。**
 
 ## 5. 关键文件说明
 
@@ -252,6 +257,8 @@
 - **[已验证]** 当前已知稳定的 Modbus 功能存在于未提交工作区，不对应一个可唯一复现的 Git commit。
 - **[已验证]** Git `HEAD=826fbff` 只代表 2026-06-04 的拓扑/UI提交；不能单独代表当前 Modbus 功能。
 - **[已验证]** 2026-07-22 使用 Keil ARM Compiler V5.06 update 7 build 960 对当前未提交工作区完成 Rebuild：0 errors、10 warnings；构建产物时间为本次构建时间。
+- **[已验证]** 2026-08-11 在D-Cache局部非缓存MPU、DCDC写命令新鲜度/超时/故障门禁及新协议常量修改后完成Keil Rebuild：0 errors、12 warnings。当前可复现状态仍位于未提交工作区。
+- **[已验证]** 当前写框架的单条启停命令、功能码`0x06`响应和`0x03`读回已在真实DCDC上成功；但第三次启动触发B侧过压，因此只能称“基本接口可用”，不能称“启停功能稳定通过”。
 
 ## 7. 当前问题
 
@@ -299,11 +306,11 @@
 
 ### 7.4 2026-08-06真实DCDC只读联调与Cache诊断
 
-- **实机条件 [已验证]：** 当前仅轮询真实DCDC，从站地址为`0xFF`；ACDC轮询、DCDC写命令处理和PC Watch写触发均已关闭，EMS只发送功能码`0x03`。
+- **当时实机条件 [历史记录]：** 该轮物理层诊断仅轮询真实DCDC，从站地址为`0xFF`；当时ACDC轮询、DCDC写命令处理和PC Watch写触发均关闭，EMS只发送功能码`0x03`。2026-08-27设备状态页版本已恢复ACDC地址33只读轮询，并保留DCDC异步安全停机队列。
 - **读取内容 [已验证]：** 每轮读取`0x0404/11`和`0x041B/6`两个保持寄存器块；DCDC处于待机，`work_state=0`、`fault_raw=0`，B侧电压约47.8 V，实机数据能够持续更新。
 - **D-Cache开启基线 [已验证]：** 连续运行约626秒，仅末尾Stop一次；`success_count=825`、`timeout_count=18`、`protocol_error_count=199`，完整轮询成功率约79.2%，失败率约20.8%。该结果排除了反复Stop/Run是主要原因。
 - **临时关闭D-Cache对比 [已验证]：** 注释`Core/Src/main.c`中的`SCB_EnableDCache()`并重新编译下载，连续运行约676秒；`success_count=1047`、`timeout_count=29`、`protocol_error_count=34`，成功率约94.3%。协议错误率由约19.1%降到约3.1%，强烈支持USART2 DMA缓冲与D-Cache一致性是主要问题，但仍有约5.7%失败需要继续分类。
-- **当前Cache状态 [已验证]：** `SCB_EnableDCache()`仅为诊断而临时注释；这不是正式修复，完成收帧诊断后必须恢复D-Cache并采用局部非缓存MPU区或正确Cache维护方案。
+- **当前Cache状态 [已验证]：** 后续已经恢复`SCB_EnableDCache()`，并在`Core/Src/main.c::MPU_Config()`新增Region 5，把`0x30000000～0x30002FFF`三个UART DMA地址槽配置为非缓存区。该正式修复不覆盖`0x30003000`之后的D2 SRAM；仍需在每次链接布局变化后核对`.map`中的三个`Uart_BUFF`地址。
 - **详细诊断代码 [已实现、已编译、待实测]：** `modbus.h/.c`新增`MODBUS_RX_DIAG_ENABLE=1`和`g_modbus_rx_diag`，仅在失败时记录状态块/实时块分类、失败阶段、期望长度、实际长度、解析结果及前32字节原始响应；设为0时通过预处理完全移除详细诊断代码和变量。
 - **异常原始帧 [已验证]：** 诊断抓到一帧完整的`0x0404/11`响应：帧头`FF 03 16`、总长度27字节、数据区可正确还原当前工作状态/温度，但帧尾实际为`E7 94`；按工程相同Modbus CRC算法计算应为`E7 29`，确认该次失败是最后一个CRC字节损坏，而不是地址、功能码、字节数或DMA长度错误。
 - **最小物理层/复制诊断 [已实现、已编译、已实测]：** 在原有开关`MODBUS_RX_DIAG_ENABLE`内增加USART2中断入口ISR快照、HAL错误码、DMA余量、ISR长度、DMA/ISR接收缓冲/任务接收缓冲/解析缓冲四级帧尾CRC、计算CRC、接收CRC、首个复制差异以及PE/NE/FE/ORE累计计数。`Core/Src/stm32h7xx_it.c`只在现有IDLE接收路径执行轻量采样，不改变DMA启停、任务通知和Modbus判定；开关设为0时中断采样调用一并移除。
@@ -325,7 +332,7 @@
 - **阻塞定长模式 [已验证]：** 将`MODBUS_BLOCKING_RX_DIAG_ENABLE`临时设为1，绕过DMA、IDLE中断和任务通知，约10分钟后DCDC计数为`success_count=0xBE(190)`、`timeout_count=0x73(115)`、`protocol_error_count=0x107(263)`；诊断同时记录`transmit_failure_count=0x4D(77)`、`deserialize_failure_count=0xBA(186)`、`crc_mismatch_count=0xB6(182)`。该临时实现的总体表现明显差于原DMA路径，不能用它证明DMA/IDLE是剩余错误的唯一原因，也不应作为正式接收方案。
 - **恢复DMA+IDLE [已验证]：** 将`MODBUS_BLOCKING_RX_DIAG_ENABLE`恢复为0并重新测试约10分钟，DCDC计数为`success_count=0x398(920)`、`timeout_count=0x19(25)`、`protocol_error_count=0x21(33)`，总事务978次，成功率约94.07%、失败率约5.93%；说明当前DMA+IDLE模式明显优于该阻塞诊断实现。
 - **拆除USB-RS485支路 [已验证，时长待确认]：** 仅保留EMS与DCDC连接后的截图计数为`success_count=0x34A(842)`、`timeout_count=0x16(22)`、`protocol_error_count=0x1B(27)`，总事务891次，成功率约94.50%、失败率约5.50%。与接有USB-RS485时的约5.93%接近，当前样本不支持把第三接收器认定为唯一根因。
-- **当前代码状态 [已验证]：** `Drivers/BSP/Components/RS485/modbus.h`中`MODBUS_BLOCKING_RX_DIAG_ENABLE=0`、`MODBUS_RX_DIAG_ENABLE=1`，工程已经恢复USART2 DMA+IDLE接收并保留详细诊断；`Core/Src/main.c`中的`SCB_EnableDCache()`仍为临时注释状态，尚未完成正式Cache一致性修复。
+- **当前代码状态 [已验证]：** `Drivers/BSP/Components/RS485/modbus.h`中`MODBUS_BLOCKING_RX_DIAG_ENABLE=0`、`MODBUS_RX_DIAG_ENABLE=1`，工程使用USART2 DMA+IDLE接收并保留详细诊断；`Core/Src/main.c`已恢复D-Cache并加入局部非缓存MPU区。当前`DCDC_MODBUS_PC_TEST_ENABLE=0`，Watch写触发入口已关闭。
 
 ### 7.6 PC直连真实DCDC主动轮询对照（2026-08-11）
 
@@ -351,9 +358,32 @@
 - **[已验证]** 链接 warning 共 3 条：scatter 文件中的 `CustomContainer4Base.o(RO)`、`SVGDatabase.o(RO)`、`UnmappedDataFont.o(RO)` 规则只匹配到已被移除的未使用 section。
 - **[已验证]** `MDK-ARM/BSMU_H750IB/BSMU_H750IB.axf`、`.hex`、`.map` 均已生成。
 - **[已验证]** After Build User command #1 仅调用 `fromelf.exe` 而未附参数，因此输出帮助文本；没有使构建失败，但该用户命令配置应后续检查，避免误导日志判断。
-- 当前 `DCDC_MODBUS_PC_TEST_ENABLE=0`，PC Watch写触发入口已关闭；DCDC任务中的写命令处理调用也保持注释，当前只做真实设备只读联调。
+- 当时`DCDC_MODBUS_PC_TEST_ENABLE=1`，PC Watch写触发入口和`dcdc_process_write_command()`已启用；写框架包含数据新鲜度、故障启动门禁、有限重试、总时限和写后读回。该历史调试配置已于2026-08-27关闭。
 
-### 7.8 其他待确认
+### 7.8 真实DCDC启停控制与第三次启动过压保护（2026-08-11）
+
+- **协议依据 [已确认]：** 真实DCDC地址为`0xFF`；`0x0402=0`用于待机/启动准备，`0x0403=4`为开机，`0x0403=5`为关机。厂家新协议称`0x0404`工作状态只有1（恒压限流）和4（故障），但实机在写`0x0402=0`后还出现过`work_state=0、fault_raw=0`，因此状态0的正式含义仍需厂家确认。
+- **故障判定 [已确认]：** `0x0405`为完整故障位掩码并作为故障权威依据；当前已知位定义保持不变。`0x0004`表示B侧过压。`work_state=4、fault_raw=0`按实测解释为停止，`work_state=4、fault_raw!=0`解释为故障。
+- **控制框架 [已实现、已实测]：** DCDC写命令使用长度1队列、白名单、值域检查、2秒数据新鲜度、最多3次尝试、4秒总执行时限和`0x03`写后读回。明确的`0x0402=0`与`0x0403=5`属于安全命令，可在数据过期时尝试；启动命令在提交和执行前均检查`fault_raw`，带故障启动分别返回提交错误`-7`或执行错误`-8`。
+- **单次启停 [已验证]：** 按`0x0402=0 → 等待约3秒 → 0x0403=4`可进入`work_state=1、fault_raw=0`；写`0x0403=5`后写状态为`state=3、attempt_count=1、readback_confirmed=1、last_error=0`，设备进入`work_state=4、fault_raw=0`。证明基本启停和写后读回可用。
+- **重复性测试 [未通过]：** 计划执行5轮启停；前两轮完成，第三次启动后DCDC触发保护，现场为`work_state=4、fault_raw=0x0004`，B侧实时电压在保护后约47.8 V，P侧约0.1 V。剩余第四、第五轮已中止。
+- **安全停机 [已验证]：** 故障后写`0x0403=5`成功，写状态为`state=3、function_code=0x06、attempt_count=1、readback_confirmed=1、requested[0]=readback[0]=5、last_error=0、sequence=9`；`stale_reject_count=0、device_fault_reject_count=0、total_timeout_count=0`符合“停机不受故障门禁阻断”的设计。停止命令不会清除锁存故障，随后仍为`work_state=4、fault_raw=0x0004`。
+- **参数核对 [已验证]：** EMS停止/退出主站访问后，PC Modbus Poll作为唯一主站读取：`0x0427=540`（B侧输出设定54.0 V）、`0x0428=510`（P侧输出设定51.0 V）、`0x0429=580`（B侧过压保护58.0 V），14次请求错误为0。当前保护后47.8 V采样不能排除启动瞬间越过58.0 V；500 ms轮询无法捕获短时过冲。
+- **通信现场 [已验证]：** 安全停机后EMS仍`online=1、consecutive_failures=0、last_error=0`，`last_update_tick`继续更新，`success_count`由`0x2E8`增至`0x2F9`，`protocol_error_count`保持`0x21`，说明故障记录不是因通信停止造成的旧数据假象。
+- **当前结论 [已确认]：** 本轮按“第三次启动触发真实DCDC B侧过压保护”归档，属于控制/设备保护失败，不是EMS写请求或读回失败。当前禁止再次启动、禁止继续5轮测试、禁止通过TouchGFX或EMS自动策略启动/调功；TouchGFX只读监控和受保护安全停机不属于被禁止范围。在厂家确认54.0/58.0 V参数与当前接线/负载适配性，并使用示波器或具有最大值保持能力的仪表检查启动瞬态前，不得关闭该问题。
+- **文档位置：** 详细过程与截图追加在`docs/EMS_Modbus双从站读写模拟测试指导书_V1.7.docx`第22章。
+
+### 7.9 TouchGFX ACDC/DCDC设备状态页（2026-08-27）
+
+- **[已实现]** MainScreen顶部在“首页”和“电池状态”之间新增“设备状态”导航；内容区采用左右卡片结构，左侧ACDC只读监听，右侧DCDC状态与控制。
+- **[已实现]** ACDC显示通信、数据年龄、直流母线/负载、交流输入、频率、整流模块和告警汇总；ACDC无任何写接口或控制按钮，地址33只执行功能码0x03轮询。
+- **[已实现]** DCDC显示通信、数据年龄、运行状态、故障、B/P侧数据、最高温度和最近写状态；启动按钮显示但不可触摸，安全停机需要5秒内二次点击确认并调用`dcdc_modbus_set_run_async(0)`。
+- **[已实现]** `modbus_copy_gui_snapshot()`在短FreeRTOS临界区内复制ACDC、DCDC和写状态；Model每约500 ms推送一次独立`DeviceStatusData`，不把Modbus状态混入CAN电池结构。
+- **[已验证]** TouchGFX 4.21.4文本/字体/图片生成成功，Simulator源码编译和链接成功；Keil ARM Compiler 5完整Build为0 errors、3个既有scatter warning，成功生成AXF/HEX。新增字体和双态导航图片分片已加入Keil工程。
+- **[已验证]** 未连接任何ACDC/DCDC设备时，实机LCD显示、顶部导航、页面切换、中文/单位和初始零值正常；“设备状态”导航使用与既有导航相同尺寸和颜色的双态PNG资源。
+- **[待实机验证]** 连接真实设备后的在线状态、数据年龄、ACDC/DCDC实时值、故障颜色和DCDC二次安全停机交互尚未验证；本次未开放DCDC启动，不改变第三次启动B侧过压的P0阻断结论。
+
+### 7.10 其他待确认
 
 - `EMS_strategy.*` 是未跟踪文件；本次日志确认 `EMS_strategy.c` 已参与编译，但其接口、完成度和运行测试状态仍待确认。
 - 当前源码使用 LAN8742 配置，README 称 LAN8720，实物 PHY 待确认。
@@ -394,8 +424,9 @@
 
 ### 9.1 分支与提交
 
-- 当前分支：`httpc`，跟踪 `origin/httpc`。
+- 当前分支：`httpc`，跟踪`origin/httpc`，本地领先1个提交。
 - 最近相关提交：
+  - `9ab85a9`（当前HEAD）`checkpoint: save Modbus master and DCDC diagnostic progress`
   - `826fbff`（2026-06-04）`feat: adapt TouchGFX main UI to 1 BCMU and 2 BMUs`
   - `961d0c8`（2026-06-03）`feat: adapt battery stack topology to 1 BCMU and 2 BMUs`
   - `edb67d5`（2026-06-03）`chore: save baseline before battery stack topology change`
@@ -403,12 +434,12 @@
 
 ### 9.2 已修改但未提交（审计时）
 
-`CmBacktrace/cm_backtrace/cm_backtrace.c`、`Core/Inc/FreeRTOSConfig.h`、`Core/Inc/usart.h`、`Core/Src/CAN_Control.c`、`Core/Src/freertos.c`、`Core/Src/heap_4_addition.c`、`Core/Src/http_client.c`、`Core/Src/main.c`、`Core/Src/screen_sleep.c`、`Core/Src/usart.c`、`Drivers/BSP/Components/RS485/modbus.c`、`modbus.h`、`modbus_data.c`、`modbus_slave.c`、`LWIP/Target/lwipopts.h`、`MDK-ARM/BSMU_H750IB.uvoptx`、`MDK-ARM/BSMU_H750IB.uvprojx`、`Middlewares/Third_Party/FreeRTOS/Source/tasks.c`、多个 TouchGFX generated/text/font 文件、`TouchGFX/gui/src/mainscreen_screen/MainScreenView.cpp`、`flash_storage/port/ef_port.c`、`flash_storage/port/sfud_port.c`、`项目记忆.md`。
+`BSMU_H750IB.ioc`、`CmBacktrace/cm_backtrace/cm_backtrace.c`、`Core/Inc/FreeRTOSConfig.h`、`Core/Src/CAN_Control.c`、`Core/Src/heap_4_addition.c`、`Core/Src/http_client.c`、`Core/Src/main.c`、`Core/Src/screen_sleep.c`、`Drivers/BSP/Components/RS485/modbus.c/.h`、`LWIP/Target/lwipopts.h`、`MDK-ARM/BSMU_H750IB.uvoptx/.uvprojx`、`Middlewares/Third_Party/FreeRTOS/Source/tasks.c`、`PROJECT_CONTEXT.md`、TouchGFX文本/字体/图片生成文件、MainScreen的Model/View/Presenter相关文件、`flash_storage/port/ef_port.c`、`flash_storage/port/sfud_port.c`以及V1.7测试文档。
 
 ### 9.3 删除和未跟踪
 
 - 删除状态：`TouchGFX/generated/images/src/.idea/modules.xml`、`src.iml`、`workspace.xml`。
-- 未跟踪：`Core/Inc/EMS_strategy.h`、`Core/Src/EMS_strategy.c`、`docs/` 下 5 份 Modbus 测试 docx、`tools/append_deferred_issue_record.py`、`tools/append_dual_slave_stability_v14.py`、`tools/append_skip_response_test.py`，以及本文 `PROJECT_CONTEXT.md`。
+- 未跟踪文件包括设备状态导航双态PNG及其生成源码、新增STXihei字体分片、`docs/TouchGFX设备状态页实机验证记录_2026-08-27.md`和`tools/append_real_dcdc_control_v17.py`；提交前必须逐项确认纳入范围。
 
 ### 9.4 保护要求
 
@@ -427,23 +458,26 @@
 - ACDC 地址已确认为 33；真实 DCDC 当前实机地址确认为 `0xFF`，PC Modbus Slave历史模拟地址为1，二者不得混用；模拟窗口使用原始十进制寄存器地址并关闭 PLC Base-1 显示。
 - 当前 5 ms RTU 帧间隔是已确认技术决策；不要为了提速直接删除。
 - 当前拓扑宏 `cluster_num=1`、`GRP_num=2`；改拓扑时必须同步 CAN、数据结构、HTTP、TouchGFX 和模拟器宏。
-- 真实 DCDC 接入前关闭 `DCDC_MODBUS_PC_TEST_ENABLE`；真实写控制前完成范围校验、互锁、设备状态机和异常恢复测试。
+- 当前`DCDC_MODBUS_PC_TEST_ENABLE=0`，不得重新启用Watch写入口绕过TouchGFX与Modbus安全门禁；TouchGFX启动按钮保持禁用，仅允许二次确认的安全停机。
+- 第三次启动已经触发`fault_raw=0x0004`（B侧过压）；在厂家确认参数/工况并完成启动瞬态测量前，不得继续启动或提高`0x0429`保护阈值。
 
 ## 11. 下一步计划
 
 | 优先级 | 任务 | 目标/涉及文件 | 验证标准 | 依赖 |
 |---:|---|---|---|---|
+| P1 | 连接真实ACDC/DCDC验证设备状态页 | TouchGFX设备状态页、`modbus.c/.h`、USART2 RS485 | EMS为唯一主站；ACDC/DCDC在线与数据年龄正常；实时值/故障显示正确；连续观察不少于10分钟；只在现场允许时验证二次安全停机，不测试启动 | ACDC地址33、DCDC地址`0xFF`、设备保持安全停机、移除并联USB-RS485 |
+| P0 | 定位第三次启动B侧过压保护 | 真实DCDC、`0x0427/0x0429`、B侧接线/负载、`modbus.c/.h` | 厂家确认54.0 V输出与58.0 V过压阈值适配当前工况；外部仪表捕获启动瞬态；修正原因后至少5轮严格按序启停均无`fault_raw` | 厂家确认；示波器或最大值保持仪表；当前禁止再次启动 |
 | P0（控制/放行）/P1（当前只读） | 外部确认DCDC异常CRC进入EMS前的来源（当前暂缓） | USART2_RX/PD6、RS485 A/B、`g_modbus_rx_diag` | 外部捕获同一事务并对照DCDC端、EMS端与DMA原始字节；明确故障位于物理链路、EMS收发器还是USART采样，随后完成修复和长稳复测 | 当前缺少逻辑分析仪/示波器；在开放写控制、闭环控制或现场放行前必须完成 |
 | P2 | 整理当前构建 warning 和 After Build 命令 | `http_client.c`、`modbus_slave.c`、`sfud_port.c`、scatter/Keil User Command | 在不改变业务行为的前提下确认每条 warning；`fromelf` 命令不再无参数打印帮助 | 先完成通信异常测试；修改前逐文件核对 diff |
 | P0 | 完成剩余异常测试 | `modbus.c/.h`、`usart.c`、V1.7 测试文档 | 持续无响应、CRC和Exception 06双向隔离与恢复已通过；继续完成恢复时间和至少5轮重复性 | PC Modbus Slave、USB-RS485 |
 | P0 | 定位电池页面异常 | `CAN_Control.c`、`station_ctl.c`、TouchGFX Model/View、Modbus 超时路径 | 首次异常写入点可定位；`Client_Sd[]` 不再被破坏；无仅掩盖问题的 UI 修补 | 稳定复现、Watch/数据断点 |
-| P1 | 完成真实DCDC只读稳定性和Cache正式修复 | `modbus.c/.h`、`RS485.c/.h`、`Core/Src/main.c`、MPU配置 | 保持`DCDC_MODBUS_PC_TEST_ENABLE=0`；恢复D-Cache后采用局部非缓存DMA区或正确Cache维护；连续运行不少于10分钟，通信失败率达到项目验收阈值（阈值待确认）且无数据错乱 | 本轮详细收帧诊断结论、内存布局与MPU方案评审 |
-| P1 | 设计真实 DCDC 控制状态机 | `EMS_strategy.*`、`modbus.c/.h` | 白名单、上下限、启停前置条件、故障互锁、幂等与读回失败策略有评审和测试 | 设备协议、系统控制需求 |
+| P1 | 完成真实DCDC通信长稳回归 | `modbus.c/.h`、`RS485.c/.h`、`Core/Src/main.c`、MPU配置 | 已恢复D-Cache且UART DMA区局部非缓存；连续运行不少于30分钟，核对`.map`地址、错误率、数据完整性和自动恢复 | 当前MPU修复、详细收帧诊断、项目验收阈值待确认 |
+| P1 | 完成真实 DCDC 控制状态机 | `EMS_strategy.*`、`modbus.c/.h` | 现有新鲜度/故障门禁/有限重试基础上，增加“准备完成后再启动”、启动过渡、状态0定义、故障锁存和人工复位流程；不得自动重启故障设备 | 厂家确认状态0/1/4定义与B侧过压原因 |
 | P1 | 核对 `EMS_strategy.*` | 新增策略文件、Keil 文件组 | 明确接口、调用者、完成度；编译接入一致 | 用户确认设计意图 |
 | P2 | HTTPS 安全加固 | `http_client.c`、`ca_certificates.h`、配置存储 | 无明文凭据；证书必选验证；错误证书必须拒绝 | 服务器证书/安全配置方案 |
 | P2 | 清理并提交前审查 | 全部 Git 差异 | 用户确认每组变更；生成文件/IDE 文件去留明确 | 前述测试通过；用户授权 Git 操作 |
 
-**下一步最先执行：** 2026-08-11的阻塞/DMA A/B、拆除USB支路和PC直连DCDC主动轮询测试已经结束，无新测试条件时不要重复。CRC/超时偶发问题继续作为P1已知风险保留，当前可继续不依赖真实DCDC写控制的工作；保持真实DCDC地址`0xFF`、功能码`0x03`只读、DMA+IDLE接收、CRC严格校验、`MODBUS_RX_DIAG_ENABLE=1`及DCDC写入口关闭。优先完善数据新鲜度/连续失败的失效安全规则；逻辑分析仪/示波器到位后恢复物理层定位。在此之前不得开放真实写控制、闭环控制或宣布通信达到现场/量产放行条件。D-Cache当前仍为临时诊断状态，正式恢复方案也不得遗漏。
+**下一步最先执行：** 保持DCDC停机，不再发送`0x0403=4`。先向厂家确认`0x0427=540`、`0x0429=580`与当前接线/负载的适配性以及`work_state=0`的正式含义，并准备示波器或具有最大值保持能力的仪表捕获B侧启动瞬态。只有明确并修正第三次启动B侧过压原因后，才重新从第一轮开始执行5轮启停回归。与此同时保留DMA+IDLE、D-Cache局部非缓存MPU修复、严格CRC和详细诊断；通信偶发错误仍是控制/现场放行的独立P0阻断项。
 
 ## 12. 新对话接续指令
 
@@ -461,7 +495,7 @@
 6. 无法从工程、Git、日志或测试记录确认的信息标为“待确认”，不要编造；
 7. 不要输出或复制账号、密码、Token、私钥或完整证书内容。
 
-当前优先事项是：真实DCDC从站地址已经确认并配置为0xFF，当前仅执行功能码0x03只读轮询，ACDC轮询、DCDC写命令处理和PC Watch写触发均已关闭。SCB_EnableDCache()仅为USART2 DMA一致性对照测试而临时注释，不能作为正式修复。当前已经恢复DMA+IDLE接收（`MODBUS_BLOCKING_RX_DIAG_ENABLE=0`），阻塞定长A/B诊断明显更差，不采用为正式方案。内部诊断确认DMA、ISR、任务和解析缓冲复制一致；2026-08-07 PC被动抓取的2080帧完整响应CRC全部正确。2026-08-11 PC作为唯一主站直连DCDC时，`0x0404/11`约10分钟为`1205次/15错`，`0x041B/6`约10分钟为`1223次/8错`；日志中核心响应帧CRC正确，异常主要为有效帧后偶发附加字节及少量无响应。测试到此暂停，剩余嫌疑仍包括RS485物理链路、收发器、USB适配器和USART采样，需要逻辑分析仪/示波器才能唯一定位。该问题按只读阶段P1有条件暂缓，但对写控制、闭环控制和现场/量产放行是P0阻断项；不得把它标记为已解决。暂缓期间继续保持严格CRC、详细计数、只读和DCDC写入口关闭，下一步优先做数据新鲜度/连续失败的失效安全设计。不要重复已经通过的PC双从站正常读写、持续失联、CRC、Exception 06以及本轮PC直连DCDC测试；DCDC Skip response期间Client_Sd[]/电池页面偶发异常仍是独立待办。
+当前优先事项是：真实DCDC地址为0xFF；USART2已恢复DMA+IDLE接收，`SCB_EnableDCache()`已恢复，`MPU_Config()`新增只覆盖`0x30000000～0x30002FFF`三个UART DMA地址槽的非缓存Region 5。DCDC异步写框架已启用2秒数据新鲜度、最多3次尝试、4秒总时限、写后读回和故障启动门禁；`DCDC_MODBUS_PC_TEST_ENABLE=0`，TouchGFX设备状态页仅开放二次确认的安全停机，启动按钮保持禁用。实机基本启停已成功，但计划5轮启停在第三次启动时出现`work_state=4、fault_raw=0x0004`，即B侧过压保护；故障后`0x0403=5`一次写入和读回成功，sequence=9，但故障保持锁存。PC独立读取确认`0x0427=540`（B输出54.0 V）、`0x0428=510`（P输出51.0 V）、`0x0429=580`（B过压58.0 V）。当前禁止再次启动、禁止继续第4/5轮、禁止EMS自动控制；先由厂家确认参数/状态定义并用示波器或最大值保持仪表检查启动瞬态。通信偶发CRC/超时问题仍按控制与现场放行P0阻断项保留，不能标记为已解决。不要重复已经通过的PC双从站正常读写、持续失联、CRC、Exception 06或PC直连DCDC测试；DCDC Skip response期间Client_Sd[]/电池页面异常仍是独立待办。
 ```
 
 ---

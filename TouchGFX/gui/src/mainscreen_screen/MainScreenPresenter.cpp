@@ -49,3 +49,13 @@ void MainScreenPresenter::ViewtoModelDat(const ViewToModelData& Data){
     model->ViewtoModelDat(Data);
 }
 
+void MainScreenPresenter::NotifyDeviceStatus(const DeviceStatusData& deviceStatus)
+{
+    view.NotifyDeviceStatus(deviceStatus);
+}
+
+int MainScreenPresenter::requestDcdcSafeStop()
+{
+    return model->requestDcdcSafeStop();
+}
+
