@@ -116,6 +116,17 @@ extern FDCAN_HandleTypeDef hfdcan2;
 #define DATA_NOMAL       0X80 // 普通数据上传
 #define DATA_URGENT      0X81 // 紧急数据上传，如报警信息
 
+/*
+ * BSMU随CMD_TRANS_START发送给BCMU的DCDC实际工作状态。
+ * UNKNOWN表示通信离线、数据过期、尚未取得有效数据或厂家状态不可识别。
+ */
+typedef enum {
+    BCMU_DCDC_STATE_UNKNOWN = 0x00U,    //未知、离线、数据过期或状态无法识别
+    BCMU_DCDC_STATE_RUNNING = 0x01U,    //DCDC运行
+    BCMU_DCDC_STATE_STOPPED = 0x02U,    //DCDC停止
+    BCMU_DCDC_STATE_FAULT   = 0x03U     //DCDC故障
+} bcmu_dcdc_state_t;
+
 void BSMU_CANInit (void);
 
 #endif

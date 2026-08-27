@@ -22,6 +22,7 @@
 #include "string.h"
 #include "task.h"
 #include "usart.h"
+#include "modbus.h"
 #include "modbus_data.h"
 
 CANTxMsg_t TxMsg; // 定义发送邮件实体
@@ -257,7 +258,64 @@ CANTimerCallback01 (void const *argument)
 {
     if (1) {}
 }
+/*
+ * 取得一份完整、一致的DCDC状态快照，并转换为BCMU协议状态。
+ * CAN与RS485任务异步运行，CAN发送最近一次完整有效的DCDC状态。
+ */
+static uint8_t
+GetBCMUDCDCState (void)
+{
+    dcdc_modbus_data_t dcdc_data;
+    uint32_t data_age_ms;
 
+    /*
+     * 该函数内部使用FreeRTOS短临界区复制整个DCDC结构，
+     * 防止Modbus任务更新结构体时CAN任务读取到混合数据。
+     */
+    modbus_copy_gui_snapshot (NULL, &dcdc_data, NULL);
+
+    /*
+     * 尚未完成过一次有效轮询，或者当前已被判定为离线。
+     */
+    if ((dcdc_data.online == 0U) ||
+        (dcdc_data.last_update_tick == 0U)) {
+        return BCMU_DCDC_STATE_UNKNOWN;
+    }
+
+    /*
+     * HAL Tick使用无符号减法，可以正确处理计数器回绕。
+     */
+    data_age_ms = HAL_GetTick () - dcdc_data.last_update_tick;
+
+    /*
+     * RS485数据超过新鲜度门限后，不继续向BCMU发送旧状态。
+     */
+    if (data_age_ms > DCDC_MODBUS_DATA_FRESHNESS_MS) {
+        return BCMU_DCDC_STATE_UNKNOWN;
+    }
+
+    /*
+     * 厂家状态值4同时表示停机或故障，因此故障判断必须优先。
+     */
+    if (dcdc_data.fault_raw != 0U) {
+        return BCMU_DCDC_STATE_FAULT;
+    }
+
+    if (dcdc_data.work_state ==
+        DCDC_WORK_STATE_CV_CURRENT_LIMIT) {
+        return BCMU_DCDC_STATE_RUNNING;
+    }
+
+    if (dcdc_data.work_state ==
+        DCDC_WORK_STATE_STOP_OR_FAULT) {
+        return BCMU_DCDC_STATE_STOPPED;
+    }
+
+    /*
+     * 对协议未定义的厂家状态采用保守处理。
+     */
+    return BCMU_DCDC_STATE_UNKNOWN;
+}
 /***********************************************
  *函数名称：CANFrameSend
  *函数功能：CAN发送数据组包
@@ -583,6 +641,7 @@ CAN_Rev (void const *argument)
 void
 CAN_Poll (void const *argument)
 {
+    uint8_t poll_data[3];
     /* 配置发送参数 */
     TxMsg.TxHeader.Identifier  = CAN_ID;            /* 设置接收帧消息的ID 11位帧ID范围0x000-0x7ff*/
     TxMsg.TxHeader.IdType      = FDCAN_STANDARD_ID; /* 标准ID */
@@ -600,7 +659,10 @@ CAN_Poll (void const *argument)
         uint8_t ACK_ERROR_TIME = 0;
         for (Queue_NUM_POLL = 0; Queue_NUM_POLL < cluster_num;) {
             if (Queue_NUM_POLL < bsmuSetting.cu_num) {
-                CANFrameSend (CMD_TRANS_START, (unsigned char *)&BCMU_ID[Queue_NUM_POLL], FDCAN_SND_Buff, 2);
+                poll_data[0] = BCMU_ID[Queue_NUM_POLL][0];
+                poll_data[1] = BCMU_ID[Queue_NUM_POLL][1];
+                poll_data[2] = GetBCMUDCDCState ();
+                CANFrameSend (CMD_TRANS_START, poll_data, FDCAN_SND_Buff, sizeof (poll_data));
                 if (ulTaskNotifyTake (pdTRUE, WAIT_PACK_TIME)) {
                     ACK_ERROR_TIME                       = 0;
                     BCMU[Queue_NUM_POLL].OnlineOrOffline = Online;
